@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\EncryptionTrait;
 use App\Traits\RevisionsTrait;
 use Illuminate\Database\Eloquent\Model;
 use Psy\Test\CodeCleaner\StaticConstructorPassTest;
@@ -21,6 +22,7 @@ class Patient extends Model
 {
 
     use RevisionsTrait;
+    use EncryptionTrait;
 
     /**
      * Разрешаем заполнять эти поля
@@ -34,6 +36,10 @@ class Patient extends Model
         'homeless',
         'ukrainian',
         'hospital_employee'
+    ];
+
+    protected $encrypted = [
+        'name'
     ];
 
     /**
