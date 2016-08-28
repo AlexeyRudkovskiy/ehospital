@@ -1,6 +1,9 @@
+process.env.DISABLE_NOTIFIER = true;
+
 const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue');
+require('laravel-elixir-livereload');
 
 /*
  |--------------------------------------------------------------------------
@@ -15,5 +18,6 @@ require('laravel-elixir-vue');
 
 elixir(mix => {
     mix.sass('app.scss')
-       .webpack('app.js');
+       .webpack('app.js')
+       .livereload();
 });

@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::group([
+    'prefix' => 'management',
+    'namespace' => 'Management',
+    'middleware' => [ 'web' ]
+], function () {
+    require_once __DIR__ . '/management.php';
+});

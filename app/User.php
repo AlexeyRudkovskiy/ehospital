@@ -192,4 +192,9 @@ class User extends Authenticatable
         return $this->permission->granted($permissionScope);
     }
 
+    public function fullName()
+    {
+        return "{$this->lastName} {$this->firstName} {$this->middleName}";
+    }
+
 }

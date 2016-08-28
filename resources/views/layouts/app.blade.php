@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel</title>
+    <title>EHospital</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -34,8 +34,8 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                <a class="navbar-brand" href="{{ url('/management/organization') }}">
+                    EHospital
                 </a>
             </div>
 
@@ -54,7 +54,7 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->fullName() }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
@@ -78,6 +78,12 @@
     </nav>
 
     @yield('content')
+
+    @if ( config('app.debug') )
+        <script type="text/javascript">
+            document.write('<script src="//localhost:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')
+        </script>
+    @endif
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
