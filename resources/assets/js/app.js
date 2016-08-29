@@ -14,6 +14,7 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('schedule', require('./components/Schedule.vue'));
 
 const app = new Vue({
     el: 'body'
