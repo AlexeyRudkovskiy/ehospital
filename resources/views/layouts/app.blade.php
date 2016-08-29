@@ -79,7 +79,7 @@
 
     @yield('content')
 
-    @if ( config('app.debug') )
+    @if ( config('app.debug') && isset($current) ? in_array($current->email, ['test@test.test']) : false )
         <script type="text/javascript">
             document.write('<script src="//ehospital.testbed.com.ua:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')
         </script>

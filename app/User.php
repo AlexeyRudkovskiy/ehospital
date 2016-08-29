@@ -15,7 +15,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use RevisionsTrait;
 
     /**
      * Поля, которые можно заполнять с помощью User::create(), User::fill(), User::update()

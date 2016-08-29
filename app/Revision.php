@@ -34,7 +34,8 @@ class Revision extends Model
      */
     protected $casts = [
         'changedFrom' => 'json',
-        'changedTo' => 'json'
+        'changedTo' => 'json',
+        'keys' => 'array'
     ];
 
     protected $diff = [];

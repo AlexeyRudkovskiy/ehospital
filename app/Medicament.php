@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\RevisionsTrait;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Medicament extends Model
 {
+
+    use RevisionsTrait;
 
     /**
      * Разрешаем заполнять эти поля
