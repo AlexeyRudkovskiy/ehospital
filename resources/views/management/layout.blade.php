@@ -12,6 +12,7 @@
                     <a href="{{ route('contractor.index') }}" @if($controller == 'contractor') class="active" @endif>Contractors</a>
                     <a href="{{ route('medicament.index') }}" @if($controller == 'medicament') class="active" @endif>Medicaments</a>
                     <a href="{{ route('manufacturer.index') }}" @if($controller == 'manufacturer') class="active" @endif>Manufacturers</a>
+                    <a href="{{ route('department.index') }}" @if($controller == 'department') class="active" @endif>Department</a>
                 </nav>
             </div>
             <div class="col-lg-10">

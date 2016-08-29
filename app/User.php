@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\EncryptionTrait;
 use App\Traits\RevisionsTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -165,6 +166,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Забронированное время
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function armored()
+    {
+        return $this->hasMany(ArmoredTime::class);
+    }
+
+    /**
      * Проверяет, имеет ли данная группа доступ на что-либо.
      * Этот метод вызывает метод с таким же именем, но у объекта Permission с небольшими преобразованиями.
      * Метод принимает объект, в котором используется трэйт Permissible и вызывает егго метод getActionScope.
@@ -191,9 +202,52 @@ class User extends Authenticatable
         return $this->permission->granted($permissionScope);
     }
 
+    /**
+     * Полное имя доктора
+     *
+     * @return string
+     */
     public function fullName()
     {
         return "{$this->lastName} {$this->firstName} {$this->middleName}";
+    }
+
+    public function getScheduleFor(Carbon $day)
+    {
+        $scheduleInfo = $this->schedule()->where('day_of_week', $day->dayOfWeek)->get()->first();
+        $schedule = [];
+
+        $from = $scheduleInfo->from;
+        $to = $scheduleInfo->to;
+        $step = Carbon::create(0, 0, 0, 0, 15, 0);
+        $current = Carbon::create($from->year, $from->month, $from->day, $from->hour, $from->minute, $from->second);
+
+        $locked = ArmoredTime::where('day_of_week', $day->dayOfWeek)->where('day', $day)->get();
+
+        array_push($schedule, $from->format('G:i'));
+
+        do {
+            $current->addMinutes($step->minute);
+            $current->addHours($step->hour);
+
+            $shouldSkip = false;
+
+            foreach ($locked as $lockedItem) {
+                $lockedItem = $lockedItem->time;
+                if ($lockedItem->hour == $current->hour && $lockedItem->minute == $current->minute) {
+                    $shouldSkip = true;
+                    break;
+                }
+            }
+
+            if (!$shouldSkip) {
+                array_push($schedule, $current->format('G:i'));
+            }
+        } while ($current->between($to, $from, false));
+
+        array_pop($schedule);
+
+        return $schedule;
     }
 
 }

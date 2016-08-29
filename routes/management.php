@@ -7,3 +7,4 @@ Route::resource('atcClassification', 'AtcClassificationController');
 Route::resource('contractor', 'ContractorController');
 Route::resource('medicament', 'MedicamentController');
 Route::resource('manufacturer', 'ManufacturerController');
+Route::resource('department', 'DepartmentController');

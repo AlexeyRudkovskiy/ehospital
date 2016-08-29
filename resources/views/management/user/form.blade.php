@@ -88,6 +88,15 @@
         @endif
     </div>
 </div>
+<div class="form-group @if($errors->has('department_id')) has-error @endif">
+    {!! Form::label('department_id', 'Parent', ['class' => 'col-sm-2 control-label']) !!}
+    <div class="col-sm-10">
+        {!! Form::select('department_id', \App\Department::pluck('name', 'id'), null, ['class' => 'form-control']) !!}
+        @if($errors->has('department_id'))
+            <span class="error-block">{{ $errors->first('department_id') }}</span>
+        @endif
+    </div>
+</div>
 <div class="form-group">
     <label class="col-sm-2 control-label">Schedule:</label>
     <div class="col-sm-10">
