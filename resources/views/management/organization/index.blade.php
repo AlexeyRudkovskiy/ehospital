@@ -1,6 +1,6 @@
-@extends('management.layout')
+@extends('layouts.app')
 
-@section('page')
+@section('content')
     <table class="table table-striped">
         <thead>
         <tr>
@@ -28,3 +28,7 @@
 
     {!! $organizations->render() !!}
 @stop
+
+{{--@push('breadcrumbs-right')--}}
+    {{--<a href="javascript:" class="btn btn-small btn-success">create new item</a>--}}
+{{--@endpush--}}

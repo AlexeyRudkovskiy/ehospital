@@ -1,3 +1,4 @@
+@inject('sidebar', 'App\Services\LayoutSidebarService')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,63 +22,56 @@
     </script>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/management/organization') }}">
-                    EHospital
-                </a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    &nbsp;
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->fullName() }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ url('/logout') }}"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
-
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-            </div>
+    <div class="container">
+        <div class="sidebar">
+            <nav>
+                <a href="javascript:" class="force-hover">EHospital</a>
+                {!! $sidebar->link('organization.index') !!}
+                {!! $sidebar->link('user.index') !!}
+                {!! $sidebar->link('contractor.index') !!}
+                {!! $sidebar->link('department.index') !!}
+                {!! $sidebar->link('manufacturer.index') !!}
+                {!! $sidebar->link('medicament.index') !!}
+                {!! $sidebar->link('atcClassification.index') !!}
+            </nav>
         </div>
-    </nav>
+        <div class="content">
 
-    @yield('content')
+            <header class="header">
+                <nav>
+                    <div class="pull-right">
+                        <span class="like-link">Alexey Rudkovskiy</span>
+                        <a href="javascript:">logout</a>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="paddings">
+
+                <div class="breadcrumbs">
+                    <nav>
+                        <div class="breadcrumbs-links">
+                            @foreach($breadcrumbs as $breadcrumb)
+                            <a href="javascript:" class="item">{{ trans($breadcrumb) }}</a>
+                            @endforeach
+                        </div>
+                        <div class="actions">
+                            @stack('breadcrumbs-right')
+                        </div>
+                    </nav>
+                </div>
+
+                <div class="clear"></div>
+
+                <div id="page-content">
+                    @yield('content')
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 
     @if ( config('app.debug') && isset($current) ? in_array($current->email, ['test@test.test']) : false )
         <script type="text/javascript">

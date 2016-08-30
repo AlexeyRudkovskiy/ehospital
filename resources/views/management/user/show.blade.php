@@ -1,6 +1,6 @@
-@extends('management.layout')
+@extends('layouts.app')
 
-@section('page')
+@section('content')
     @php($days = [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ])
     <div>
         <h3>{{ $user->lastName }} {{ $user->firstName }} {{ $user->middleName }}</h3>

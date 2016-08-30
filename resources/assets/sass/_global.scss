@@ -1,0 +1,32 @@
+@import "variables";
+
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic-ext';
+
+body {
+  margin: 0;
+  padding: 0;
+
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+.pull-right {
+  float: right;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.clear {
+  clear: both;
+  overflow: hidden;
+}
+
+a {
+  color: $color-blue;
+  text-decoration: none;
+}

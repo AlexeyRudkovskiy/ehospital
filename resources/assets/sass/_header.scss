@@ -1,0 +1,42 @@
+@import "variables";
+@import "mixins";
+
+header.header {
+  background-color: $header-background-color;
+
+  nav {
+    a, .like-link {
+      display: inline-block;
+      float: left;
+      padding: 17px 22px;
+      color: white;
+      text-decoration: none;
+
+      transition: 0.1s all;
+
+      @include box-sizing;
+
+      &:not(.like-link) {
+        &:hover {
+          background-color: $header-background-hover;
+        }
+
+        &.no-hover {
+          &:hover {
+            background-color: transparent;
+          }
+        }
+
+        &.brand {
+          font-weight: bold;
+        }
+      }
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+}

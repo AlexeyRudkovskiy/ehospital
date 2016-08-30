@@ -23,9 +23,21 @@ class ManagementViewComposer
     {
         $currentRoute = request()->route()->getName();
         $currentRoute = explode('.', $currentRoute);
+        $savedCurrentRoute = $currentRoute;
         $currentRoute = array_shift($currentRoute);
+        $action = array_shift($savedCurrentRoute);
+        $action = array_shift($savedCurrentRoute);
+
+        $breadcrumbs = [
+            'management.breadcrumbs.index',
+            'management.breadcrumbs.' . $currentRoute . '.title',
+            'management.breadcrumbs.' . $currentRoute . '.' . $action
+        ];
+
+        $view->with('action', $action);
         $view->with('current', $this->user);
         $view->with('controller', $currentRoute);
+        $view->with('breadcrumbs', $breadcrumbs);
     }
 
 }

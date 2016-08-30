@@ -1,6 +1,6 @@
-@extends('management.layout')
+@extends('layouts.app')
 
-@section('page')
+@section('content')
     <div>
         <h2>{{ $medicament->name }}</h2>
     </div>

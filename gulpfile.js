@@ -17,7 +17,9 @@ require('laravel-elixir-livereload');
  */
 
 elixir(mix => {
-    mix.sass('app.scss')
+    mix.copy('node_modules/material-design-icons/iconfont/', 'public/font/');
+
+    mix.sass('main.scss', 'public/css/app.css')
        .webpack('app.js')
        .livereload();
 });

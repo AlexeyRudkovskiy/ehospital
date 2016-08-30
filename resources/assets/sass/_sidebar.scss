@@ -1,0 +1,47 @@
+@import "variables";
+@import "mixins";
+
+.sidebar {
+  background-color: $sidebar-background;
+
+  @include box-sizing;
+
+  nav {
+    a {
+      padding: 17px 22px;
+      display: block;
+      width: 100%;
+      color: $color-white;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+
+      @include box-sizing;
+
+      &:hover, &.active, &.force-hover {
+        background-color: $sidebar-item-hover-background-color;
+      }
+
+      &.has-badge {
+        &::after {
+          content: attr(data-badge);
+          position: absolute;
+          color: $sidebar-item-badge-color;
+          background-color: $color-white;
+
+          top: 14.5px;
+          right: 22px;
+          font-size: 12px;
+          line-height: 12px;
+
+          padding: 5px 8px;
+          border-radius: 15px;
+
+          box-shadow: 0 4px 15px -7px black;
+
+          @include box-sizing;
+        }
+      }
+    }
+  }
+}

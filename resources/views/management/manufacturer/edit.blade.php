@@ -1,6 +1,6 @@
-@extends('management.layout')
+@extends('layouts.app')
 
-@section('page')
+@section('content')
     {!! Form::model($manufacturer, ['route' => ['manufacturer.update', $manufacturer->id], 'method' => 'put', 'class' => "form-horizontal"]) !!}
     @include('management.manufacturer.form')
     {!! Form::close() !!}

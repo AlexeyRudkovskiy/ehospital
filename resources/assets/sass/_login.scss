@@ -1,0 +1,16 @@
+@import "variables";
+@import "mixins";
+
+#login {
+  min-height: 100%;
+
+  #container {
+    width: 430px;
+    margin: 200px auto 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+
+    padding: $app-base-padding;
+
+    @include box-sizing;
+  }
+}

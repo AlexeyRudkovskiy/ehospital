@@ -1,7 +1,7 @@
-@extends('management.layout')
+@extends('layouts.app')
 
-@section('page')
-    {!! Form::model($organization, ['route' => ['organization.store'], 'method' => 'post', 'class' => "form-horizontal"]) !!}
+@section('content')
+    {!! Form::model($organization, ['route' => ['organization.store'], 'method' => 'post', 'class' => "form form-compact"]) !!}
     @include('management.organization.form')
     {!! Form::close() !!}
 @stop

@@ -1,0 +1,20 @@
+@import "variables";
+@import "mixins";
+
+.row {
+  display: flex;
+
+  &.row-vertical-baseline {
+    align-items: baseline;
+  }
+
+  &.row-fixed {
+    @for $i from 1 through 12 {
+      .col-#{$i} {
+        width: 100% / 12 * $i;
+
+        @include box-sizing;
+      }
+    }
+  }
+}

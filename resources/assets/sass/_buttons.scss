@@ -1,0 +1,76 @@
+@import "variables";
+@import "mixins";
+
+.btn {
+  padding: 10px 15px;
+  color: $color-blue-darken;
+  border: 1px solid $color-blue-darken;
+  border-radius: 3px;
+  background-color: transparent;
+  text-decoration: none;
+  display: inline-block;
+
+  line-height: 14px;
+  cursor: pointer;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  @include box-sizing;
+
+  &:hover {
+    background-color: $color-blue-darken;
+    color: $color-white;
+  }
+
+  &.btn-small {
+    padding: 5px 10px;
+  }
+
+  &.btn-fill {
+    background-color: $color-blue-darken;
+    color: $color-white;
+
+    &.btn-success {
+      color: $color-white;
+      background-color: $color-green;
+
+      &:hover {
+        background-color: $color-green-darken;
+        border-color: $color-green-darken;
+      }
+    }
+
+    &.btn-danger {
+      color: $color-white;
+      background-color: $color-red;
+
+      &:hover {
+        background-color: $color-red-darken;
+        border-color: $color-red-darken;
+      }
+    }
+  }
+
+  &.btn-success {
+    border-color: $color-green;
+    color: $color-green;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-green;
+    }
+  }
+
+  &.btn-danger {
+    border-color: $color-red;
+    color: $color-red;
+
+    &:hover {
+      background-color: $color-red;
+      color: $color-white;
+    }
+  }
+}

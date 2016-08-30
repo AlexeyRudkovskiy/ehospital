@@ -1,29 +1,84 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-2">
-                <nav class="sidebar">
-                    <a href="{{ route('organization.index') }}" @if($controller == 'organization') class="active" @endif>Organizations</a>
-                    <a href="{{ route('user.index') }}" @if($controller == 'user') class="active" @endif>Users</a>
-                    <a href="{{ route('permission.index') }}" @if($controller == 'permission') class="active" @endif>Permissions</a>
-                    <a href="{{ route('atcClassification.index') }}" @if($controller == 'atcClassification') class="active" @endif>Atc Classification</a>
-                    <a href="{{ route('contractor.index') }}" @if($controller == 'contractor') class="active" @endif>Contractors</a>
-                    <a href="{{ route('medicament.index') }}" @if($controller == 'medicament') class="active" @endif>Medicaments</a>
-                    <a href="{{ route('manufacturer.index') }}" @if($controller == 'manufacturer') class="active" @endif>Manufacturers</a>
-                    <a href="{{ route('department.index') }}" @if($controller == 'department') class="active" @endif>Department</a>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>EHospital</title>
+
+    <!-- Styles -->
+    <link href="/css/app.css" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script>
+        window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <nav>
+            <a href="javascript:" class="force-hover">EHospital</a>
+            <a href="javascript:">Organizations</a>
+            <a href="javascript:" class="has-badge active" data-badge="5">Users</a>
+            <a href="javascript:">Medicaments</a>
+            <a href="javascript:">Manufacturers</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </div>
+    <div class="content">
+
+        <header class="header">
+            <nav>
+                <div class="pull-right">
+                    <span class="like-link">Alexey Rudkovskiy</span>
+                    <a href="javascript:">logout</a>
+                </div>
+            </nav>
+        </header>
+
+        <div class="paddings">
+
+            <div class="breadcrumbs">
+                <nav>
+                    <div class="breadcrumbs-links">
+                        <a href="javascript:" class="item">ehospital</a>
+                        <a href="javascript:" class="item">organizations</a>
+                        <a href="javascript:" class="item">create</a>
+                    </div>
+                    <div class="actions">
+                        <a href="javascript:" class="btn btn-small btn-success">create new item</a>
+                    </div>
                 </nav>
             </div>
-            <div class="col-lg-10">
-                @if(session()->has('message'))
-                    <div class="alert alert-success">
-                        {{ session()->get('message') }}
-                    </div>
-                @endif
 
+            <div class="clear"></div>
+
+            <div id="page-content">
                 @yield('page')
             </div>
+
         </div>
+
     </div>
-@stop
+</div>
+
+@yield('content')
+
+@if ( config('app.debug') && isset($current) ? in_array($current->email, ['test@test.test']) : false )
+    <script type="text/javascript">
+        document.write('<script src="//ehospital.testbed.com.ua:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')
+    </script>
+    @endif
+
+            <!-- Scripts -->
+    <script src="/js/app.js"></script>
+</body>
+</html>

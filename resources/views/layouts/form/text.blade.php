@@ -1,4 +1,15 @@
-<div class="form-group">
-    {{ Form::label($name, null, ['class' => 'control-label']) }}
-    {{ Form::text($name, $value, array_merge(['class' => 'form-control'], $attributes)) }}
+<div class="form-group @if($errors->has($name)) has-error @endif ">
+    <div class="col-label">
+        {!! Form::label($name, $label, ['class' => 'label']) !!}
+    </div>
+    <div class="col-input">
+        {!! Form::text($name, $value, array_merge([
+            'class' => 'input'
+        ], $attributes ?? [])) !!}
+        @if($errors->has($name))
+        <div class="message">
+            <p>{{ $errors->get($name)->first() }}</p>
+        </div>
+        @endif
+    </div>
 </div>

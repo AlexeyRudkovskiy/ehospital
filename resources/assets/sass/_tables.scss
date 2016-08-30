@@ -1,0 +1,39 @@
+@import "variables";
+@import "mixins";
+
+.table {
+  width: 100%;
+
+  &.table-striped {
+    tbody {
+      tr:nth-of-type(2n) {
+        td {
+          background-color: lighten($color-gray, 36%);
+        }
+      }
+    }
+  }
+
+  tr {
+    td, th {
+      padding: $app-base-padding;
+      text-align: left;
+    }
+  }
+
+  tbody {
+    tr:last-of-type {
+      td, th {
+        border-bottom: none;
+      }
+    }
+  }
+
+  thead {
+    th {
+      border-bottom: 1px solid $color-gray;
+      font-weight: bold;
+    }
+  }
+
+}

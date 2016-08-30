@@ -79,6 +79,9 @@
         @endif
     </div>
 </div>
+
+{!! Form::ehSelect('basic_unit_id', \App\Unit::pluck('text', 'id')) !!}
+
 <div class="form-group @if($errors->has('basic_unit_id')) has-error @endif">
     {!! Form::label('basic_unit_id', null, ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
