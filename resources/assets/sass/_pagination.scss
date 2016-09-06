@@ -1,0 +1,23 @@
+@import "variables";
+@import "mixins";
+
+.pagination {
+  margin-top: $app-base-padding;
+
+  li {
+    float: left;
+
+    &.active {
+      span {
+        color: $color-white;
+        background-color: $color-blue-darken;
+        font-weight:bold;
+      }
+    }
+
+    a, span {
+      display: inline-block;
+      padding: $app-base-padding / 1.5 $app-base-padding;
+    }
+  }
+}

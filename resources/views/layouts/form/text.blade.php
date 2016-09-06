@@ -8,7 +8,7 @@
         ], $attributes ?? [])) !!}
         @if($errors->has($name))
         <div class="message">
-            <p>{{ $errors->get($name)->first() }}</p>
+            <p>{{ $errors->first($name) }}</p>
         </div>
         @endif
     </div>

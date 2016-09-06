@@ -9,9 +9,11 @@
   background-color: transparent;
   text-decoration: none;
   display: inline-block;
-
+  font-size: 14px;
   line-height: 14px;
+
   cursor: pointer;
+  outline: none !important;
 
   -webkit-user-select: none;
   -moz-user-select: none;

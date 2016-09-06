@@ -21,7 +21,12 @@
 @import "buttons";
 @import "tables";
 @import "forms";
+@import "tabs";
+@import "pagination";
 
 // For small pages:
 // Login:
 @import "login";
+
+// Pages:
+@import "pages/medicament";

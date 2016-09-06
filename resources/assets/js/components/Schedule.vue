@@ -1,6 +1,13 @@
 <template>
     <div v-for="item in items" style="border-bottom: 1px solid rgba(0, 0, 0, .1); padding-top: 10px; padding-bottom: 10px;">
-        <input type="number" name="schedule[{{$index}}][day_of_week]" placeholder="Day of week(from 1 to 7)" />
+        <div class="form-group">
+            <div class="col-label">
+                <label class="label">&nbsp;</label>
+            </div>
+            <div class="col-input">
+                <input type="number" name="schedule[{{$index}}][day_of_week]" placeholder="Day of week(from 1 to 7)" class="input" />
+            </div>
+        </div>
         <br>
         <input type="time" name="schedule[{{$index}}][from]" placeholder="Work from:" />
         <br>

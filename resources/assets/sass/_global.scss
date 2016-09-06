@@ -29,4 +29,34 @@ body {
 a {
   color: $color-blue;
   text-decoration: none;
+  transition: 0.2s color;
+
+  &:hover {
+    color: darken($color-blue-darken, 15%);
+  }
+
+  &.bold {
+    font-weight: bold;
+  }
+
+  &.danger {
+    color: $color-red;
+
+    &:hover {
+      color: $color-red-darken;
+    }
+  }
+
+  &.success {
+    color: $color-green;
+
+    &:hover {
+      color: $color-green-darken;
+    }
+  }
+
+  &.underline {
+    text-decoration: underline;
+  }
+
 }

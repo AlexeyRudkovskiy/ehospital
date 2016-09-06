@@ -26,7 +26,7 @@
         </tbody>
     </table>
 
-    {!! $organizations->render() !!}
+    {!! $organizations->links('layouts.pagination') !!}
 @stop
 
 {{--@push('breadcrumbs-right')--}}

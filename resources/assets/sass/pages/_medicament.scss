@@ -1,0 +1,134 @@
+@import "../variables";
+@import "../mixins";
+
+.medicament-page {
+  .header {
+    padding: $app-base-padding;
+    border-bottom: 1px solid $color-gray;
+
+    .links {
+      margin-top: $app-base-padding;
+    }
+
+    nav.links {
+      a {
+        margin-left: $app-base-padding / 2;
+        margin-right: $app-base-padding / 2;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  .medicament-info-compact {
+    width: $input-small-width + $label-small-width + 100px;
+
+    @include box-sizing;
+  }
+
+  .medicament-subinfo {
+    padding-left: $app-base-padding;
+  }
+
+  .tab-content {
+    &.tab-content-revisions {
+
+      .revision-card {
+        box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+        border: 1px solid rgba(0, 0, 0, .15);
+
+        margin-top: $app-base-padding;
+        margin-bottom: $app-base-padding;
+
+        width: $revision-width;
+
+        @include box-sizing;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .revision-header {
+          border-bottom: 1px solid $color-gray;
+          padding: $app-base-padding;
+
+          div {
+            margin-top:    $app-base-padding / 2;
+            margin-bottom: $app-base-padding / 2;
+
+            &:first-child {
+              margin-top: 0;
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        .revision-content {
+          padding-bottom: $app-base-padding;
+          padding-top: $app-base-padding;
+
+          @include box-sizing;
+
+          .revision-item {
+            padding: $app-base-padding;
+            cursor: pointer;
+
+            @include box-sizing;
+
+            &:hover {
+              background-color: $color-gray;
+            }
+
+            &:not(.active) {
+              .revision-item-to, .revision-item-from {
+                display: none;
+              }
+            }
+
+            .revision-item-from {
+              margin-top: $app-base-padding;
+              margin-bottom: $app-base-padding;
+
+              span {
+                background-color: $color-red-darken;
+                color: $color-white;
+              }
+            }
+
+            .revision-item-to {
+              span {
+                background-color: $color-green-darken;
+                color: $color-white;
+              }
+            }
+
+            .revision-item-from, .revision-item-to {
+              span {
+                display: inline-block;
+                padding: $app-base-padding / 3;
+                border-radius: 3px;
+              }
+            }
+
+          }
+        }
+
+      }
+
+    }
+  }
+
+}

@@ -30,6 +30,7 @@ class Medicament extends Model
         'nds',
         'barcode',
         'morion_code',
+        'inn_name',
 
         'set_id',
         'base_unit_id',

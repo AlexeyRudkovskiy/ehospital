@@ -14,6 +14,26 @@
     }
   }
 
+  &.table-striped-on-hover {
+    tbody {
+      tr:hover {
+        td {
+          background-color: lighten($color-gray, 36%);
+        }
+      }
+    }
+  }
+
+  &.table-no-first-padding-left {
+    tr {
+      td, th {
+        &:first-of-type {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
   tr {
     td, th {
       padding: $app-base-padding;

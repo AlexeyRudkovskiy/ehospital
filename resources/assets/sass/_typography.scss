@@ -28,6 +28,19 @@ h6 {
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
 
+  &.underline {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid $color-gray;
+    margin-bottom: $app-base-padding;
+
+    &.with-paddings {
+      padding: $app-base-padding / 2 $app-base-padding;
+
+      @include box-sizing;
+    }
+  }
+
   small, .small {
     font-size: 65%;
     line-height: 1;

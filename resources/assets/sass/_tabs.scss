@@ -1,0 +1,49 @@
+@import "variables";
+@import "mixins";
+
+nav.tabs {
+  display: flex;
+
+  padding-left:  $app-base-padding;
+  padding-right: $app-base-padding;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+  border: 1px solid rgba(0, 0, 0, .15);
+
+  @include box-sizing;
+
+  &.tabs-bottom-offset {
+    margin-bottom: $app-base-padding;
+  }
+
+  &.tabs-vertical-offset {
+    margin-top: $app-base-padding;
+    margin-bottom: $app-base-padding;
+  }
+
+  a {
+    display: inline-block;
+    padding: $app-base-padding;
+    border-bottom: 3px solid transparent;
+    color: $color-gray-darken;
+    outline: none;
+
+    @include box-sizing;
+
+    &.active {
+      border-bottom-color:$color-blue-darken;
+      color: $color-blue-darken;
+    }
+
+    &:hover {
+      &:not(.active) {
+        color: $color-blue;
+      }
+    }
+  }
+}
+
+.tab-content {
+  &.hidden {
+    display: none;
+  }
+}

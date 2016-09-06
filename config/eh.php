@@ -2,6 +2,7 @@
 
 return [
     'pagination' => [
-        'limit' => 5
+        'limit' => 15,
+        'offset' => 2
     ]
 ];
