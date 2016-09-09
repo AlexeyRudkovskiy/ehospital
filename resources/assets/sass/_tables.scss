@@ -34,6 +34,16 @@
     }
   }
 
+  &.table-last-td-pull-right {
+    tr {
+      td, th {
+        &:last-child {
+          text-align: right;
+        }
+      }
+    }
+  }
+
   tr {
     td, th {
       padding: $app-base-padding;

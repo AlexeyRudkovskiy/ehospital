@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <table class="table table-striped">
+    <table class="table table-striped table-last-td-pull-right">
         <thead>
         <tr>
             <th>Название</th>
