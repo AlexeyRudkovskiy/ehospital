@@ -42,6 +42,10 @@ return [
 
     'label' => [
         'save' => 'Сохранить',
+        'pagination' => [
+            'next' => 'следующая страница',
+            'previous' => 'предыдущая страница'
+        ],
 
         'organization' => [
             'type' => 'Тип организации',

@@ -30,5 +30,5 @@
         </tbody>
     </table>
 
-    {!! $medicaments->render() !!}
+    {!! $medicaments->links('layouts.pagination') !!}
 @stop

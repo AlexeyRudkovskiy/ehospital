@@ -26,5 +26,5 @@
         </tbody>
     </table>
 
-    {!! $users->render() !!}
+    {!! $users->links('layouts.pagination') !!}
 @stop

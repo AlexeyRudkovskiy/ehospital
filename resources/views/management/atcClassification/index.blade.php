@@ -30,5 +30,5 @@
         </tbody>
     </table>
 
-    {!! $classifications->render() !!}
+    {!! $classifications->links('layouts.pagination') !!}
 @stop

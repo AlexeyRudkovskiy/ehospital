@@ -26,5 +26,5 @@
         </tbody>
     </table>
 
-    {!! $departments->render() !!}
+    {!! $departments->links('layouts.pagination') !!}
 @stop

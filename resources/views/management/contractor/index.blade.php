@@ -32,5 +32,5 @@
         </tbody>
     </table>
 
-    {!! $contractors->render() !!}
+    {!! $contractors->links('layouts.pagination') !!}
 @stop
