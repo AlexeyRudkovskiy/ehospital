@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <base href="/" />
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -80,6 +82,12 @@
     @endif
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="/vendor/vue.js"></script>
+    <script src="/vendor/system.js"></script>
+    <script src="/systemjs.config.js"></script>
+    <script src="{{ url('/') }}:{{ config('eh.echo.port')  }}/socket.io/socket.io.js"></script>
+    <script>
+        System.import('/js/app');
+    </script>
 </body>
 </html>

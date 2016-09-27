@@ -18,6 +18,10 @@ Route::get('/', function () {
     return redirect()->route('organization.index');
 });
 
+Route::get('test', function () {
+    return view('test_echo');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

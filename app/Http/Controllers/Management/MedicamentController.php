@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Management;
 
+use App\Events\MedicamentChangedEvent;
 use App\Medicament;
 use Illuminate\Http\Request;
 
@@ -111,6 +112,9 @@ class MedicamentController extends Controller
 
         $medicament->update($data);
         session()->flash('message', 'management.medicament.saved');
+
+        event(new MedicamentChangedEvent($medicament));
+
         return back();
     }
 
