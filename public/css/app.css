@@ -228,7 +228,6 @@ header.header {
   display: flex; }
   .row.row-vertical-baseline {
     -webkit-box-align: baseline;
-    -ms-grid-row-align: baseline;
     align-items: baseline; }
   .row.row-fixed .col-1 {
     width: 8.3333333333%;
@@ -338,6 +337,30 @@ header.header {
     .btn.btn-danger:hover {
       background-color: #e74c3c;
       color: white; }
+
+.mi-btn {
+  font-family: 'Material Icons', sans-serif;
+  margin-top: 1px;
+  padding: 15px;
+  color: rgba(102, 102, 102, 0.6);
+  -webkit-transition: 0.1s color;
+  transition: 0.1s color;
+  box-sizing: border-box; }
+  .mi-btn:hover {
+    color: rgba(0, 0, 0, 0.6); }
+  .mi-btn.mi-btn-small {
+    padding: 7.5px; }
+  .mi-btn.mi-btn-danger {
+    color: #e74c3c; }
+    .mi-btn.mi-btn-danger:hover {
+      color: #c0392b; }
+
+.btn-group .btn {
+  border-radius: 0; }
+  .btn-group .btn:first-child {
+    border-radius: 3px 0 0 3px; }
+  .btn-group .btn:last-child {
+    border-radius: 0 3px 3px 0; }
 
 .table {
   width: 100%; }
@@ -529,6 +552,10 @@ nav.tabs {
       color: #2980b9; }
     nav.tabs a:hover:not(.active) {
       color: #3498db; }
+  nav.tabs .right {
+    margin-left: auto; }
+    nav.tabs .right .mi-btn {
+      margin-top: 0; }
 
 .tab-content.hidden {
   display: none; }
@@ -544,6 +571,38 @@ nav.tabs {
     .pagination li a, .pagination li span {
       display: inline-block;
       padding: 10px 15px; }
+
+.notifications {
+  position: absolute;
+  bottom: 15px;
+  right: 30px; }
+  .notifications .notification {
+    padding: 15px;
+    width: 300px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box; }
+
+.popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3); }
+  .popup .content {
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    width: 620px;
+    margin: 0 auto;
+    margin-top: 100px;
+    background-color: white;
+    box-sizing: border-box; }
+    .popup .content .header {
+      padding-bottom: 10px; }
+      .popup .content .header .title {
+        font-weight: bold;
+        font-size: 16px; }
 
 #login {
   min-height: 100%; }

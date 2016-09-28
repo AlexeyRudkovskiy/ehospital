@@ -40,6 +40,14 @@ nav.tabs {
       }
     }
   }
+
+  .right {
+    margin-left: auto;
+
+    .mi-btn {
+      margin-top: 0;
+    }
+  }
 }
 
 .tab-content {

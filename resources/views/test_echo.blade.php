@@ -10,8 +10,8 @@
             <my-component>loading...</my-component>
         </div>
 
-        <script src="/vue.js"></script>
-        <script src="/system.js"></script>
+        <script src="{{ url('/') }}:{{ config('eh.echo.port') }}/socket.io/socket.io.js"></script>
+        <script src="/vendor/system.js"></script>
         <script src="/systemjs.config.js"></script>
         <script>
             System.import('js/app').catch(function(err){ console.error(err); });

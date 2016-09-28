@@ -5,8 +5,13 @@
         <nav class="tabs tabs-vertical-offset" data-default=".tab-content-info">
             <a href="javascript:" data-target=".tab-content-info">@lang('management.label.medicament.info')</a>
             <a href="javascript:" data-target=".tab-content-revisions">@lang('management.label.medicament.revisions')</a>
-            <a href="javascript:" data-target=".tab-content-series">@lang('management.label.medicament.series')</a>
+            <a href="javascript:" data-target=".tab-content-batches">@lang('management.label.medicament.series')</a>
             <a href="javascript:" data-target=".tab-content-statistic">@lang('management.label.medicament.statistic')</a>
+
+            <div class="right">
+                <a href="javascript:" id="medicament_income" class="mi-btn">file_download</a><!--
+                --><a href="javascript:" id="medicament_outgoing" class="mi-btn">file_upload</a>
+            </div>
         </nav>
 
         <!-- Информация об медикаменте -->
@@ -94,5 +99,49 @@
                 </div>
             @endforeach
         </div>
+
+        <div class="tab-content tab-content-batches">
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>Expiration date</th>
+                    <th width="200">Number</th>
+                    <th width="150">Price</th>
+                    <th width="200" align="right" style="text-align: right;">
+                        {{ link_to(route('medicament.batch.create', $medicament->id), 'создать', ['class' => 'btn btn-default']) }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($medicament->batches as $batch)
+                <tr>
+                    <td>{{ $batch->expiration_date }}</td>
+                    <td>{{ $batch->batch_number }}</td>
+                    <td>{{ $batch->price }}</td>
+                    <td align="right" style="text-align: right">
+                        <div class="btn-group">
+                            <a href="javascript:" class="mi-btn mi-btn-small">edit</a><!--
+                            --><a href="javascript:" class="mi-btn mi-btn-small mi-btn-danger">delete</a>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+            </table>
+        </div>
+
+        <div class="tab-content tab-content-statistic">
+            <balance-component :balance="{{ $medicament->balance() }}"></balance-component>
+        </div>
+
     </div>
 @stop
+
+@push('scripts')
+<script>
+    window.medicament = {
+        id: {{ $medicament->id }},
+        name: '{{ $medicament->name }}'
+    };
+</script>
+@endpush

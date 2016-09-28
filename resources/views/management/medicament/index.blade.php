@@ -22,8 +22,8 @@
                     {{ $medicament->amount_in_a_package }}
                 </td>
                 <td>{{ isset($medicament->atcClassification) ? $medicament->atcClassification->name_ua : '' }}</td>
-                <td align="right">
-                    <a href="{{ route('medicament.edit', $medicament->id) }}">редактировать</a>
+                <td align="right" style="text-align: right;">
+                    <a href="{{ route('medicament.edit', $medicament->id) }}" class="mi-btn mi-btn-small">edit</a>
                 </td>
             </tr>
         @endforeach

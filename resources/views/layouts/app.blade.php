@@ -75,19 +75,31 @@
         </div>
     </div>
 
+    <div class="notifications">
+        <div class="notification">
+            Hello world
+        </div>
+    </div>
+
     @if ( config('app.debug') && isset($current) ? in_array($current->email, ['test@test.test']) : false )
         <script type="text/javascript">
-            document.write('<script src="//ehospital.testbed.com.ua:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')
+            document.write('<script src="{{ url('/') }}:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')
         </script>
     @endif
 
+    <script>
+        window.page = "{{ request()->route()->getName() }}";
+        window.prefix = "{{ $prefix or 'management' }}";
+    </script>
+
+    @stack('scripts')
+
     <!-- Scripts -->
-    <script src="/vendor/vue.js"></script>
+    <script src="{{ url('/') }}:{{ config('eh.echo.port') }}/socket.io/socket.io.js"></script>
     <script src="/vendor/system.js"></script>
     <script src="/systemjs.config.js"></script>
-    <script src="{{ url('/') }}:{{ config('eh.echo.port')  }}/socket.io/socket.io.js"></script>
     <script>
-        System.import('/js/app');
+        System.import('js/app').catch(function(err){ console.error(err); });
     </script>
 </body>
 </html>

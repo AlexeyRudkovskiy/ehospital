@@ -3,6 +3,7 @@ process.env.DISABLE_NOTIFIER = true;
 const elixir = require('laravel-elixir');
 const clean = require('gulp-clean');
 
+require('laravel-elixir-livereload');
 require('elixir-typescript');
 
 //require('mitk-elixir-typescript-compiler');
@@ -27,16 +28,17 @@ elixir(function (mix) {
         .typescript([
             './typings/index.d.ts',
             '**/*.ts'
-        ], 'public/js');
+        ], 'public/js')
+        .livereload();
 
-    mix
-        .copy('./node_modules/material-design-icons/iconfont/', vendorFolder + '/font/')
-        .copy('./node_modules/systemjs', vendorFolder + '/vendor/systemjs')
-        .copy('./node_modules/vue-typescript/lib/**/*.js', vendorFolder + '/vendor/vue-typescript')
-        .copy('./node_modules/clone/clone.js', vendorFolder + '/vendor/clone.js')
-        .copy('./node_modules/vue/dist/vue.js', vendorFolder + '/vendor/vue.js')
-        .copy('./node_modules/systemjs/dist/system.js', vendorFolder + '/vendor/system.js')
-        .copy(vendorFolder + '/vendor/vue-typescript/index.js', vendorFolder + '/vendor/vue-typescript/vue-typescript.js');
+    // mix
+    //     .copy('./node_modules/material-design-icons/iconfont/', vendorFolder + '/font/')
+    //     .copy('./node_modules/systemjs', vendorFolder + '/vendor/systemjs')
+    //     .copy('./node_modules/vue-typescript/lib/**/*.js', vendorFolder + '/vendor/vue-typescript')
+    //     .copy('./node_modules/clone/clone.js', vendorFolder + '/vendor/clone.js')
+    //     .copy('./node_modules/vue/dist/vue.js', vendorFolder + '/vendor/vue.js')
+    //     .copy('./node_modules/systemjs/dist/system.js', vendorFolder + '/vendor/system.js')
+    //     .copy(vendorFolder + '/vendor/vue-typescript/index.js', vendorFolder + '/vendor/vue-typescript/vue-typescript.js');
 
         //.webpack('app.js');
         //.webpack('app.ts', 'dist/', 'resources/assets/typescript/app.ts');

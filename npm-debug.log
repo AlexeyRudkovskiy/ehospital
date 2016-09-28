@@ -1,32 +1,35 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/bin/nodejs', '/usr/local/bin/npm', 'run', 'echo' ]
+1 verbose cli [ 'D:\\Program Files\\NodeJS\\node.exe',
+1 verbose cli   'D:\\Program Files\\NodeJS\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'echo' ]
 2 info using npm@3.3.12
-3 info using node@v4.2.6
+3 info using node@v5.3.0
 4 verbose run-script [ 'preecho', 'echo', 'postecho' ]
 5 info lifecycle @~preecho: @
 6 silly lifecycle @~preecho: no script for preecho, continuing
 7 info lifecycle @~echo: @
 8 verbose lifecycle @~echo: unsafe-perm in lifecycle true
-9 verbose lifecycle @~echo: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/home/alexeyrudkovskiy/www/ehospital.dev/node_modules/.bin:/home/alexeyrudkovskiy/.dnx/runtimes/dnx-mono.1.0.0-rc1-update1/bin:/home/alexeyrudkovskiy/.dnx/bin:/home/alexeyrudkovskiy/.rbenv/plugins/ruby-build/bin:/home/alexeyrudkovskiy/.rbenv/shims:/home/alexeyrudkovskiy/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/alexeyrudkovskiy/.composer/vendor/bin
-10 verbose lifecycle @~echo: CWD: /home/alexeyrudkovskiy/www/ehospital.dev
-11 silly lifecycle @~echo: Args: [ '-c', 'nodejs ./laravel_echo_server.js' ]
+9 verbose lifecycle @~echo: PATH: D:\Program Files\NodeJS\node_modules\npm\bin\node-gyp-bin;D:\OpenServer\OpenServer\domains\EHospital-v2\node_modules\.bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\Program Files\WinAVR-20100110\bin;D:\Program Files\WinAVR-20100110\utils\bin;D:\Program Files\Git\bin\;D:\OpenServer\OpenServer\modules\php\PHP-7-x64\;D:\Program Files\NodeJS\;D:\Program Files\HashiCorp\Vagrant\bin;D:\Ruby22-x64\bin;D:\Ruby21-x64\bin;D:\RubyDev\Ruby\bin;C:\Ruby200-x64\bin;C:\Program Files\Common Files\Microsoft Shared\Windows Live;D:\Program Files\Jar2Exe Wizard\;D:\OpenServer\OpenServer\;C:\Python27\;C:\Users\HOME\AppData\Local\atom\bin;C:\Users\HOME\AppData\Roaming\npm;C:\Users\HOME\AppData\Roaming\Composer\vendor\bin\;D:\Program Files\Microsoft VS Code\bin
+10 verbose lifecycle @~echo: CWD: D:\OpenServer\OpenServer\domains\EHospital-v2
+11 silly lifecycle @~echo: Args: [ '/d /s /c', 'nodejs ./laravel_echo_server.js' ]
 12 silly lifecycle @~echo: Returned: code: 1  signal: null
 13 info lifecycle @~echo: Failed to exec echo script
 14 verbose stack Error: @ echo: `nodejs ./laravel_echo_server.js`
 14 verbose stack Exit status 1
-14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:232:16)
+14 verbose stack     at EventEmitter.<anonymous> (D:\Program Files\NodeJS\node_modules\npm\lib\utils\lifecycle.js:232:16)
 14 verbose stack     at emitTwo (events.js:87:13)
 14 verbose stack     at EventEmitter.emit (events.js:172:7)
-14 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+14 verbose stack     at ChildProcess.<anonymous> (D:\Program Files\NodeJS\node_modules\npm\lib\utils\spawn.js:24:14)
 14 verbose stack     at emitTwo (events.js:87:13)
 14 verbose stack     at ChildProcess.emit (events.js:172:7)
-14 verbose stack     at maybeClose (internal/child_process.js:821:16)
+14 verbose stack     at maybeClose (internal/child_process.js:818:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
 15 verbose pkgid @
-16 verbose cwd /home/alexeyrudkovskiy/www/ehospital.dev
-17 error Linux 4.4.0-36-generic
-18 error argv "/usr/bin/nodejs" "/usr/local/bin/npm" "run" "echo"
-19 error node v4.2.6
+16 verbose cwd D:\OpenServer\OpenServer\domains\EHospital-v2
+17 error Windows_NT 6.1.7601
+18 error argv "D:\\Program Files\\NodeJS\\node.exe" "D:\\Program Files\\NodeJS\\node_modules\\npm\\bin\\npm-cli.js" "run" "echo"
+19 error node v5.3.0
 20 error npm  v3.3.12
 21 error code ELIFECYCLE
 22 error @ echo: `nodejs ./laravel_echo_server.js`

@@ -20,6 +20,8 @@ redis.on('pmessage', function (pattern, channel, message) {
         }
     };
 
+    console.log('New event: ', data);
+
     for (var i = 0, length = connections.length; i < length; i++) {
         connections[i].emit('message', data);
     }
@@ -27,4 +29,5 @@ redis.on('pmessage', function (pattern, channel, message) {
 
 io.sockets.on('connection', function (socket) {
     connections.push(socket);
+    console.log('New client connected');
 });

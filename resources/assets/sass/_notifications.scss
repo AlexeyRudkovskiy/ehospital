@@ -1,0 +1,17 @@
+@import "mixins";
+@import "variables";
+
+.notifications {
+  position: absolute;
+  bottom: $app-base-padding;
+  right: $app-base-padding * 2;
+
+  .notification {
+    padding: $app-base-padding;
+    width: 300px;
+
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+    @include box-sizing;
+  }
+}
+

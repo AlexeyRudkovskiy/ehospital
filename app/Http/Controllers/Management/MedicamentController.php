@@ -56,7 +56,8 @@ class MedicamentController extends Controller
         ]);
 
         $data = array_merge($data, [
-            'keep_records_by_series' => true
+            'keep_records_by_series' => true,
+            'inn_name' => 0
         ]);
 
         $medicament = Medicament::create($data);
@@ -128,4 +129,16 @@ class MedicamentController extends Controller
     {
         //
     }
+
+    public function getIncome(Medicament $medicament)
+    {
+        return view('management.medicament.income')
+            ->with('medicament', $medicament);
+    }
+
+    public function postIncome(Medicament $medicament, Request $request)
+    {
+        return $request->all();
+    }
+
 }

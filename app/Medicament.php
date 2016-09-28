@@ -6,7 +6,7 @@ use App\Traits\RevisionsTrait;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Medicament
+ * Class MedicamentShow
  *
  * @author Alexey Rudkovskiy
  * @package App
@@ -147,17 +147,17 @@ class Medicament extends Model
      * @param array $attributes дополнительные аттрибуты
      * @return Model
      */
-    public function income($amount, $attributes)
+    public function income($amount, $attributes = [])
     {
         return $this->addToHistory($amount, 'income', $attributes);
     }
 
-    public function outgoing($amount, $attributes)
+    public function outgoing($amount, $attributes = [])
     {
         return $this->addToHistory($amount, 'outgoing', $attributes);
     }
 
-    public function armor($amount, $attributes)
+    public function armor($amount, $attributes = [])
     {
         return $this->addToHistory($amount, 'armored', $attributes);
     }

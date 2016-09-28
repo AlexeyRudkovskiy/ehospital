@@ -17,11 +17,12 @@ $faker = Faker\Factory::create($lang);
 $factory->define(App\User::class, function () use ($faker) {
     return [
         'firstName' => $faker->firstName,
+        'middleName' => 'MiddleName',
         'lastName' => $faker->lastName,
         'password' => str_random(10),
         'email' => $faker->safeEmail,
         'phone' => $faker->phoneNumber,
-        'cryptKey' => \Crypt::encrypt(str_random(32) . md5($faker->firstNameFemale)),
+        'cryptKey' => md5(\Crypt::encrypt(str_random(16) . md5($faker->firstNameFemale))),
         'organization_id' => 1,
         'permission_id' => 1
     ];
@@ -74,10 +75,12 @@ $factory->define(\App\Contractor::class, function () use ($faker) {
 $factory->define(\App\Patient::class, function () use ($faker) {
     return [
         'name' => $faker->name,
-        'birthday' => $faker->numberBetween(16, 70),
+        'birthday' => $faker->date(),
+//        'birthday' => $faker->numberBetween(16, 70),
         'phone' => $faker->phoneNumber,
         'homeless' => $faker->randomNumber() % 2 == 0 ? true : false,
-        'ukrainian' => true
+        'ukrainian' => true,
+        'hospital_employee' => false
     ];
 });
 
