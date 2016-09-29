@@ -9,9 +9,100 @@
   .notification {
     padding: $app-base-padding;
     width: 300px;
+    background-color: $color-white;
 
-    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+    //box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 3px;
+
+    position: relative;
+
     @include box-sizing;
+
+    &:not(.notification-danger), &:not(.notification-default) {
+      .close {
+        .mi-btn {
+          color: lighten($color-gray-darken, $mi-btn-color-offset);
+
+          &:hover {
+            color: $color-gray-darken;
+          }
+        }
+      }
+    }
+
+    &.notification-default {
+      border-color: $color-blue;
+      background-color: $color-blue;
+      color: $color-white;
+
+      .btn {
+        color: $color-blue;
+      }
+    }
+
+    &.notification-danger {
+      border-color: $color-red;
+      background-color: $color-red;
+      color: $color-white;
+
+      .btn {
+        color: $color-red;
+      }
+    }
+
+    .btn {
+      color: $color-gray-darken;
+    }
+
+    .notification-content {
+      // computed close button width minus $app-base-padding(15px)
+      padding-right: 29px;
+
+      .btn {
+        margin-top: $app-base-padding;
+        background-color: $color-white;
+
+        border-color: transparent;
+
+        &:hover {
+          background-color: $color-gray-darken;
+          color: $color-white;
+        }
+
+        &.btn-danger {
+          &:hover {
+            background-color: $color-red-darken;
+            color: $color-white;
+          }
+        }
+
+        &.btn-success {
+          &:hover {
+            background-color: $color-green-darken;
+            color: $color-white;
+          }
+        }
+      }
+    }
+
+    .close {
+      position: absolute;
+      right: 0;
+      top: $app-base-padding;
+
+      .mi-btn {
+        color: $color-white;
+        opacity: 0.7;
+
+        transition: 0.15s opacity;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
   }
 }
 

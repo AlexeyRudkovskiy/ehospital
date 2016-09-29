@@ -228,7 +228,6 @@ header.header {
   display: flex; }
   .row.row-vertical-baseline {
     -webkit-box-align: baseline;
-    -ms-grid-row-align: baseline;
     align-items: baseline; }
   .row.row-fixed .col-1 {
     width: 8.3333333333%;
@@ -347,13 +346,21 @@ header.header {
   -webkit-transition: 0.1s color;
   transition: 0.1s color;
   box-sizing: border-box; }
-  .mi-btn:hover {
+  .mi-btn.mi-no-left-padding {
+    padding-left: 0; }
+  .mi-btn.mi-no-right-padding {
+    padding-right: 0; }
+  .mi-btn.mi-no-top-padding {
+    padding-top: 0; }
+  .mi-btn.mi-no-bottom-padding {
+    padding-bottom: 0; }
+  .mi-btn:not(.mi-static):hover {
     color: rgba(0, 0, 0, 0.6); }
-  .mi-btn.mi-btn-small {
+  .mi-btn:not(.mi-static).mi-btn-small {
     padding: 7.5px; }
-  .mi-btn.mi-btn-danger {
+  .mi-btn:not(.mi-static).mi-btn-danger {
     color: #e74c3c; }
-    .mi-btn.mi-btn-danger:hover {
+    .mi-btn:not(.mi-static).mi-btn-danger:hover {
       color: #c0392b; }
 
 .btn-group .btn {
@@ -580,8 +587,55 @@ nav.tabs {
   .notifications .notification {
     padding: 15px;
     width: 300px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    position: relative;
     box-sizing: border-box; }
+    .notifications .notification:not(.notification-danger) .close .mi-btn, .notifications .notification:not(.notification-default) .close .mi-btn {
+      color: rgba(102, 102, 102, 0.6); }
+      .notifications .notification:not(.notification-danger) .close .mi-btn:hover, .notifications .notification:not(.notification-default) .close .mi-btn:hover {
+        color: rgba(0, 0, 0, 0.6); }
+    .notifications .notification.notification-default {
+      border-color: #3498db;
+      background-color: #3498db;
+      color: white; }
+      .notifications .notification.notification-default .btn {
+        color: #3498db; }
+    .notifications .notification.notification-danger {
+      border-color: #e74c3c;
+      background-color: #e74c3c;
+      color: white; }
+      .notifications .notification.notification-danger .btn {
+        color: #e74c3c; }
+    .notifications .notification .btn {
+      color: rgba(0, 0, 0, 0.6); }
+    .notifications .notification .notification-content {
+      padding-right: 29px; }
+      .notifications .notification .notification-content .btn {
+        margin-top: 15px;
+        background-color: white;
+        border-color: transparent; }
+        .notifications .notification .notification-content .btn:hover {
+          background-color: rgba(0, 0, 0, 0.6);
+          color: white; }
+        .notifications .notification .notification-content .btn.btn-danger:hover {
+          background-color: #c0392b;
+          color: white; }
+        .notifications .notification .notification-content .btn.btn-success:hover {
+          background-color: #16a085;
+          color: white; }
+    .notifications .notification .close {
+      position: absolute;
+      right: 0;
+      top: 15px; }
+      .notifications .notification .close .mi-btn {
+        color: white;
+        opacity: 0.7;
+        -webkit-transition: 0.15s opacity;
+        transition: 0.15s opacity; }
+        .notifications .notification .close .mi-btn:hover {
+          opacity: 1; }
 
 .popup {
   position: absolute;
@@ -605,6 +659,25 @@ nav.tabs {
         font-weight: bold;
         font-size: 16px; }
 
+.info-compact {
+  width: 500px;
+  box-sizing: border-box; }
+  .info-compact .header {
+    padding: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+    .info-compact .header .links {
+      margin-top: 15px; }
+    .info-compact .header nav.links a {
+      margin-left: 7.5px;
+      margin-right: 7.5px; }
+      .info-compact .header nav.links a:first-child {
+        margin-left: 0; }
+      .info-compact .header nav.links a:last-child {
+        margin-right: 0; }
+
+.info-subinfo {
+  padding-left: 15px; }
+
 #login {
   min-height: 100%; }
   #login #container {
@@ -613,26 +686,6 @@ nav.tabs {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     padding: 15px;
     box-sizing: border-box; }
-
-.medicament-page .header {
-  padding: 15px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
-  .medicament-page .header .links {
-    margin-top: 15px; }
-  .medicament-page .header nav.links a {
-    margin-left: 7.5px;
-    margin-right: 7.5px; }
-    .medicament-page .header nav.links a:first-child {
-      margin-left: 0; }
-    .medicament-page .header nav.links a:last-child {
-      margin-right: 0; }
-
-.medicament-page .medicament-info-compact {
-  width: 500px;
-  box-sizing: border-box; }
-
-.medicament-page .medicament-subinfo {
-  padding-left: 15px; }
 
 .medicament-page .tab-content.tab-content-revisions .revision-card {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
@@ -680,5 +733,30 @@ nav.tabs {
         display: inline-block;
         padding: 5px;
         border-radius: 3px; }
+
+.users-page .tab-content.tab-content-schedule .header .day_of_week {
+  display: inline-block;
+  position: relative;
+  top: -5px; }
+
+.users-page .tab-content.tab-content-schedule .schedule-time {
+  padding-top: 7.5px;
+  padding-bottom: 7.5px; }
+  .users-page .tab-content.tab-content-schedule .schedule-time .mi-btn {
+    font-size: 22px; }
+  .users-page .tab-content.tab-content-schedule .schedule-time .time_period {
+    position: relative;
+    display: inline-block;
+    top: 12px;
+    left: 4px; }
+    .users-page .tab-content.tab-content-schedule .schedule-time .time_period p {
+      margin-top: 5px;
+      margin-bottom: 5px; }
+      .users-page .tab-content.tab-content-schedule .schedule-time .time_period p:first-child {
+        margin-top: 0; }
+      .users-page .tab-content.tab-content-schedule .schedule-time .time_period p:last-child {
+        margin-bottom: 0; }
+      .users-page .tab-content.tab-content-schedule .schedule-time .time_period p b {
+        font-weight: 500; }
 
 /*# sourceMappingURL=app.css.map */

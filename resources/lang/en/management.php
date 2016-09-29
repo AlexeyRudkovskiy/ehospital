@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'property' => [
+        'empty' => 'свойство не установлено'
+    ],
+
     'organization' => [
         'type' => [
             'legal' => 'юридическая',
@@ -59,6 +63,12 @@ return [
             'revisions' => 'Изменения',
             'series' => 'Серии',
             'statistic' => 'Статистика'
+        ],
+
+        'users' => [
+            'info' => 'О пользователе',
+            'schedule' => 'График работы',
+            'timeDelta' => 'На пациента отведено <b>:delta</b> часов'
         ]
     ]
 ];

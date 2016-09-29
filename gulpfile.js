@@ -31,8 +31,6 @@ elixir(function (mix) {
         ], 'public/js')
         .livereload();
 
-    mix.copy('./resources/assets/typescript/**/*.html', vendorFolder + '/partials/');
-
      mix
          .copy('./node_modules/systemjs-plugin-text/text.js', vendorFolder + '/vendor/text.js');
     //     .copy('./node_modules/material-design-icons/iconfont/', vendorFolder + '/font/')

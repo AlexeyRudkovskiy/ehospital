@@ -28,6 +28,7 @@
 
 @import "notifications";
 @import "popup";
+@import "info";
 
 // For small pages:
 // Login:
@@ -35,3 +36,4 @@
 
 // Pages:
 @import "pages/medicament";
+@import "pages/users";

@@ -10,19 +10,38 @@
 
   @include box-sizing;
 
-  &:hover {
-    color: darken($color-gray-darken, $mi-btn-color-offset);
+  &.mi-no-left-padding {
+    padding-left: 0;
   }
 
-  &.mi-btn-small {
-    padding: $app-base-padding / 2;
+  &.mi-no-right-padding {
+    padding-right: 0;
   }
 
-  &.mi-btn-danger {
-    color: $color-red;
+  &.mi-no-top-padding {
+    padding-top: 0;
+  }
+
+  &.mi-no-bottom-padding {
+    padding-bottom: 0;
+  }
+
+  &:not(.mi-static) {
 
     &:hover {
-      color: $color-red-darken
+      color: darken($color-gray-darken, $mi-btn-color-offset);
+    }
+
+    &.mi-btn-small {
+      padding: $app-base-padding / 2;
+    }
+
+    &.mi-btn-danger {
+      color: $color-red;
+
+      &:hover {
+        color: $color-red-darken
+      }
     }
   }
 }

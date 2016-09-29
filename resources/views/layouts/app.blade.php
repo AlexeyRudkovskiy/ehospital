@@ -77,7 +77,15 @@
 
     <div class="notifications">
         <div class="notification">
-            Hello world
+            <div class="notification-content">
+                <p>Any content there. Many content. Too a a much many content...</p>
+                <div class="btn-group">
+                    <a href="javascript:" class="btn">test</a><!--
+                    --><a href="javascript:" class="btn">test</a><!--
+                    --><a href="javascript:" class="btn">test</a>
+                </div>
+            </div>
+            <div class="close"><a href="javascript:" class="mi-btn">close</a></div>
         </div>
     </div>
 

@@ -1,4 +1,4 @@
-declare function require(params:string): any;
+/// <references path="../../typings/index.d.ts" />
 
 import * as Vue from 'vue'
 import { router } from './routes'

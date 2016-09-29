@@ -7,7 +7,7 @@
     "clear": "rm -rf public/js && rm -rf public/css && rm -rf public/font",
     "build": "webpack",
     "postinstall": "typings install",
-    "echo": "nodejs ./laravel_echo_server.js"
+    "echo": "node ./laravel_echo_server.js"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.7",

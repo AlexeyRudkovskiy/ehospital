@@ -1,0 +1,50 @@
+@import "../mixins";
+@import "../variables";
+
+.users-page {
+
+  .tab-content {
+    &.tab-content-schedule {
+      .header {
+        .day_of_week {
+          display: inline-block;
+          position: relative;
+          top: $users-schedule-day-of-week-vertical-offset;
+        }
+      }
+
+      .schedule-time {
+        padding-top:    $app-base-padding / 2;
+        padding-bottom: $app-base-padding / 2;
+
+        .mi-btn {
+          font-size: 22px;
+        }
+
+        .time_period {
+          position: relative;
+          display: inline-block;
+          top: $users-schedule-time-period-vertical-offset;
+          left: $users-schedule-time-period-horizontal-offset;
+
+          p {
+            margin-top: 5px;
+            margin-bottom: 5px;
+
+            &:first-child {
+              margin-top: 0;
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            b {
+              font-weight:500;
+            }
+          }
+        }
+      }
+    }
+  }
+}

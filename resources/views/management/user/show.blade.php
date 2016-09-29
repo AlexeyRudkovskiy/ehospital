@@ -1,40 +1,63 @@
 @extends('layouts.app')
 
 @section('content')
-    @php($days = [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ])
-    <div>
-        <h3>{{ $user->lastName }} {{ $user->firstName }} {{ $user->middleName }}</h3>
+
+    <div class="users-page">
+        <nav class="tabs tabs-vertical-offset" data-default=".tab-content-info">
+            <a href="javascript:" data-target=".tab-content-info">@lang('management.label.users.info')</a>
+            <a href="javascript:" data-target=".tab-content-schedule">@lang('management.label.users.schedule')</a>
+        </nav>
+
+        <div class="tab-content tab-content-info">
+            <div class="info-compact">
+                <div class="header underline">
+                    <h3>{{ $user->fullName() }}</h3>
+                    <nav class="links">
+                        <a href="javascript:">edit</a><!--
+                        --><a href="javascript:" class="danger">delete</a>
+                    </nav>
+                </div>
+                <table class="table table-striped-on-hover">
+                    <tr>
+                        <td width="200">Phone:</td>
+                        <td>{{ $user->phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>{{ $user->email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Position:</td>
+                        <td>{{ isset($user->position) ? $user->position->name : trans('management.property.empty') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Parent:</td>
+                        <td>{{ isset($user->parent) ? $user->parent->fullName() : trans('management.property.empty') }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-content tab-content-schedule">
+            <div class="info-compact">
+                @foreach($user->schedule as $schedule)
+                    <div class="header underline">
+                        <h3>
+                            <i class="mi-btn mi-static mi-no-left-padding">today</i><!--
+                            --><span class="day_of_week">@lang('datetime.day.week.' . $schedule->getDayOfWeek())</span>
+                        </h3>
+                        <div class="clear"></div>
+                        <div class="schedule-time">
+                            <i class="mi-btn mi-static mi-no-left-padding mi-no-bottom-padding mi-no-top-padding">timer</i><!--
+                            --><div class="time_period">
+                                <p>{{ $schedule->period() }}</p>
+                                <p>@lang('management.label.users.timeDelta', ['delta' => $schedule->getPerPatientFormated()])</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
-    <table class="table">
-        <tr>
-            <td width="100">Phone:</td>
-            <td>{{ $user->phone }}</td>
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td>{{ $user->email }}</td>
-        </tr>
-        <tr>
-            <td>Position:</td>
-            <td>{{ isset($user->position) ? $user->position->name : '' }}</td>
-        </tr>
-        <tr>
-            <td>Parent:</td>
-            <td>{{ isset($user->parent) ? $user->parent->fullName() : '' }}</td>
-        </tr>
-    </table>
-    <h3>График работы:</h3>
-    <table class="table">
-        @foreach($user->schedule as $schedule)
-        <tr>
-            <td width="100">{{ $days[$schedule->day_of_week - 1] }}</td>
-            <td>
-                <p>
-                    {{ $schedule->from }} - {{ $schedule->to }}
-                </p>
-                <p>На пациента отведено: {{ $schedule->per_patient }}</p>
-            </td>
-        </tr>
-        @endforeach
-    </table>
+
 @stop

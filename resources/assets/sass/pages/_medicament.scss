@@ -2,39 +2,6 @@
 @import "../mixins";
 
 .medicament-page {
-  .header {
-    padding: $app-base-padding;
-    border-bottom: 1px solid $color-gray;
-
-    .links {
-      margin-top: $app-base-padding;
-    }
-
-    nav.links {
-      a {
-        margin-left: $app-base-padding / 2;
-        margin-right: $app-base-padding / 2;
-
-        &:first-child {
-          margin-left: 0;
-        }
-
-        &:last-child {
-          margin-right: 0;
-        }
-      }
-    }
-  }
-
-  .medicament-info-compact {
-    width: $input-small-width + $label-small-width + 100px;
-
-    @include box-sizing;
-  }
-
-  .medicament-subinfo {
-    padding-left: $app-base-padding;
-  }
 
   .tab-content {
     &.tab-content-revisions {

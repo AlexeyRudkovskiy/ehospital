@@ -29,8 +29,8 @@ var Service = (function () {
         }
     };
     Service.prototype.match = function (pattern, value) {
-        pattern = pattern.replace('*', '([0-1a-zA-Z\.\,\\\/]+)');
-        pattern = pattern.replace('[0-9]', '([0-1]+)');
+        pattern = pattern.replace('*', '([0-9a-zA-Z\.\,\\\/]+)');
+        pattern = pattern.replace('[0-9]', '([0-9]+)');
         pattern = pattern.replace('[a-z]', '([a-zA-Z]+)');
         pattern += '$';
         return (new RegExp(pattern)).test(value);

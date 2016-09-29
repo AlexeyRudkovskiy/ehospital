@@ -219,7 +219,10 @@ class User extends Authenticatable
 
         $from = $scheduleInfo->from;
         $to = $scheduleInfo->to;
-        $step = Carbon::create(0, 0, 0, 0, 15, 0);
+        $step = Carbon::parse($scheduleInfo->per_patient);
+        $step->day = 0;
+        $step->year = 0;
+        $step->month = 0;
         $current = Carbon::create($from->year, $from->month, $from->day, $from->hour, $from->minute, $from->second);
 
         $locked = ArmoredTime::where('day_of_week', $day->dayOfWeek)->where('day', $day)->get();

@@ -1,3 +1,4 @@
+/// <references path="../../typings/index.d.ts" />
 "use strict";
 var Vue = require('vue');
 var routes_1 = require('./routes');

@@ -1,3 +1,4 @@
+/// <reference path="../../../../../typings/index.d.ts" />
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -42,7 +43,7 @@ var BatchesListComponent = (function () {
     ], BatchesListComponent.prototype, "testFunc", null);
     BatchesListComponent = __decorate([
         vue_typescript_1.VueComponent({
-            template: require('/partials/batches-list-component.html!text')
+            template: require('/partials/batches-list.html!text')
         }), 
         __metadata('design:paramtypes', [])
     ], BatchesListComponent);

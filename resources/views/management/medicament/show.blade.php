@@ -16,7 +16,7 @@
 
         <!-- Информация об медикаменте -->
         <div class="tab-content tab-content-info">
-            <div class="medicament-info-compact">
+            <div class="info-compact">
                 <div class="header underline">
                     <h3>{{ $medicament->name }}</h3>
                     <nav class="links">
@@ -105,9 +105,9 @@
             <thead>
                 <tr>
                     <th>Expiration date</th>
-                    <th width="200">Number</th>
+                    <th width="150">Number</th>
                     <th width="150">Price</th>
-                    <th width="200" align="right" style="text-align: right;">
+                    <th width="100" align="right" style="text-align: right;">
                         {{ link_to(route('medicament.batch.create', $medicament->id), 'создать', ['class' => 'btn btn-default']) }}
                     </th>
                 </tr>

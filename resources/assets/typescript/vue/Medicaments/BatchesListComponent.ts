@@ -1,8 +1,10 @@
+/// <reference path="../../../../../typings/index.d.ts" />
+
 import { VueComponent, Prop, Watch } from 'vue-typescript'
 import {MyService} from "../../MyService";
 
 @VueComponent({
-    template: require('/partials/batches-list-component.html!text')
+    template: require('/partials/batches-list.html!text')
 })
 export class BatchesListComponent {
 

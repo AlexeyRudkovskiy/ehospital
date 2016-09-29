@@ -10,7 +10,7 @@
     @php($offset = config('eh.pagination.offset'))
 
     <!-- Pagination Elements -->
-    @for ($page = 1; $page < $paginator->lastPage(); $page++)
+    @for ($page = 1; $page <= $paginator->lastPage(); $page++)
             @if ($page == $paginator->currentPage() )
                 <li class="active"><span>{{ $page }}</span></li>
                 @php($showedDots = false)
