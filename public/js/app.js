@@ -4,7 +4,8 @@ var routes_1 = require('./routes');
 var helpers_1 = require('./helpers');
 var tabs_1 = require('./tabs');
 var revisions_1 = require('./revisions');
-var BalanceComponent_1 = require('./vue/BalanceComponent');
+var BalanceComponent_1 = require('./vue/Medicaments/BalanceComponent');
+var BatchesListComponent_1 = require('./vue/Medicaments/BatchesListComponent');
 (function () {
     var routes = routes_1.router();
     tabs_1.tabs();
@@ -24,7 +25,8 @@ var BalanceComponent_1 = require('./vue/BalanceComponent');
     var app = new Vue({
         el: function () { return 'body'; },
         components: [
-            BalanceComponent_1.BalanceComponent
+            BalanceComponent_1.BalanceComponent,
+            BatchesListComponent_1.BatchesListComponent
         ]
     });
 })();

@@ -228,6 +228,7 @@ header.header {
   display: flex; }
   .row.row-vertical-baseline {
     -webkit-box-align: baseline;
+    -ms-grid-row-align: baseline;
     align-items: baseline; }
   .row.row-fixed .col-1 {
     width: 8.3333333333%;

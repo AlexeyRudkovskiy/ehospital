@@ -128,6 +128,9 @@
                 @endforeach
             </tbody>
             </table>
+
+            <batches-list-component></batches-list-component>
+
         </div>
 
         <div class="tab-content tab-content-statistic">

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var vue_typescript_1 = require('vue-typescript');
-var MyService_1 = require('../MyService');
+var MyService_1 = require('../../MyService');
 var BalanceComponent = (function () {
     function BalanceComponent() {
         this.balance = 0.0;

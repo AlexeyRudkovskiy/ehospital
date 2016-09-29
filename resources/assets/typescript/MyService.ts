@@ -16,6 +16,7 @@ export class MyService extends Service {
     }
 
     private onMessage(event):void {
+        console.log(event);
         this.emit(event.channel, event.message.data);
     }
 

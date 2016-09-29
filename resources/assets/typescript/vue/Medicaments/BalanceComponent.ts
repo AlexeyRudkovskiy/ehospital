@@ -1,5 +1,5 @@
 import { VueComponent, Prop } from 'vue-typescript'
-import { MyService } from '../MyService'
+import { MyService } from '../../MyService'
 
 @VueComponent({
     template: '<b>Balance: {{ balance }}</b>'

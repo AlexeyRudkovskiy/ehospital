@@ -31,7 +31,7 @@ export class Service {
     }
 
     private match (pattern:string, value:string):boolean {
-        pattern = pattern.replace('*', '([0-1a-zA-Z]+)');
+        pattern = pattern.replace('*', '([0-1a-zA-Z\.\,\\\/]+)');
         pattern = pattern.replace('[0-9]', '([0-1]+)');
         pattern = pattern.replace('[a-z]', '([a-zA-Z]+)');
         pattern += '$';

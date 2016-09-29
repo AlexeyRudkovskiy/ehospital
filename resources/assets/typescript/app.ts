@@ -6,7 +6,8 @@ import { get, set } from './helpers'
 import { tabs } from './tabs'
 import { initRevisions } from './revisions'
 
-import { BalanceComponent } from './vue/BalanceComponent'
+import { BalanceComponent } from './vue/Medicaments/BalanceComponent'
+import { BatchesListComponent } from './vue/Medicaments/BatchesListComponent'
 
 (function () {
 
@@ -32,7 +33,8 @@ import { BalanceComponent } from './vue/BalanceComponent'
     var app = new Vue(<any>{
         el: () => 'body',
         components: [
-            BalanceComponent
+            BalanceComponent,
+            BatchesListComponent
         ]
     });
 

@@ -37,7 +37,7 @@ class BatchCreatedEvent implements ShouldBroadcast
     public function broadcastOn()
     {
         return [
-            'eh.medicament.batch.created.' . $this->batch->id
+            'eh.medicament.' . $this->batch->medicament->id . '.batch.created.' . $this->batch->id
         ];
     }
 }

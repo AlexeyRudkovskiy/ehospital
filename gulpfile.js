@@ -31,7 +31,10 @@ elixir(function (mix) {
         ], 'public/js')
         .livereload();
 
-    // mix
+    mix.copy('./resources/assets/typescript/**/*.html', vendorFolder + '/partials/');
+
+     mix
+         .copy('./node_modules/systemjs-plugin-text/text.js', vendorFolder + '/vendor/text.js');
     //     .copy('./node_modules/material-design-icons/iconfont/', vendorFolder + '/font/')
     //     .copy('./node_modules/systemjs', vendorFolder + '/vendor/systemjs')
     //     .copy('./node_modules/vue-typescript/lib/**/*.js', vendorFolder + '/vendor/vue-typescript')
