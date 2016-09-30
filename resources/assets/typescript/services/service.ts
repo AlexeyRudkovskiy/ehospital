@@ -19,6 +19,7 @@ export class Service {
             for (var i = 0, length = this.listeners[name].length; i < length; i++) {
                 this.listeners[name][i].update(data);
             }
+            return;
         }
 
         for (var key in this.listeners) {

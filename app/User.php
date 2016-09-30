@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\Notification;
 use App\Traits\EncryptionTrait;
 use App\Traits\RevisionsTrait;
 use Carbon\Carbon;
@@ -251,6 +252,60 @@ class User extends Authenticatable
         array_pop($schedule);
 
         return $schedule;
+    }
+
+    /**
+     * @param $text
+     * @param $type
+     *
+     * @return Notification
+     */
+    public function notify()
+    {
+        $arguments = func_get_args();
+        if ($arguments[0] instanceof Notification) {
+            $arguments[0]->setUserId($this->id);
+            event($arguments[0]);
+        } else if (count($arguments) == 2) {
+            $type = $arguments[1];
+            switch ($type) {
+                case 'danger':
+                    $type = 'notification-danger';
+                    break;
+                case 'default':
+                    $type = 'notification-default';
+                    break;
+                default:
+                    $type = '';
+                    break;
+            }
+            $event = new Notification($arguments[0], $type);
+            $event->setUserId($this->id);
+            event($event);
+        } else if (count($arguments) == 3) {
+            $type = $arguments[1];
+            switch ($type) {
+                case 'danger':
+                    $type = 'notification-danger';
+                    break;
+                case 'default':
+                    $type = 'notification-default';
+                    break;
+                default:
+                    $type = '';
+                    break;
+            }
+            $notification = new Notification($arguments[0], $type);
+            $notification->setUserId($this->id);
+
+            foreach ($arguments[3] as $argument) {
+                call_user_func_array([
+                    $notification, 'addAction'
+                ], $argument);
+            }
+
+            event($notification);
+        }
     }
 
 }

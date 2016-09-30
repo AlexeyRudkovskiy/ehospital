@@ -1,4 +1,5 @@
 import { Popup } from '../ui/popup'
+import {InlinePopup} from "../ui/inline-popup";
 
 export class MedicamentShow {
 
@@ -21,17 +22,16 @@ export class MedicamentShow {
     }
 
     private onIncomeButtonClicked():void {
-        var popup = new Popup(this.url('income'), true, {
+        var popup = new InlinePopup(this.income, this.url('income'), true, {
             close_after_form_submit: true
         });
         popup.show();
     }
 
     private onOutgoingButtonClicked():void {
-        var popup = new Popup(this.url('outgoing'), true, {
+        var popup = new InlinePopup(this.outgoing, this.url('outgoing'), true, {
             close_after_form_submit: true
-        });
-        popup.show();
+        }).setOnLoadedEventListener(console.log.bind(console)).show();
     }
 
     private url(path:string):string {

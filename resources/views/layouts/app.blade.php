@@ -75,19 +75,7 @@
         </div>
     </div>
 
-    <div class="notifications">
-        <div class="notification">
-            <div class="notification-content">
-                <p>Any content there. Many content. Too a a much many content...</p>
-                <div class="btn-group">
-                    <a href="javascript:" class="btn">test</a><!--
-                    --><a href="javascript:" class="btn">test</a><!--
-                    --><a href="javascript:" class="btn">test</a>
-                </div>
-            </div>
-            <div class="close"><a href="javascript:" class="mi-btn">close</a></div>
-        </div>
-    </div>
+    <notifications-list-component></notifications-list-component>
 
     @if ( config('app.debug') && isset($current) ? in_array($current->email, ['test@test.test']) : false )
         <script type="text/javascript">

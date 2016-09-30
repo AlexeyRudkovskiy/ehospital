@@ -136,6 +136,11 @@ class MedicamentController extends Controller
             ->with('medicament', $medicament);
     }
 
+    public function getOutgoing(Medicament $medicament)
+    {
+        return view('management.medicament.outgoing');
+    }
+
     public function postIncome(Medicament $medicament, Request $request)
     {
         return $request->all();

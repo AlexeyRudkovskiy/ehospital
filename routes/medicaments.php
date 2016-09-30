@@ -9,3 +9,7 @@ Route::get('medicament/{medicament}/income', [
     'uses' => 'MedicamentController@getIncome',
     'as' => 'medicament.income'
 ]);
+Route::get('medicament/{medicament}/outgoing', [
+    'uses' => 'MedicamentController@getOutgoing',
+    'as' => 'medicament.outgoing'
+]);

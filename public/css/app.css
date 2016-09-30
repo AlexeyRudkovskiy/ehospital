@@ -228,6 +228,7 @@ header.header {
   display: flex; }
   .row.row-vertical-baseline {
     -webkit-box-align: baseline;
+    -ms-grid-row-align: baseline;
     align-items: baseline; }
   .row.row-fixed .col-1 {
     width: 8.3333333333%;
@@ -591,9 +592,16 @@ nav.tabs {
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 3px;
     position: relative;
+    margin-top: 15px;
+    margin-bottom: 15px;
     box-sizing: border-box; }
+    .notifications .notification:first-child {
+      margin-top: 0; }
+    .notifications .notification:last-child {
+      margin-bottom: 0; }
     .notifications .notification:not(.notification-danger) .close .mi-btn, .notifications .notification:not(.notification-default) .close .mi-btn {
-      color: rgba(102, 102, 102, 0.6); }
+      color: rgba(102, 102, 102, 0.6);
+      cursor: pointer; }
       .notifications .notification:not(.notification-danger) .close .mi-btn:hover, .notifications .notification:not(.notification-default) .close .mi-btn:hover {
         color: rgba(0, 0, 0, 0.6); }
     .notifications .notification.notification-default {
@@ -625,16 +633,18 @@ nav.tabs {
         .notifications .notification .notification-content .btn.btn-success:hover {
           background-color: #16a085;
           color: white; }
-    .notifications .notification .close {
+    .notifications .notification.notification-danger .close, .notifications .notification.notification-default .close {
       position: absolute;
       right: 0;
       top: 15px; }
-      .notifications .notification .close .mi-btn {
+      .notifications .notification.notification-danger .close .mi-btn, .notifications .notification.notification-default .close .mi-btn {
         color: white;
         opacity: 0.7;
+        cursor: pointer;
         -webkit-transition: 0.15s opacity;
         transition: 0.15s opacity; }
-        .notifications .notification .close .mi-btn:hover {
+        .notifications .notification.notification-danger .close .mi-btn:hover, .notifications .notification.notification-default .close .mi-btn:hover {
+          color: white;
           opacity: 1; }
 
 .popup {
@@ -658,6 +668,40 @@ nav.tabs {
       .popup .content .header .title {
         font-weight: bold;
         font-size: 16px; }
+
+.inline-popup {
+  position: absolute;
+  display: block;
+  width: auto;
+  padding: 15px;
+  top: 158px;
+  left: 1721px;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  box-sizing: border-box; }
+  .inline-popup .inline-popup-content .form {
+    width: auto; }
+    .inline-popup .inline-popup-content .form .form-group {
+      display: block; }
+    .inline-popup .inline-popup-content .form .label, .inline-popup .inline-popup-content .form .input, .inline-popup .inline-popup-content .form .col-input, .inline-popup .inline-popup-content .form .col-label {
+      width: auto;
+      display: block; }
+  .inline-popup .inline-popup-triangle {
+    position: absolute;
+    top: 0;
+    left: 0; }
+    .inline-popup .inline-popup-triangle::after {
+      content: "";
+      color: black;
+      position: absolute;
+      top: -10px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 10px 10px 10px;
+      border-color: transparent transparent white transparent; }
 
 .info-compact {
   width: 500px;

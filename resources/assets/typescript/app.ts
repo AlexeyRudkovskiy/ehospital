@@ -6,8 +6,9 @@ import { get, set } from './helpers'
 import { tabs } from './tabs'
 import { initRevisions } from './revisions'
 
-import { BalanceComponent } from './vue/Medicaments/BalanceComponent'
-import { BatchesListComponent } from './vue/Medicaments/BatchesListComponent'
+import { BalanceComponent } from './components/medicament/balance-component'
+import { BatchesListComponent } from './components/medicament/batches-list-component'
+import { NotificationsListComponent } from './components/notifications/notifications-list-component'
 
 (function () {
 
@@ -34,7 +35,8 @@ import { BatchesListComponent } from './vue/Medicaments/BatchesListComponent'
         el: () => 'body',
         components: [
             BalanceComponent,
-            BatchesListComponent
+            BatchesListComponent,
+            NotificationsListComponent
         ]
     });
 

@@ -1,0 +1,65 @@
+@import "mixins";
+@import "variables";
+
+.inline-popup {
+
+  position: absolute;
+
+  display: block;
+  width: auto;
+
+  padding: $app-base-padding;
+  top:  158px;
+  left: 1721px;
+
+  background-color: $color-white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, .15);
+  border-radius: 3px;
+
+  @include box-sizing();
+
+  .inline-popup-content {
+
+    .form {
+      width: auto;
+
+      .form-group {
+        display: block;
+      }
+
+      .label, .input, .col-input, .col-label {
+        width: auto;
+        display: block;
+      }
+    }
+
+  }
+
+  .inline-popup-close {
+    // empty
+  }
+
+  .inline-popup-triangle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    //margin-left: $inline-popup-horizontal-offset - 5;
+
+    &::after {
+      content: "";
+      color: black;
+
+      position: absolute;
+      top: $inline-popup-vertical-offset;
+      left: 0;
+
+      width:  0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 10px 10px 10px;
+      border-color: transparent transparent $color-white transparent;
+
+    }
+  }
+
+}

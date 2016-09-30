@@ -17,12 +17,24 @@
 
     position: relative;
 
+    margin-top: $app-base-padding;
+    margin-bottom: $app-base-padding;
+
     @include box-sizing;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     &:not(.notification-danger), &:not(.notification-default) {
       .close {
         .mi-btn {
           color: lighten($color-gray-darken, $mi-btn-color-offset);
+          cursor: pointer;
 
           &:hover {
             color: $color-gray-darken;
@@ -86,19 +98,23 @@
       }
     }
 
-    .close {
-      position: absolute;
-      right: 0;
-      top: $app-base-padding;
+    &.notification-danger, &.notification-default {
+      .close {
+        position: absolute;
+        right: 0;
+        top: $app-base-padding;
 
-      .mi-btn {
-        color: $color-white;
-        opacity: 0.7;
+        .mi-btn {
+          color: $color-white;
+          opacity: 0.7;
+          cursor: pointer;
 
-        transition: 0.15s opacity;
+          transition: 0.15s opacity;
 
-        &:hover {
-          opacity: 1;
+          &:hover {
+            color: $color-white;
+            opacity: 1;
+          }
         }
       }
     }
