@@ -17,7 +17,11 @@ class Comment extends Model
      *
      * @var array
      */
-    protected $fillable = [ 'comment', 'user_id' ];
+    protected $fillable = [ 'text', 'user_id' ];
+
+    protected $with = [ 'user' ];
+
+    protected $hidden = [ 'id', 'commentable_type', 'commentable_id' ];
 
     /**
      * Устанавливаем полиморфическую связь

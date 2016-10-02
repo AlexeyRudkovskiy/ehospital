@@ -36,6 +36,7 @@
                 {!! $sidebar->link('manufacturer.index') !!}
                 {!! $sidebar->link('medicament.index') !!}
                 {!! $sidebar->link('atcClassification.index') !!}
+                {!! $sidebar->link('patient.index') !!}
             </nav>
         </div>
         <div class="content">
@@ -43,8 +44,8 @@
             <header class="header">
                 <nav>
                     <div class="pull-right">
-                        <span class="like-link">Alexey Rudkovskiy</span>
-                        <a href="javascript:">logout</a>
+                        <span class="like-link">{{ auth()->user()->fullName() }}</span>
+                        <a href="/logout">logout</a>
                     </div>
                 </nav>
             </header>
@@ -75,7 +76,7 @@
         </div>
     </div>
 
-    <notifications-list-component></notifications-list-component>
+    <notifications-list></notifications-list>
 
     @if ( config('app.debug') && isset($current) ? in_array($current->email, ['test@test.test']) : false )
         <script type="text/javascript">

@@ -39,7 +39,7 @@ class Patient extends Model
     ];
 
     protected $encrypted = [
-        'name'
+        'name', 'birthday'
     ];
 
     /**

@@ -6,9 +6,10 @@ import { get, set } from './helpers'
 import { tabs } from './tabs'
 import { initRevisions } from './revisions'
 
-import { BalanceComponent } from './components/medicament/balance-component'
-import { BatchesListComponent } from './components/medicament/batches-list-component'
-import { NotificationsListComponent } from './components/notifications/notifications-list-component'
+import { Balance } from './components/medicament/balance'
+import { BatchesList } from './components/medicament/batches-list'
+import { NotificationsList } from './components/notifications/notifications-list'
+import { Discussions } from './components/patient/discussions'
 
 (function () {
 
@@ -34,11 +35,11 @@ import { NotificationsListComponent } from './components/notifications/notificat
     var app = new Vue(<any>{
         el: () => 'body',
         components: [
-            BalanceComponent,
-            BatchesListComponent,
-            NotificationsListComponent
+            Balance,
+            BatchesList,
+            NotificationsList,
+            Discussions
         ]
     });
 
 })();
-

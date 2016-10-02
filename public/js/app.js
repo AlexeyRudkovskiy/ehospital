@@ -5,9 +5,10 @@ var routes_1 = require('./routes');
 var helpers_1 = require('./helpers');
 var tabs_1 = require('./tabs');
 var revisions_1 = require('./revisions');
-var balance_component_1 = require('./components/medicament/balance-component');
-var batches_list_component_1 = require('./components/medicament/batches-list-component');
-var notifications_list_component_1 = require('./components/notifications/notifications-list-component');
+var balance_1 = require('./components/medicament/balance');
+var batches_list_1 = require('./components/medicament/batches-list');
+var notifications_list_1 = require('./components/notifications/notifications-list');
+var discussions_1 = require('./components/patient/discussions');
 (function () {
     var routes = routes_1.router();
     tabs_1.tabs();
@@ -27,9 +28,10 @@ var notifications_list_component_1 = require('./components/notifications/notific
     var app = new Vue({
         el: function () { return 'body'; },
         components: [
-            balance_component_1.BalanceComponent,
-            batches_list_component_1.BatchesListComponent,
-            notifications_list_component_1.NotificationsListComponent
+            balance_1.Balance,
+            batches_list_1.BatchesList,
+            notifications_list_1.NotificationsList,
+            discussions_1.Discussions
         ]
     });
 })();

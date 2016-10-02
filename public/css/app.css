@@ -223,47 +223,46 @@ header.header {
   .content-with-sidebar .content-container {
     width: 100%; }
 
-.row {
+.row, .grid {
   display: -webkit-box;
   display: flex; }
-  .row.row-vertical-baseline {
+  .row.row-vertical-baseline, .row.grid-vertical-baseline, .grid.row-vertical-baseline, .grid.grid-vertical-baseline {
     -webkit-box-align: baseline;
-    -ms-grid-row-align: baseline;
     align-items: baseline; }
-  .row.row-fixed .col-1 {
+  .row.row-fixed .col-1, .row.grid-fixed .col-1, .grid.row-fixed .col-1, .grid.grid-fixed .col-1 {
     width: 8.3333333333%;
     box-sizing: border-box; }
-  .row.row-fixed .col-2 {
+  .row.row-fixed .col-2, .row.grid-fixed .col-2, .grid.row-fixed .col-2, .grid.grid-fixed .col-2 {
     width: 16.6666666667%;
     box-sizing: border-box; }
-  .row.row-fixed .col-3 {
+  .row.row-fixed .col-3, .row.grid-fixed .col-3, .grid.row-fixed .col-3, .grid.grid-fixed .col-3 {
     width: 25%;
     box-sizing: border-box; }
-  .row.row-fixed .col-4 {
+  .row.row-fixed .col-4, .row.grid-fixed .col-4, .grid.row-fixed .col-4, .grid.grid-fixed .col-4 {
     width: 33.3333333333%;
     box-sizing: border-box; }
-  .row.row-fixed .col-5 {
+  .row.row-fixed .col-5, .row.grid-fixed .col-5, .grid.row-fixed .col-5, .grid.grid-fixed .col-5 {
     width: 41.6666666667%;
     box-sizing: border-box; }
-  .row.row-fixed .col-6 {
+  .row.row-fixed .col-6, .row.grid-fixed .col-6, .grid.row-fixed .col-6, .grid.grid-fixed .col-6 {
     width: 50%;
     box-sizing: border-box; }
-  .row.row-fixed .col-7 {
+  .row.row-fixed .col-7, .row.grid-fixed .col-7, .grid.row-fixed .col-7, .grid.grid-fixed .col-7 {
     width: 58.3333333333%;
     box-sizing: border-box; }
-  .row.row-fixed .col-8 {
+  .row.row-fixed .col-8, .row.grid-fixed .col-8, .grid.row-fixed .col-8, .grid.grid-fixed .col-8 {
     width: 66.6666666667%;
     box-sizing: border-box; }
-  .row.row-fixed .col-9 {
+  .row.row-fixed .col-9, .row.grid-fixed .col-9, .grid.row-fixed .col-9, .grid.grid-fixed .col-9 {
     width: 75%;
     box-sizing: border-box; }
-  .row.row-fixed .col-10 {
+  .row.row-fixed .col-10, .row.grid-fixed .col-10, .grid.row-fixed .col-10, .grid.grid-fixed .col-10 {
     width: 83.3333333333%;
     box-sizing: border-box; }
-  .row.row-fixed .col-11 {
+  .row.row-fixed .col-11, .row.grid-fixed .col-11, .grid.row-fixed .col-11, .grid.grid-fixed .col-11 {
     width: 91.6666666667%;
     box-sizing: border-box; }
-  .row.row-fixed .col-12 {
+  .row.row-fixed .col-12, .row.grid-fixed .col-12, .grid.row-fixed .col-12, .grid.grid-fixed .col-12 {
     width: 100%;
     box-sizing: border-box; }
 
@@ -778,29 +777,53 @@ nav.tabs {
         padding: 5px;
         border-radius: 3px; }
 
-.users-page .tab-content.tab-content-schedule .header .day_of_week {
+.user-page .tab-content.tab-content-schedule .header .day_of_week {
   display: inline-block;
   position: relative;
   top: -5px; }
 
-.users-page .tab-content.tab-content-schedule .schedule-time {
+.user-page .tab-content.tab-content-schedule .schedule-time {
   padding-top: 7.5px;
   padding-bottom: 7.5px; }
-  .users-page .tab-content.tab-content-schedule .schedule-time .mi-btn {
+  .user-page .tab-content.tab-content-schedule .schedule-time .mi-btn {
     font-size: 22px; }
-  .users-page .tab-content.tab-content-schedule .schedule-time .time_period {
+  .user-page .tab-content.tab-content-schedule .schedule-time .time_period {
     position: relative;
     display: inline-block;
     top: 12px;
     left: 4px; }
-    .users-page .tab-content.tab-content-schedule .schedule-time .time_period p {
+    .user-page .tab-content.tab-content-schedule .schedule-time .time_period p {
       margin-top: 5px;
       margin-bottom: 5px; }
-      .users-page .tab-content.tab-content-schedule .schedule-time .time_period p:first-child {
+      .user-page .tab-content.tab-content-schedule .schedule-time .time_period p:first-child {
         margin-top: 0; }
-      .users-page .tab-content.tab-content-schedule .schedule-time .time_period p:last-child {
+      .user-page .tab-content.tab-content-schedule .schedule-time .time_period p:last-child {
         margin-bottom: 0; }
-      .users-page .tab-content.tab-content-schedule .schedule-time .time_period p b {
+      .user-page .tab-content.tab-content-schedule .schedule-time .time_period p b {
         font-weight: 500; }
+
+.patient-page .patient-discussion {
+  padding-left: 15px;
+  padding-top: 15px;
+  box-sizing: border-box; }
+  .patient-page .patient-discussion .discussion-form.discussion-form-hidden {
+    display: none; }
+  .patient-page .patient-discussion .discussion-form textarea {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    outline: none;
+    padding: 15px;
+    padding-bottom: 45px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 14px;
+    font-size: 14px;
+    height: auto;
+    resize: none;
+    -webkit-transition: 0.1s all;
+    transition: 0.1s all;
+    box-sizing: border-box; }
+    .patient-page .patient-discussion .discussion-form textarea:focus {
+      border-color: rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
 
 /*# sourceMappingURL=app.css.map */

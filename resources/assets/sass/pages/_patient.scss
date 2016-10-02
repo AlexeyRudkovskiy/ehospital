@@ -1,0 +1,42 @@
+@import "../mixins";
+@import "../variables";
+
+.patient-page {
+  .patient-discussion {
+    padding-left: $patient-discussion-left-padding;
+    padding-top: $patient-discussion-top-padding;
+
+    @include box-sizing;
+
+    .discussion-form {
+
+      &.discussion-form-hidden {
+        display: none;
+      }
+
+      textarea {
+        width: 100%;
+        border: 1px solid $color-gray;
+        outline: none;
+
+        padding: $app-base-padding;
+        padding-bottom: $app-base-padding * 3;
+        font-family: 'Roboto', sans-serif;
+        line-height: 14px;
+        font-size: 14px;
+        height: auto;
+        //border-radius: 3px;
+
+        resize: none;
+        transition: 0.1s all;
+
+        @include box-sizing;
+
+        &:focus {
+          border-color: rgba(0, 0, 0, .15);
+          box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        }
+      }
+    }
+  }
+}

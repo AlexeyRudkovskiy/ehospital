@@ -44,7 +44,8 @@ class User extends Authenticatable
      */
     protected $with = [
         'permission',
-        'position'
+        'position',
+        'department'
     ];
 
     /**
@@ -57,6 +58,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $encrypted = [  ];
+
+    /**
+     * @var \Illuminate\Encryption\Encrypter
+     */
+    protected $encrypter = null;
 
     /**
      * Автоматически шифруем пароль, что бы не следить за этим где-либо ещё
@@ -90,6 +96,11 @@ class User extends Authenticatable
     public function additionalPatients()
     {
         return $this->belongsToMany(Patient::class, 'patient_users', 'user_id');
+    }
+
+    public function patients()
+    {
+        return $this->hasMany(Patient::class);
     }
 
     /**
@@ -142,6 +153,16 @@ class User extends Authenticatable
     public function revisions()
     {
         return $this->hasMany(Revision::class)->orderBy('id', 'desc');
+    }
+
+    /**
+     * Настройки пользователя(например, о чём нужно выводить уведомления)
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function settings()
+    {
+        return $this->hasOne(Settings::class);
     }
 
     /**
@@ -306,6 +327,14 @@ class User extends Authenticatable
 
             event($notification);
         }
+    }
+
+    public function getEncrypter()
+    {
+        if ($this->encrypter == null) {
+            $this->encrypter = new \Illuminate\Encryption\Encrypter($this->cryptKey, config('app.cipher'));
+        }
+        return $this->encrypter;
     }
 
 }

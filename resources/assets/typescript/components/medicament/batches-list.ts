@@ -6,7 +6,7 @@ import {MyService} from "../../MyService";
 @VueComponent({
     template: require('/partials/batches-list.html!text')
 })
-export class BatchesListComponent {
+export class BatchesList {
 
     @Prop items:any = [];
 

@@ -129,12 +129,12 @@
             </tbody>
             </table>
 
-            <batches-list-component></batches-list-component>
+            <batches-list></batches-list>
 
         </div>
 
         <div class="tab-content tab-content-statistic">
-            <balance-component :balance="{{ $medicament->balance() }}"></balance-component>
+            <balance :balance="{{ $medicament->balance() }}"></balance>
         </div>
 
     </div>

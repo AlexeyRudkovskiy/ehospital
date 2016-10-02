@@ -1,7 +1,7 @@
 @import "../mixins";
 @import "../variables";
 
-.users-page {
+.user-page {
 
   .tab-content {
     &.tab-content-schedule {
@@ -9,7 +9,7 @@
         .day_of_week {
           display: inline-block;
           position: relative;
-          top: $users-schedule-day-of-week-vertical-offset;
+          top: $user-schedule-day-of-week-vertical-offset;
         }
       }
 
@@ -24,8 +24,8 @@
         .time_period {
           position: relative;
           display: inline-block;
-          top: $users-schedule-time-period-vertical-offset;
-          left: $users-schedule-time-period-horizontal-offset;
+          top: $user-schedule-time-period-vertical-offset;
+          left: $user-schedule-time-period-horizontal-offset;
 
           p {
             margin-top: 5px;

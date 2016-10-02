@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Traits;
+use League\Flysystem\Exception;
 
 /**
  * Created by PhpStorm.
@@ -11,22 +12,33 @@ namespace App\Traits;
 trait EncryptionTrait
 {
 
+    /**
+     * @var \Illuminate\Encryption\Encrypter
+     */
+    protected $encrypter = null;
+
     public function __get($key)
     {
         $value = $this->getAttribute($key);
         if (in_array($key, $this->encrypted ?? [])) {
-            $value = \Crypt::decrypt($value);
+            $value = auth()->user()->getEncrypter()->decrypt($value);
         }
         return $value;
     }
 
     public function __set($key, $value)
     {
-        $this->setAttribute($key, $value);
         if (in_array($key, $this->encrypted ?? [])) {
-            $this->attributes[$key] = \Crypt::encrypt($this->attributes[$key]);
+            $this->attributes[$key] = auth()->user()->getEncrypter()->encrypt($value);
+        } else {
+            $this->setAttribute($key, $value);
         }
         return $this;
+    }
+
+    public function setEncrypted($encrypted)
+    {
+        $this->encrypted = $encrypted;
     }
 
 }

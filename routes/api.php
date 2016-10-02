@@ -17,7 +17,17 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::post('medicament/{medicament}/income', [
-    'uses' => 'API\MedicamentController@postIncome',
-    'as' => 'api.medicament.income.post'
-]);
+Route::group([
+    'namespace' => 'API'
+], function () {
+    Route::post('medicament/{medicament}/income', [
+        'uses' => 'MedicamentController@postIncome',
+        'as' => 'api.medicament.income.post'
+    ]);
+
+    Route::get('patient/{patient}/comments', [
+        'uses' => 'PatientController@getComments',
+        'as' => 'api.patient.comments'
+    ]);
+});
+

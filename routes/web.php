@@ -18,6 +18,13 @@ Route::get('/', function () {
     return redirect()->route('organization.index');
 });
 
+Route::get('logout', function () {
+    auth()->logout();
+    session()->flush();
+    session()->regenerate();
+    return redirect('/');
+});
+
 Route::get('test', function () {
     return view('test_echo');
 });
@@ -29,7 +36,7 @@ Route::get('/home', 'HomeController@index');
 Route::group([
     'prefix' => 'management',
     'namespace' => 'Management',
-    'middleware' => [ 'web' ]
+    'middleware' => [ 'web', 'auth' ]
 ], function () {
     require_once __DIR__ . '/management.php';
 });

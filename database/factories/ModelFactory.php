@@ -19,10 +19,10 @@ $factory->define(App\User::class, function () use ($faker) {
         'firstName' => $faker->firstName,
         'middleName' => 'MiddleName',
         'lastName' => $faker->lastName,
-        'password' => str_random(10),
+        'password' => str_random(20),
         'email' => $faker->safeEmail,
         'phone' => $faker->phoneNumber,
-        'cryptKey' => md5(\Crypt::encrypt(str_random(16) . md5($faker->firstNameFemale))),
+        'cryptKey' => md5(\Crypt::encrypt(str_random(32) . md5($faker->firstNameFemale))),
         'organization_id' => 1,
         'permission_id' => 1
     ];

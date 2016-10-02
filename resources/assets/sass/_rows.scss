@@ -1,14 +1,14 @@
 @import "variables";
 @import "mixins";
 
-.row {
+.row, .grid {
   display: flex;
 
-  &.row-vertical-baseline {
+  &.row-vertical-baseline, &.grid-vertical-baseline {
     align-items: baseline;
   }
 
-  &.row-fixed {
+  &.row-fixed, &.grid-fixed {
     @for $i from 1 through 12 {
       .col-#{$i} {
         width: 100% / 12 * $i;

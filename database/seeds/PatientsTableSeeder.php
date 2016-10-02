@@ -11,6 +11,8 @@ class PatientsTableSeeder extends Seeder
      */
     public function run()
     {
+        auth()->loginUsingId(1);
+
         factory(\App\Patient::class, 50)->create()->each(function (\App\Patient $patient) {
             $patient->addresses()->create(factory(\App\Address::class)->make()->toArray());
 

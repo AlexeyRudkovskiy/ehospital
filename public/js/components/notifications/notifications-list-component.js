@@ -21,6 +21,7 @@ var NotificationsListComponent = (function () {
         this.notifications.splice(index, 1);
     };
     NotificationsListComponent.prototype.onNewNotification = function (item) {
+        console.log(item);
         this.notifications.push(item);
     };
     __decorate([

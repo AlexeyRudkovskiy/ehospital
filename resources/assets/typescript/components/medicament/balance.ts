@@ -4,7 +4,7 @@ import { MyService } from '../../MyService'
 @VueComponent({
     template: '<b>Balance: {{ balance }}</b>'
 })
-export class BalanceComponent {
+export class Balance {
 
     @Prop balance:number = 0.0;
 

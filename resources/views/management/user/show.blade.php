@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <div class="users-page">
+    <div class="user-page">
         <nav class="tabs tabs-vertical-offset" data-default=".tab-content-info">
-            <a href="javascript:" data-target=".tab-content-info">@lang('management.label.users.info')</a>
-            <a href="javascript:" data-target=".tab-content-schedule">@lang('management.label.users.schedule')</a>
+            <a href="javascript:" data-target=".tab-content-info">@lang('management.label.user.info')</a>
+            <a href="javascript:" data-target=".tab-content-schedule">@lang('management.label.user.schedule')</a>
         </nav>
 
         <div class="tab-content tab-content-info">
@@ -51,7 +51,7 @@
                             <i class="mi-btn mi-static mi-no-left-padding mi-no-bottom-padding mi-no-top-padding">timer</i><!--
                             --><div class="time_period">
                                 <p>{{ $schedule->period() }}</p>
-                                <p>@lang('management.label.users.timeDelta', ['delta' => $schedule->getPerPatientFormated()])</p>
+                                <p>@lang('management.label.user.timeDelta', ['delta' => $schedule->getPerPatientFormated()])</p>
                             </div>
                         </div>
                     </div>

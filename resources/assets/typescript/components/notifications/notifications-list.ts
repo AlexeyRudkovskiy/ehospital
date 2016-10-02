@@ -5,7 +5,7 @@ import {MyService} from "../../MyService";
 @VueComponent({
     template: require('/partials/notifications.html!text')
 })
-export class NotificationsListComponent {
+export class NotificationsList {
 
     @Prop notifications:Notification[] = [];
 
@@ -18,6 +18,7 @@ export class NotificationsListComponent {
     }
 
     protected onNewNotification (item) {
+        console.log(item);
         this.notifications.push(item);
     }
 
