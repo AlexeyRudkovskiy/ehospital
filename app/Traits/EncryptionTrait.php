@@ -19,9 +19,14 @@ trait EncryptionTrait
 
     public function __get($key)
     {
-        $value = $this->getAttribute($key);
         if (in_array($key, $this->encrypted ?? [])) {
-            $value = auth()->user()->getEncrypter()->decrypt($value);
+            try {
+                $value = auth()->user()->getEncrypter()->decrypt($this->attributes[$key]);
+            } catch (\Exception $e) {
+                throw new \Exception("Can't decrypt data");
+            }
+        } else {
+            $value = $this->getAttribute($key);
         }
         return $value;
     }

@@ -1,0 +1,38 @@
+@import "mixins";
+@import "variables";
+
+.mi-icon {
+  font-family: 'Material Icons', sans-serif;
+  margin-top: 1px;
+  padding: $app-base-padding;
+  color: lighten($color-gray-darken, $mi-btn-color-offset);
+  transition: 0.1s color;
+
+  @include box-sizing;
+
+  &.mi-no-left-padding {
+    padding-left: 0;
+  }
+
+  &.mi-no-right-padding {
+    padding-right: 0;
+  }
+
+  &.mi-no-top-padding {
+    padding-top: 0;
+  }
+
+  &.mi-no-bottom-padding {
+    padding-bottom: 0;
+  }
+
+  &.mi-icon-danger {
+    color: $color-red-darken;
+  }
+
+  &.mi-icon-success {
+    color: $color-green-darken;
+  }
+
+}
+

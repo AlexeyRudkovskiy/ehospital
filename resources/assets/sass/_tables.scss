@@ -48,6 +48,11 @@
     td, th {
       padding: $app-base-padding;
       text-align: left;
+
+      &.no-paddings {
+        padding: 0;
+        vertical-align: top;
+      }
     }
   }
 

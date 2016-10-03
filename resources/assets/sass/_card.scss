@@ -1,0 +1,9 @@
+@import "mixins";
+@import "variables";
+
+.card {
+  padding: $app-base-padding;
+  box-shadow: 0 0 5px $color-gray;
+
+  @include box-sizing;
+}

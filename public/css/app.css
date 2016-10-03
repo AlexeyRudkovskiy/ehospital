@@ -152,7 +152,7 @@ header.header {
     -webkit-box-flex: 0;
     flex-grow: 0;
     flex-shrink: 0;
-    width: 300px; }
+    width: 200px; }
   .container .content {
     width: 100%;
     overflow-y: scroll !important;
@@ -192,7 +192,7 @@ header.header {
   display: -webkit-box;
   display: flex; }
   .content-with-sidebar .content-sidebar {
-    width: 300px;
+    width: 200px;
     flex-shrink: 0;
     -webkit-box-flex: 0;
     flex-grow: 0;
@@ -228,6 +228,7 @@ header.header {
   display: flex; }
   .row.row-vertical-baseline, .row.grid-vertical-baseline, .grid.row-vertical-baseline, .grid.grid-vertical-baseline {
     -webkit-box-align: baseline;
+    -ms-grid-row-align: baseline;
     align-items: baseline; }
   .row.row-fixed .col-1, .row.grid-fixed .col-1, .grid.row-fixed .col-1, .grid.grid-fixed .col-1 {
     width: 8.3333333333%;
@@ -363,6 +364,27 @@ header.header {
     .mi-btn:not(.mi-static).mi-btn-danger:hover {
       color: #c0392b; }
 
+.mi-icon {
+  font-family: 'Material Icons', sans-serif;
+  margin-top: 1px;
+  padding: 15px;
+  color: rgba(102, 102, 102, 0.6);
+  -webkit-transition: 0.1s color;
+  transition: 0.1s color;
+  box-sizing: border-box; }
+  .mi-icon.mi-no-left-padding {
+    padding-left: 0; }
+  .mi-icon.mi-no-right-padding {
+    padding-right: 0; }
+  .mi-icon.mi-no-top-padding {
+    padding-top: 0; }
+  .mi-icon.mi-no-bottom-padding {
+    padding-bottom: 0; }
+  .mi-icon.mi-icon-danger {
+    color: #c0392b; }
+  .mi-icon.mi-icon-success {
+    color: #16a085; }
+
 .btn-group .btn {
   border-radius: 0; }
   .btn-group .btn:first-child {
@@ -383,6 +405,9 @@ header.header {
   .table tr td, .table tr th {
     padding: 15px;
     text-align: left; }
+    .table tr td.no-paddings, .table tr th.no-paddings {
+      padding: 0;
+      vertical-align: top; }
   .table tbody tr:last-of-type td, .table tbody tr:last-of-type th {
     border-bottom: none; }
   .table thead th {
@@ -579,6 +604,11 @@ nav.tabs {
     .pagination li a, .pagination li span {
       display: inline-block;
       padding: 10px 15px; }
+
+.card {
+  padding: 15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box; }
 
 .notifications {
   position: absolute;
@@ -802,28 +832,8 @@ nav.tabs {
       .user-page .tab-content.tab-content-schedule .schedule-time .time_period p b {
         font-weight: 500; }
 
-.patient-page .patient-discussion {
-  padding-left: 15px;
-  padding-top: 15px;
-  box-sizing: border-box; }
-  .patient-page .patient-discussion .discussion-form.discussion-form-hidden {
-    display: none; }
-  .patient-page .patient-discussion .discussion-form textarea {
-    width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    outline: none;
-    padding: 15px;
-    padding-bottom: 45px;
-    font-family: 'Roboto', sans-serif;
-    line-height: 14px;
-    font-size: 14px;
-    height: auto;
-    resize: none;
-    -webkit-transition: 0.1s all;
-    transition: 0.1s all;
-    box-sizing: border-box; }
-    .patient-page .patient-discussion .discussion-form textarea:focus {
-      border-color: rgba(0, 0, 0, 0.15);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
+.patient-page ul.doctors-list li {
+  display: block;
+  padding: 15px; }
 
 /*# sourceMappingURL=app.css.map */

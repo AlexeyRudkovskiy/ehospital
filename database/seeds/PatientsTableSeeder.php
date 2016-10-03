@@ -17,7 +17,8 @@ class PatientsTableSeeder extends Seeder
             $patient->addresses()->create(factory(\App\Address::class)->make()->toArray());
 
             $cure = $patient->cures()->create([
-                'department_id' => \App\Department::inRandomOrder()->get()->first()->id
+                'department_id' => \App\Department::inRandomOrder()->get()->first()->id,
+                'user_id' => $patient->user_id
             ]);
         });
     }

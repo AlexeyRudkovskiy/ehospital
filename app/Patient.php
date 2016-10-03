@@ -5,7 +5,7 @@ namespace App;
 use App\Traits\EncryptionTrait;
 use App\Traits\RevisionsTrait;
 use Illuminate\Database\Eloquent\Model;
-use Psy\Test\CodeCleaner\StaticConstructorPassTest;
+use Illuminate\Support\Collection;
 
 /**
  * Class Patient
@@ -39,7 +39,11 @@ class Patient extends Model
     ];
 
     protected $encrypted = [
-        'name', 'birthday'
+        'name', 'birthday', 'phone', 'homeless', 'ukrainian', 'hospital_employee'
+    ];
+
+    protected $casts = [
+        'homeless' => 'boolean'
     ];
 
     /**
@@ -50,6 +54,16 @@ class Patient extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable')->orderBy('id', 'desc');
+    }
+
+    /**
+     * Основной лечащий врач в данный момент
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function doctor()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -91,6 +105,33 @@ class Patient extends Model
     public function statuses()
     {
         return $this->hasMany(PatientStatus::class)->orderBy('id', 'desc');
+    }
+
+    /**
+     * Определяет, имеет ли текущий доктор, или доктор указанный в качестве первого аргумента, доступ к пациенту и его истории в расшифрованном виде
+     *
+     * @param User|null $user
+     * @return User|\Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    public function granted (User $user = null) {
+        if ($user == null) {
+            $user = auth()->user();
+        }
+
+        return $user;
+    }
+
+    /**
+     * Возвращает список врачей, отсносящихся к этому пациенту в данный момент
+     *
+     * @return Collection
+     */
+    public function getDoctors()
+    {
+        $doctors = $this->doctors;
+        $doctors->prepend($this->doctor);
+
+        return $doctors;
     }
 
 }

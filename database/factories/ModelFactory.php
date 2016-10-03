@@ -80,7 +80,8 @@ $factory->define(\App\Patient::class, function () use ($faker) {
         'phone' => $faker->phoneNumber,
         'homeless' => $faker->randomNumber() % 2 == 0 ? true : false,
         'ukrainian' => true,
-        'hospital_employee' => false
+        'hospital_employee' => false,
+        'user_id' => $faker->randomNumber(6) % 2 ? 1 : 2
     ];
 });
 

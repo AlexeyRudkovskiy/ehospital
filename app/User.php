@@ -7,6 +7,7 @@ use App\Traits\EncryptionTrait;
 use App\Traits\RevisionsTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
@@ -17,6 +18,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
+
+    use SoftDeletes;
 
     /**
      * Поля, которые можно заполнять с помощью User::create(), User::fill(), User::update()
