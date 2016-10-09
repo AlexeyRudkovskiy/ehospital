@@ -29,5 +29,10 @@ Route::group([
         'uses' => 'PatientController@getComments',
         'as' => 'api.patient.comments'
     ]);
+
+    Route::get('test', function () {
+        return auth()->user();
+    });
+
 });
 

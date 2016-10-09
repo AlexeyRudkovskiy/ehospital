@@ -16,6 +16,9 @@ class FormComponentsProvider extends ServiceProvider
         // Registering custom text form component
         \Form::component('ehText', 'layouts.form.text', ['name', 'label', 'value', 'attributes']);
 
+        // Registering custom number for component
+        \Form::component('ehNumber', 'layouts.form.number', ['name', 'label', 'value', 'attributes']);
+
         // Registering custom radio button form component
         \Form::component('ehRadio', 'layouts.form.radio', ['name', 'value', 'label', 'attributes']);
 

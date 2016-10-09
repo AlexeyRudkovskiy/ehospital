@@ -340,4 +340,9 @@ class User extends Authenticatable
         return $this->encrypter;
     }
 
+    public function regenerateApiToken()
+    {
+        $this->api_token = md5('token_' . \json_encode($this) . Carbon::now());
+    }
+
 }
