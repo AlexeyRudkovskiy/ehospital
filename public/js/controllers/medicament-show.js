@@ -1,5 +1,6 @@
 "use strict";
 var inline_popup_1 = require("../ui/inline-popup");
+var ajax_form_1 = require("../ui/ajax-form");
 var MedicamentShow = (function () {
     function MedicamentShow() {
         this.income = document.querySelector('#medicament_income');
@@ -11,12 +12,20 @@ var MedicamentShow = (function () {
         var popup = new inline_popup_1.InlinePopup(this.income, this.url('income'), true, {
             close_after_form_submit: true
         });
+        popup.setOnLoadedEventListener(function (data, popupInstance) {
+            var ajaxForm = new ajax_form_1.AjaxForm(data.querySelector('form'), function (data) {
+                this.popupInstance.close();
+            }.bind({
+                popupInstance: popupInstance
+            }));
+        });
         popup.show();
     };
     MedicamentShow.prototype.onOutgoingButtonClicked = function () {
         var popup = new inline_popup_1.InlinePopup(this.outgoing, this.url('outgoing'), true, {
             close_after_form_submit: true
-        }).setOnLoadedEventListener(console.log.bind(console)).show();
+        }).setOnLoadedEventListener(console.log.bind(console));
+        popup.show();
     };
     MedicamentShow.prototype.url = function (path) {
         return "/management/medicament/" + (window.medicament.id) + "/" + path;

@@ -8,7 +8,14 @@
   color: lighten($color-gray-darken, $mi-btn-color-offset);
   transition: 0.1s color;
 
+  outline: none;
+
+  @include user-select;
   @include box-sizing;
+
+  &.mi-round {
+    border-radius: 50%;
+  }
 
   &.mi-no-left-padding {
     padding-left: 0;
@@ -44,4 +51,11 @@
       }
     }
   }
+
+  &.mi-background {
+    &:hover {
+      background-color: $color-gray;
+    }
+  }
+
 }

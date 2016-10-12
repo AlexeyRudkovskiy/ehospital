@@ -25,19 +25,28 @@ export class InlinePopup {
     }
 
     public show():InlinePopup {
-        if (InlinePopup.element != null) {
-            InlinePopup.element.parentElement.removeChild(InlinePopup.element);
+        if (InlinePopup.element != null && InlinePopup.element.parentElement != null) {
+            this.close();
         }
 
         if (this.ajax) {
             var request = (<any>window).fetch(this.content, {
-                credentials: 'same-origin'
+                credentials: 'same-origin',
+                headers: {
+                    token: (<any>window).token
+                }
             })
                 .then(response => response.text())
                 .then(this.onContentLoaded.bind(this));
         }
 
         return this;
+    }
+
+    public close():void {
+        if (InlinePopup.element != null && InlinePopup.element.parentElement != null) {
+            InlinePopup.element.parentElement.removeChild(InlinePopup.element);
+        }
     }
 
     private onContentLoaded (response) {
@@ -68,7 +77,7 @@ export class InlinePopup {
         popup.style.top = "0px";
         popup.style.left = "0px";
 
-        this.root = popupContent.firstChild;
+        this.root = popupContent;
 
         if (popup.offsetWidth > this.config.maxWidth) {
             var maxWidth = this.config.maxWidth;
@@ -77,12 +86,29 @@ export class InlinePopup {
 
         popup.style.top = (offsetTop + offsetHeight) + "px";
         var popupLeftPosition = offsetLeft - popup.offsetWidth / 2;
-        popup.style.left = (popupLeftPosition) + "px";
-        popupTriangle.style.left = (popup.offsetWidth / 2) + "px";
-        popupTriangle.style.marginLeft = "17px";
+
+        /*
+         * Отступ от правой границы
+         * Добавляет отступ что бы окно выглядело красивее
+         */
+        var popupRightWindowBorderOffset = 25;
+        var triangleOffset = 17;
+        if (popupLeftPosition + popup.offsetWidth > window.innerWidth - popupRightWindowBorderOffset) {
+            popupLeftPosition = window.innerWidth - popup.offsetWidth - popupRightWindowBorderOffset;
+            triangleOffset = 13;
+        } else {
+            popupLeftPosition += popupRightWindowBorderOffset;
+        }
+
+        popup.style.left = (popupLeftPosition) + 'px';
+
+        var triangleDiff = Math.abs(popupLeftPosition - offsetLeft);
+
+        popupTriangle.style.left = (triangleDiff) + "px";
+        popupTriangle.style.marginLeft = (triangleOffset) + "px";
 
         if (this.onLoadedFunc != null) {
-            this.onLoadedFunc.call(window, this.root);
+            this.onLoadedFunc.call(window, this.root, this);
         }
     }
 

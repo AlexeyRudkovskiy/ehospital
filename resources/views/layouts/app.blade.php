@@ -35,7 +35,7 @@
                 {!! $sidebar->link('department.index') !!}
                 {!! $sidebar->link('manufacturer.index') !!}
                 {!! $sidebar->link('medicament.index') !!}
-                {!! $sidebar->link('atcClassification.index') !!}
+                {!! $sidebar->link('atcClassification.index', '999+') !!}
                 {!! $sidebar->link('patient.index') !!}
             </nav>
         </div>
@@ -87,6 +87,7 @@
     <script>
         window.page = "{{ request()->route()->getName() }}";
         window.prefix = "{{ $prefix or 'management' }}";
+        window.token = "{{ auth()->user()->api_token }}";
     </script>
 
     @stack('scripts')

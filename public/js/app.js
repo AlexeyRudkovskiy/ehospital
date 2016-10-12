@@ -4,7 +4,7 @@ var Vue = require('vue');
 var routes_1 = require('./routes');
 var helpers_1 = require('./helpers');
 var tabs_1 = require('./tabs');
-var revisions_1 = require('./revisions');
+var diffs_1 = require('./diffs');
 var balance_1 = require('./components/medicament/balance');
 var batches_list_1 = require('./components/medicament/batches-list');
 var notifications_list_1 = require('./components/notifications/notifications-list');
@@ -12,7 +12,7 @@ var discussions_1 = require('./components/patient/discussions');
 (function () {
     var routes = routes_1.router();
     tabs_1.tabs();
-    revisions_1.initRevisions();
+    diffs_1.initDiffs();
     var page = helpers_1.get(window, 'page');
     var prefix = helpers_1.get(window, 'prefix');
     for (var i = 0; i < routes.length; i++) {

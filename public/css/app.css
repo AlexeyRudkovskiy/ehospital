@@ -89,6 +89,9 @@ a {
   a.underline {
     text-decoration: underline; }
 
+.empty-placeholder {
+  color: rgba(153, 153, 153, 0.6); }
+
 h1 {
   font-size: 36px; }
 
@@ -152,7 +155,7 @@ header.header {
     -webkit-box-flex: 0;
     flex-grow: 0;
     flex-shrink: 0;
-    width: 200px; }
+    width: 250px; }
   .container .content {
     width: 100%;
     overflow-y: scroll !important;
@@ -228,6 +231,7 @@ header.header {
   display: flex; }
   .row.row-vertical-baseline, .row.grid-vertical-baseline, .grid.row-vertical-baseline, .grid.grid-vertical-baseline {
     -webkit-box-align: baseline;
+    -ms-grid-row-align: baseline;
     align-items: baseline; }
   .row.row-fixed .col-1, .row.grid-fixed .col-1, .grid.row-fixed .col-1, .grid.grid-fixed .col-1 {
     width: 8.3333333333%;
@@ -345,7 +349,14 @@ header.header {
   color: rgba(102, 102, 102, 0.6);
   -webkit-transition: 0.1s color;
   transition: 0.1s color;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   box-sizing: border-box; }
+  .mi-btn.mi-round {
+    border-radius: 50%; }
   .mi-btn.mi-no-left-padding {
     padding-left: 0; }
   .mi-btn.mi-no-right-padding {
@@ -362,6 +373,8 @@ header.header {
     color: #e74c3c; }
     .mi-btn:not(.mi-static).mi-btn-danger:hover {
       color: #c0392b; }
+  .mi-btn.mi-background:hover {
+    background-color: rgba(0, 0, 0, 0.05); }
 
 .mi-icon {
   font-family: 'Material Icons', sans-serif;
@@ -370,7 +383,14 @@ header.header {
   color: rgba(102, 102, 102, 0.6);
   -webkit-transition: 0.1s color;
   transition: 0.1s color;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   box-sizing: border-box; }
+  .mi-icon.mi-round {
+    border-radius: 50%; }
   .mi-icon.mi-no-left-padding {
     padding-left: 0; }
   .mi-icon.mi-no-right-padding {
@@ -383,6 +403,8 @@ header.header {
     color: #c0392b; }
   .mi-icon.mi-icon-success {
     color: #16a085; }
+  .mi-icon.mi-background:hover {
+    background-color: rgba(0, 0, 0, 0.05); }
 
 .btn-group .btn {
   border-radius: 0; }
@@ -411,7 +433,8 @@ header.header {
     border-bottom: none; }
   .table thead th {
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    font-weight: bold; }
+    font-weight: bold;
+    box-sizing: border-box; }
 
 .form {
   margin-top: 15px;
@@ -593,7 +616,9 @@ nav.tabs {
   display: none; }
 
 .pagination {
-  margin-top: 15px; }
+  margin-top: 15px;
+  clear: both;
+  overflow: hidden; }
   .pagination li {
     float: left; }
     .pagination li.active span {
@@ -607,6 +632,8 @@ nav.tabs {
 .card {
   padding: 15px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  width: 400px;
   box-sizing: border-box; }
 
 .notifications {
@@ -759,53 +786,6 @@ nav.tabs {
     padding: 15px;
     box-sizing: border-box; }
 
-.medicament-page .tab-content.tab-content-revisions .revision-card {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  margin-top: 15px;
-  margin-bottom: 15px;
-  width: 400px;
-  box-sizing: border-box; }
-  .medicament-page .tab-content.tab-content-revisions .revision-card:first-child {
-    margin-top: 0; }
-  .medicament-page .tab-content.tab-content-revisions .revision-card:last-child {
-    margin-bottom: 0; }
-  .medicament-page .tab-content.tab-content-revisions .revision-card .revision-header {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 15px; }
-    .medicament-page .tab-content.tab-content-revisions .revision-card .revision-header div {
-      margin-top: 7.5px;
-      margin-bottom: 7.5px; }
-      .medicament-page .tab-content.tab-content-revisions .revision-card .revision-header div:first-child {
-        margin-top: 0; }
-      .medicament-page .tab-content.tab-content-revisions .revision-card .revision-header div:last-child {
-        margin-bottom: 0; }
-  .medicament-page .tab-content.tab-content-revisions .revision-card .revision-content {
-    padding-bottom: 15px;
-    padding-top: 15px;
-    box-sizing: border-box; }
-    .medicament-page .tab-content.tab-content-revisions .revision-card .revision-content .revision-item {
-      padding: 15px;
-      cursor: pointer;
-      box-sizing: border-box; }
-      .medicament-page .tab-content.tab-content-revisions .revision-card .revision-content .revision-item:hover {
-        background-color: rgba(0, 0, 0, 0.05); }
-      .medicament-page .tab-content.tab-content-revisions .revision-card .revision-content .revision-item:not(.active) .revision-item-to, .medicament-page .tab-content.tab-content-revisions .revision-card .revision-content .revision-item:not(.active) .revision-item-from {
-        display: none; }
-      .medicament-page .tab-content.tab-content-revisions .revision-card .revision-content .revision-item .revision-item-from {
-        margin-top: 15px;
-        margin-bottom: 15px; }
-        .medicament-page .tab-content.tab-content-revisions .revision-card .revision-content .revision-item .revision-item-from span {
-          background-color: #c0392b;
-          color: white; }
-      .medicament-page .tab-content.tab-content-revisions .revision-card .revision-content .revision-item .revision-item-to span {
-        background-color: #16a085;
-        color: white; }
-      .medicament-page .tab-content.tab-content-revisions .revision-card .revision-content .revision-item .revision-item-from span, .medicament-page .tab-content.tab-content-revisions .revision-card .revision-content .revision-item .revision-item-to span {
-        display: inline-block;
-        padding: 5px;
-        border-radius: 3px; }
-
 .user-page .tab-content.tab-content-schedule .header .day_of_week {
   display: inline-block;
   position: relative;
@@ -834,5 +814,59 @@ nav.tabs {
 .patient-page ul.doctors-list li {
   display: block;
   padding: 15px; }
+
+.diff-card {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 400px;
+  box-sizing: border-box; }
+  .diff-card:first-child {
+    margin-top: 0; }
+  .diff-card:last-child {
+    margin-bottom: 0; }
+  .diff-card .diff-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 15px; }
+    .diff-card .diff-header div {
+      margin-top: 7.5px;
+      margin-bottom: 7.5px; }
+      .diff-card .diff-header div:first-child {
+        margin-top: 0; }
+      .diff-card .diff-header div:last-child {
+        margin-bottom: 0; }
+  .diff-card .diff-content {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    overflow: hidden;
+    box-sizing: border-box; }
+    .diff-card .diff-content .diff {
+      color: rgba(38, 38, 38, 0.6);
+      cursor: pointer;
+      box-sizing: border-box; }
+      .diff-card .diff-content .diff:first-child.active {
+        margin-top: 0; }
+      .diff-card .diff-content .diff:hover {
+        background-color: rgba(0, 0, 0, 0.05); }
+      .diff-card .diff-content .diff:not(.active) .diff-to, .diff-card .diff-content .diff:not(.active) .diff-from {
+        display: none; }
+      .diff-card .diff-content .diff.active {
+        color: rgba(0, 0, 0, 0.7); }
+        .diff-card .diff-content .diff.active:hover {
+          background-color: transparent; }
+      .diff-card .diff-content .diff .diff-from {
+        background-color: #f9d7dc;
+        border-top: 1px solid #f6c1c9; }
+      .diff-card .diff-content .diff .diff-to {
+        background-color: #ddfbe6;
+        border-bottom: 1px solid #c6f8d5; }
+      .diff-card .diff-content .diff .diff-name {
+        padding: 15px;
+        box-sizing: border-box; }
+      .diff-card .diff-content .diff .diff-from, .diff-card .diff-content .diff .diff-to {
+        padding: 15px;
+        color: rgba(0, 0, 0, 0.6);
+        box-sizing: border-box; }
 
 /*# sourceMappingURL=app.css.map */

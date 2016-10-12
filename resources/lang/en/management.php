@@ -1,6 +1,12 @@
 <?php
 
 return [
+
+    'global' => [
+        'yes' => 'Да',
+        'create' => 'Создать'
+    ],
+
     'property' => [
         'empty' => 'свойство не установлено'
     ],
@@ -82,7 +88,13 @@ return [
             'homeless' => 'Бездомный',
             'ukrainian' => 'Украинец',
             'hospital_employee' => 'Работник больницы',
-            'doctors' => 'Доктора'
+            'doctors' => 'Доктора',
+            'noCures' => 'нет курсов лечения'
+        ],
+
+        'atcClassification' => [
+            'noParentCategory' => 'Подкатегория'
         ]
+
     ]
 ];

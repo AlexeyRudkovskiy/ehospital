@@ -3,7 +3,7 @@
 
 return [
     'pagination' => [
-        'limit' => 2,
+        'limit' => 15,
         'offset' => 2
     ],
     "echo" => [

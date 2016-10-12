@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BatchRequest extends FormRequest
+class MedicamentBatchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class BatchRequest extends FormRequest
     public function rules()
     {
         return [
-            'expiration_date' => 'required',
             'batch_number' => 'required',
+            'expiration_date' => 'required',
             'price' => 'required'
         ];
     }

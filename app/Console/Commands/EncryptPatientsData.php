@@ -40,10 +40,50 @@ class EncryptPatientsData extends Command
     {
         $patiens = Patient::where('user_id', 1)->get();
         auth()->loginUsingId(1);
-        $patiens->each($this->eachCallback);
+        $patiens->each(function (Patient $patient) {
+            $patient->setEncrypted([]);
+            $name = $patient->name;
+            $birthday = $patient->birthday;
+            $phone = $patient->phone;
+            $homeless = $patient->homeless;
+            $ukrainian = $patient->ukrainian;
+            $hospital_employee = $patient->hospital_employee;
+
+            $patient->setEncrypted([
+                'name', 'birthday', 'phone', 'homeless', 'ukrainian', 'hospital_employee'
+            ]);
+
+            $patient->name = $name;
+            $patient->birthday = $birthday;
+            $patient->phone = $phone;
+            $patient->homeless = $homeless;
+            $patient->ukrainian = $ukrainian;
+            $patient->hospital_employee = $hospital_employee;
+            $patient->save();
+        });
         $patiens = Patient::where('user_id', 2)->get();
         auth()->loginUsingId(2);
-        $patiens->each($this->eachCallback);
+        $patiens->each(function (Patient $patient) {
+            $patient->setEncrypted([]);
+            $name = $patient->name;
+            $birthday = $patient->birthday;
+            $phone = $patient->phone;
+            $homeless = $patient->homeless;
+            $ukrainian = $patient->ukrainian;
+            $hospital_employee = $patient->hospital_employee;
+
+            $patient->setEncrypted([
+                'name', 'birthday', 'phone', 'homeless', 'ukrainian', 'hospital_employee'
+            ]);
+
+            $patient->name = $name;
+            $patient->birthday = $birthday;
+            $patient->phone = $phone;
+            $patient->homeless = $homeless;
+            $patient->ukrainian = $ukrainian;
+            $patient->hospital_employee = $hospital_employee;
+            $patient->save();
+        });
     }
 
     public function eachCallback(Patient $patient) {

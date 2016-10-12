@@ -4,6 +4,9 @@
 .pagination {
   margin-top: $app-base-padding;
 
+  clear: both;
+  overflow: hidden;
+
   li {
     float: left;
 

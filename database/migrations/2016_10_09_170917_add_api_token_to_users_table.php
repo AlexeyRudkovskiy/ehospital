@@ -14,7 +14,7 @@ class AddApiTokenToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('api_token', 32)->unique();
+            $table->string('api_token', 32)->unique()->default('no-token');
         });
     }
 

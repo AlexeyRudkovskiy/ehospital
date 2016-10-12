@@ -4,6 +4,9 @@
 .card {
   padding: $app-base-padding;
   box-shadow: 0 0 5px $color-gray;
+  border: 1px solid $color-gray;
+
+  width: $card-width;
 
   @include box-sizing;
 }

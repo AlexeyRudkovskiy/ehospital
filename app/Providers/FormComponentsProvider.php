@@ -28,6 +28,12 @@ class FormComponentsProvider extends ServiceProvider
         // Registering radio group
         \Form::component('ehRadioGroup', 'layouts.form.group.radio', ['title', 'options']);
 
+        // Registering checkbox group
+        \Form::component('ehCheckboxGroup', 'layouts.form.group.checkbox', ['title', 'options']);
+
+        // Registering custom date field form component
+        \Form::component('ehDate', 'layouts.form.date', ['name', 'label', 'value', 'attributes']);
+
         // Registering save button
         \Form::component('ehSave', 'layouts.form.submit', ['title']);
 

@@ -20,7 +20,7 @@
                 <div class="header underline">
                     <h3>{{ $medicament->name }}</h3>
                     <nav class="links">
-                        <a href="javascript:">edit</a><!--
+                        <a href="{{ route('medicament.edit', $medicament->id) }}">edit</a><!--
                         --><a href="javascript:" class="danger">delete</a>
                     </nav>
                 </div>
@@ -72,25 +72,25 @@
         <!-- Изменения медикамета -->
         <div class="tab-content tab-content-revisions">
             @foreach($medicament->revisions as $revision)
-                <div class="revision-card">
-                    <div class="revision-header">
+                <div class="diff-card">
+                    <div class="diff-header">
                         <div>
-                            <a href="javascript:" class="bold">{{ $revision->getDiff()->author->fullName() }}</a>
+                            <a href="{{ route('user.show', $revision->getDiff()->author->id) }}" class="bold">{{ $revision->getDiff()->author->fullName() }}</a>
                         </div>
                         <div>
                             <span>{{ $revision->getDiff()->date }}</span>
                         </div>
                     </div>
-                    <div class="revision-content">
+                    <div class="diff-content">
                         @foreach($revision->getDiff()->diff as $key => $diff)
-                        <div class="revision-item">
-                            <div class="revision-item-name">
+                        <div class="diff">
+                            <div class="diff-name">
                                 <span>{{ $key }}</span>
                             </div>
-                            <div class="revision-item-from">
+                            <div class="diff-from">
                                 <span>{{ $diff['from'] }}</span>
                             </div>
-                            <div class="revision-item-to">
+                            <div class="diff-to">
                                 <span>{{ $diff['to'] }}</span>
                             </div>
                         </div>
@@ -120,8 +120,8 @@
                     <td>{{ $batch->price }}</td>
                     <td align="right" style="text-align: right">
                         <div class="btn-group">
-                            <a href="javascript:" class="mi-btn mi-btn-small">edit</a><!--
-                            --><a href="javascript:" class="mi-btn mi-btn-small mi-btn-danger">delete</a>
+                            <a href="{{ route('medicament.batch.edit', [$medicament->id, $batch->id]) }}" class="mi-btn mi-btn-small mi-round mi-background">edit</a><!--
+                            --><a href="javascript:" class="mi-btn mi-btn-small mi-btn-danger mi-round mi-background">delete</a>
                         </div>
                     </td>
                 </tr>

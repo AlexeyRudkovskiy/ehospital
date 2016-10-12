@@ -46,8 +46,12 @@ class AtcClassificationController extends Controller
             'name_ua',
             'parent_id'
         ]);
-        if (!array_has($data, 'parent_id') || strlen($data['parent_id']) < 1) {
+        if ($request->has('has_parent_category') && $request->get('has_parent_category') == 'yes') {
+            if (!array_has($data, 'parent_id') || strlen($data['parent_id']) < 1) {
 //            unset($data['parent_id']);
+                $data['parent_id'] = null;
+            }
+        } else {
             $data['parent_id'] = null;
         }
 

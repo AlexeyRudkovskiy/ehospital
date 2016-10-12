@@ -4,7 +4,7 @@ import * as Vue from 'vue'
 import { router } from './routes'
 import { get, set } from './helpers'
 import { tabs } from './tabs'
-import { initRevisions } from './revisions'
+import { initDiffs } from './diffs'
 
 import { Balance } from './components/medicament/balance'
 import { BatchesList } from './components/medicament/batches-list'
@@ -16,7 +16,7 @@ import { Discussions } from './components/patient/discussions'
     var routes = router();
 
     tabs();
-    initRevisions();
+    initDiffs();
 
     var page = get(window, 'page');
     var prefix = get(window, 'prefix');

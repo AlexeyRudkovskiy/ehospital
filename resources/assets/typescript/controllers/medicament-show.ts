@@ -1,5 +1,6 @@
 import { Popup } from '../ui/popup'
-import {InlinePopup} from "../ui/inline-popup";
+import { InlinePopup } from "../ui/inline-popup";
+import { AjaxForm } from "../ui/ajax-form";
 
 export class MedicamentShow {
 
@@ -25,13 +26,22 @@ export class MedicamentShow {
         var popup = new InlinePopup(this.income, this.url('income'), true, {
             close_after_form_submit: true
         });
+        popup.setOnLoadedEventListener(function (data, popupInstance:InlinePopup) {
+            var ajaxForm = new AjaxForm(data.querySelector('form'), function (data) {
+                (<any>this).popupInstance.close();
+            }.bind({
+                popupInstance: popupInstance
+            }));
+        });
         popup.show();
     }
 
     private onOutgoingButtonClicked():void {
         var popup = new InlinePopup(this.outgoing, this.url('outgoing'), true, {
             close_after_form_submit: true
-        }).setOnLoadedEventListener(console.log.bind(console)).show();
+        }).setOnLoadedEventListener(console.log.bind(console));
+
+        popup.show();
     }
 
     private url(path:string):string {

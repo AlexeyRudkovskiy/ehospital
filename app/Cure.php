@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 
 /**
  * Class Cure
@@ -21,6 +22,11 @@ class Cure extends Model
     protected $fillable = [
         'department_id',
         'patient_id'
+    ];
+
+    protected $with = [
+        'status',
+        'days'
     ];
 
     /**
@@ -54,6 +60,32 @@ class Cure extends Model
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    /**
+     * Статус курса лечения. Берёться из БД из таблицы cure_statuses.
+     * Пример статусов: выписан, госпитализация, дневной стационар...
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function status()
+    {
+        return $this->belongsTo(CureStatus::class, 'cure_status_id');
+    }
+
+    /**
+     * Основной доктор в этом курсе лечения
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function doctor()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function doctors()
+    {
+        return $this->belongsToMany(User::class);
     }
 
 }

@@ -5,11 +5,11 @@
         <thead>
         <tr>
             <th width="75">id</th>
-            <th width="200">Название</th>
-            <th width="200">Название(en.)</th>
-            <th>Родительская классификация</th>
+            <th>Название</th>
+            <th width="250">Название(en.)</th>
+            <th width="250">Родительская классификация</th>
             <th width="150" align="right" style="text-align: right;">
-                {{ link_to(route('atcClassification.create'), 'создать', ['class' => 'btn btn-default']) }}
+                {{ link_to(route('atcClassification.create'), trans('management.global.create'), ['class' => 'btn btn-default']) }}
             </th>
         </tr>
         </thead>
@@ -22,8 +22,8 @@
                     {{ $classification->name_en }}
                 </td>
                 <td>{{ isset($classification->parent) ? $classification->parent->name_ua : '' }}</td>
-                <td align="right">
-                    <a href="{{ route('atcClassification.edit', $classification->id) }}">редактировать</a>
+                <td align="right" style="text-align: right">
+                    <a href="{{ route('atcClassification.edit', $classification->id) }}" class="mi-btn mi-btn-small mi-round mi-background">edit</a>
                 </td>
             </tr>
         @endforeach

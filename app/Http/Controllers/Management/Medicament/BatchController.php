@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Management\Medicament;
 
+use App\Events\BatchChangedEvent;
 use App\Events\BatchCreatedEvent;
+use App\Http\Requests\MedicamentBatchRequest;
 use App\Medicament;
 use App\MedicamentBatch;
 use Illuminate\Http\Request;
@@ -35,7 +37,7 @@ class BatchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Medicament $medicament, Requests\BatchRequest $request)
+    public function store(Medicament $medicament, MedicamentBatchRequest $request)
     {
         if ($medicament->id != null) {
             $data = $request->only([
@@ -54,33 +56,44 @@ class BatchController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Medicament $medicament
+     * @param  MedicamentBatch  $batch
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Medicament $medicament, MedicamentBatch $batch)
     {
-        //
+        return view('management.medicament.batch.edit')
+            ->with('medicament', $medicament)
+            ->with('batch', $batch);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  MedicamentBatchRequest  $request
+     * @param Medicament $medicament
+     * @param  MedicamentBatch  $batch
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MedicamentBatchRequest $request, Medicament $medicament, MedicamentBatch $batch)
     {
-        //
+        $data = $batch->update($request->only([
+            'batch_number',
+            'expiration_date',
+            'price'
+        ]));
+        event(new BatchChangedEvent($batch));
+
+        return redirect()->route('medicament.show', [$medicament->id, '#activetab=.tab-content-batches']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  MedicamentBatch  $batch
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(MedicamentBatch $batch)
     {
         //
     }

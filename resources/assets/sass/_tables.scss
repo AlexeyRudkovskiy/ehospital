@@ -68,6 +68,8 @@
     th {
       border-bottom: 1px solid $color-gray;
       font-weight: bold;
+
+      @include box-sizing;
     }
   }
 
