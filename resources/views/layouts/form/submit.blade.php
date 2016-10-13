@@ -1,8 +1,12 @@
+@if(!$empty ?? true)
 <div class="form-group">
     <div class="col-label">
         <label class="label">&nbsp;</label>
     </div>
     <div class="col-input">
-        <input type="submit" value="@lang('management.label.save')" class="btn btn-success btn-fill" />
+        {!! Form::submit($title ?? trans('management.label.save'), array_merge(['class' => 'btn btn-success'], $attributes ?? [])) !!}
     </div>
 </div>
+@else
+    {!! Form::submit($title ?? trans('management.label.save'), array_merge(['class' => 'btn btn-success'], $attributes ?? [])) !!}
+@endif

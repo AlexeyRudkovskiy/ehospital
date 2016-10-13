@@ -4,6 +4,11 @@
 
 {!! Form::ehText('small_name') !!}
 
+{!! Form::ehRadioGroup('keep_records_by_series', [
+    [ 'keep_records_by_series', 1, 'yes', ],
+    [ 'keep_records_by_series', 0, 'no', ]
+]) !!}
+
 {!! Form::ehNumber('amount_in_a_package') !!}
 
 {!! Form::ehNumber('nds') !!}

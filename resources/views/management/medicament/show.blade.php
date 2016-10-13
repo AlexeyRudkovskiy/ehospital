@@ -128,13 +128,10 @@
                 @endforeach
             </tbody>
             </table>
-
-            <batches-list></batches-list>
-
         </div>
 
         <div class="tab-content tab-content-statistic">
-            <balance :balance="{{ $medicament->balance() }}"></balance>
+            <balance :balance="{{ $medicament->balance() }}" :medicament-id="{{ $medicament->id }}"></balance>
         </div>
 
     </div>

@@ -1,6 +1,6 @@
 <div class="form-group">
     <div class="col-label">
-        <label class="label">{{ $title }}</label>
+        {!! Form::label($title, null, ['class' => 'label']) !!}
     </div>
     <div class="col-input">
         @foreach($options as $option)

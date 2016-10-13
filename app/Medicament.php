@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Events\MedicamentBatchBalanceUpdated;
+use App\Events\MedicamentHistoryUpdatedEvent;
 use App\Traits\RevisionsTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,6 +39,10 @@ class Medicament extends Model
         'basic_unit_id',
         'manufacturer_id',
         'atc_classification_id'
+    ];
+
+    protected $casts = [
+        'keep_records_by_series' => 'bool'
     ];
 
     /**
@@ -90,7 +96,7 @@ class Medicament extends Model
      */
     public function history()
     {
-        return $this->hasMany(MedicamentHistory::class);
+        return $this->hasMany(MedicamentHistory::class)->orderBy('id', 'desc');
     }
 
     /**
@@ -144,22 +150,23 @@ class Medicament extends Model
      * Регистрируем поступление товара
      *
      * @param float $amount
+     * @param MedicamentBatch $batch
      * @param array $attributes дополнительные аттрибуты
      * @return Model
      */
-    public function income($amount, $attributes = [])
+    public function income($amount, $batch = null, $attributes = [])
     {
-        return $this->addToHistory($amount, 'income', $attributes);
+        return $this->addToHistory($amount, 'income', $attributes, $batch);
     }
 
-    public function outgoing($amount, $attributes = [])
+    public function outgoing($amount, $batch = null, $attributes = [])
     {
-        return $this->addToHistory($amount, 'outgoing', $attributes);
+        return $this->addToHistory($amount, 'outgoing', $attributes, $batch);
     }
 
-    public function armor($amount, $attributes = [])
+    public function armor($amount, $batch = null, $attributes = [])
     {
-        return $this->addToHistory($amount, 'armored', $attributes);
+        return $this->addToHistory($amount, 'armored', $attributes, $batch);
     }
 
     /**
@@ -168,17 +175,42 @@ class Medicament extends Model
      * @param float $amount
      * @param string $status
      * @param array $attributes
+     * @param MedicamentBatch $batch
      * @return MedicamentHistory
      */
-    public function addToHistory($amount, $status, $attributes)
+    public function addToHistory($amount, $status, $attributes, $batch = null)
     {
         $createAttributes = [
             'amount' => $amount,
             'status' => $status,
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
+            'medicament_batch_id' => $batch->id ?? null
         ];
         $createAttributes = array_merge($createAttributes, $attributes);
-        return $this->history()->create($createAttributes);
+        $medicamentHistory = $this->history()->create($createAttributes);
+        event(new MedicamentBatchBalanceUpdated($this, $this->balance(), $status == 'income' ? $amount : -$amount, $status, $batch));
+        event(new MedicamentHistoryUpdatedEvent($this->history()->take(1)->get()->first()));
+        return $medicamentHistory;
+    }
+
+    public function getBatchList()
+    {
+        $batchesRaw = $this->batches;
+        $batchesRaw = $batchesRaw->toArray();
+        $batchesRaw = array_map(function ($batch) {
+            return [
+                $batch['id'],
+                $batch['expiration_date'] . ' ' . $batch['batch_number']
+            ];
+        }, $batchesRaw);
+
+        $batchesRaw = array_values($batchesRaw);
+        $batches = [];
+        foreach ($batchesRaw as $item) {
+            $batches[$item[0]] = $item[1];
+        }
+
+        return $batches;
     }
 
 }

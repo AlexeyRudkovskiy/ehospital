@@ -16,7 +16,6 @@ var MyService = (function (_super) {
         MyService.instance = this;
     }
     MyService.prototype.onMessage = function (event) {
-        console.log(event);
         this.emit(event.channel, event.message.data);
     };
     MyService.getInstance = function () {

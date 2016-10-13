@@ -15,7 +15,7 @@ var NotificationsList = (function () {
         this.notifications = [];
     }
     NotificationsList.prototype.ready = function () {
-        MyService_1.MyService.getInstance().on('eh.notification.1').then(this.onNewNotification);
+        MyService_1.MyService.getInstance().on('eh.notification.' + (window).uid).then(this.onNewNotification);
     };
     NotificationsList.prototype.deleteNotification = function (index) {
         this.notifications.splice(index, 1);

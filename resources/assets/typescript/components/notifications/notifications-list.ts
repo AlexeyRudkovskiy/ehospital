@@ -10,7 +10,7 @@ export class NotificationsList {
     @Prop notifications:Notification[] = [];
 
     ready():void {
-        MyService.getInstance().on('eh.notification.1').then(this.onNewNotification);
+        MyService.getInstance().on('eh.notification.' + ((<any>window)).uid).then(this.onNewNotification);
     }
 
     deleteNotification(index):void {

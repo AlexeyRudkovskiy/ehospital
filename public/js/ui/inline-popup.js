@@ -86,6 +86,27 @@ var InlinePopup = (function () {
         if (this.onLoadedFunc != null) {
             this.onLoadedFunc.call(window, this.root, this);
         }
+        document.onclick = this.onDocumentMouseClicked.bind(this);
+    };
+    InlinePopup.prototype.onDocumentMouseClicked = function (e) {
+        var target = e.target;
+        var popup = this.root.parentElement;
+        var inTarget = false;
+        while (target !== document) {
+            if (target === popup) {
+                inTarget = true;
+                break;
+            }
+            if (target.tagName.toLowerCase().indexOf('body') !== 0) {
+                target = target.parentElement;
+            }
+            else {
+                break;
+            }
+        }
+        if (!inTarget) {
+            this.close();
+        }
     };
     InlinePopup.element = null;
     return InlinePopup;

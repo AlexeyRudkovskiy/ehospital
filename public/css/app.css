@@ -349,6 +349,7 @@ header.header {
   color: rgba(102, 102, 102, 0.6);
   -webkit-transition: 0.1s color;
   transition: 0.1s color;
+  display: inline-block;
   outline: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -383,12 +384,15 @@ header.header {
   color: rgba(102, 102, 102, 0.6);
   -webkit-transition: 0.1s color;
   transition: 0.1s color;
+  display: inline-block;
   outline: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   box-sizing: border-box; }
+  .mi-icon.mi-large {
+    font-size: 20px; }
   .mi-icon.mi-round {
     border-radius: 50%; }
   .mi-icon.mi-no-left-padding {
@@ -403,6 +407,9 @@ header.header {
     color: #c0392b; }
   .mi-icon.mi-icon-success {
     color: #16a085; }
+  .mi-icon.mi-no-hover:hover {
+    color: rgba(102, 102, 102, 0.6);
+    background-color: transparent; }
   .mi-icon.mi-background:hover {
     background-color: rgba(0, 0, 0, 0.05); }
 
@@ -631,10 +638,16 @@ nav.tabs {
 
 .card {
   padding: 15px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   width: 400px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   box-sizing: border-box; }
+  .card:first-child {
+    margin-top: 0; }
+  .card:last-child {
+    margin-bottom: 0; }
 
 .notifications {
   position: absolute;
@@ -740,8 +753,20 @@ nav.tabs {
     .inline-popup .inline-popup-content .form .form-group {
       display: block; }
     .inline-popup .inline-popup-content .form .label, .inline-popup .inline-popup-content .form .input, .inline-popup .inline-popup-content .form .col-input, .inline-popup .inline-popup-content .form .col-label {
-      width: auto;
-      display: block; }
+      width: 100%;
+      display: block;
+      box-sizing: border-box; }
+    .inline-popup .inline-popup-content .form .col-label, .inline-popup .inline-popup-content .form .col-input {
+      padding: 0; }
+    .inline-popup .inline-popup-content .form .col-label, .inline-popup .inline-popup-content .form .col-label .label {
+      text-align: left;
+      padding-left: 0; }
+  .inline-popup .inline-popup-content .inline-popup-footer {
+    text-align: right; }
+    .inline-popup .inline-popup-content .inline-popup-footer .btn {
+      float: right; }
+    .inline-popup .inline-popup-content .inline-popup-footer label.label {
+      display: none; }
   .inline-popup .inline-popup-triangle {
     position: absolute;
     top: 0;
@@ -785,6 +810,33 @@ nav.tabs {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     padding: 15px;
     box-sizing: border-box; }
+
+.medicament-page .balance-card {
+  display: -webkit-box;
+  display: flex; }
+  .medicament-page .balance-card .icon {
+    width: 40px;
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    flex-shrink: 0; }
+    .medicament-page .balance-card .icon .mi-icon {
+      padding: 0; }
+  .medicament-page .balance-card .balance-card-content {
+    width: 100%;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1; }
+    .medicament-page .balance-card .balance-card-content .amount {
+      padding-top: 2px;
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.75); }
+      .medicament-page .balance-card .balance-card-content .amount.amount-negative {
+        color: #e55268; }
+    .medicament-page .balance-card .balance-card-content .info {
+      padding-top: 15px;
+      color: rgba(0, 0, 0, 0.6); }
+      .medicament-page .balance-card .balance-card-content .info.info-date {
+        font-size: 12px; }
 
 .user-page .tab-content.tab-content-schedule .header .day_of_week {
   display: inline-block;

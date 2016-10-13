@@ -30,6 +30,11 @@ Route::group([
         'as' => 'api.patient.comments'
     ]);
 
+    Route::get('medicament/{medicament}/history', [
+        'uses' => 'MedicamentController@getHistory',
+        'as' => 'api.medicament.history'
+    ]);
+
     Route::get('test', function () {
         return auth()->user();
     });

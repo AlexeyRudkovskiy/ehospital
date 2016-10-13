@@ -88,6 +88,7 @@
         window.page = "{{ request()->route()->getName() }}";
         window.prefix = "{{ $prefix or 'management' }}";
         window.token = "{{ auth()->user()->api_token }}";
+        window.uid = {{ auth()->user()->id }};
     </script>
 
     @stack('scripts')

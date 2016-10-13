@@ -7,11 +7,16 @@
   padding: $app-base-padding;
   color: lighten($color-gray-darken, $mi-btn-color-offset);
   transition: 0.1s color;
+  display: inline-block;
 
   outline: none;
 
   @include user-select;
   @include box-sizing;
+
+  &.mi-large {
+    font-size: 20px;
+  }
 
   &.mi-round {
     border-radius: 50%;
@@ -39,6 +44,13 @@
 
   &.mi-icon-success {
     color: $color-green-darken;
+  }
+
+  &.mi-no-hover {
+    &:hover {
+      color: lighten($color-gray-darken, $mi-btn-color-offset);
+      background-color: transparent;
+    }
   }
 
   &.mi-background {

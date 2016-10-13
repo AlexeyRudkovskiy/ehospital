@@ -46,6 +46,7 @@ export class InlinePopup {
     public close():void {
         if (InlinePopup.element != null && InlinePopup.element.parentElement != null) {
             InlinePopup.element.parentElement.removeChild(InlinePopup.element);
+            //document.removeEventListener('click', this.onDocumentMouseClicked, true);
         }
     }
 
@@ -109,6 +110,29 @@ export class InlinePopup {
 
         if (this.onLoadedFunc != null) {
             this.onLoadedFunc.call(window, this.root, this);
+        }
+
+        (<any>document).onclick = this.onDocumentMouseClicked.bind(this);
+    }
+
+    private onDocumentMouseClicked(e):void {
+        var target = e.target;
+        var popup = this.root.parentElement;
+        var inTarget = false;
+        while (target !== document) {
+            if (target === popup) {
+                inTarget = true;
+                break;
+            }
+            if (target.tagName.toLowerCase().indexOf('body') !== 0) {
+                target = target.parentElement;
+            } else {
+                break;
+            }
+        }
+
+        if (!inTarget) {
+            this.close();
         }
     }
 

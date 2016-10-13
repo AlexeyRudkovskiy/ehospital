@@ -14,7 +14,6 @@ var MyService_1 = require("../../MyService");
 var BatchesList = (function () {
     function BatchesList() {
         this.items = [];
-        this.test = "Test";
     }
     BatchesList.prototype.ready = function () {
         var _this = this;
@@ -22,19 +21,16 @@ var BatchesList = (function () {
     };
     BatchesList.prototype.onBatchCreated = function (event) {
         this.items.push(event.batch);
-        console.log(this);
     };
     BatchesList.prototype.testFunc = function () {
         console.log(arguments);
+    };
+    BatchesList.prototype.onBatchModified = function () {
     };
     __decorate([
         vue_typescript_1.Prop, 
         __metadata('design:type', Object)
     ], BatchesList.prototype, "items", void 0);
-    __decorate([
-        vue_typescript_1.Prop, 
-        __metadata('design:type', String)
-    ], BatchesList.prototype, "test", void 0);
     __decorate([
         vue_typescript_1.Watch('items'), 
         __metadata('design:type', Function), 

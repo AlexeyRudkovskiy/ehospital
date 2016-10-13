@@ -25,4 +25,5 @@ class RenameCuresUsersTableToCureUser extends Migration
     {
         Schema::rename('cure_user', 'cures_users');
     }
+
 }

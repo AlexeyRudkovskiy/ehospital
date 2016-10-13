@@ -10,21 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var vue_typescript_1 = require('vue-typescript');
 var MyService_1 = require('../../MyService');
+var api_1 = require("../../api");
 var Balance = (function () {
     function Balance() {
         this.balance = 0.0;
+        this.history = [];
+        this.medicamentId = -1;
     }
     Balance.prototype.ready = function () {
         var _this = this;
-        MyService_1.MyService.getInstance().on('eh.medicament.[0-9].income').then(function (response) { return _this.balance = response.balance; });
+        api_1.API
+            .get('/api/medicament/' + (this.medicamentId) + '/history')
+            .then(function (response) { return response.json(); })
+            .then(function (response) { _this.history = response; });
+        MyService_1.MyService.getInstance().on('eh.medicament.[0-9].history').then(this.onBalanceChanged.bind(this));
+        MyService_1.MyService.getInstance().on('eh.medicament.[0-9].balance').then(this.onMedicamentChanged.bind(this));
+    };
+    Balance.prototype.onMedicamentChanged = function (response) {
+        console.log(response, this);
+    };
+    Balance.prototype.onBalanceChanged = function (response) {
+        this.history.unshift(response.history);
     };
     __decorate([
         vue_typescript_1.Prop, 
         __metadata('design:type', Number)
     ], Balance.prototype, "balance", void 0);
+    __decorate([
+        vue_typescript_1.Prop, 
+        __metadata('design:type', Object)
+    ], Balance.prototype, "history", void 0);
+    __decorate([
+        vue_typescript_1.Prop, 
+        __metadata('design:type', Number)
+    ], Balance.prototype, "medicamentId", void 0);
     Balance = __decorate([
         vue_typescript_1.VueComponent({
-            template: '<b>Balance: {{ balance }}</b>'
+            template: require('/partials/balance.html!text')
         }), 
         __metadata('design:paramtypes', [])
     ], Balance);

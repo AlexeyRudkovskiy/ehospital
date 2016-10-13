@@ -52,7 +52,8 @@ class MedicamentController extends Controller
             'morion_code',
             'base_unit_id',
             'basic_unit_id',
-            'atc_classification_id'
+            'atc_classification_id',
+            'keep_records_by_series'
         ]);
 
         $data = array_merge($data, [
@@ -108,7 +109,8 @@ class MedicamentController extends Controller
             'morion_code',
             'base_unit_id',
             'basic_unit_id',
-            'atc_classification_id'
+            'atc_classification_id',
+            'keep_records_by_series'
         ]);
 
         $medicament->update($data);

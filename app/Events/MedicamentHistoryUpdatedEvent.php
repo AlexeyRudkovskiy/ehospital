@@ -3,6 +3,8 @@
 namespace App\Events;
 
 use App\Medicament;
+use App\MedicamentBatch;
+use App\MedicamentHistory;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -10,29 +12,20 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class MedicamentIncomeEvent implements ShouldBroadcast
+class MedicamentHistoryUpdatedEvent implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
 
-    /**
-     * @var Medicament
-     */
-    public $medicament;
-
-    /**
-     * @var float
-     */
-    public $balance = 0;
+    public $history;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Medicament $medicament)
+    public function __construct(MedicamentHistory $history)
     {
-        $this->medicament = $medicament;
-        $this->balance = $medicament->balance();
+        $this->history = $history;
     }
 
     /**
@@ -43,7 +36,7 @@ class MedicamentIncomeEvent implements ShouldBroadcast
     public function broadcastOn()
     {
         return [
-            'eh.medicament.' . $this->medicament->id . '.income'
+            'eh.medicament.' . $this->history->medicament->id . '.history'
         ];
     }
 }

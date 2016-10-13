@@ -35,4 +35,12 @@ class MedicamentBatch extends Model
         return $this->belongsTo(Medicament::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function batch()
+    {
+        return $this->belongsTo(MedicamentBatch::class);
+    }
+
 }

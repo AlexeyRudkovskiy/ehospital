@@ -33,7 +33,8 @@ class MedicamentRequest extends FormRequest
             'morion_code' => 'required',
             'base_unit_id' => 'required',
             'basic_unit_id' => 'required',
-            'atc_classification_id' => 'required'
+            'atc_classification_id' => 'required',
+            'keep_records_by_series' => 'required'
         ];
     }
 }

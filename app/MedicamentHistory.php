@@ -19,7 +19,14 @@ class MedicamentHistory extends Model
      * @var array
      */
     protected $fillable = [
-        'amount', 'status', 'user_id'
+        'amount',
+        'status',
+        'user_id',
+        'medicament_batch_id'
+    ];
+
+    protected $with = [
+        'user'
     ];
 
     /**

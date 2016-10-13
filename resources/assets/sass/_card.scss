@@ -3,10 +3,21 @@
 
 .card {
   padding: $app-base-padding;
-  box-shadow: 0 0 5px $color-gray;
-  border: 1px solid $color-gray;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+  border: 1px solid   rgba(0, 0, 0, .1);
 
   width: $card-width;
+  margin-top: $app-base-padding;
+  margin-bottom: $app-base-padding;
 
   @include box-sizing;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
 }

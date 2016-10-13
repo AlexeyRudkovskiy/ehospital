@@ -35,7 +35,7 @@ class FormComponentsProvider extends ServiceProvider
         \Form::component('ehDate', 'layouts.form.date', ['name', 'label', 'value', 'attributes']);
 
         // Registering save button
-        \Form::component('ehSave', 'layouts.form.submit', ['title']);
+        \Form::component('ehSave', 'layouts.form.submit', ['title', 'attributes', 'empty']);
 
         // Registering select component
         \Form::component('ehSelect', 'layouts.form.select', ['name', 'elements', 'title', 'current', 'attributes']);

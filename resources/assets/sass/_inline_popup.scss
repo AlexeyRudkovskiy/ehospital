@@ -28,8 +28,31 @@
       }
 
       .label, .input, .col-input, .col-label {
-        width: auto;
+        width: 100%;
         display: block;
+
+        @include box-sizing;
+      }
+
+      .col-label, .col-input {
+        padding: 0;
+      }
+
+      .col-label, .col-label .label {
+        text-align: left;
+        padding-left: 0;
+      }
+    }
+
+    .inline-popup-footer {
+      text-align: right;
+
+      .btn {
+        float: right;
+      }
+
+      label.label {
+        display: none;
       }
     }
 
