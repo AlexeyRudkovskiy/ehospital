@@ -77,3 +77,6 @@ composer.phar
 # composer.lock
 
 documentation/
+public/css/
+public/js/
+typings/
