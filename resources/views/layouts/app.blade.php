@@ -93,6 +93,12 @@
 
     @stack('scripts')
 
+    @if(session()->has('message'))
+    <script>
+        window.message = JSON.parse('{!! session()->get('message') !!}');
+    </script>
+    @endif
+
     <!-- Scripts -->
     <script src="{{ url('/') }}:{{ config('eh.echo.port') }}/socket.io/socket.io.js"></script>
     <script src="/vendor/system.js"></script>

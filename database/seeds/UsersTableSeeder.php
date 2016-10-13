@@ -17,6 +17,8 @@ class UsersTableSeeder extends Seeder
         $user->regenerateApiToken();
         $user->save();
 
-        factory(\App\User::class)->create();
+        $user2 = factory(\App\User::class)->make();
+        $user2->regenerateApiToken();
+        $user2->save();
     }
 }

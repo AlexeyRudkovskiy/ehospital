@@ -39,7 +39,13 @@ export class MedicamentShow {
     private onOutgoingButtonClicked():void {
         var popup = new InlinePopup(this.outgoing, this.url('outgoing'), true, {
             close_after_form_submit: true
-        }).setOnLoadedEventListener(console.log.bind(console));
+        }).setOnLoadedEventListener(function (data, popupInstance:InlinePopup) {
+            var ajaxForm = new AjaxForm(data.querySelector('form'), function (data) {
+                (<any>this).popupInstance.close();
+            }.bind({
+                popupInstance: popupInstance
+            }));
+        });
 
         popup.show();
     }

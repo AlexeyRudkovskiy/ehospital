@@ -1,10 +1,12 @@
 export class AjaxForm {
 
     constructor (private form:HTMLFormElement, private onFormSentEvent:any) {
-        form.addEventListener('submit', function (e:any) {
-            e.preventDefault();
-            this.onFormSent();
-        }.bind(this));
+        if (form !== null) {
+            form.addEventListener('submit', function (e:any) {
+                e.preventDefault();
+                this.onFormSent();
+            }.bind(this));
+        }
     }
 
     private onFormSent(): void {

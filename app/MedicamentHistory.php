@@ -26,7 +26,8 @@ class MedicamentHistory extends Model
     ];
 
     protected $with = [
-        'user'
+        'user',
+        'batch'
     ];
 
     /**
@@ -69,6 +70,23 @@ class MedicamentHistory extends Model
         return $this->belongsTo(CalendarDay::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function batch()
+    {
+        return $this->belongsTo(MedicamentBatch::class, 'medicament_batch_id');
+    }
 
+    /**
+     * Возвращает "разницу", а именно если запись в истории имеет статус icome - просто вернёт amount.
+     * Если запись имеет статус отличный от income, то -amount.
+     *
+     * @return float
+     */
+    public function getDelta()
+    {
+        return $this->status == 'income' ? $this->amount : -($this->amount);
+    }
 
 }

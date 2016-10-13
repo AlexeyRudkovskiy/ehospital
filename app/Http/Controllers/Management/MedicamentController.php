@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\Events\MedicamentChangedEvent;
 use App\Medicament;
+use App\MedicamentBatch;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -113,12 +114,21 @@ class MedicamentController extends Controller
             'keep_records_by_series'
         ]);
 
+        if ($data['keep_records_by_series'] == '0') {
+            $data['keep_records_by_series'] = false;
+        } else {
+            $data['keep_records_by_series'] = true;
+        }
+
         $medicament->update($data);
-        session()->flash('message', 'management.medicament.saved');
+        session()->flash('message', json_encode([
+            'text' => 'management.medicament.saved',
+            'type' => ''
+        ]));
 
         event(new MedicamentChangedEvent($medicament));
 
-        return back();
+        return redirect()->route('medicament.show', $medicament->id);
     }
 
     /**
@@ -140,7 +150,8 @@ class MedicamentController extends Controller
 
     public function getOutgoing(Medicament $medicament)
     {
-        return view('management.medicament.outgoing');
+        return view('management.medicament.outgoing')
+            ->with('medicament', $medicament);
     }
 
     public function postIncome(Medicament $medicament, Request $request)

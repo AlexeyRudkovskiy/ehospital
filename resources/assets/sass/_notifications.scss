@@ -98,12 +98,14 @@
       }
     }
 
-    &.notification-danger, &.notification-default {
-      .close {
+    .close {
         position: absolute;
         right: 0;
-        top: $app-base-padding;
+        top: 0;
+    }
 
+    &.notification-danger, &.notification-default {
+      .close {
         .mi-btn {
           color: $color-white;
           opacity: 0.7;

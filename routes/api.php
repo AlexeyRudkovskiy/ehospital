@@ -25,6 +25,11 @@ Route::group([
         'as' => 'api.medicament.income.post'
     ]);
 
+    Route::post('medicament/{medicament}/outgoing', [
+        'uses' => 'MedicamentController@postOutgoing',
+        'as' => 'api.medicament.outgoing.post'
+    ]);
+
     Route::get('patient/{patient}/comments', [
         'uses' => 'PatientController@getComments',
         'as' => 'api.patient.comments'

@@ -93,9 +93,14 @@ class BatchController extends Controller
      * @param  MedicamentBatch  $batch
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MedicamentBatch $batch)
+    public function destroy(Medicament $medicament, MedicamentBatch $batch)
     {
-        //
+        $batch->delete();
+        session()->flash('message', json_encode([
+            'text' => 'management.medicament.batch.deleted',
+            'type' => ''
+        ]));
+        return redirect()->route('medicament.show', [$medicament->id, '#activetab=.tab-content-batches']);
     }
 
 }

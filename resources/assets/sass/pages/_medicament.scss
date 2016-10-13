@@ -4,6 +4,13 @@
 .medicament-page {
 
   .tab-content {
+
+    &.tab-content-batches {
+      form {
+        display: inline-block;
+      }
+    }
+
     &.tab-content-revisions {
 
 

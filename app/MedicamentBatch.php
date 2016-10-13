@@ -43,4 +43,14 @@ class MedicamentBatch extends Model
         return $this->belongsTo(MedicamentBatch::class);
     }
 
+    public function getBalance()
+    {
+        $balance = 0;
+        $history = MedicamentHistory::where('medicament_id', $this->medicament_id)->where('medicament_batch_id', $this->id)->get();
+        foreach ($history as $item) {
+            $balance += $item->getDelta();
+        }
+        return $balance;
+    }
+
 }

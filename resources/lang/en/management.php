@@ -4,7 +4,9 @@ return [
 
     'global' => [
         'yes' => 'Да',
-        'create' => 'Создать'
+        'create' => 'Создать',
+        'delete' => 'Удалить',
+        'edit' => 'Редактировать'
     ],
 
     'property' => [
@@ -72,7 +74,8 @@ return [
             'revisions' => 'Изменения',
             'series' => 'Серии',
             'statistic' => 'Статистика',
-            'income' => 'Поступление'
+            'income' => 'Поступление',
+            'outgoing' => 'Отпуск в отделение'
         ],
 
         'user' => [

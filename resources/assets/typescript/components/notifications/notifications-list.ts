@@ -11,6 +11,14 @@ export class NotificationsList {
 
     ready():void {
         MyService.getInstance().on('eh.notification.' + ((<any>window)).uid).then(this.onNewNotification);
+
+        if (typeof (<any>window).message !== "undefined") {
+            var message = (<any>window).message;
+            if (typeof message.actions === "undefined") {
+                message.actions = [];
+            }
+            this.notifications.push(message);
+        }
     }
 
     deleteNotification(index):void {
@@ -18,7 +26,6 @@ export class NotificationsList {
     }
 
     protected onNewNotification (item) {
-        console.log(item);
         this.notifications.push(item);
     }
 

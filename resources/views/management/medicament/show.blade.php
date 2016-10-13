@@ -20,8 +20,8 @@
                 <div class="header underline">
                     <h3>{{ $medicament->name }}</h3>
                     <nav class="links">
-                        <a href="{{ route('medicament.edit', $medicament->id) }}">edit</a><!--
-                        --><a href="javascript:" class="danger">delete</a>
+                        <a href="{{ route('medicament.edit', $medicament->id) }}">@lang('management.global.edit')</a><!--
+                        --><a href="javascript:" class="danger">@lang('management.global.delete')</a>
                     </nav>
                 </div>
                 <table class="table table-striped-on-hover">
@@ -88,7 +88,7 @@
                                 <span>{{ $key }}</span>
                             </div>
                             <div class="diff-from">
-                                <span>{{ $diff['from'] }}</span>
+                                <span>{!! $diff['from'] !!}</span>
                             </div>
                             <div class="diff-to">
                                 <span>{{ $diff['to'] }}</span>
@@ -106,6 +106,7 @@
                 <tr>
                     <th>Expiration date</th>
                     <th width="150">Number</th>
+                    <th width="150">Balance</th>
                     <th width="150">Price</th>
                     <th width="100" align="right" style="text-align: right;">
                         {{ link_to(route('medicament.batch.create', $medicament->id), 'создать', ['class' => 'btn btn-default']) }}
@@ -117,11 +118,14 @@
                 <tr>
                     <td>{{ $batch->expiration_date }}</td>
                     <td>{{ $batch->batch_number }}</td>
+                    <td>{{ $batch->getBalance() }}</td>
                     <td>{{ $batch->price }}</td>
                     <td align="right" style="text-align: right">
                         <div class="btn-group">
                             <a href="{{ route('medicament.batch.edit', [$medicament->id, $batch->id]) }}" class="mi-btn mi-btn-small mi-round mi-background">edit</a><!--
-                            --><a href="javascript:" class="mi-btn mi-btn-small mi-btn-danger mi-round mi-background">delete</a>
+                            -->{!! Form::open(['route' => ['medicament.batch.destroy', $medicament->id, $batch->id], 'method' => 'delete']) !!}<!--
+                            --><a href="javascript:" onclick="this.parentElement.submit()" class="mi-btn mi-btn-small mi-btn-danger mi-round mi-background">delete</a><!--
+                            -->{!! Form::close() !!}
                         </div>
                     </td>
                 </tr>
