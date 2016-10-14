@@ -83,7 +83,7 @@ $factory->define(\App\Patient::class, function () use ($faker) {
         'ukrainian' => true,
         'hospital_employee' => false,
         'user_id' => $userId,
-        'first_user_id' => $userId
+        'created_by_id' => $userId
     ];
 });
 
