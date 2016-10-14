@@ -12,7 +12,7 @@ class MiIconService {
     {
         $attributes = array_merge($attributes, [
             'classes' => [
-                'mi-no-left-padding'
+                'mi-no-paddings'
             ]
         ]);
         $class = $condition ? $this->positiveClass : $this->negativeClass;

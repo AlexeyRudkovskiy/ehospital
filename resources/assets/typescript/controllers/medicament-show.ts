@@ -23,6 +23,7 @@ export class MedicamentShow {
     }
 
     private onIncomeButtonClicked():void {
+        this.income.classList.add('mi-active');
         var popup = new InlinePopup(this.income, this.url('income'), true, {
             close_after_form_submit: true
         });
@@ -33,10 +34,15 @@ export class MedicamentShow {
                 popupInstance: popupInstance
             }));
         });
+        popup.setOnCloseEventListener(function () {
+            this.income.classList.remove('mi-active');
+        }.bind(this));
         popup.show();
     }
 
+
     private onOutgoingButtonClicked():void {
+        this.outgoing.classList.add('mi-active');
         var popup = new InlinePopup(this.outgoing, this.url('outgoing'), true, {
             close_after_form_submit: true
         }).setOnLoadedEventListener(function (data, popupInstance:InlinePopup) {
@@ -45,7 +51,9 @@ export class MedicamentShow {
             }.bind({
                 popupInstance: popupInstance
             }));
-        });
+        }).setOnCloseEventListener(function () {
+            this.outgoing.classList.remove('mi-active');
+        }.bind(this));
 
         popup.show();
     }

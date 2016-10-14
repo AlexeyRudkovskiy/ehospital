@@ -63,7 +63,7 @@ class MedicamentController extends Controller
         ]);
 
         $medicament = Medicament::create($data);
-        session()->flash('message', trans('management.medicament.created'));
+        session()->flash('message', trans('management.notification.medicament.created'));
         return redirect()->route('medicament.index');
     }
 
@@ -122,7 +122,7 @@ class MedicamentController extends Controller
 
         $medicament->update($data);
         session()->flash('message', json_encode([
-            'text' => 'management.medicament.saved',
+            'text' => 'management.notification.medicament.modified',
             'type' => ''
         ]));
 

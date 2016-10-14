@@ -9,6 +9,7 @@ import { initDiffs } from './diffs'
 import { Balance } from './components/medicament/balance'
 import { BatchesList } from './components/medicament/batches-list'
 import { NotificationsList } from './components/notifications/notifications-list'
+import { InputList } from './components/patient/inspection/input-list'
 // import { Discussions } from './components/patient/discussions'
 
 (function () {
@@ -38,6 +39,7 @@ import { NotificationsList } from './components/notifications/notifications-list
             Balance,
             BatchesList,
             NotificationsList,
+            InputList,
             // Discussions
         ]
     });

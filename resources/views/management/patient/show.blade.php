@@ -17,6 +17,10 @@
                 <div class="info-compact">
                     <div class="header underline">
                         <h3>{{ $patient->name }}</h3>
+                        <nav class="links">
+                            <a href="{{ route('patient.edit', $patient->id) }}">@lang('management.global.edit')</a><!--
+                        --><a href="javascript:" class="danger">@lang('management.global.delete')</a>
+                        </nav>
                     </div>
                     <table class="table table-striped-on-hover">
                         <tr>
@@ -28,12 +32,12 @@
                             <td>{{ $patient->birthday }}</td>
                         </tr>
                         <tr>
-                            <td width="200">@lang('management.label.patient.homeless')</td>
-                            <td>{!! $miicon->toggle($patient->homeless) !!}</td>
-                        </tr>
-                        <tr>
                             <td width="200">@lang('management.label.patient.ukrainian')</td>
                             <td>{!! $miicon->toggle($patient->ukrainian) !!}</td>
+                        </tr>
+                        <tr>
+                            <td width="200">@lang('management.label.patient.homeless')</td>
+                            <td>{!! $miicon->toggle($patient->homeless) !!}</td>
                         </tr>
                         <tr>
                             <td width="200">@lang('management.label.patient.hospital_employee')</td>

@@ -103,7 +103,7 @@ class User extends Authenticatable
 
     public function patients()
     {
-        return $this->hasMany(Patient::class);
+        return $this->hasMany(Patient::class)->orderBy('id', 'desc');
     }
 
     /**
@@ -335,7 +335,9 @@ class User extends Authenticatable
     public function getEncrypter()
     {
         if ($this->encrypter == null) {
-            $this->encrypter = new \Illuminate\Encryption\Encrypter($this->cryptKey, config('app.cipher'));
+            $cryptKey = $this->cryptKey;
+            $cryptKey = md5($cryptKey ^ env('APP_KEY'));
+            $this->encrypter = new \Illuminate\Encryption\Encrypter($cryptKey, config('app.cipher'));
         }
         return $this->encrypter;
     }

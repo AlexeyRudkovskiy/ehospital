@@ -43,7 +43,9 @@ class Patient extends Model
     ];
 
     protected $casts = [
-        'homeless' => 'boolean'
+        'homeless' => 'bool',
+        'ukrainian' => 'bool',
+        'hospital_employee' => 'bool'
     ];
 
     /**
@@ -77,6 +79,17 @@ class Patient extends Model
     }
 
     /**
+     * Пользователь, создавший этого пациента.
+     * Используется для шифрования
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function createBy()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * Адреса проживания пациента
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
@@ -96,6 +109,11 @@ class Patient extends Model
         return $this->hasMany(Cure::class)->orderBy('id', 'desc');
     }
 
+    public function inspection()
+    {
+        return $this->hasOne(Inspection::class, 'patient_id');
+    }
+
     /**
      * Статусы пользователя.
      * Тут хранится информация когды был госпитализирован\выписан, куда был переведён.
@@ -111,14 +129,18 @@ class Patient extends Model
      * Определяет, имеет ли текущий доктор, или доктор указанный в качестве первого аргумента, доступ к пациенту и его истории в расшифрованном виде
      *
      * @param User|null $user
-     * @return User|\Illuminate\Contracts\Auth\Authenticatable|null
+     * @return bool
      */
     public function granted (User $user = null) {
         if ($user == null) {
             $user = auth()->user();
         }
 
-        return $user;
+        $doctors = $this->getDoctors();
+        $doctorsIds = $doctors->map(function (User $user) {
+            return $user->id;
+        });
+        return $doctorsIds->contains($user->id);
     }
 
     /**
@@ -128,10 +150,25 @@ class Patient extends Model
      */
     public function getDoctors()
     {
-        $doctors = $this->doctors;
+        $doctors = collect($this->doctors->toArray());
         $doctors->prepend($this->doctor);
 
         return $doctors;
+    }
+
+    public function setHomelessAttribute($data)
+    {
+        $this->attributes['homeless'] = strlen($data) > 0;
+    }
+
+    public function setUkrainianAttribute($data)
+    {
+        $this->attributes['ukrainian'] = strlen($data) > 0;
+    }
+
+    public function getEncrypter()
+    {
+        return $this->createdBy->getEncrypter();
     }
 
 }

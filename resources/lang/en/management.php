@@ -45,7 +45,8 @@ return [
             'title' => 'Производители'
         ],
         'medicament' => [
-            'title' => 'Медикаменты'
+            'title' => 'Медикаменты',
+            'show' => 'Просмотр медикамента'
         ],
         'atcClassification' => [
             'title' => 'АТС классификации'
@@ -93,12 +94,28 @@ return [
             'ukrainian' => 'Украинец',
             'hospital_employee' => 'Работник больницы',
             'doctors' => 'Доктора',
-            'noCures' => 'нет курсов лечения'
+            'noCures' => 'нет курсов лечения',
+
+            'inspection' => [
+                'rhFactor' => 'Резус фактор',
+                'bloodTransfusions' => 'Переливания крови'
+            ]
         ],
 
         'atcClassification' => [
             'noParentCategory' => 'Подкатегория'
         ]
 
+    ],
+
+    // Тексты уведомлений
+    'notification' => [
+        'medicament' => [
+            'modified' => 'Медикамент успешно сохранён'
+        ],
+
+        'patient' => [
+            'modified' => 'Данные пациента успешно сохранены'
+        ]
     ]
 ];

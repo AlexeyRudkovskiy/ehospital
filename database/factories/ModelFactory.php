@@ -73,6 +73,7 @@ $factory->define(\App\Contractor::class, function () use ($faker) {
 });
 
 $factory->define(\App\Patient::class, function () use ($faker) {
+    $userId = $faker->randomNumber(6) % 2 ? 1 : 2;
     return [
         'name' => $faker->name,
         'birthday' => $faker->date(),
@@ -81,7 +82,8 @@ $factory->define(\App\Patient::class, function () use ($faker) {
         'homeless' => $faker->randomNumber() % 2 == 0 ? true : false,
         'ukrainian' => true,
         'hospital_employee' => false,
-        'user_id' => $faker->randomNumber(6) % 2 ? 1 : 2
+        'user_id' => $userId,
+        'first_user_id' => $userId
     ];
 });
 

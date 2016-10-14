@@ -7,7 +7,9 @@
             <th>ФИО</th>
             <th width="140">Дата рождения</th>
             <th width="140">Отделение</th>
-            <th width="75"></th>
+            <th width="120" style="text-align: right;">
+                <a href="{{ route('patient.create') }}" class="btn">@lang('management.global.create')</a>
+            </th>
         </tr>
         </thead>
         <tbody>

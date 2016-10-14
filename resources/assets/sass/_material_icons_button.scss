@@ -14,6 +14,10 @@
   @include user-select;
   @include box-sizing;
 
+  &.mi-active {
+    color: $color-blue;
+  }
+
   &.mi-round {
     border-radius: 50%;
   }

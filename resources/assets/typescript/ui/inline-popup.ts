@@ -8,6 +8,8 @@ export class InlinePopup {
 
     protected onLoadedFunc:any = null;
 
+    protected onCloseFunc:any = null;
+
     constructor (
         private target:any,
         private content:string,
@@ -21,6 +23,11 @@ export class InlinePopup {
 
     public setOnLoadedEventListener(func:any):InlinePopup {
         this.onLoadedFunc = func;
+        return this;
+    }
+
+    public setOnCloseEventListener(func:any):InlinePopup {
+        this.onCloseFunc = func;
         return this;
     }
 
@@ -47,6 +54,8 @@ export class InlinePopup {
         if (InlinePopup.element != null && InlinePopup.element.parentElement != null) {
             InlinePopup.element.parentElement.removeChild(InlinePopup.element);
             //document.removeEventListener('click', this.onDocumentMouseClicked, true);
+
+            this.onCloseFunc.call(window);
         }
     }
 
