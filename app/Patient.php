@@ -84,7 +84,7 @@ class Patient extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function createBy()
+    public function createdBy()
     {
         return $this->belongsTo(User::class);
     }
