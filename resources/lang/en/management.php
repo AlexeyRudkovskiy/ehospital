@@ -97,8 +97,14 @@ return [
             'noCures' => 'нет курсов лечения',
 
             'inspection' => [
+                'edit' => 'Редактировать первичный осмотр',
+
+                'bloodGroup' => 'Группа крови',
                 'rhFactor' => 'Резус фактор',
-                'bloodTransfusions' => 'Переливания крови'
+                'bloodTransfusions' => 'Переливания крови',
+
+                'rhFactorPositive' => 'Позитивный',
+                'rhFactorNegative' => 'Негативный'
             ]
         ],
 

@@ -11,6 +11,8 @@ class PatientsTableSeeder extends Seeder
      */
     public function run()
     {
+        \App\Patient::truncate();
+
         auth()->loginUsingId(1);
 
         factory(\App\Patient::class, 50)->create()->each(function (\App\Patient $patient) {

@@ -27,12 +27,12 @@ class AddOnDeleteCascadeToMainTables extends Migration
             $table->foreign('cure_id')->references('id')->on('cures')->onDelete('cascade');
         });
 
-        Schema::table('cure_user', function (Blueprint $table) {
-            $table->dropForeign('cures_users_user_id_foreign');
-            $table->dropForeign('cures_users_cure_id_foreign');
+        Schema::table('departments', function (Blueprint $table) {
+            $table->dropForeign(['leader_id']);
+            $table->dropForeign(['organization_id']);
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('cure_id')->references('id')->on('cures')->onDelete('cascade');
+            $table->foreign('leader_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
         });
     }
 
@@ -57,12 +57,12 @@ class AddOnDeleteCascadeToMainTables extends Migration
             $table->foreign('cure_id')->references('id')->on('cures');
         });
 
-        Schema::table('cure_user', function (Blueprint $table) {
-            $table->dropForeign([ 'user_id' ]);
-            $table->dropForeign([ 'cure_id' ]);
+        Schema::table('departments', function (Blueprint $table) {
+            $table->dropForeign(['leader_id']);
+            $table->dropForeign(['organization_id']);
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('cure_id')->references('id')->on('cures');
+            $table->foreign('leader_id')->references('id')->on('users');
+            $table->foreign('organization_id')->references('id')->on('organizations');
         });
     }
 }

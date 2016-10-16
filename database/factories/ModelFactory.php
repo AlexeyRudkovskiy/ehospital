@@ -15,9 +15,10 @@ $lang = 'uk_UA';
 $faker = Faker\Factory::create($lang);
 
 $factory->define(App\User::class, function () use ($faker) {
+    $fullName = explode(' ', $faker->name);
     return [
         'firstName' => $faker->firstName,
-        'middleName' => 'MiddleName',
+        'middleName' => array_pop($fullName),
         'lastName' => $faker->lastName,
         'password' => str_random(20),
         'email' => $faker->safeEmail,
@@ -94,7 +95,8 @@ $factory->define(\App\Address::class, function () use ($faker) {
     ];
 
     return [
-        'country' => 'Украина',
+//        'country' => 'Украина',
+        'country_id' => 1,
         'region' => Faker\Provider\uk_UA\Address::region(),
         'city' => $faker->randomElement($city),
         'street' => "ул. Печерская",

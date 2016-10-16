@@ -48,6 +48,10 @@ class Patient extends Model
         'hospital_employee' => 'bool'
     ];
 
+    protected $with = [
+        'inspection'
+    ];
+
     /**
      * Даём возможность комментировать пациента врачём или группой врачей
      *

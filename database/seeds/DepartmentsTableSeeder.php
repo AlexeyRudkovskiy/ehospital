@@ -11,6 +11,8 @@ class DepartmentsTableSeeder extends Seeder
      */
     public function run()
     {
+        \App\Department::truncate();
+
         factory(\App\Department::class, 10)->create()->each(function (\App\Department $department) {
             $department->leader()->associate(\App\User::inRandomOrder()->get()->first());
         });

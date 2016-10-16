@@ -30,6 +30,13 @@
     }
   }
 
+  ul.info-list {
+    li {
+      display: block;
+      padding: $app-base-padding;
+    }
+  }
+
 }
 
 .info-subinfo {

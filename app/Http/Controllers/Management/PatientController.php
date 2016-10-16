@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Management;
 
+use App\Inspection;
 use App\Patient;
 use Illuminate\Http\Request;
 
@@ -35,11 +36,11 @@ class PatientController extends Controller
         $data = $request->only($request->fields);
         $patient = new Patient($data);
         $patient->user_id = auth()->id();
-        $patient->first_user_id = auth()->id();
+        $patient->created_by_id = auth()->id();
         $patient->encrypt();
         $patient->save();
 
-        session()->flash('message', json_encode([
+            session()->flash('message', json_encode([
             'text' => trans('management.notification.patient.created'),
             'type' => 'notification-default'
         ]));
@@ -79,10 +80,25 @@ class PatientController extends Controller
 
     /**
      * @param Patient $patient
+     * @param Requests\PatientInspectionRequest $request
+     * @return \Illuminate\Database\Eloquent\Model
      */
-    public function postInspection(Patient $patient)
+    public function postInspection(Patient $patient, Requests\PatientInspectionRequest $request)
     {
-        return $patient;
+        $inspection = $patient->inspection()->create($request->only($request->fields));
+        foreach ($request->get('blood_transfusions') as $item) {
+            $inspection->bloodTransfusions()->create([
+                'data' => $item,
+                'key' => 'blood_transfusion'
+            ]);
+        }
+        return $inspection;
+    }
+
+    public function getEditInspection(Patient $patient)
+    {
+        return view('management.patient.inspection.edit')
+            ->with('patient', $patient);
     }
 
 }

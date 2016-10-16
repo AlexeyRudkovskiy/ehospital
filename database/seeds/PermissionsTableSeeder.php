@@ -11,6 +11,8 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
+        \App\Permission::truncate();
+
         factory(\App\Permission::class)->create();
     }
 }

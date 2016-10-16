@@ -83,9 +83,10 @@
       }
 
       .input-list {
-        .input {
+        .list-item {
           margin-top: $app-base-padding;
           margin-bottom: $app-base-padding;
+          position: relative;
 
           &:first-child {
             margin-top: 0;
@@ -93,6 +94,22 @@
 
           &:last-child {
             margin-bottom: 0;
+          }
+
+          .item-remove + .input {
+            padding-right: $app-base-padding / 2 + 29;
+          }
+
+          .item-remove {
+            position: absolute;
+            top:   1px;
+            right: 2px;
+
+            transition: 0.1s color;
+
+            &:hover {
+              color: $color-red-darken;
+            }
           }
         }
       }
@@ -238,6 +255,15 @@
         outline: none !important;
 
         @include box-sizing;
+
+        &.input-textarea-small {
+          height: 50px;
+          min-height: 50px;
+
+          font-family: Arial, serif;
+
+          resize: vertical;
+        }
       }
 
       select.input {

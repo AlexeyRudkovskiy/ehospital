@@ -11,6 +11,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        \App\User::truncate();
+
         $user = factory(\App\User::class)->make();
         $user->email = 'test@test.test';
         $user->password = 'password';

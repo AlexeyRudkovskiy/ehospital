@@ -13,8 +13,13 @@ class FormComponentsProvider extends ServiceProvider
      */
     public function boot()
     {
+        \Form::component('ehHeader', 'layouts.form.header', ['text']);
+
         // Registering custom text form component
         \Form::component('ehText', 'layouts.form.text', ['name', 'label', 'value', 'attributes']);
+
+        // Registering custom textarea form component
+        \Form::component('ehTextarea', 'layouts.form.textarea', ['name', 'label', 'value', 'attributes']);
 
         // Registering custom number for component
         \Form::component('ehNumber', 'layouts.form.number', ['name', 'label', 'value', 'attributes']);
@@ -39,6 +44,8 @@ class FormComponentsProvider extends ServiceProvider
 
         // Registering select component
         \Form::component('ehSelect', 'layouts.form.select', ['name', 'elements', 'title', 'current', 'attributes']);
+
+        \Form::component('ehAddress', 'layouts.form.address', ['name', 'label', 'value']);
     }
 
     /**

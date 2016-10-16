@@ -11,6 +11,8 @@ class OrganizationsTableSeeder extends Seeder
      */
     public function run()
     {
+        \App\Organization::truncate();
+
         factory(\App\Organization::class, 10)->create();
     }
 }

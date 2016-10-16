@@ -14,4 +14,6 @@
 <!-- Дата рождения -->
 {!! Form::ehDate('birthday') !!}
 
+{!! Form::ehAddress('address', 'test') !!}
+
 {!! Form::ehSave() !!}

@@ -20,6 +20,9 @@ class CreatePatientInitialInspectionsTable extends Migration
             $table->boolean('rh_factor');
             $table->integer('patient_id')->unsigned();
 
+            $table->string('diabetes')->nullable();
+            $table->string('allergic_history')->nullable();
+
             $table->timestamps();
 
             $table->foreign('patient_id')->references('id')->on('patients');
