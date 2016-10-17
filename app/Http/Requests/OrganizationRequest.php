@@ -2,19 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Organization;
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrganizationRequest extends FormRequest
+class OrganizationRequest extends PermissibleRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
+
+    protected $model = Organization::class;
 
     /**
      * Get the validation rules that apply to the request.
@@ -32,4 +26,5 @@ class OrganizationRequest extends FormRequest
             'type' => "required|in:legal,private"
         ];
     }
+
 }

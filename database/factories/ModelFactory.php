@@ -34,7 +34,28 @@ $factory->define(\App\Permission::class, function () use ($faker) {
         'name' => 'global',
         'map' => json_encode([
             'organization' => [
-                'view' => true,
+                'index' => true,
+                'store' => true,
+                'update' => true,
+                'show' => true,
+                'create' => true,
+                'edit' => true,
+                'delete' => true
+            ],
+            'department' => [
+                'index' => true,
+                'store' => true,
+                'update' => true,
+                'show' => true,
+                'create' => true,
+                'edit' => true,
+                'delete' => true
+            ],
+            'contractor' => [
+                'index' => true,
+                'store' => true,
+                'update' => true,
+                'show' => true,
                 'create' => true,
                 'edit' => true,
                 'delete' => true
@@ -100,8 +121,7 @@ $factory->define(\App\Address::class, function () use ($faker) {
         'region' => Faker\Provider\uk_UA\Address::region(),
         'city' => $faker->randomElement($city),
         'street' => "ул. Печерская",
-        'house_number' => 33,
-        'apartment' => '14'
+        'house_number' => 33
     ];
 });
 

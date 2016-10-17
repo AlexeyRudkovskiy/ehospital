@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Permissible;
 use App\Traits\RevisionsTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +16,7 @@ class Contractor extends Model
 {
 
     use RevisionsTrait;
+    use Permissible;
 
     /**
      * Разрешаем заполнять эти поля
@@ -25,7 +27,10 @@ class Contractor extends Model
         'name',
         'fullName',
         'type',
-        'edrpou'
+        'edrpou',
+        'description',
+        'phone',
+        'contractor_group_id'
     ];
 
     /**
@@ -46,6 +51,14 @@ class Contractor extends Model
     public function group()
     {
         return $this->belongsTo(ContractorGroup::class, 'contractor_group_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function addresses()
+    {
+        return $this->morphMany(Address::class, 'addressable')->orderBy('id', 'desc');
     }
 
 }

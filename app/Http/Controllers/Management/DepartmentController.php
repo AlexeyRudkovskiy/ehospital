@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Management;
 
 use App\Department;
+use App\Http\Controllers\PermissibleController;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class DepartmentController extends Controller
+class DepartmentController extends PermissibleController
 {
+
+    protected $model = Department::class;
+
     /**
      * Display a listing of the resource.
      *

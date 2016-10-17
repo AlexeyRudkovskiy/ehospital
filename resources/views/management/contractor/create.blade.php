@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    {!! Form::model($classification, ['route' => ['atcClassification.store'], 'method' => 'post', 'class' => "form-horizontal"]) !!}
-    @include('management.atcClassification.form')
+    {!! Form::model($contractor, ['route' => ['contractor.store'], 'method' => 'post', 'class' => "form form-compact"]) !!}
+    @include('management.contractor.form')
     {!! Form::close() !!}
 @stop

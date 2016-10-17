@@ -2,19 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Department;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DepartmentRequest extends FormRequest
+class DepartmentRequest extends PermissibleRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
+
+    protected $model = Department::class;
 
     /**
      * Get the validation rules that apply to the request.
@@ -34,4 +28,5 @@ class DepartmentRequest extends FormRequest
             'male_beds_amount' => 'required'
         ];
     }
+
 }

@@ -10,7 +10,7 @@
             <th>Тип</th>
             <th width="150">ЄДРПОУ</th>
             <th width="150" align="right" style="text-align: right;">
-                {{ link_to(route('atcClassification.create'), 'создать', ['class' => 'btn btn-default']) }}
+                {{ link_to(route('contractor.create'), 'создать', ['class' => 'btn btn-default']) }}
             </th>
         </tr>
         </thead>

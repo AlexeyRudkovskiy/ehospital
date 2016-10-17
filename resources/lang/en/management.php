@@ -36,7 +36,8 @@ return [
             'title' => 'Пользователи'
         ],
         'contractor' => [
-            'title' => 'Контрагенты'
+            'title' => 'Контрагенты',
+            'show' => 'Просмотр контрагента'
         ],
         'department' => [
             'title' => 'Отделения'
@@ -110,6 +111,24 @@ return [
 
         'atcClassification' => [
             'noParentCategory' => 'Подкатегория'
+        ],
+
+        'contractor' => [
+            'edrpou' => "ЄДРПОУ",
+            'name' => "Название",
+            'fullName' => 'Полное название',
+            'type' => 'Тип',
+            'phone' => 'Номер телефона',
+            'description' => 'Описание',
+            'addAddress' => 'Добавить адрес',
+
+            'info' => 'Базовая информация',
+            'addresses' => 'Адреса',
+            'documents' => 'Документы',
+
+            'addressPopup' => [
+                'header' => 'Добавление адреса'
+            ]
         ]
 
     ],

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Permissible;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Department extends Model
 {
+
+    use Permissible;
 
     protected $fillable = [
         'name',

@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 class ContractorController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -29,62 +30,88 @@ class ContractorController extends Controller
      */
     public function create()
     {
-        //
+        return view('management.contractor.create')
+            ->with('contractor', new Contractor());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Requests\ContractorRequest|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\ContractorRequest $request)
     {
-        //
+        $data = $request->only($request->fields);
+        $contractor = Contractor::create($data);
+
+        session()->flash('message', json_encode([
+            'text' => trans('management.notification.contractor.created'),
+            'type' => 'notification-default'
+        ]));
+
+        return redirect()->route('contractor.show', $contractor->id);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Contractor   $contractor
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Contractor $contractor)
     {
-        //
+        return view('management.contractor.show')
+            ->with('contractor', $contractor);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Contractor  $contractor
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Contractor $contractor)
     {
-        //
+        return view('management.contractor.edit')
+            ->with('contractor', $contractor);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param Requests\ContractorRequest|Request $request
+     * @param  Contractor $contractor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\ContractorRequest $request, Contractor  $contractor)
     {
-        //
+        $data = $request->only($request->fields);
+        $contractor->update($data);
+
+        session()->flash('message', json_encode([
+            'text' => trans('management.notification.contractor.modified'),
+            'type' => 'notification-default'
+        ]));
+
+        return redirect()->route('contractor.show', $contractor->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Contractor  $contractor
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Contractor  $contractor)
     {
         //
     }
+
+    public function getAddAddress(Contractor $contractor)
+    {
+        return view('management.contractor.address.create')
+            ->with('contractor', $contractor);
+    }
+
 }

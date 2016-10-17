@@ -78,11 +78,11 @@
 
     <notifications-list></notifications-list>
 
-    @if ( config('app.debug') && isset($current) ? in_array($current->email, ['test@test.test']) : false )
-        <script type="text/javascript">
-            document.write('<script src="{{ url('/') }}:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')
-        </script>
-    @endif
+    {{--@if ( config('app.debug') && isset($current) ? in_array($current->email, ['test@test.test']) : false )--}}
+        {{--<script type="text/javascript">--}}
+            {{--document.write('<script src="{{ url('/') }}:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')--}}
+        {{--</script>--}}
+    {{--@endif--}}
 
     <script>
         window.page = "{{ request()->route()->getName() }}";

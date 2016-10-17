@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Management;
 
+use App\Http\Controllers\PermissibleController;
 use App\Organization;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class OrganizationController extends Controller
+class OrganizationController extends PermissibleController
 {
+    protected $model = Organization::class;
+
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +20,7 @@ class OrganizationController extends Controller
      */
     public function index()
     {
+        if (!policy()->dispatch(new Organization(), 'index')) { abort(403); }
         $paginated = Organization::orderBy('id', 'desc')->paginate(config('eh.pagination.limit'));
         return view('management.organization.index')
             ->with('organizations', $paginated);

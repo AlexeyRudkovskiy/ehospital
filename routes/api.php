@@ -44,5 +44,7 @@ Route::group([
         return auth()->user();
     });
 
+    require_once 'api/contractors.php';
+
 });
 
