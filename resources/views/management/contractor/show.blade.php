@@ -8,7 +8,8 @@
         <a href="javascript:" data-target=".tab-content-documents">@lang('management.label.contractor.documents')</a>
 
         <div class="right">
-            <a href="javascript:" class="mi-btn" id="add_address">add_location</a>
+            <a href="javascript:" class="mi-btn" id="add_address" data-contractor-id="{{ $contractor->id }}">add_location</a>
+            <a href="javascript:" class="mi-btn" id="add_agreement" data-contractor-id="{{ $contractor->id }}">note_add</a>
         </div>
     </nav>
 
@@ -54,12 +55,12 @@
         </div>
         <div class="tab-content tab-content-addresses">
 
-            <div class="card">
-                Test
-            </div>
+            <addresses-list></addresses-list>
 
         </div>
         <div class="tab-content tab-content-documents">
+
+            <agreements-list></agreements-list>
 
         </div>
     </div>
@@ -67,6 +68,6 @@
 
 @push('scripts')
 <script>
-    window.contractor = JSON.parse('{!! $contractor->toJson() !!}');
+    window.contractor = JSON.parse('{!! str_replace('\\', '\\\\', $contractor->toJson()) !!}');
 </script>
 @endpush

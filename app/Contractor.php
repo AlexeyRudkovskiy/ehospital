@@ -33,6 +33,11 @@ class Contractor extends Model
         'contractor_group_id'
     ];
 
+    protected $with = [
+        'addresses',
+        'agreements'
+    ];
+
     /**
      * Комментарии записи
      *
@@ -40,7 +45,7 @@ class Contractor extends Model
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable')->orderBy('id', 'desc');
     }
 
     /**
@@ -50,7 +55,7 @@ class Contractor extends Model
      */
     public function group()
     {
-        return $this->belongsTo(ContractorGroup::class, 'contractor_group_id');
+        return $this->belongsTo(ContractorGroup::class, 'contractor_group_id')->orderBy('id', 'desc');
     }
 
     /**
@@ -58,7 +63,14 @@ class Contractor extends Model
      */
     public function addresses()
     {
-        return $this->morphMany(Address::class, 'addressable')->orderBy('id', 'desc');
+        return $this->morphMany(Address::class, 'addressable')->orderBy('id', 'desc')->orderBy('id', 'desc');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function agreements () {
+        return $this->morphMany(Agreement::class, 'agreementable')->orderBy('id', 'desc');
     }
 
 }

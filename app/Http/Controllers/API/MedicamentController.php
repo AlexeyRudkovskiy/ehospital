@@ -13,6 +13,11 @@ use App\Http\Controllers\Controller;
 class MedicamentController extends Controller
 {
 
+    public function getList()
+    {
+        return Medicament::orderBy('name', 'asc')->get();
+    }
+
     public function postIncome(Medicament $medicament, Request $request)
     {
         if ($medicament->id != null) {

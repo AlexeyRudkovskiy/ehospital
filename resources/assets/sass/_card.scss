@@ -20,4 +20,27 @@
     margin-bottom: 0;
   }
 
+  &.address-card {
+    p {
+      margin-top:    $app-base-padding / 2;
+      margin-bottom: $app-base-padding / 2;
+
+      font-size: 16px;
+
+      color: rgba(0, 0, 0, .8);
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .actions {
+    margin-top: $app-base-padding;
+  }
+
 }

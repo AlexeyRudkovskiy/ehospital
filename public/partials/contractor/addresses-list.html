@@ -1,0 +1,8 @@
+<div class="card address-card" v-for="address in addresses">
+    <p>{{ address.country.name }}</p>
+    <p>{{ address.region }}, {{ address.city }}, {{ address.street }}, {{ address.house_number }}</p>
+
+    <div class="actions">
+        <a href="/management/contractor/{{ contractorId }}/address/{{ address.id }}/delete" class="btn btn-danger btn-small">delete</a>
+    </div>
+</div>

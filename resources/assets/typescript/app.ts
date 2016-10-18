@@ -10,6 +10,9 @@ import { Balance } from './components/medicament/balance'
 import { BatchesList } from './components/medicament/batches-list'
 import { NotificationsList } from './components/notifications/notifications-list'
 import { InputList } from './components/patient/inspection/input-list'
+import { AddressesList } from './components/contractor/addresses-list'
+import { AgreementsList } from './components/contractor/agreements-list'
+import { IncomeMedicaments } from "./components/income-medicaments/income-medicaments"
 // import { Discussions } from './components/patient/discussions'
 
 (function () {
@@ -40,6 +43,9 @@ import { InputList } from './components/patient/inspection/input-list'
             BatchesList,
             NotificationsList,
             InputList,
+            AddressesList,
+            AgreementsList,
+            IncomeMedicaments,
             // Discussions
         ]
     });

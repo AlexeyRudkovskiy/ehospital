@@ -20,29 +20,16 @@ Route::get('/user', function (Request $request) {
 Route::group([
     'namespace' => 'API'
 ], function () {
-    Route::post('medicament/{medicament}/income', [
-        'uses' => 'MedicamentController@postIncome',
-        'as' => 'api.medicament.income.post'
-    ]);
-
-    Route::post('medicament/{medicament}/outgoing', [
-        'uses' => 'MedicamentController@postOutgoing',
-        'as' => 'api.medicament.outgoing.post'
-    ]);
-
     Route::get('patient/{patient}/comments', [
         'uses' => 'PatientController@getComments',
         'as' => 'api.patient.comments'
     ]);
 
-    Route::get('medicament/{medicament}/history', [
-        'uses' => 'MedicamentController@getHistory',
-        'as' => 'api.medicament.history'
-    ]);
-
     Route::get('test', function () {
         return auth()->user();
     });
+
+    require_once 'api/medicaments.php';
 
     require_once 'api/contractors.php';
 

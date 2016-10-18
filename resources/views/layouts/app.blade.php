@@ -37,6 +37,8 @@
                 {!! $sidebar->link('medicament.index') !!}
                 {!! $sidebar->link('atcClassification.index', '999+') !!}
                 {!! $sidebar->link('patient.index') !!}
+                {!! $sidebar->link('sourceOfFinancing.index') !!}
+                {!! $sidebar->link('medicamentIncome.index') !!}
             </nav>
         </div>
         <div class="content">

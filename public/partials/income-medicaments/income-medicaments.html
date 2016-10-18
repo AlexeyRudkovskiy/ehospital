@@ -1,0 +1,15 @@
+{{ text }}
+
+<div v-for="item in income">
+    <div>
+        <select v-model="item.medicament">
+        <option v-for="medicament in medicaments" value="{{ medicament.id }}">{{ medicament.name }}</option>
+        </select>
+    </div>
+
+    {{ item.medicament }}
+</div>
+
+<div>
+    <input type="button" value="add new item" v-on:click="addIncome" class="btn" />
+</div>

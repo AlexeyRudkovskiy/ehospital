@@ -15,6 +15,8 @@ export class Service {
     }
 
     emit (name, data):void {
+        console.log(name, data);
+
         if (typeof this.listeners[name] !== "undefined") {
             for (var i = 0, length = this.listeners[name].length; i < length; i++) {
                 this.listeners[name][i].update(data);

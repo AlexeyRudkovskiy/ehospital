@@ -55,7 +55,9 @@ export class InlinePopup {
             InlinePopup.element.parentElement.removeChild(InlinePopup.element);
             //document.removeEventListener('click', this.onDocumentMouseClicked, true);
 
-            this.onCloseFunc.call(window);
+            if (this.onCloseFunc != null) {
+                this.onCloseFunc.call(window);
+            }
         }
     }
 

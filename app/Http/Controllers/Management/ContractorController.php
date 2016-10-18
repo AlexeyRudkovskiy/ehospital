@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Management;
 
+use App\Address;
 use App\Contractor;
 use Illuminate\Http\Request;
 
@@ -111,6 +112,24 @@ class ContractorController extends Controller
     public function getAddAddress(Contractor $contractor)
     {
         return view('management.contractor.address.create')
+            ->with('contractor', $contractor);
+    }
+
+    public function deleteAddress(Contractor $contractor, Address $address)
+    {
+        $address->delete();
+
+        session()->flash('message', json_encode([
+            'text' => trans('management.notification.contractor.address.deleted'),
+            'type' => 'notification-default'
+        ]));
+
+        return back();
+    }
+
+    public function getAddAgreement(Contractor $contractor)
+    {
+        return view('management.contractor.agreement.create')
             ->with('contractor', $contractor);
     }
 

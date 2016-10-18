@@ -20,7 +20,16 @@ class Address extends Model
      * @var array
      */
     protected $fillable = [
-        'country', 'state', 'province', 'street', 'house'
+        'country_id',
+        'region',
+        'city',
+        'street',
+        'house_number',
+        'apartment'
+    ];
+
+    protected $with = [
+        'country'
     ];
 
     /**
@@ -31,6 +40,11 @@ class Address extends Model
     public function addressable()
     {
         return $this->morphTo();
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
     }
 
 }
