@@ -1,14 +1,17 @@
-{{ text }}
-
-<div v-for="item in income">
-    <div>
-        <select v-model="item.medicament">
-        <option v-for="medicament in medicaments" value="{{ medicament.id }}">{{ medicament.name }}</option>
-        </select>
-    </div>
-
-    {{ item.medicament }}
-</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Medicament</th>
+        <th width="100">amount</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr v-for="item in income">
+            <td>{{ item.medicament }}</td>
+            <td>{{ item.amount }}</td>
+        </tr>
+    </tbody>
+</table>
 
 <div>
     <input type="button" value="add new item" v-on:click="addIncome" class="btn" />
