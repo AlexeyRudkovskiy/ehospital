@@ -87,12 +87,14 @@
                             <div class="diff-name">
                                 <span>{{ $key }}</span>
                             </div>
+                            <?php try { ?>
                             <div class="diff-from">
                                 <span>{!! $diff['from'] !!}</span>
                             </div>
                             <div class="diff-to">
                                 <span>{{ $diff['to'] }}</span>
                             </div>
+                            <?php } catch (\Exception $e) { dd($e, $revision->getDiff()); } ?>
                         </div>
                         @endforeach
                     </div>

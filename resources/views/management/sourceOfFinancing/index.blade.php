@@ -14,7 +14,7 @@
         @foreach($items as $item)
             <tr>
                 <td>{{ $item->name }}</td>
-                <td align="right" style="text-align: right;">
+                <td align="right" style="text-align: right;" class="no-paddings">
                 <!--<a href="{{ route('sourceOfFinancing.edit', $item->id) }}" class="mi-btn mi-btn-small mi-round mi-background">edit</a>
                     -->{!! Form::open(['route' => ['sourceOfFinancing.destroy', $item->id], 'method' => 'delete', 'style' => 'display: inline-block;']) !!}<a href="javascript:" class="mi-btn mi-btn-small mi-btn-danger mi-round mi-background" onclick="this.parentElement.submit()">delete</a>{!! Form::close() !!}
                 </td>

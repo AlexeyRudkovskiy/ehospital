@@ -4,10 +4,9 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th width="75">id</th>
-            <th width="200">Название</th>
+            <th>Название</th>
             <th width="200">Полное название</th>
-            <th>Тип</th>
+            <th width="200">Тип</th>
             <th width="150">ЄДРПОУ</th>
             <th width="150" align="right" style="text-align: right;">
                 {{ link_to(route('contractor.create'), 'создать', ['class' => 'btn btn-default']) }}
@@ -17,8 +16,7 @@
         <tbody>
         @foreach($contractors as $contractor)
             <tr>
-                <td>{{ $contractor->id }}</td>
-                <td>{{ $contractor->name }}</td>
+                <td><a href="{{ route('contractor.show', $contractor->id) }}">{{ $contractor->name }}</a></td>
                 <td>
                     {{ $contractor->fullName }}
                 </td>

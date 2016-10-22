@@ -13,8 +13,8 @@
                 <div class="header underline">
                     <h3>{{ $user->fullName() }}</h3>
                     <nav class="links">
-                        <a href="javascript:">edit</a><!--
-                        --><a href="javascript:" class="danger">delete</a>
+                        <a href="{{ route('user.edit', $user->id) }}">@lang('management.global.edit')</a><!--
+                        --><a href="javascript:" class="danger">@lang('management.global.delete')</a>
                     </nav>
                 </div>
                 <table class="table table-striped-on-hover">

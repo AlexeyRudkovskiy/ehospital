@@ -92,7 +92,7 @@ class Revision extends Model
         $targetObject = new $this->revisionable_type;
         $traits = class_uses($targetObject);
 
-        $diff['targetObject'] = $this->revisionable_type;
+//        $diff['targetObject'] = $this->revisionable_type;
 
         foreach ($from as $key => $val) {
             $diff[$key] = [
