@@ -29,7 +29,7 @@ Route::group([
         return auth()->user();
     });
 
-    require_once 'api/medicaments.php';
+    require_once 'api/nomenclatures.php';
 
     require_once 'api/contractors.php';
 

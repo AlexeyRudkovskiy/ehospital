@@ -47,34 +47,34 @@ class Unit extends Model
     /**
      * Медикаменты, которые использую эту единицу измерений(basic_unit_id)
      *
-     * @see \App\Medicament
+     * @see \App\Nomenclature
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function basicMedicaments()
+    public function basicNomenclatures()
     {
-        return $this->hasMany(Medicament::class, 'basic_unit_id');
+        return $this->hasMany(Nomenclature::class, 'basic_unit_id');
     }
 
     /**
      * Медикаменты, которые использую эту единицу измерений(base_unit_id)
      *
-     * @see \App\Medicament
+     * @see \App\Nomenclature
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function baseMedicaments()
+    public function baseNomenclatures()
     {
-        return $this->hasMany(Medicament::class, 'base_unit_id');
+        return $this->hasMany(Nomenclature::class, 'base_unit_id');
     }
 
     /**
      * Записи из истории медикаметов, которые имеют эту единицу измерения
      *
-     * @see \App\MedicamentHistory
+     * @see \App\NomenclatureHistory
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function medicamentHistories()
+    public function nomenclatureHistories()
     {
-        return $this->hasMany(MedicamentHistory::class);
+        return $this->hasMany(NomenclatureHistory::class);
     }
 
     /**

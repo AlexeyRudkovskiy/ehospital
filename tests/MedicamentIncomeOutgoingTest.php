@@ -11,7 +11,7 @@ class MedicamentIncomeOutgoingTest extends TestCase
     {
         auth()->loginUsingId(1);
 
-        $medicament = \App\Medicament::find(1);
+        $medicament = \App\Nomenclature::find(1);
         $batch = $medicament->batches->first();
 
         $amount = rand(100, 500);

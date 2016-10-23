@@ -12,6 +12,6 @@ Route::resource('sourceOfFinancing', 'SourceOfFinancingController');
 require_once "contractors.php";
 
 require_once "patients.php";
-require_once "medicaments.php";
+require_once "nomenclatures.php";
 
-require_once "medicamentIncome.php";
+require_once "nomenclatureIncome.php";

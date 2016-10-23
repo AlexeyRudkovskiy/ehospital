@@ -28,9 +28,9 @@ class CalendarDay extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function medicaments()
+    public function nomenclatures()
     {
-        return $this->belongsToMany(Medicament::class);
+        return $this->belongsToMany(Nomenclature::class);
     }
 
     /**

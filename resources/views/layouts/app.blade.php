@@ -1,4 +1,6 @@
 @inject('sidebar', 'App\Services\LayoutSidebarService')
+@inject('content', 'App\Services\LayoutContentService')
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,19 +31,20 @@
         <div class="sidebar">
             <nav>
                 <a href="javascript:" class="force-hover">EHospital</a>
-                {!! $sidebar->link('organization.index') !!}
-                {!! $sidebar->link('user.index') !!}
-                {!! $sidebar->link('contractor.index') !!}
-                {!! $sidebar->link('department.index') !!}
-                {!! $sidebar->link('manufacturer.index') !!}
-                {!! $sidebar->link('medicament.index') !!}
-                {!! $sidebar->link('atcClassification.index', '999+') !!}
-                {!! $sidebar->link('patient.index') !!}
-                {!! $sidebar->link('sourceOfFinancing.index') !!}
-                {!! $sidebar->link('medicamentIncome.index') !!}
+                {!! $sidebar->make(auth()->user()->permission) !!}
+                {{--{!! $sidebar->link('organization.index') !!}--}}
+                {{--{!! $sidebar->link('user.index') !!}--}}
+                {{--{!! $sidebar->link('contractor.index') !!}--}}
+                {{--{!! $sidebar->link('department.index') !!}--}}
+                {{--{!! $sidebar->link('manufacturer.index') !!}--}}
+                {{--{!! $sidebar->link('nomenclature.index') !!}--}}
+                {{--{!! $sidebar->link('atcClassification.index', '999+') !!}--}}
+                {{--{!! $sidebar->link('patient.index') !!}--}}
+                {{--{!! $sidebar->link('sourceOfFinancing.index') !!}--}}
+                {{--{!! $sidebar->link('nomenclatureIncome.index') !!}--}}
             </nav>
         </div>
-        <div class="content">
+        <div class="{{ $content->getContentClasses(get_defined_vars()) }}">
 
             <header class="header">
                 <nav>
@@ -52,24 +55,26 @@
                 </nav>
             </header>
 
-            <div class="paddings">
+            <div class="{{ $content->getContentWrapperClasses(get_defined_vars()) }}">
 
-                <div class="breadcrumbs">
-                    <nav>
-                        <div class="breadcrumbs-links">
-                            @foreach($breadcrumbs as $breadcrumb)
-                            <a href="javascript:" class="item">{{ trans($breadcrumb) }}</a>
-                            @endforeach
-                        </div>
-                        <div class="actions">
-                            @stack('breadcrumbs-right')
-                        </div>
-                    </nav>
-                </div>
+                {{--<div class="breadcrumbs">--}}
+                    {{--<nav>--}}
+                        {{--<div class="breadcrumbs-links">--}}
+                            {{--@foreach($breadcrumbs as $breadcrumb)--}}
+                            {{--<a href="javascript:" class="item">{{ trans($breadcrumb) }}</a>--}}
+                            {{--@endforeach--}}
+                        {{--</div>--}}
+                        {{--<div class="actions">--}}
+                            {{--@stack('breadcrumbs-right')--}}
+                        {{--</div>--}}
+                    {{--</nav>--}}
+                {{--</div>--}}
 
-                <div class="clear"></div>
+                {{--<div class="clear"></div>--}}
 
-                <div id="page-content">
+                @php($pageContentClasses = $content->getPageContentClasses(get_defined_vars()))
+
+                <div id="page-content" @if(!empty($pageContentClasses)) class="{{ $pageContentClasses }}" @endif>
                     @yield('content')
                 </div>
 

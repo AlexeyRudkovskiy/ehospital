@@ -45,9 +45,9 @@ return [
         'manufacturer' => [
             'title' => 'Производители'
         ],
-        'medicament' => [
-            'title' => 'Медикаменты',
-            'show' => 'Просмотр медикамента'
+        'nomenclature' => [
+            'title' => 'Номенклатуры',
+            'show' => 'Просмотр номенклатуры'
         ],
         'atcClassification' => [
             'title' => 'АТС классификации'
@@ -58,8 +58,8 @@ return [
         'sourceOfFinancing' => [
             'title' => 'Источники финансирования'
         ],
-        'medicamentIncome' => [
-            'title' => 'Поступление медикаментов'
+        'nomenclatureIncome' => [
+            'title' => 'Поступление номенклатуры'
         ]
     ],
 
@@ -77,7 +77,7 @@ return [
             'private' => 'Физ. лицо'
         ],
 
-        'medicament' => [
+        'nomenclature' => [
             'info' => 'Общая информация',
             'revisions' => 'Изменения',
             'series' => 'Серии',
@@ -141,8 +141,8 @@ return [
 
     // Тексты уведомлений
     'notification' => [
-        'medicament' => [
-            'modified' => 'Медикамент успешно сохранён'
+        'nomenclature' => [
+            'modified' => 'Номенклатура успешно сохранён'
         ],
 
         'patient' => [

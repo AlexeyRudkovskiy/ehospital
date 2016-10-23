@@ -1,5 +1,5 @@
 import { VueComponent, Prop } from 'vue-typescript'
-import {MyService} from "../../MyService";
+import {EchoService} from "../../EchoService";
 
 @VueComponent({
     template: require('/partials/contractor/addresses-list.html!text')
@@ -15,7 +15,7 @@ export class AddressesList {
         this.addresses = (<any>window).contractor.addresses;
 
         var name2 = 'eh.management.contractor.' + (this.contractorId) + '.address.created';
-        MyService.getInstance().on(name2)
+        EchoService.getInstance().on(name2)
             .then(this.onAddressCreated.bind(this));
     }
 

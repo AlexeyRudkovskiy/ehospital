@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\MedicamentBatch;
+use App\NomenclatureBatch;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -21,7 +21,7 @@ class BatchChangedEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(MedicamentBatch $batch)
+    public function __construct(NomenclatureBatch $batch)
     {
         $this->batch = $batch;
     }
@@ -34,7 +34,7 @@ class BatchChangedEvent implements ShouldBroadcast
     public function broadcastOn()
     {
         return [
-            'eh.medicament.' . $this->batch->medicament->id . '.batch.created.' . $this->batch->id
+            'eh.nomenclature.' . $this->batch->nomenclature->id . '.batch.created.' . $this->batch->id
         ];
     }
 }

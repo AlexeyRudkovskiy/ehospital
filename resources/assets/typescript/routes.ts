@@ -1,4 +1,4 @@
-import { MedicamentShow } from './controllers/medicament-show'
+import { NomeclatureShow } from './controllers/nomenclature-show'
 import { ContractorShow } from './controllers/contractor-show'
 
 export function router () {
@@ -6,7 +6,7 @@ export function router () {
         {
             prefix: 'management',
             actions: {
-                'medicament.show': MedicamentShow,
+                'nomenclature.show': NomeclatureShow,
                 'contractor.show': ContractorShow
             }
         }

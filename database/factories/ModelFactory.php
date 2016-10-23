@@ -60,6 +60,14 @@ $factory->define(\App\Permission::class, function () use ($faker) {
                 'edit' => true,
                 'delete' => true
             ]
+        ]),
+        'sidebar' => json_encode([
+            [
+                'name' => "Номенклатура",
+                'items' => [
+                    [ 'path' => "nomenclature.index" ]
+                ]
+            ]
         ])
     ];
 });
@@ -71,7 +79,7 @@ $factory->define(\App\Organization::class, function () use ($faker) {
     ];
 });
 
-$factory->define(\App\Medicament::class, function () use ($faker) {
+$factory->define(\App\Nomenclature::class, function () use ($faker) {
     return [
         'name' => $faker->words(6, true)
     ];

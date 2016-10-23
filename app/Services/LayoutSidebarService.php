@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Permission;
 use Illuminate\View\View;
 
 class LayoutSidebarService {
@@ -29,6 +30,22 @@ class LayoutSidebarService {
             ->with('badge', $badge)
             ->with('link', $link)
             ->with('active', $this->current == $controller);
+    }
+
+    /**
+     * @param Permission $permission
+     *
+     * @return string
+     */
+    public function make(Permission $permission)
+    {
+        $schema = $permission->sidebar;
+        $sidebar = '';
+        foreach ($schema as $item) {
+            $sidebar .= view('layouts.sidebar.section', $item)
+                ->with('sidebar', $this);
+        }
+        return $sidebar;
     }
 
 }

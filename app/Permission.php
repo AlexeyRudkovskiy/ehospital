@@ -18,7 +18,7 @@ class Permission extends Model
      *
      * @var array
      */
-    protected $fillable = [ 'name', 'map' ];
+    protected $fillable = [ 'name', 'map', 'sidebar' ];
 
     /**
      * Преобразуем нужные поля к нужным типам
@@ -26,7 +26,8 @@ class Permission extends Model
      * @var array
      */
     protected $casts = [
-        'map' => 'array'
+        'map' => 'array',
+        'sidebar' => 'array'
     ];
 
     /**

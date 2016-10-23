@@ -1,6 +1,6 @@
 import { VueComponent, Prop } from 'vue-typescript'
 import { Notification } from './notification'
-import {MyService} from "../../MyService";
+import {EchoService} from "../../EchoService";
 
 @VueComponent({
     template: require('/partials/notifications.html!text')
@@ -10,7 +10,7 @@ export class NotificationsList {
     @Prop notifications:Notification[] = [];
 
     ready():void {
-        MyService.getInstance().on('eh.notification.' + ((<any>window)).uid).then(this.onNewNotification);
+        EchoService.getInstance().on('eh.notification.' + ((<any>window)).uid).then(this.onNewNotification);
 
         if (typeof (<any>window).message !== "undefined") {
             var message = (<any>window).message;

@@ -25,6 +25,7 @@
 @import "tables";
 @import "forms";
 @import "tabs";
+@import "tabs_sidebar";
 @import "pagination";
 @import "card";
 
@@ -38,7 +39,7 @@
 @import "login";
 
 // Pages:
-@import "pages/medicament";
+@import "pages/nomenclature";
 @import "pages/user";
 @import "pages/patient";
 

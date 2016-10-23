@@ -1,6 +1,6 @@
 import {InlinePopup} from "../ui/inline-popup";
 import {AjaxForm} from "../ui/ajax-form";
-import {MyService} from "../MyService";
+import {EchoService} from "../EchoService";
 export class ContractorShow {
 
     /**
@@ -35,7 +35,7 @@ export class ContractorShow {
         popup.setOnLoadedEventListener(function (data, popupInstance:InlinePopup) {
             var ajaxForm = new AjaxForm(data.querySelector('form'), function (response) {
                 (<any>this).popupInstance.close();
-                MyService.getInstance().emit('eh.management.contractor.' + (this.instance.contractorId) + '.address.created', response.data.item);
+                EchoService.getInstance().emit('eh.management.contractor.' + (this.instance.contractorId) + '.address.created', response.data.item);
             }.bind({
                 popupInstance: popupInstance,
                 instance: this
@@ -53,7 +53,7 @@ export class ContractorShow {
         popup.setOnLoadedEventListener(function (data, popupInstance:InlinePopup) {
             var ajaxForm = new AjaxForm(data.querySelector('form'), function (response) {
                 (<any>this).popupInstance.close();
-                MyService.getInstance().emit('eh.management.contractor.' + (this.instance.contractorId) + '.agreement.created', response.data.item);
+                EchoService.getInstance().emit('eh.management.contractor.' + (this.instance.contractorId) + '.agreement.created', response.data.item);
             }.bind({
                 popupInstance: popupInstance,
                 instance: this

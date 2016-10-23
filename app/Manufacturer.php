@@ -28,12 +28,12 @@ class Manufacturer extends Model
     /**
      * Медикаменты, которые производит этот производитель
      *
-     * @see \App\Medicament
+     * @see \App\Nomenclature
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function medicaments()
+    public function nomenclatures()
     {
-        return $this->hasMany(Medicament::class);
+        return $this->hasMany(Nomenclature::class);
     }
 
     /**

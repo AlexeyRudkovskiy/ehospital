@@ -1,26 +1,23 @@
 /// <references path="../../typings/index.d.ts" />
 
+import { Application } from './Application';
 import * as Vue from 'vue'
 import { router } from './routes'
 import { get, set } from './helpers'
 import { tabs } from './tabs'
 import { initDiffs } from './diffs'
 
-import { Balance } from './components/medicament/balance'
-import { BatchesList } from './components/medicament/batches-list'
+import { Balance } from './components/nomenclature/balance'
+import { BatchesList } from './components/nomenclature/batches-list'
 import { NotificationsList } from './components/notifications/notifications-list'
 import { InputList } from './components/patient/inspection/input-list'
 import { AddressesList } from './components/contractor/addresses-list'
 import { AgreementsList } from './components/contractor/agreements-list'
-import { IncomeMedicaments } from "./components/income-medicaments/income-medicaments"
+import { IncomeNomenclatures } from "./components/income-nimenclatures/income-medicaments"
 // import { Discussions } from './components/patient/discussions'
 
-(function () {
-
+function executeRoute() {
     var routes = router();
-
-    tabs();
-    initDiffs();
 
     var page = get(window, 'page');
     var prefix = get(window, 'prefix');
@@ -35,6 +32,32 @@ import { IncomeMedicaments } from "./components/income-medicaments/income-medica
             }
         }
     }
+}
+
+function resizePageContent () {
+    var pageContent:any = document.querySelector('#page-content');
+    var pageHeader:any = document.querySelector('.content header.header');
+    pageContent.style.height = (window.innerHeight - pageHeader.offsetHeight) + "px";
+}
+
+(function () {
+
+    var application:Application = Application.getInstance();
+
+    application
+        .addOnLoadedEvent(tabs)
+        .addOnLoadedEvent(initDiffs)
+        .addOnLoadedEvent(executeRoute)
+        .addOnLoadedEvent(resizePageContent)
+        .addOnResizeEvent(resizePageContent);
+
+    application.emitOnLoadEvent();
+
+    window.addEventListener('resize', function () {
+        this.application.emitOnResizeEvent();
+    }.bind({
+        application: application
+    }));
 
     var app = new Vue(<any>{
         el: () => 'body',
@@ -45,7 +68,7 @@ import { IncomeMedicaments } from "./components/income-medicaments/income-medica
             InputList,
             AddressesList,
             AgreementsList,
-            IncomeMedicaments,
+            IncomeNomenclatures,
             // Discussions
         ]
     });
