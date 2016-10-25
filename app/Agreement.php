@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Agreement extends Model
 {
 
+    /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
     protected $fillable = [
         'from',
         'until',

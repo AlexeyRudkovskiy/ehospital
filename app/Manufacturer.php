@@ -17,6 +17,13 @@ class Manufacturer extends Model
     use RevisionsTrait;
 
     /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Разрешаем заполнять эти поля
      *
      * @var array

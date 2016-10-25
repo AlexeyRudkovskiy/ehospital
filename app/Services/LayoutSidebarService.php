@@ -43,8 +43,9 @@ class LayoutSidebarService {
         $sidebar = '';
         $schema = json_decode($schema);
         foreach ($schema as $item) {
-            $sidebar .= view('layouts.sidebar.section', $item)
-                ->with('sidebar', $this);
+            $sidebar .= view('layouts.sidebar.section')
+                ->with('sidebar', $this)
+                ->with('item', $item);
         }
         return $sidebar;
     }

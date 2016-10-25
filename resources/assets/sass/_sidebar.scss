@@ -6,6 +6,36 @@
 
   @include box-sizing;
 
+  .section {
+    background-color: rgba(0, 0, 0, .15);
+
+    &.active {
+      .section-header {
+        background-color: rgba(0, 0, 0, .15);
+      }
+
+      .section-items {
+        display: block;
+      }
+    }
+
+    .section-header {
+      &:hover {
+        background-color: rgba(0, 0, 0, .15);
+      }
+    }
+
+    .section-items {
+      display: none;
+
+      a {
+        &:hover, &.active {
+          background-color: rgba(0, 0, 0, .15)
+        }
+      }
+    }
+  }
+
   nav {
     a {
       padding: 17px 22px;

@@ -9,6 +9,13 @@ class ArmoredTime extends Model
 {
 
     /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Доктор, к которому относится бронь
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

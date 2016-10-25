@@ -14,6 +14,13 @@ class Unit extends Model
 {
 
     /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Разрешаем заполнять эти поля
      *
      * @var array

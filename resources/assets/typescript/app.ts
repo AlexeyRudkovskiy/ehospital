@@ -40,6 +40,20 @@ function resizePageContent () {
     pageContent.style.height = (window.innerHeight - pageHeader.offsetHeight) + "px";
 }
 
+function sidebarSections () {
+    var sidebarSections:any = document.querySelectorAll('.sidebar .section');
+    for (var i = 0; i < sidebarSections.length; i++) {
+        var header = sidebarSections[i].querySelector('.sidebar-header');
+        if (header != null) {
+            header.addEventListener('click', function () {
+                (<any>this).section.classList.toggle('active');
+            }.bind({
+                section: sidebarSections[i]
+            }));
+        }
+    }
+}
+
 (function () {
 
     var application:Application = Application.getInstance();
@@ -49,8 +63,10 @@ function resizePageContent () {
         .addOnLoadedEvent(initDiffs)
         .addOnLoadedEvent(executeRoute)
         .addOnLoadedEvent(resizePageContent)
-        .addOnResizeEvent(resizePageContent);
+        .addOnResizeEvent(resizePageContent)
+        .addOnLoadedOnceEvent(sidebarSections);
 
+    application.emitOnLoadEvent();
     application.emitOnLoadEvent();
 
     window.addEventListener('resize', function () {

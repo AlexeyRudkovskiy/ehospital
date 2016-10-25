@@ -16,6 +16,13 @@ class Department extends Model
 
     use Permissible;
 
+    /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
     protected $fillable = [
         'name',
         'department_code',

@@ -14,6 +14,13 @@ class UserPosition extends Model
 {
 
     /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Разрешаем заполнять этим поля
      *
      * @var array

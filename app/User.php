@@ -22,6 +22,13 @@ class User extends Authenticatable
     use SoftDeletes;
 
     /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Поля, которые можно заполнять с помощью User::create(), User::fill(), User::update()
      *
      * @var array

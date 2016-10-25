@@ -14,6 +14,13 @@ class NomenclatureHistory extends Model
 {
 
     /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Ращрешаем заполнять эти поля
      *
      * @var array

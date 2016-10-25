@@ -15,6 +15,13 @@ class PatientStatus extends Model
 {
 
     /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Поля, которые разрешено заполнять
      *
      * @var array

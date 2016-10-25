@@ -65,7 +65,8 @@ $factory->define(\App\Permission::class, function () use ($faker) {
             [
                 'name' => "Номенклатура",
                 'items' => [
-                    [ 'path' => "nomenclature.index" ]
+                    [ 'path' => "nomenclature.index" ],
+                    [ 'path' => "contractor.index" ]
                 ]
             ]
         ])

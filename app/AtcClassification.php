@@ -14,6 +14,13 @@ class AtcClassification extends Model
 {
 
     /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Разрешаем заполнение этих полей
      *
      * @var array

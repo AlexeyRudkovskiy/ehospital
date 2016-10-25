@@ -15,6 +15,13 @@ class UserSchedule extends Model
 {
 
     /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Формат времени для вывода на печать
      *
      * H - часы в 24-х часовом формате
