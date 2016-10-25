@@ -12,6 +12,10 @@
     &.active {
       .section-header {
         background-color: rgba(0, 0, 0, .15);
+
+        &::after {
+          transform: rotateZ(180deg);
+        }
       }
 
       .section-items {
@@ -20,8 +24,25 @@
     }
 
     .section-header {
+      outline: none;
+      position: relative;
+
+      @include user-select(none);
+
       &:hover {
         background-color: rgba(0, 0, 0, .15);
+      }
+
+      &::after {
+        content: "keyboard_arrow_down";
+        font-family: "Material Icons", sans-serif;
+        padding: $app-sidebar-section-icon-padding;
+        position: absolute;
+        font-size: $app-sidebar-section-icon-size;
+        top:  0;
+        right: 0;
+        color: $color-white;
+        transition: 0.15s transform;
       }
     }
 

@@ -43,7 +43,7 @@ function resizePageContent () {
 function sidebarSections () {
     var sidebarSections:any = document.querySelectorAll('.sidebar .section');
     for (var i = 0; i < sidebarSections.length; i++) {
-        var header = sidebarSections[i].querySelector('.sidebar-header');
+        var header = sidebarSections[i].querySelector('.section-header');
         if (header != null) {
             header.addEventListener('click', function () {
                 (<any>this).section.classList.toggle('active');

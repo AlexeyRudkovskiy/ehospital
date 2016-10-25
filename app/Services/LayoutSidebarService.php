@@ -41,7 +41,9 @@ class LayoutSidebarService {
     {
         $schema = $permission->sidebar;
         $sidebar = '';
-        $schema = json_decode($schema);
+        if (gettype($schema) == 'string') {
+            $schema = json_decode($schema);
+        }
         foreach ($schema as $item) {
             $sidebar .= view('layouts.sidebar.section')
                 ->with('sidebar', $this)
