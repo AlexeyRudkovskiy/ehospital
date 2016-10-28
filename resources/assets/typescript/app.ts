@@ -46,9 +46,13 @@ function sidebarSections () {
         var header = sidebarSections[i].querySelector('.section-header');
         if (header != null) {
             header.addEventListener('click', function () {
+                for (var i = 0; i < (<any>this).sections.length; i++) {
+                    (<any>this).sections[i].classList.remove('active');
+                }
                 (<any>this).section.classList.toggle('active');
             }.bind({
-                section: sidebarSections[i]
+                section: sidebarSections[i],
+                sections: sidebarSections
             }));
         }
     }
@@ -66,7 +70,6 @@ function sidebarSections () {
         .addOnResizeEvent(resizePageContent)
         .addOnLoadedOnceEvent(sidebarSections);
 
-    application.emitOnLoadEvent();
     application.emitOnLoadEvent();
 
     window.addEventListener('resize', function () {

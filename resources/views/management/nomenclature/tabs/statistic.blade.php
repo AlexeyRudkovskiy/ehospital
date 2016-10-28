@@ -1,1 +1,1 @@
-<balance :balance="{{ $nomenclature->balance() }}" :medicament-id="{{ $nomenclature->id }}"></balance>
+<balance :balance="{{ $nomenclature->balance() }}" :nomenclature-id="{{ $nomenclature->id }}"></balance>

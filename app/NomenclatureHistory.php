@@ -20,6 +20,10 @@ class NomenclatureHistory extends Model
      */
     public $timestamps = false;
 
+    public $dates = [
+        self::CREATED_AT
+    ];
+
     /**
      * Ращрешаем заполнять эти поля
      *

@@ -1,4 +1,4 @@
-import { NomeclatureShow } from './controllers/nomenclature-show'
+import { NomenclatureShow } from './controllers/nomenclature-show'
 import { ContractorShow } from './controllers/contractor-show'
 
 export function router () {
@@ -6,7 +6,7 @@ export function router () {
         {
             prefix: 'management',
             actions: {
-                'nomenclature.show': NomeclatureShow,
+                'nomenclature.show': NomenclatureShow,
                 'contractor.show': ContractorShow
             }
         }

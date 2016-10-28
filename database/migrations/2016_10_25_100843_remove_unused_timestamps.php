@@ -53,10 +53,6 @@ class RemoveUnusedTimestamps extends Migration
             $table->dropTimestamps();
         });
 
-        Schema::table('cures', function (Blueprint $table) {
-            $table->dropTimestamps();
-        });
-
         Schema::table('departments', function (Blueprint $table) {
             $table->dropTimestamps();
         });
@@ -70,10 +66,6 @@ class RemoveUnusedTimestamps extends Migration
         });
 
         Schema::table('nomenclature_batches', function (Blueprint $table) {
-            $table->dropTimestamps();
-        });
-
-        Schema::table('nomenclature_histories', function (Blueprint $table) {
             $table->dropTimestamps();
         });
 
@@ -120,6 +112,9 @@ class RemoveUnusedTimestamps extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropTimestamps();
         });
+
+        DB::statement('alter table `nomenclature_histories` drop COLUMN `updated_at`');
+        DB::statement('alter table `cures` drop COLUMN `updated_at`');
     }
 
     /**
@@ -169,10 +164,6 @@ class RemoveUnusedTimestamps extends Migration
             $table->timestamps();
         });
 
-        Schema::table('cures', function (Blueprint $table) {
-            $table->timestamps();
-        });
-
         Schema::table('departments', function (Blueprint $table) {
             $table->timestamps();
         });
@@ -186,10 +177,6 @@ class RemoveUnusedTimestamps extends Migration
         });
 
         Schema::table('nomenclature_batches', function (Blueprint $table) {
-            $table->timestamps();
-        });
-
-        Schema::table('nomenclature_histories', function (Blueprint $table) {
             $table->timestamps();
         });
 
@@ -236,5 +223,8 @@ class RemoveUnusedTimestamps extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->timestamps();
         });
+
+        DB::statement('alter TABLE `nomenclature_histories` add COLUMN `updated_at` TIMESTAMP  DEFAULT CURRENT_TIMESTAMP  AFTER `created_at`');
+        DB::statement('alter TABLE `cures` add COLUMN `updated_at` TIMESTAMP  DEFAULT CURRENT_TIMESTAMP  AFTER `created_at`');
     }
 }

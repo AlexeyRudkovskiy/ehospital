@@ -2,7 +2,7 @@ import { Popup } from '../ui/popup'
 import { InlinePopup } from "../ui/inline-popup";
 import { AjaxForm } from "../ui/ajax-form";
 
-export class NomeclatureShow {
+export class NomenclatureShow {
 
     /**
      * income button

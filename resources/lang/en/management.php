@@ -53,13 +53,18 @@ return [
             'title' => 'АТС классификации'
         ],
         'patient' => [
-            'title' => 'Пациенты'
+            'title' => 'Пациенты',
+            'hospitalization' => 'Госпитализация',
+            'create' => 'Новая карточка пациента'
         ],
         'sourceOfFinancing' => [
             'title' => 'Источники финансирования'
         ],
         'nomenclatureIncome' => [
             'title' => 'Поступление номенклатуры'
+        ],
+        'permission' => [
+            'title' => 'Права доступа'
         ]
     ],
 

@@ -191,7 +191,7 @@ class Nomenclature extends Model
             'amount' => $amount,
             'status' => $status,
             'user_id' => auth()->id(),
-            'medicament_batch_id' => $batch->id ?? null
+            'nomenclature_batch_id' => $batch->id ?? null
         ];
         $createAttributes = array_merge($createAttributes, $attributes);
         $nomenclatureHistory = $this->history()->create($createAttributes);

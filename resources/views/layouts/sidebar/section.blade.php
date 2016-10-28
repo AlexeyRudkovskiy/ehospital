@@ -1,4 +1,4 @@
-<div class="section">
+<div class="section @if($item->active) active @endif">
     <a href="javascript:" class="section-header">{{ $item->name }}</a>
     <div class="items section-items">
         @foreach($item->items as $_item)

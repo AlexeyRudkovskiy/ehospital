@@ -66,7 +66,22 @@ $factory->define(\App\Permission::class, function () use ($faker) {
                 'name' => "Номенклатура",
                 'items' => [
                     [ 'path' => "nomenclature.index" ],
-                    [ 'path' => "contractor.index" ]
+                    [ 'path' => "contractor.index" ],
+                    [ 'path' => 'atcClassification.index' ],
+                    [ 'path' => 'manufacturer.index' ]
+                ]
+            ], [
+                'name' => "Пользователи",
+                'items' => [
+                    [ 'path' => "user.index" ],
+                    [ 'path' => "permission.index" ]
+                ]
+            ], [
+                'name' => "Пациенты",
+                'items' => [
+                    [ 'path' => 'patient.index' ],
+                    [ 'path' => 'patient.hospitalization' ],
+                    [ 'path' => 'patient.create' ]
                 ]
             ]
         ])

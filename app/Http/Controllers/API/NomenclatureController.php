@@ -38,6 +38,7 @@ class NomenclatureController extends Controller
             call_user_func_array([
                 $nomenclature, 'income'
             ], $data);
+            $nomenclature->historyWithoutArmored;
             $lastUpdate = $nomenclature->historyWithoutArmored->first();
             return [
                 "response" => "success",

@@ -1,5 +1,10 @@
 <?php
 
+Route::get('patient/hospitalization', [
+    'uses' => 'PatientController@getHospitalization',
+    'as' => 'patient.hospitalization'
+]);
+
 Route::get('patient/{patient}/inspection', [
     'uses' => 'PatientController@getInspection',
     'as' => 'patient.inspection'
