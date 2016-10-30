@@ -16,7 +16,7 @@
     [ 'rh_factor', '0', trans('management.label.patient.inspection.rhFactorNegative') ]
 ]) !!}
 
-{!! Form::ehTextarea('diabetes', null, null, ['class' => 'input input-textarea-small']) !!}
+{!! Form::ehTextarea('diabetes', null, $patient->inspection != null ? $patient->inspection->diabetes : null, ['class' => 'input input-textarea-small']) !!}
 
 {!! Form::ehTextarea('allergic_history', null, null, ['class' => 'input input-textarea-small']) !!}
 

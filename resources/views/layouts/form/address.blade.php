@@ -1,10 +1,11 @@
-<div class="form-group">
-    <div class="col-label">
-        <label class="label">
-            {{ $label }}
-        </label>
-    </div>
-    <div class="col-input">
-        Test
-    </div>
-</div>
+{!! Form::ehSelect('address[country]', \App\Country::pluck('name', 'id')) !!}
+
+{!! Form::ehText('address[region]') !!}
+
+{!! Form::ehText('address[city]') !!}
+
+{!! Form::ehText('address[street]') !!}
+
+{!! Form::ehText('address[house_number]') !!}
+
+{!! Form::ehText('address[apartment]') !!}

@@ -33,5 +33,9 @@ Route::group([
 
     require_once 'api/contractors.php';
 
+    require_once 'api/users.php';
+
+    require_once 'api/department.php';
+
 });
 

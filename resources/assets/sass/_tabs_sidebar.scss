@@ -34,6 +34,8 @@
           border-bottom: 0 solid transparent;
           position: relative;
 
+          padding: 17px 22px;
+
           &[data-icon] {
             &::after {
               content: attr(data-icon);
@@ -41,7 +43,7 @@
               top: 0;
               right: 0;
               font-family: "Material Icons", sans-serif;
-              padding: $app-base-padding;
+              padding: 17px 22px;
             }
           }
         }

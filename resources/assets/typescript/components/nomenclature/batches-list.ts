@@ -18,11 +18,6 @@ export class BatchesList {
         this.items.push(event.batch);
     }
 
-    @Watch('items')
-    private testFunc () {
-        console.log(arguments);
-    }
-
     private onBatchModified() {
 
     }

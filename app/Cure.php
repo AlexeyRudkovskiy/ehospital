@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,12 +14,11 @@ use Illuminate\Database\Eloquent\Model;
 class Cure extends Model
 {
 
-    /**
-     * Отключаем колонки created_at, updated_at
-     *
-     * @var bool
-     */
     public $timestamps = false;
+
+    public $dates = [
+        self::CREATED_AT
+    ];
 
     /**
      * Разрешаем заполнять эти поля
@@ -26,8 +26,12 @@ class Cure extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'department_id',
-        'patient_id'
+        'patient_id',
+        'hospitalization_date',
+        'discharge_date',
+        'cure_status_id'
     ];
 
     protected $with = [
@@ -92,6 +96,19 @@ class Cure extends Model
     public function doctors()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function getHospitalizationDateAttribute()
+    {
+        return Carbon::parse($this->attributes['hospitalization_date']);
+    }
+
+    public function getDischargeDateAttribute()
+    {
+        if ($this->attributes['discharge_date'] != null) {
+            return Carbon::parse($this->attributes['discharge_date']);
+        }
+        return null;
     }
 
 }

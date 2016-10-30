@@ -10,7 +10,9 @@ class PatientInspectionRequest extends FormRequest
     public $fields = [
         'blood_group',
         'rh_factor',
-        'blood_transfusions'
+        'blood_transfusions',
+        'diabetes',
+        'allergic_history'
     ];
 
     /**

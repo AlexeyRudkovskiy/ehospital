@@ -98,7 +98,6 @@ return [
         ],
 
         'patient' => [
-            'cures' => 'Курсы лечения',
             'card' => 'Информация о пациенте',
             'phone' => 'Телефон',
             'birthday' => 'День рождения',
@@ -107,6 +106,7 @@ return [
             'hospital_employee' => 'Работник больницы',
             'doctors' => 'Доктора',
             'noCures' => 'нет курсов лечения',
+            'hospitalization' => 'Госпитализация',
 
             'inspection' => [
                 'edit' => 'Редактировать первичный осмотр',
@@ -117,6 +117,18 @@ return [
 
                 'rhFactorPositive' => 'Позитивный',
                 'rhFactorNegative' => 'Негативный'
+            ],
+
+            'cures' => [
+                'title' => 'Курсы лечения',
+                'empty' => 'У пациента ещё нет курсов лечения'
+            ],
+
+            'cure' => [
+                'hospitalized' => 'Госпитализирован :date',
+                'doctor' => 'Лечащий врач: :doctor',
+                'discharge' => 'Выписан: :date',
+                'show' => 'Показать курс лечения'
             ]
         ],
 

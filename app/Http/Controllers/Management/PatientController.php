@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Management;
 
+use App\Cure;
+use App\CureStatus;
 use App\Inspection;
+use App\ListItem;
 use App\Patient;
 use Illuminate\Http\Request;
 
@@ -86,7 +89,7 @@ class PatientController extends Controller
     public function postInspection(Patient $patient, Requests\PatientInspectionRequest $request)
     {
         $inspection = $patient->inspection()->create($request->only($request->fields));
-        foreach ($request->get('blood_transfusions') as $item) {
+        foreach ($request->get('blood_transfusions')['new'] as $item) {
             $inspection->bloodTransfusions()->create([
                 'data' => $item,
                 'key' => 'blood_transfusion'
@@ -99,6 +102,62 @@ class PatientController extends Controller
     {
         return view('management.patient.inspection.edit')
             ->with('patient', $patient);
+    }
+
+    public function postEditInspection(Patient $patient, Requests\PatientInspectionRequest $request)
+    {
+        $patient->inspection->update($request->only($request->fields));
+
+        $bloodTransfusions = $request->get('blood_transfusions');
+
+        if (array_key_exists('edit', $bloodTransfusions)) {
+            $currentBloodTransfusions = $patient->inspection->bloodTransfusions;
+            $editedRaw = $bloodTransfusions['edit'];
+            $edited = array_keys($editedRaw);
+            $currentBloodTransfusions->reject(function ($val, $key) use ($edited) {
+                return in_array($val->id, $edited);
+            })->each(function (ListItem $listItem) {
+                $listItem->delete();
+            });
+
+            $currentBloodTransfusions->reject(function ($val, $key) use ($edited) {
+                return !in_array($val->id, $edited);
+            })->map(function (ListItem $item) use ($editedRaw) {
+                $item->data = $editedRaw[$item->id];
+                return $item;
+            })->each(function (ListItem $listItem) {
+                $listItem->save();
+            });
+        }
+
+        if (array_key_exists('new', $bloodTransfusions)) {
+            foreach ($bloodTransfusions['new'] as $item) {
+                $patient->inspection->bloodTransfusions()->create([
+                    'data' => $item,
+                    'key' => 'blood_transfusion'
+                ]);
+            }
+        }
+
+        return $request->all();
+    }
+
+    public function getHospitalization()
+    {
+
+    }
+
+    public function postHospitalization(Request $request)
+    {
+        $patient = Patient::find($request->get('patient_id'));
+        $patient->cures()->create([
+            'hospitalization_date' => $request->get('hospitalization_date'),
+            'user_id' => $request->get('doctor_select'),
+            'cure_status_id' => 1, // 1 - income, госпитализация
+            'department_id' => $request->get('department_id')
+        ]);
+
+        return redirect()->route('patient.show', $request->get('patient_id'));
     }
 
 }

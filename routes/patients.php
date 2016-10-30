@@ -5,6 +5,11 @@ Route::get('patient/hospitalization', [
     'as' => 'patient.hospitalization'
 ]);
 
+Route::post('patient/hospitalization', [
+    'uses' => 'PatientController@postHospitalization',
+    'as' => 'patient.hospitalization.post'
+]);
+
 Route::get('patient/{patient}/inspection', [
     'uses' => 'PatientController@getInspection',
     'as' => 'patient.inspection'

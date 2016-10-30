@@ -1,0 +1,27 @@
+@import "mixins";
+@import "variables";
+
+.alert {
+  padding: $app-base-padding;
+
+  border: 1px solid lighten($color-gray-darken, 70%);
+  border-radius: 3px;
+
+  color: $color-gray-darken;
+
+  @include box-sizing;
+
+  &.alert-danger {
+    background-color: $color-red;
+    color: $color-white;
+    font-weight: bold;
+    border-color: $color-red;
+  }
+
+  &.alert-info {
+    background-color: $color-blue;
+    border-color: $color-blue;
+    color: $color-white;
+    font-weight: bold;
+  }
+}

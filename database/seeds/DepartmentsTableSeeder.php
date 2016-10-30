@@ -38,5 +38,11 @@ class DepartmentsTableSeeder extends Seeder
             $department->save();
             $department->leader()->associate(\App\User::inRandomOrder()->get()->first());
         });
+
+        \App\User::all()->each(function (\App\User $user) {
+            $user->department_id = 1;
+            $user->save();
+        });
+
     }
 }
