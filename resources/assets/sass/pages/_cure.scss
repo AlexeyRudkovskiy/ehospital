@@ -1,0 +1,21 @@
+@import "../mixins";
+@import "../variables";
+
+.cure-page {
+  .comments {
+    .card {
+      p {
+        margin-top: $app-base-padding;
+        margin-bottom: $app-base-padding;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

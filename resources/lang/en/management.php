@@ -152,6 +152,10 @@ return [
             'addressPopup' => [
                 'header' => 'Добавление адреса'
             ]
+        ],
+
+        'cure' => [
+            'comments' => 'Комментарии'
         ]
 
     ],

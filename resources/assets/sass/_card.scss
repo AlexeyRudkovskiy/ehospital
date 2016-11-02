@@ -20,22 +20,28 @@
     margin-bottom: 0;
   }
 
+  &.card-full-width {
+    width: 100%;
+  }
+
   &.address-card {
     p {
-      margin-top:    $app-base-padding / 2;
-      margin-bottom: $app-base-padding / 2;
-
       font-size: 16px;
+    }
+  }
 
-      color: rgba(0, 0, 0, .8);
+  p {
+    margin-top:    $app-base-padding / 2;
+    margin-bottom: $app-base-padding / 2;
 
-      &:first-child {
-        margin-top: 0;
-      }
+    color: $color-gray-darken;
 
-      &:last-child {
-        margin-bottom: 0;
-      }
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 

@@ -21,7 +21,7 @@ use Illuminate\Support\Collection;
 class Patient extends Model
 {
 
-    use RevisionsTrait;
+    // use RevisionsTrait;
     use EncryptionTrait;
 
     /**

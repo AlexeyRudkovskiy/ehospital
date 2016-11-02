@@ -13,7 +13,8 @@ class CureController extends Controller
 
     public function show(Cure $cure)
     {
-        return $cure;
+        return view('management.cure.show')
+            ->with('cure', $cure);
     }
 
 }

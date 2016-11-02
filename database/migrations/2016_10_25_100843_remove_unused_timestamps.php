@@ -33,10 +33,6 @@ class RemoveUnusedTimestamps extends Migration
             $table->dropTimestamps();
         });
 
-        Schema::table('comments', function (Blueprint $table) {
-            $table->dropTimestamps();
-        });
-
         Schema::table('contractor_groups', function (Blueprint $table) {
             $table->dropTimestamps();
         });
@@ -141,10 +137,6 @@ class RemoveUnusedTimestamps extends Migration
         });
 
         Schema::table('calendar_days', function (Blueprint $table) {
-            $table->timestamps();
-        });
-
-        Schema::table('comments', function (Blueprint $table) {
             $table->timestamps();
         });
 

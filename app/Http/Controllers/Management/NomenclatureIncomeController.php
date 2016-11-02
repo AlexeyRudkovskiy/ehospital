@@ -16,4 +16,9 @@ class NomenclatureIncomeController extends Controller
             ->with('model', new \stdClass());
     }
 
+    public function postNomenclatures(Request $request)
+    {
+        return $request->all();
+    }
+
 }

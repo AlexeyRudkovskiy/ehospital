@@ -93,16 +93,30 @@ class Cure extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function doctors()
     {
         return $this->belongsToMany(User::class);
     }
 
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * @return static
+     */
     public function getHospitalizationDateAttribute()
     {
         return Carbon::parse($this->attributes['hospitalization_date']);
     }
 
+    /**
+     * @return null|static
+     */
     public function getDischargeDateAttribute()
     {
         if ($this->attributes['discharge_date'] != null) {

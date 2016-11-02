@@ -13,7 +13,7 @@ import { NotificationsList } from './components/notifications/notifications-list
 import { InputList } from './components/patient/inspection/input-list'
 import { AddressesList } from './components/contractor/addresses-list'
 import { AgreementsList } from './components/contractor/agreements-list'
-import { IncomeNomenclatures } from "./components/income-nimenclatures/income-medicaments"
+import { IncomeNomenclatures } from "./components/income-nomenclatures/income-nomenclatures"
 // import { Discussions } from './components/patient/discussions'
 
 function executeRoute() {

@@ -1,18 +1,32 @@
-<table class="table">
-    <thead>
-    <tr>
-        <th>Medicament</th>
-        <th width="100">amount</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr v-for="item in income">
-            <td>{{ item.medicament }}</td>
-            <td>{{ item.amount }}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="card card-nomenclature" v-for="item in income">
+    <p class="nomenclature-name">{{ item.nomenclature }}</p>
+    <div class="form-group row row-fixed">
+        <div class="col-label col-3"><label class="label">test</label></div>
+        <div class="col-input col-9">
+            <input type="number" step="0.01" class="input" v-model="item.amount">
+        </div>
+    </div>
+
+    <p>{{ stringify(item.units) }}</p>
+
+    <!--<div class="form-group row row-fixed">-->
+        <!--<div class="col-label col-3">-->
+            <!--<label class="label">Storage Id</label>-->
+        <!--</div>-->
+        <!--<div class="col-input col-9">-->
+            <!--<select class="input" v-for="item.unit">-->
+                <!--<option value="-1">empty</option>-->
+                <!--<option value="{{ $index }}" v-for="unit in item.units">{{ unit.name }}</option>-->
+            <!--</select>-->
+        <!--</div>-->
+    <!--</div>-->
+
+</div>
 
 <div>
+    <select v-on:click="addIncome(item)" v-model="nomenclature">
+        <option value="-1" selected>select nomenclature</option>
+        <option value="{{ $index }}" v-for="item in nomenclatures">{{ item.name }}</option>
+    </select>
     <input type="button" value="add new item" v-on:click="addIncome" class="btn" />
 </div>

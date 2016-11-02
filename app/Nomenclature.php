@@ -52,6 +52,11 @@ class Nomenclature extends Model
         'keep_records_by_series' => 'bool'
     ];
 
+    protected $with = [
+        'baseUnit',
+        'basicUnit'
+    ];
+
     /**
      * Календарные дни, в которых есть эти медикаменты
      *

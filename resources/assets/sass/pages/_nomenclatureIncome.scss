@@ -1,0 +1,20 @@
+@import "../mixins";
+@import "../variables";
+
+.nomenclatureIncome-page {
+
+  .offset-top {
+    margin-top: $app-base-padding;
+  }
+
+  .card {
+    &.card-nomenclature {
+      width: 100%;
+      .nomenclature-name {
+        font-size: 16px;
+        color: darken($color-gray-darken, 50%);
+      }
+    }
+  }
+
+}

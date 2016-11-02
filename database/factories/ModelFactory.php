@@ -68,7 +68,8 @@ $factory->define(\App\Permission::class, function () use ($faker) {
                     [ 'path' => "nomenclature.index" ],
                     [ 'path' => "contractor.index" ],
                     [ 'path' => 'atcClassification.index' ],
-                    [ 'path' => 'manufacturer.index' ]
+                    [ 'path' => 'manufacturer.index' ],
+                    [ 'path' => 'nomenclatureIncome.index' ]
                 ]
             ], [
                 'name' => "Пользователи",
@@ -164,5 +165,13 @@ $factory->define(\App\Department::class, function () use ($faker) {
         'beds_amount_in_repair' => $totalBedsInRepair,
         'female_beds_amount' => $femaleBeds,
         'male_beds_amount' => $maleBeds,
+    ];
+});
+
+$factory->define(\App\Storage::class, function () use ($faker) {
+    static $counter = 0;
+    $counter++;
+    return [
+        'name' => 'Склад №' . $counter
     ];
 });

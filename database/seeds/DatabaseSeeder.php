@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PatientsTableSeeder::class);
 
         $this->call(SourceOfFinancingsTableSeeder::class);
+        $this->call(StoragesTableSeeder::class);
 
 //        $this->call(MedicamentsTableSeeder::class);
         \DB::statement("SET foreign_key_checks=1");

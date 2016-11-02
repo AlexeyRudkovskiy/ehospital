@@ -8,6 +8,10 @@
     align-items: baseline;
   }
 
+  & > .pull-right {
+    margin-left: auto;
+  }
+
   &.row-fixed, &.grid-fixed {
     @for $i from 1 through 12 {
       .col-#{$i} {
@@ -17,4 +21,5 @@
       }
     }
   }
+
 }
