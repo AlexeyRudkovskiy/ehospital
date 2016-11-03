@@ -54,7 +54,8 @@ class Nomenclature extends Model
 
     protected $with = [
         'baseUnit',
-        'basicUnit'
+        'basicUnit',
+        'batches'
     ];
 
     /**
