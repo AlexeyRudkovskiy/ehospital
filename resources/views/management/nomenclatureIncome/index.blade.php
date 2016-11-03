@@ -9,7 +9,16 @@
         <div class="step">
             {!! Form::ehSelect('source_of_financing_id', \App\SourceOfFinancing::pluck('name', 'id')) !!}
 
-            {!! Form::ehSelect('contractor_id', \App\Contractor::pluck('name', 'id')) !!}
+            {!! Form::ehSelect('contractor_id', \App\Contractor::pluck('name', 'id'), null, null, ['id' => 'contractor_select']) !!}
+
+            <div class="form-group hidden" id="agreement_group">
+                <div class="col-label">
+                    <label for="agreement" class="label">Agreement</label>
+                </div>
+                <div class="col-input">
+                    <select name="agreement" id="agreement_select" class="input"></select>
+                </div>
+            </div>
 
             {!! Form::ehSelect('storage_id', \App\Storage::pluck('name', 'id')) !!}
         </div>

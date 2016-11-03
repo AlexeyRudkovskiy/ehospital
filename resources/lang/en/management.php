@@ -61,7 +61,7 @@ return [
             'title' => 'Источники финансирования'
         ],
         'nomenclatureIncome' => [
-            'title' => 'Поступление номенклатуры'
+            'title' => 'Поступление товаров'
         ],
         'permission' => [
             'title' => 'Права доступа'
@@ -151,6 +151,14 @@ return [
 
             'addressPopup' => [
                 'header' => 'Добавление адреса'
+            ],
+
+            'address' => [
+                'create' => 'Создать адрес'
+            ],
+
+            'agreement' => [
+                'create' => 'Создать договор'
             ]
         ],
 

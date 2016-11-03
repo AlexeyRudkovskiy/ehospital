@@ -1,4 +1,4 @@
-<div class="card card-nomenclature" v-for="item in income" data-target="nomenclature_{{ $index }}_{{ item.nomenclatureId }}">
+<div class="card card-nomenclature" v-for="item in income" data-target="nomenclature_{{ $index }}_{{ item.nomenclature_id }}">
     <input type="hidden" v-model="item.index" value="{{ $index }}" />
     <div class="form-group form-group-static row">
         <div class="col-label col-3">
@@ -13,7 +13,7 @@
     <div class="form-group row row-fixed" v-if="item.nomenclature.keep_records_by_series == 1">
         <div class="col-label col-3"><label class="label">Batch</label></div>
         <div class="col-input col-9">
-            <select v-model="item.batch" class="input" v-on:change="calculatePrice(item)">
+            <select v-model="item.batch" class="input" v-on:change="calculatePrice(item, $index)">
                 <option value="{{ batch.id }}" v-for="batch in item.nomenclature.batches">{{ batch.expiration_date }} {{ batch.batch_number }}</option>
             </select>
         </div>
@@ -21,7 +21,7 @@
     <div class="form-group row row-fixed">
         <div class="col-label col-3"><label class="label">Amount</label></div>
         <div class="col-input col-9">
-            <input type="number" step="0.01" class="input" v-model="item.amount" v-on:change="calculatePrice(item)">
+            <input type="number" step="0.01" class="input" v-model="item.amount" v-on:change="calculatePrice(item, $index)">
         </div>
     </div>
 
@@ -39,7 +39,7 @@
     <div class="form-group form-group-static row row-fixed">
         <div class="col-label col-3"><label class="label">Batch</label></div>
         <div class="col-input col-9">
-            <input type="text" class="input" id="nomenclature_{{ $index }}_{{ item.nomenclatureId }}" disabled />
+            <input type="text" class="input" id="nomenclature_{{ $index }}_{{ item.nomenclature_id }}" disabled />
         </div>
     </div>
 
@@ -64,3 +64,5 @@
     </select>
     <input type="button" value="add new item" v-on:click="addIncome" class="btn" />
 </div>
+
+<textarea name="nomenclatures">{{ stringify(income, true) }}</textarea>

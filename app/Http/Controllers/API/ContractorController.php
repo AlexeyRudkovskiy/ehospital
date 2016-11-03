@@ -13,6 +13,15 @@ use App\Http\Controllers\Controller;
 class ContractorController extends Controller
 {
 
+    /**
+     * @param Contractor $contractor
+     * @return Contractor
+     */
+    public function show(Contractor $contractor)
+    {
+        return $contractor;
+    }
+
     public function addressStore(Contractor $contractor, Request $request)
     {
         $address = $contractor->addresses()->create($request->all());

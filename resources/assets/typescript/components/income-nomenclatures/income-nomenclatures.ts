@@ -18,9 +18,8 @@ export class IncomeNomenclatures {
         return ;
     }
 
-    calculatePrice(item): void {
+    calculatePrice(item, index:number = -1): number {
         var batch:any = null;
-        var index = -1;
         for (var i = 0; i < item.nomenclature.batches.length; i++) {
             if (item.nomenclature.batches[i].id == item.batch) {
                 batch = item.nomenclature.batches[i];
@@ -29,19 +28,13 @@ export class IncomeNomenclatures {
         }
         if (batch == null) { return; }
 
-        for (var i = 0; i < this.income.length; i++) {
-            if (this.income[i].nomenclatureId == item.nomenclatureId) {
-                index = i;
-                break;
-            }
+        var value:any = Number(item.amount) * batch.price;
+        value = value.toFixed(2);
+        if (index > -1) {
+            var target:any = document.querySelector('#nomenclature_' + index + '_' + item.nomenclature_id);
+            target.value = value;
         }
-
-        if (index < 0) {
-            return;
-        }
-
-        var target = document.querySelector('#nomenclature_' + index + '_' + item.nomenclatureId);
-        target.value = Number(item.amount) * batch.price;
+        return value;
     }
 
     ready(): void {
@@ -59,7 +52,7 @@ export class IncomeNomenclatures {
                 amount: 22.12,
                 units: targetNomenclature.units,
                 unit: -1,
-                nomenclatureId: targetNomenclature.id
+                nomenclature_id: targetNomenclature.id
             });
         }
         //var items = {
@@ -69,7 +62,16 @@ export class IncomeNomenclatures {
         //this.income.push(items);
     }
 
-    stringify(item:any):string {
+    stringify(item:any, removeLargeFieldsInNomenclatures:boolean = false):string {
+        if (removeLargeFieldsInNomenclatures) {
+            item = JSON.parse(JSON.stringify(item));
+            for (var i = 0; i < item.length; i++) {
+                item[i].price = this.calculatePrice(item[i]);
+                delete item[i].nomenclature;
+                delete item[i].units;
+                delete item[i].index;
+            }
+        }
         return JSON.stringify(item);
     }
 

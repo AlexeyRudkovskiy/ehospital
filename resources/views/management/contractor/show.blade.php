@@ -1,19 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.app', [
+    'no_content_paddings' => true,
+    'tabs_as_sidebar' => true,
+    'classes' => ['contractor-page'],
+    'content_scrollable' => false
+])
 
 @section('content')
 
-    <nav class="tabs tabs-vertical-offset" data-default=".tab-content-info">
+    <nav class="tabs" data-default=".tab-content-info">
         <a href="javascript:" data-target=".tab-content-info">@lang('management.label.contractor.info')</a>
         <a href="javascript:" data-target=".tab-content-addresses">@lang('management.label.contractor.addresses')</a>
         <a href="javascript:" data-target=".tab-content-documents">@lang('management.label.contractor.documents')</a>
 
-        <div class="right">
-            <a href="javascript:" class="mi-btn" id="add_address" data-contractor-id="{{ $contractor->id }}">add_location</a>
-            <a href="javascript:" class="mi-btn" id="add_agreement" data-contractor-id="{{ $contractor->id }}">note_add</a>
-        </div>
+        <a href="javascript:" id="add_address" data-contractor-id="{{ $contractor->id }}">@lang("management.label.contractor.address.create")</a>
+        <a href="javascript:" id="add_agreement" data-contractor-id="{{ $contractor->id }}">@lang("management.label.contractor.agreement.create")</a>
     </nav>
-
-    <div class="tab-contents">
+    <div class="tabs-contents">
         <div class="tab-content tab-content-info">
 
             <div class="info-compact">
@@ -54,14 +56,10 @@
             </div>
         </div>
         <div class="tab-content tab-content-addresses">
-
             <addresses-list></addresses-list>
-
         </div>
         <div class="tab-content tab-content-documents">
-
             <agreements-list></agreements-list>
-
         </div>
     </div>
 @endsection
