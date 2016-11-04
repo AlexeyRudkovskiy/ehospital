@@ -6,6 +6,7 @@
                 --><a href="javascript:" class="danger">@lang('management.global.delete')</a>
         </nav>
     </div>
+
     <table class="table table-striped-on-hover">
         <tr>
             <td width="200">Название для отделения</td>
@@ -19,6 +20,12 @@
             <td>Количество в упаковке</td>
             <td>{{ $nomenclature->amount_in_a_package }}</td>
         </tr>
+        @if($nomenclature->manufacturer != null)
+            <tr>
+                <td>Производитель</td>
+                <td><a href="{{ route('manufacturer.show', $nomenclature->manufacturer->id) }}">{{ $nomenclature->manufacturer->name }}</a></td>
+            </tr>
+        @endif
         <tr>
             <td>НДС</td>
             <td>{{ $nomenclature->nds }}</td>

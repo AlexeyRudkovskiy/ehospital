@@ -7,6 +7,8 @@ export class NomenclatureIncomeIndex {
 
     protected agreement_group:any = null;
 
+    protected nomenclature_income_form:any = null;
+
     protected nextStep:any;
 
     protected steps:any = [];
@@ -18,6 +20,7 @@ export class NomenclatureIncomeIndex {
         this.contractor_select = document.querySelector('#contractor_select');
         this.agreement_select = document.querySelector('#agreement_select');
         this.agreement_group = document.querySelector('#agreement_group');
+        this.nomenclature_income_form = document.querySelector('#nomenclature_income_form');
         this.nextStep.addEventListener('click', this.onNextStepClicked.bind(this));
         this.contractor_select.addEventListener('change', this.onContractorChanged.bind(this));
 
@@ -28,6 +31,7 @@ export class NomenclatureIncomeIndex {
         this.current++;
         if (this.current > this.steps.length - 1) {
             this.current = this.steps.length - 1;
+            this.nomenclature_income_form.submit();
         }
 
         for (var i = 0; i < this.steps.length; i++) {

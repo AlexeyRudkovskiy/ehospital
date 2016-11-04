@@ -37,7 +37,8 @@ class Contractor extends Model
         'edrpou',
         'description',
         'phone',
-        'contractor_group_id'
+        'contractor_group_id',
+        'group'
     ];
 
     protected $with = [
@@ -60,10 +61,10 @@ class Contractor extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function group()
-    {
-        return $this->belongsTo(ContractorGroup::class, 'contractor_group_id')->orderBy('id', 'desc');
-    }
+//    public function group()
+//    {
+//        return $this->belongsTo(ContractorGroup::class, 'contractor_group_id')->orderBy('id', 'desc');
+//    }
 
     /**
      * @return mixed

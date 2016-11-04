@@ -17,6 +17,9 @@
         <div class="info">
             {{ item.user.lastName }} {{ item.user.firstName }} {{ item.user.middleName }}
         </div>
+        <div class="info" v-if="item.nomenclature_income_id != null">
+            <a href="/management/nomenclatureIncome/{{ item.nomenclature_income_id }}">Показать поступление</a>
+        </div>
         <div class="info" v-if="item.batch != null">
             {{ item.batch.expiration_date }} {{ item.batch.batch_number }}
         </div>

@@ -54,7 +54,8 @@ class NomenclatureController extends Controller
             'base_unit_id',
             'basic_unit_id',
             'atc_classification_id',
-            'keep_records_by_series'
+            'keep_records_by_series',
+            'manufacturer_id'
         ]);
 
         $data = array_merge($data, [
@@ -111,7 +112,8 @@ class NomenclatureController extends Controller
             'base_unit_id',
             'basic_unit_id',
             'atc_classification_id',
-            'keep_records_by_series'
+            'keep_records_by_series',
+            'manufacturer_id'
         ]);
 
         if ($data['keep_records_by_series'] == '0') {

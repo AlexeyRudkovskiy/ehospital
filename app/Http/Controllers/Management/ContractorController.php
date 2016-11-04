@@ -15,13 +15,22 @@ class ContractorController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $contractors = Contractor::orderBy('id', 'desc')->paginate(config('eh.pagination.limit'));
+        $type = $request->get('type', 'provider');
+
+        $contractors = Contractor::orderBy('id', 'desc')
+            ->whereGroup($type)->paginate(config('eh.pagination.limit'));
+
+        view()->share('hasType', true);
+        view()->share('type', $type);
+
         return view('management.contractor.index')
-            ->with('contractors', $contractors);
+            ->with('contractors', $contractors)
+            ->with('type', $type);
     }
 
     /**
@@ -44,6 +53,9 @@ class ContractorController extends Controller
     public function store(Requests\ContractorRequest $request)
     {
         $data = $request->only($request->fields);
+        $data = array_merge($data, [
+            'contractor_group_id' => 1
+        ]);
         $contractor = Contractor::create($data);
 
         session()->flash('message', json_encode([

@@ -32,6 +32,10 @@ class Manufacturer extends Model
         'name'
     ];
 
+    protected $with = [
+        'nomenclatures'
+    ];
+
     /**
      * Медикаменты, которые производит этот производитель
      *

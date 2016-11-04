@@ -11,6 +11,8 @@
 
 {!! Form::ehSelect('contractor_group_id', \App\ContractorGroup::pluck('name', 'id')) !!}
 
+{!! Form::ehSelect('group', collect(['provider' => 'Provider', 'recipient' => 'Recipient'])) !!}
+
 {!! Form::ehTextarea('description', null, null, [ 'class' => 'input input-textarea-small' ]) !!}
 
 {!! Form::ehText('phone') !!}

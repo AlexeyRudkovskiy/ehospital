@@ -115,7 +115,8 @@ $factory->define(\App\Contractor::class, function () use ($faker) {
         'fullName' => $name,
         'type' => $faker->numberBetween() % 2 == 0 ? 'legal' : 'private',
         'edrpou' => $faker->numberBetween(10000000, 99999999),
-        'contractor_group_id' => 1
+        'contractor_group_id' => 1,
+        'group' => $faker->numberBetween() % 2 == 0 ? 'provider' : 'recipient'
     ];
 });
 

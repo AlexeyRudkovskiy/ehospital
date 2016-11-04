@@ -54,7 +54,7 @@ class ManufacturerController extends Controller
      */
     public function show(Manufacturer $manufacturer)
     {
-        //
+        return $manufacturer;
     }
 
     /**

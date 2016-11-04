@@ -21,7 +21,7 @@ export class IncomeNomenclatures {
     calculatePrice(item, index:number = -1): number {
         var batch:any = null;
         for (var i = 0; i < item.nomenclature.batches.length; i++) {
-            if (item.nomenclature.batches[i].id == item.batch) {
+            if (item.nomenclature.batches[i].id == item.batch_id) {
                 batch = item.nomenclature.batches[i];
                 break;
             }
@@ -51,15 +51,10 @@ export class IncomeNomenclatures {
                 nomenclature: targetNomenclature,
                 amount: 22.12,
                 units: targetNomenclature.units,
-                unit: -1,
+                unit_id: -1,
                 nomenclature_id: targetNomenclature.id
             });
         }
-        //var items = {
-        //    targetNomenclature: 'Hello world',
-        //    amount: 12.57
-        //};
-        //this.income.push(items);
     }
 
     stringify(item:any, removeLargeFieldsInNomenclatures:boolean = false):string {
@@ -67,6 +62,7 @@ export class IncomeNomenclatures {
             item = JSON.parse(JSON.stringify(item));
             for (var i = 0; i < item.length; i++) {
                 item[i].price = this.calculatePrice(item[i]);
+                item[i].keep_records_by_series = item[i].nomenclature.keep_records_by_series;
                 delete item[i].nomenclature;
                 delete item[i].units;
                 delete item[i].index;

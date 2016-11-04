@@ -17,7 +17,8 @@ class ContractorRequest extends PermissibleRequest
         'contractor_group_id',
         'edrpou',
         'description',
-        'phone'
+        'phone',
+        'group'
     ];
 
     /**
@@ -31,7 +32,8 @@ class ContractorRequest extends PermissibleRequest
             'name' => 'required',
             'fullName' => 'required',
             'type' => 'required',
-            'contractor_group_id' => 'required'
+            'contractor_group_id' => 'required',
+            'group' => 'required'
         ];
     }
 }

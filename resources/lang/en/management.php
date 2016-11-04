@@ -164,6 +164,11 @@ return [
 
         'cure' => [
             'comments' => 'Комментарии'
+        ],
+
+        'nomenclatureIncome' => [
+            'info' => 'Информация',
+            'nomenclatures' => 'Номенклатуры'
         ]
 
     ],

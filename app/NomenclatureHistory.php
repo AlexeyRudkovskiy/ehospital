@@ -33,7 +33,8 @@ class NomenclatureHistory extends Model
         'amount',
         'status',
         'user_id',
-        'nomenclature_batch_id'
+        'nomenclature_batch_id',
+        'nomenclature_income_id'
     ];
 
     protected $with = [
@@ -98,6 +99,14 @@ class NomenclatureHistory extends Model
     public function getDelta()
     {
         return $this->status == 'income' ? $this->amount : -($this->amount);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function nomenclatureIncome()
+    {
+        return $this->belongsTo(NomenclatureIncome::class);
     }
 
 }

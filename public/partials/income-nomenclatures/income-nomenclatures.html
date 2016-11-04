@@ -13,7 +13,7 @@
     <div class="form-group row row-fixed" v-if="item.nomenclature.keep_records_by_series == 1">
         <div class="col-label col-3"><label class="label">Batch</label></div>
         <div class="col-input col-9">
-            <select v-model="item.batch" class="input" v-on:change="calculatePrice(item, $index)">
+            <select v-model="item.batch_id" class="input" v-on:change="calculatePrice(item, $index)">
                 <option value="{{ batch.id }}" v-for="batch in item.nomenclature.batches">{{ batch.expiration_date }} {{ batch.batch_number }}</option>
             </select>
         </div>
@@ -30,7 +30,7 @@
             <label class="label">Unit</label>
         </div>
         <div class="col-input col-9">
-            <select v-model="item.unit" class="input">
+            <select v-model="item.unit_id" class="input">
                 <option value="{{ unit.id }}" v-for="unit in item.units">{{ unit.text }}</option>
             </select>
         </div>
@@ -43,18 +43,6 @@
         </div>
     </div>
 
-    <!--<div class="form-group row row-fixed">-->
-        <!--<div class="col-label col-3">-->
-            <!--<label class="label">Storage Id</label>-->
-        <!--</div>-->
-        <!--<div class="col-input col-9">-->
-            <!--<select class="input" v-for="item.unit">-->
-                <!--<option value="-1">empty</option>-->
-                <!--<option value="{{ $index }}" v-for="unit in item.units">{{ unit.name }}</option>-->
-            <!--</select>-->
-        <!--</div>-->
-    <!--</div>-->
-
 </div>
 
 <div>
@@ -65,4 +53,4 @@
     <input type="button" value="add new item" v-on:click="addIncome" class="btn" />
 </div>
 
-<textarea name="nomenclatures">{{ stringify(income, true) }}</textarea>
+<textarea name="nomenclatures" class="hidden">{{ stringify(income, true) }}</textarea>
