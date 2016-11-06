@@ -4,7 +4,7 @@
 
 @section('content')
 
-    {!! Form::model($model, ['class' => 'form form-compact', 'route' => ['nomenclatureIncome.nomenclatures'], 'id' => 'nomenclature_income_form']) !!}
+    {!! Form::model($model, ['class' => 'form form-compact steps', 'route' => ['nomenclatureIncome.nomenclatures'], 'id' => 'nomenclature_income_form', 'data-form' => '']) !!}
 
         <div class="step">
             {!! Form::ehSelect('source_of_financing_id', \App\SourceOfFinancing::pluck('name', 'id')) !!}
@@ -30,7 +30,7 @@
         <div class="form-footer row offset-top">
             <div class="pull-right">
                 {{--<input type="submit" value="Next step" class="btn" />--}}
-                <a href="javascript:" class="btn" id="nextStep">next step</a>
+                <a href="javascript:" class="btn next-step">next step</a>
             </div>
         </div>
 

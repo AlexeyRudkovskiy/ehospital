@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * Class CalendarDay
@@ -37,7 +39,7 @@ class CalendarDay extends Model
      */
     public function nomenclatures()
     {
-        return $this->belongsToMany(Nomenclature::class);
+        return $this->belongsToMany(Nomenclature::class)->withPivot('amount')->withPivot('unit_id');
     }
 
     /**
@@ -58,6 +60,11 @@ class CalendarDay extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function getDayAttribute ()
+    {
+        return Carbon::parse($this->attributes['day']);
     }
 
 }

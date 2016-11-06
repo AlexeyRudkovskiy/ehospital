@@ -17,4 +17,18 @@
     }
   }
 
+  .nomenclatures-list {
+    .card {
+      &.card-income {
+        .nomenclature-name {
+          margin-bottom: $app-base-padding;
+
+          a {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+
 }

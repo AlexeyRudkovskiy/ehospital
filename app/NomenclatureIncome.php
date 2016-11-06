@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class NomenclatureIncome extends Model
@@ -12,6 +13,7 @@ class NomenclatureIncome extends Model
         'contractor_id',
         'agreement_id',
         'storage_id',
+        'created_by',
         'nomenclatures'
     ];
 
@@ -43,9 +45,22 @@ class NomenclatureIncome extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    protected function storage()
+    public function storage()
     {
         return $this->belongsTo(Storage::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at']);
     }
 
     public function data()
@@ -55,6 +70,8 @@ class NomenclatureIncome extends Model
             'storage' => $this->storage->name,
             'sourceOfFinancing' => $this->sourceOfFinancing->name,
             'agreement' => $this->agreement,
+            'createdBy' => $this->createdBy,
+            'createdAt' => $this->created_at->format('d.m.Y H:i'),
             'nomenclatures' => $this->getNomenclatures()
         ];
     }
@@ -63,15 +80,16 @@ class NomenclatureIncome extends Model
         $data = [];
 
         foreach ($this->nomenclatures as $item) {
-            array_push($data, [
-                'nomenclature' => Nomenclature::where('id', $item['nomenclature_id'])->pluck('name', 'id'),
+            array_push($data, (object)[
+                'id' => $item['nomenclature_id'],
+                'name' => Nomenclature::where('id', $item['nomenclature_id'])->pluck('name', 'id')->first(),
                 'amount' => (int)($item['amount']),
                 'price' => (float)($item['price']),
                 'unit' => Unit::find($item['unit_id'])
             ]);
         }
 
-        return (object)$data;
+        return $data;
     }
 
 }

@@ -20,6 +20,7 @@ class CreateNomenclatureIncomesTable extends Migration
             $table->integer('contractor_id')->unsigned();
             $table->integer('agreement_id')->unsigned();
             $table->integer('storage_id')->unsigned();
+            $table->integer('created_by')->unsigned();
 
             $table->json('nomenclatures');
 
@@ -29,6 +30,7 @@ class CreateNomenclatureIncomesTable extends Migration
             $table->foreign('contractor_id')->references('id')->on('contractors')->onDelete('cascade');
             $table->foreign('agreement_id')->references('id')->on('agreements')->onDelete('cascade');
             $table->foreign('storage_id')->references('id')->on('storages')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

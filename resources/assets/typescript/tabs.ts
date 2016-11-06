@@ -58,6 +58,14 @@ function initTabs () {
                 target.classList.add('hidden');
             }
 
+            if (target.classList.contains('tab-full-size')) {
+                // todo: fix this
+                var height = window.innerHeight - (document.querySelector('header.header') as any).offsetHeight;
+                console.log(height);
+                (target as any).width = target.parentElement.offsetWidth + 'px';
+                (target as any).height = height + 'px';
+            }
+
             if (defaultItem !== null && child.getAttribute('data-target') == defaultItem) {
                 defaultItem = child;
             }

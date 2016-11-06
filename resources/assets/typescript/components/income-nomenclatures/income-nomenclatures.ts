@@ -49,7 +49,7 @@ export class IncomeNomenclatures {
         if (targetNomenclature != null) {
             this.income.push({
                 nomenclature: targetNomenclature,
-                amount: 22.12,
+                amount: 1,
                 units: targetNomenclature.units,
                 unit_id: -1,
                 nomenclature_id: targetNomenclature.id

@@ -163,7 +163,16 @@ return [
         ],
 
         'cure' => [
-            'comments' => 'Комментарии'
+            'comments' => 'Комментарии',
+            'flow' => 'Ход лечения',
+
+            'card' => [
+                'title' => 'Информация о курсе лечения',
+                'diagnosis' => 'Диагноз',
+                'comment' => 'Комментарий',
+                'hospitalization_date' => 'Дата госптализации',
+                'discharge_date' => 'Дата выписки'
+            ]
         ],
 
         'nomenclatureIncome' => [

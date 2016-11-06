@@ -154,7 +154,10 @@ class PatientController extends Controller
             'hospitalization_date' => $request->get('hospitalization_date'),
             'user_id' => $request->get('doctor_select'),
             'cure_status_id' => 1, // 1 - income, госпитализация
-            'department_id' => $request->get('department_id')
+            'department_id' => $request->get('department_id'),
+            'diagnosis' => $request->get('diagnosis'),
+            'comment' => $request->get('comment'),
+            'discharge_date' => $request->get('discharge_date')
         ]);
 
         return redirect()->route('patient.show', $request->get('patient_id'));

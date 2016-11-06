@@ -32,13 +32,16 @@ class NomenclatureIncomeController extends Controller
 
         $data['nomenclatures'] = \json_decode($data['nomenclatures']);
 
+        $data = array_merge($data, [
+            'created_by' => auth()->id()
+        ]);
         $nomenclatureIncome = NomenclatureIncome::create($data);
 
         foreach ($data['nomenclatures'] as $nomenclatureData) {
             $nomenclature = Nomenclature::find($nomenclatureData->nomenclature_id);
             $batch = null;
 
-            if ($nomenclatureData->keep_records_by_series && isset($nomenclatureData->batch_id)) {
+            if (isset($nomenclatureData->keep_records_by_series) && $nomenclatureData->keep_records_by_series && isset($nomenclatureData->batch_id)) {
                 $batch = NomenclatureBatch::find($nomenclatureData->batch_id);
             }
 

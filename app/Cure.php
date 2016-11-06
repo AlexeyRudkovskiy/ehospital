@@ -31,7 +31,9 @@ class Cure extends Model
         'patient_id',
         'hospitalization_date',
         'discharge_date',
-        'cure_status_id'
+        'cure_status_id',
+        'diagnosis',
+        'comment'
     ];
 
     protected $with = [
@@ -58,7 +60,7 @@ class Cure extends Model
      */
     public function days()
     {
-        return $this->hasMany(CalendarDay::class);
+        return $this->hasMany(CalendarDay::class)->orderBy('day');
     }
 
     /**

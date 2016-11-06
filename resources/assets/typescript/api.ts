@@ -3,7 +3,6 @@ export class API {
     public static instance:API = null;
 
     constructor(private _token:string) {
-
     }
 
     public static getInstance():API {

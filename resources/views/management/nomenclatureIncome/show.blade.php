@@ -1,7 +1,7 @@
 @extends('layouts.app', [
     'no_content_paddings' => true,
     'tabs_as_sidebar' => true,
-    'classes' => ['nomenclature-page'],
+    'classes' => ['nomenclatureIncome-page'],
     'content_scrollable' => false
 ])
 
@@ -14,12 +14,10 @@
 
     <div class="tabs-contents">
         <div class="tab-content tab-content-info">
-            Info tab
+            @include('management.nomenclatureIncome.tabs.info')
         </div>
         <div class="tab-content tab-content-nomenclatures">
-            @foreach($income->nomenclatures as $nomenclature)
-                Test
-            @endforeach
+            @include('management.nomenclatureIncome.tabs.nomenclatures')
         </div>
     </div>
 

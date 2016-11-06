@@ -18,4 +18,22 @@
       }
     }
   }
+
+  .flow {
+    ul.list {
+      li {
+        margin-top: $app-base-padding;
+        margin-bottom: $app-base-padding;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
 }

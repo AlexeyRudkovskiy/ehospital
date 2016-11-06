@@ -1,6 +1,7 @@
 import { VueComponent, Prop } from 'vue-typescript'
 import { Notification } from './notification'
 import {EchoService} from "../../EchoService";
+import {NotificationAction} from "./notification-action";
 
 @VueComponent({
     template: require('/partials/notifications.html!text')
