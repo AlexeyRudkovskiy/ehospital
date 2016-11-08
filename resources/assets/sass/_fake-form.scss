@@ -38,6 +38,15 @@
         width: 100%;
 
         @include box-sizing;
+
+        &.input-textarea-small {
+          height: 50px;
+          min-height: 50px;
+
+          font-family: Arial, serif;
+
+          resize: vertical;
+        }
       }
 
       select {

@@ -19,7 +19,20 @@ class NomenclatureController extends Controller
         if (!$request->has('only')) {
             return Nomenclature::orderBy('name', 'asc')->get();
         }
-        $data = DB::table('nomenclatures')->select(explode(',', $request->get('only')))->get();
+        $attributes = explode(',', $request->get('only'));
+        $attributes = array_merge($attributes, [ 'basic_unit_id', 'base_unit_id' ]);
+        $data = DB::table('nomenclatures')->select($attributes)->get();
+
+        $data = $data->map(function ($item) {
+            $unitIds = [$item->basic_unit_id, $item->base_unit_id];
+            $item->units = DB::table('units')
+                                ->select('name')
+                                ->whereIn('id', $unitIds)
+                                ->select(['text', 'id'])
+                                ->get();
+            return $item;
+        });
+
         return $data;
     }
 

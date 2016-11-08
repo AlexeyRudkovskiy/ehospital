@@ -1,5 +1,71 @@
 <div class="form-group">
-    test
+    <div class="card card-full-width" v-for="item in nomenclaturesPerDay">
+        <div class="form-group form-group-static row">
+            <div class="col-label col-3">
+                <label class="label">
+                    Наименование
+                </label>
+            </div>
+            <div class="col-input col-9">
+                <input type="text" class="input" v-model="item.nomenclature" disabled />
+            </div>
+        </div>
+
+        <div class="form-group form-group-static row">
+            <div class="col-label col-3">
+                <label class="label">
+                    Количество
+                </label>
+            </div>
+            <div class="col-input col-9">
+                <input type="text" class="input" v-model="item.amount" disabled />
+            </div>
+        </div>
+
+        <div class="form-group form-group-static row">
+            <div class="col-label col-3">
+                <label class="label">
+                    Дата с
+                </label>
+            </div>
+            <div class="col-input col-9">
+                <input type="text" class="input" v-model="item.from_day" disabled />
+            </div>
+        </div>
+
+        <div class="form-group form-group-static row">
+            <div class="col-label col-3">
+                <label class="label">
+                    Дата по
+                </label>
+            </div>
+            <div class="col-input col-9">
+                <input type="text" class="input" v-model="item.until_day" disabled />
+            </div>
+        </div>
+
+        <div class="form-group form-group-static row">
+            <div class="col-label col-3">
+                <label class="label">
+                    Единица измерения
+                </label>
+            </div>
+            <div class="col-input col-9">
+                <input type="text" class="input" v-model="item.unit" disabled />
+            </div>
+        </div>
+
+        <div class="form-group form-group-static row">
+            <div class="col-label col-3">
+                <label class="label">
+                    Комментарий
+                </label>
+            </div>
+            <div class="col-input col-9">
+                <div class="input">{{ item.comment }}</div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="form-group">
     <div class="col-label">
@@ -10,4 +76,4 @@
     </div>
 </div>
 
-<textarea>{{ serialize(nomenclaturesPerDay) }}</textarea>
+<textarea name="calendar_days" class="hidden">{{ serialize(nomenclaturesPerDay) }}</textarea>
