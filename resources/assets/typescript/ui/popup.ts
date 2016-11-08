@@ -1,16 +1,37 @@
 export class Popup {
 
-    protected element:any;
+    protected static element:any = null;
+
+    private onPopupLoaded:any = null;
 
     constructor (private content:string, private ajax:boolean = false, private config:any = {}) { /* empty */ }
 
     public show():Popup {
-        var request = (<any>window).fetch(this.content, {
-            credentials: 'same-origin'
-        })
-            .then(response => response.text())
-            .then(response => this.onContentLoaded(response));
+        if (Popup.element != null) {
+            this.close();
+        }
 
+        if (this.ajax) {
+            var request = (<any>window).fetch(this.content, {
+                credentials: 'same-origin'
+            })
+                .then(response => response.text())
+                .then(response => this.onContentLoaded(response));
+        } else {
+            this.onContentLoaded(this.content);
+        }
+
+        return this;
+    }
+
+    public close():void {
+        if (Popup.element != null && Popup.element.parentElement != null) {
+            Popup.element.parentElement.removeChild(Popup.element);
+        }
+    }
+
+    setOnPopupLoaded(value: any): Popup {
+        this.onPopupLoaded = value;
         return this;
     }
 
@@ -23,13 +44,28 @@ export class Popup {
 
         content.innerHTML = response;
 
+        if (typeof this.config.classes !== "undefined") {
+            for (var i = 0; i < this.config.classes.length; i++) {
+                content.classList.add(this.config.classes[i]);
+            }
+
+            var close:any = content.querySelectorAll('.close');
+            for (var i = 0; i < close.length; i++) {
+                close[i].addEventListener('click', this.close);
+            }
+        }
+
         var forms = content.querySelectorAll('form');
         for (var i = 0; i < forms.length; i++) {
             forms[i].addEventListener('submit', this.onFormSubmited);
         }
 
         document.body.appendChild(popup);
-        this.element = popup;
+        Popup.element = popup;
+
+        if (this.onPopupLoaded != null) {
+            this.onPopupLoaded.call(this, popup);
+        }
     }
 
     private onFormSubmited(e):void {
@@ -50,7 +86,7 @@ export class Popup {
 
     private onFormResponse():void {
         if (typeof this.config['close_after_form_submit'] !== "undefined" && this.config['close_after_form_submit'] == true) {
-            this.element.parentElement.removeChild(this.element);
+            Popup.element.parentElement.removeChild(Popup.element);
         }
     }
 

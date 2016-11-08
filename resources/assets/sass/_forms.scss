@@ -61,6 +61,23 @@
       }
     }
 
+    &.row {
+      width: auto;
+
+      &.row-fixed {
+        .col-label {
+          width: 100%;
+        }
+        .col-input {
+          width: 100%;
+
+          .input {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+
     .col-label, .col-input {
       float: left;
     }

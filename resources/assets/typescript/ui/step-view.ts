@@ -15,7 +15,6 @@ class StepViewContainer {
     }
 
     private changeStep(activeIndex:number = 0): void {
-        console.log(this.steps.length - 1, activeIndex);
         if (activeIndex == this.steps.length) {
             if (this.element.hasAttribute('data-form')) {
                 this.element.submit();

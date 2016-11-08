@@ -12,19 +12,48 @@
   background-color: rgba(0, 0, 0, .3);
 
   .content {
-    border-radius: 2px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, .5);
-    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 35px rgba(0, 0, 0, .15);
+    padding: 20px;
     width: 620px;
-    margin: 0 auto;
-    margin-top: 100px;
+    margin: 100px auto 0;
+    color: darken($color-gray-darken, 20%);
 
     background-color: $color-white;
 
     @include box-sizing;
 
-    .header {
-      padding-bottom: 10px;
+    &.popup-closable {
+      .popup-header {
+        .close {
+          font-family: "Material Icons", sans-serif;
+          padding: $app-base-padding;
+          margin-top: -$app-base-padding;
+          margin-right: -$app-base-padding;
+
+          transition: 0.1s color;
+          cursor: pointer;
+
+          @include user-select;
+          @include box-sizing;
+
+          &:hover {
+            color: $color-blue-darken;
+          }
+        }
+      }
+    }
+
+    .pull-right {
+      text-align: right;
+    }
+
+    .popup-footer {
+      margin-top: 20px;
+    }
+
+    .header, .popup-header {
+      padding-bottom: 20px;
 
       .title {
         font-weight: bold;

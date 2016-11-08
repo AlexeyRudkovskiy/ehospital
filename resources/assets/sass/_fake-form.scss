@@ -1,0 +1,48 @@
+@import "mixins";
+@import "variables";
+
+.fake-form {
+  .form-group {
+    margin-top: $app-base-padding;
+    margin-bottom: $app-base-padding;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .col-label {
+      text-align: right;
+
+      label {
+        display: inline-block;
+        font-weight: bold;
+        padding: $input-padding;
+
+        @include box-sizing;
+      }
+    }
+
+    .col-input {
+      padding-left: $app-base-padding;
+
+      .input {
+        padding: $input-padding;
+        border: 2px solid $color-blue-darken;
+        outline: none;
+        background: transparent;
+
+        width: 100%;
+
+        @include box-sizing;
+      }
+
+      select {
+        width: 100%;
+      }
+    }
+  }
+}

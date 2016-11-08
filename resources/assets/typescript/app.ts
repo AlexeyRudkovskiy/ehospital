@@ -14,6 +14,7 @@ import { InputList } from './components/patient/inspection/input-list'
 import { AddressesList } from './components/contractor/addresses-list'
 import { AgreementsList } from './components/contractor/agreements-list'
 import { IncomeNomenclatures } from "./components/income-nomenclatures/income-nomenclatures"
+import { AttachNomenclatures } from "./components/patient/attach-nomenclatures"
 import {StepView} from "./ui/step-view";
 // import { Discussions } from './components/patient/discussions'
 
@@ -90,6 +91,7 @@ function sidebarSections () {
             AddressesList,
             AgreementsList,
             IncomeNomenclatures,
+            AttachNomenclatures,
             // Discussions
         ]
     });

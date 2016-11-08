@@ -9,13 +9,18 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class NomenclatureController extends Controller
 {
 
-    public function getList()
+    public function getList(Request $request)
     {
-        return Nomenclature::orderBy('name', 'asc')->get();
+        if (!$request->has('only')) {
+            return Nomenclature::orderBy('name', 'asc')->get();
+        }
+        $data = DB::table('nomenclatures')->select(explode(',', $request->get('only')))->get();
+        return $data;
     }
 
     public function postIncome(Nomenclature $nomenclature, Request $request)
