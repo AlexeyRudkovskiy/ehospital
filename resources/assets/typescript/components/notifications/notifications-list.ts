@@ -37,10 +37,16 @@ export class NotificationsList {
         notification.type = 'notification-default';
         notification.text = 'Новый запрос номенклатур';
         notification.actions = [
-            new NotificationAction('открыть', 'javascript:alert(\'Method not implemented\')')
+            new NotificationAction('открыть', '/management/nomenclatureRequest/' + request.id)
         ];
 
+        console.log(notification.actions);
+
         this.notifications.push(notification);
+    }
+
+    public serialize(data): string {
+        return JSON.stringify(data);
     }
 
 }

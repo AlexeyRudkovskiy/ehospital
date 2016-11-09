@@ -20,6 +20,37 @@
   }
 
   .flow {
+
+    .row {
+
+      &.like-header {
+        .col {
+          font-weight: bold;
+          border-bottom: 1px solid rgba(0, 0, 0, .4);
+
+          &.centered {
+            text-align: center;
+          }
+        }
+      }
+
+      &.striped {
+        .col {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+      }
+      
+      .col {
+        width: 250px;
+        flex-grow: 0;
+        flex-shrink:0;
+
+        padding: $app-base-padding;
+
+        @include box-sizing;
+      }
+    }
+
     ul.list {
       li {
         margin-top: $app-base-padding;

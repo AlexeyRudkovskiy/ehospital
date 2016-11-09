@@ -15,7 +15,7 @@ Route::get('/', function () {
     /*if (auth()->guest()) {
         return redirect()->route('login');
     }*/
-    return redirect()->route('organization.index');
+    return redirect()->route('nomenclature.index');
 });
 
 Route::get('logout', function () {

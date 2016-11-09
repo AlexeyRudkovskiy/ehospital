@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\Cure;
 use App\CureStatus;
+use App\Events\Nomenclature\RequestEvent;
 use App\Inspection;
 use App\ListItem;
 use App\Nomenclature;
@@ -176,11 +177,11 @@ class PatientController extends Controller
             $until = Carbon::parse($item->until_day);
 
             if (!array_key_exists($item->nomenclature_id, $requestNomenclatures)) {
-                $requestNomenclatures[$item->nomenclature_id] = 0;
+                $requestNomenclatures[$item->nomenclature_id . '_' . $item->unit_id] = 0;
             }
 
             while ($from <= $until) {
-                $requestNomenclatures[$item->nomenclature_id] += $item->amount;
+                $requestNomenclatures[$item->nomenclature_id . '_' . $item->unit_id] += $item->amount;
 
                 $_item = clone $item;
                 unset($_item->from_day);
@@ -223,6 +224,8 @@ class PatientController extends Controller
 
         $nomenclatureRequestObject->doctor_id = auth()->id();
         $nomenclatureRequestObject->save();
+
+        event(new RequestEvent($nomenclatureRequestObject));
 
         return redirect()->route('patient.show', $request->get('patient_id'));
     }
