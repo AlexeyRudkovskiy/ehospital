@@ -27,10 +27,22 @@ export class AttachNomenclatures {
 
     @Prop public nomenclaturesPerDay:NomenclatureDay[] = [];
 
+    @Prop review:boolean = false;
+
     ready(): void {
         API.get('api/nomenclatures/?only=name_for_department,id')
             .then(response => (response as any).json())
             .then(this.onNomenclaturesLoaded);
+
+        if (this.review) {
+            for (var i = 0; i < (window as any).review.data.length; i++) {
+                var obj:any = {} as NomenclatureDay;
+                for (var key in (window as any).review.data[i]) {
+                    obj[key] = (window as any).review.data[i][key];
+                }
+                this.nomenclaturesPerDay.push(obj);
+            }
+        }
     }
 
     public addNewDay(): void {
@@ -43,6 +55,10 @@ export class AttachNomenclatures {
 
     public serialize(data:any): string {
         return JSON.stringify(data);
+    }
+
+    public isDisabled(): boolean {
+        return false;
     }
 
     private onNomenclaturesLoaded(items): void {

@@ -151,7 +151,11 @@ class Patient extends Model
         $doctorsIds = $doctors->map(function (User $user) {
             return $user->id;
         });
-        return $doctorsIds->contains($user->id);
+        $hasCurrentUserAsParent = $doctors->map(function (User $doctor) use ($user) {
+            return $doctor->isParent($user);
+        });
+        $hasCurrentUserAsParent = collect($hasCurrentUserAsParent);
+        return $doctorsIds->contains($user->id) || $hasCurrentUserAsParent->contains(true);
     }
 
     /**

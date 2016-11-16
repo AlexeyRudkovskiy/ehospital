@@ -60,7 +60,8 @@ class DepartmentsTableSeeder extends Seeder
 
             foreach ($userIds as $userId) {
                 \App\User::find($userId)->update([
-                    'department_id' => $department->id
+                    'department_id' => $department->id,
+                    'parent_id' => $departmentId != $userId ? $departmentId : null
                 ]);
             }
 

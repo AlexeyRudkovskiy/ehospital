@@ -173,25 +173,25 @@ class PatientController extends Controller
         $days = [];
         $requestNomenclatures = [];
 
-        foreach ($calendarDays as $item) {
-            $from = Carbon::parse($item->from_day);
-            $until = Carbon::parse($item->until_day);
-
-            if (!array_key_exists($item->nomenclature_id, $requestNomenclatures)) {
-                $requestNomenclatures[$item->nomenclature_id . '_' . $item->unit_id] = 0;
-            }
-
-            while ($from <= $until) {
-                $requestNomenclatures[$item->nomenclature_id . '_' . $item->unit_id] += $item->amount;
-
-                $_item = clone $item;
-                unset($_item->from_day);
-                unset($_item->until_day);
-                $_item->day = clone $from;
-                array_push($days, $_item);
-                $from->addDay();
-            }
-        }
+//        foreach ($calendarDays as $item) {
+//            $from = Carbon::parse($item->from_day);
+//            $until = Carbon::parse($item->until_day);
+//
+//            if (!array_key_exists($item->nomenclature_id, $requestNomenclatures)) {
+//                $requestNomenclatures[$item->nomenclature_id . '_' . $item->unit_id] = 0;
+//            }
+//
+//            while ($from <= $until) {
+//                $requestNomenclatures[$item->nomenclature_id . '_' . $item->unit_id] += $item->amount;
+//
+//                $_item = clone $item;
+//                unset($_item->from_day);
+//                unset($_item->until_day);
+//                $_item->day = clone $from;
+//                array_push($days, $_item);
+//                $from->addDay();
+//            }
+//        }
 
         $cure = $patient->cures()->create([
             'hospitalization_date' => $request->get('hospitalization_date'),
@@ -200,31 +200,35 @@ class PatientController extends Controller
             'department_id' => $request->get('department_id'),
             'diagnosis' => $request->get('diagnosis'),
             'comment' => $request->get('comment'),
-            'discharge_date' => $request->get('discharge_date')
+            'discharge_date' => $request->get('discharge_date'),
+            'review' => [
+                'accepted' => false,
+                'data' => $calendarDays
+            ]
         ]);
 
-        foreach ($days as $day) {
-            $_day = $cure->days()->where('day', $day->day)->first();
-            if ($_day == null) {
-                $_day = $cure->days()->create([
-                    'day' => $day->day
-                ]);
-            }
+//        foreach ($days as $day) {
+//            $_day = $cure->days()->where('day', $day->day)->first();
+//            if ($_day == null) {
+//                $_day = $cure->days()->create([
+//                    'day' => $day->day
+//                ]);
+//            }
+//
+//            $_day->nomenclatures()->attach([
+//                $day->nomenclature_id => [
+//                    'comment' => $day->comment,
+//                    'unit_id' => $day->unit_id,
+//                    'amount' => $day->amount
+//                ]
+//            ]);
+//        }
 
-            $_day->nomenclatures()->attach([
-                $day->nomenclature_id => [
-                    'comment' => $day->comment,
-                    'unit_id' => $day->unit_id,
-                    'amount' => $day->amount
-                ]
-            ]);
-        }
-
-        $nomenclatureRequestObject = new \App\NomenclatureRequest();
-        $nomenclatureRequestObject->requested = $requestNomenclatures;
-
-        $nomenclatureRequestObject->doctor_id = auth()->id();
-        $nomenclatureRequestObject->save();
+//        $nomenclatureRequestObject = new \App\NomenclatureRequest();
+//        $nomenclatureRequestObject->requested = $requestNomenclatures;
+//
+//        $nomenclatureRequestObject->doctor_id = auth()->id();
+//        $nomenclatureRequestObject->save();
 
         $notification = new Notification(trans('management.label.cure.review.need'), 'notification-default');
         $notification->addAction(trans('management.notification.cure.action.open'), route('cure.show', $cure->id));

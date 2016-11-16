@@ -354,4 +354,17 @@ class User extends Authenticatable
         $this->api_token = md5('token_' . \json_encode($this) . Carbon::now());
     }
 
+    public function isParent(User $user)
+    {
+        if ($this->parent != null) {
+            if ($this->id == $user->id) {
+                return true;
+            }
+            return $this->parent->isParent($user);
+        } else {
+            return $this->id == $user->id;
+        }
+//        return $this->parent != null ? $this->isParent($user) : $this->id == $user->id;
+    }
+
 }

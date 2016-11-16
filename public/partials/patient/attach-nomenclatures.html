@@ -18,7 +18,7 @@
                 </label>
             </div>
             <div class="col-input col-9">
-                <input type="text" class="input" v-model="item.amount" disabled />
+                <input type="text" class="input" v-model="item.amount" />
             </div>
         </div>
 
@@ -63,6 +63,15 @@
             </div>
             <div class="col-input col-9">
                 <div class="input">{{ item.comment }}</div>
+            </div>
+        </div>
+
+        <div class="form-group form-group-static row">
+            <div class="col-label col-3">
+                <label class="label">&nbsp;</label>
+            </div>
+            <div class="col-input col-9">
+                <a href="javascript:" class="btn btn-danger btn-small btn-fill" v-on:click="nomenclaturesPerDay.splice($index, 1)">удалить</a>
             </div>
         </div>
     </div>

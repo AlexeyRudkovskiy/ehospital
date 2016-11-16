@@ -33,12 +33,17 @@ class Cure extends Model
         'discharge_date',
         'cure_status_id',
         'diagnosis',
-        'comment'
+        'comment',
+        'review'
     ];
 
     protected $with = [
         'status',
         'days'
+    ];
+
+    protected $casts = [
+        'review' => 'array'
     ];
 
     /**
@@ -129,7 +134,16 @@ class Cure extends Model
 
     public function granted(User $user)
     {
-        return $this->patient->granted($user);
+        $isGrunted = $this->patient->granted($user) || $this->doctor->isParent($user);
+        if (!$isGrunted) {
+            abort(403);
+        }
+        return $isGrunted;
+    }
+
+    public function isHeadNurse(User $user)
+    {
+        return $this->department->leader->id === $user->id;
     }
 
 }
