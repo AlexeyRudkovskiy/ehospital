@@ -17,7 +17,7 @@
     <div class="tabs-contents scrollable">
         <!-- patient-card -->
         <div class="tab-content tab-content-cure-card">
-            @if($cure->patient->granted(auth()->user()))
+            @if($cure->granted(auth()->user()))
                 @include('management.cure.tabs.card')
             @else
                 <div class="alert alert-danger">@lang('management.error.403')</div>

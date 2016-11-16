@@ -64,6 +64,8 @@ function sidebarSections () {
 
     var application:Application = Application.getInstance();
 
+    console.log(application);
+
     application
         .addOnLoadedEvent(tabs)
         .addOnLoadedEvent(initDiffs)

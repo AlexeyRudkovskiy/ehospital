@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Management;
 use App\Cure;
 use App\CureStatus;
 use App\Events\Nomenclature\RequestEvent;
+use App\Events\Notification;
 use App\Inspection;
 use App\ListItem;
 use App\Nomenclature;
@@ -225,7 +226,11 @@ class PatientController extends Controller
         $nomenclatureRequestObject->doctor_id = auth()->id();
         $nomenclatureRequestObject->save();
 
-        event(new RequestEvent($nomenclatureRequestObject));
+        $notification = new Notification(trans('management.label.cure.review.need'), 'notification-default');
+        $notification->addAction(trans('management.notification.cure.action.open'), route('cure.show', $cure->id));
+        auth()->user()->department->leader->notify($notification);
+
+//        event(new RequestEvent($nomenclatureRequestObject));
 
         return redirect()->route('patient.show', $request->get('patient_id'));
     }

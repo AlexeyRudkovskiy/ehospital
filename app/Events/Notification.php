@@ -57,9 +57,9 @@ class Notification implements ShouldBroadcast
         ];
     }
 
-    public function addAction ($name, $action) {
+    public function addAction ($text, $action) {
         array_push($this->actions, [
-            'name' => $name,
+            'text' => $text,
             'action' => $action
         ]);
     }
