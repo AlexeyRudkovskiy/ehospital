@@ -1,0 +1,20 @@
+@import "../mixins";
+@import "../variables";
+
+.custom-select {
+
+  .header {
+    width: 100%;
+    font-size: 14px;
+    line-height: 14px;
+
+    padding: $app-base-padding + 1px $app-base-padding $app-base-padding;
+
+    @include box-sizing;
+  }
+
+  .items {
+    display: none;
+  }
+
+}

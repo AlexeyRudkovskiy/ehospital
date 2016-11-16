@@ -17,6 +17,9 @@
         <div class="info">
             {{ item.user.lastName }} {{ item.user.firstName }} {{ item.user.middleName }}
         </div>
+        <div class="info" v-if="item.nomenclature_request_id != null">
+            <a href="/management/nomenclatureRequest/{{ item.nomenclature_request_id }}">Показать запрос номенклатур</a>
+        </div>
         <div class="info" v-if="item.nomenclature_income_id != null">
             <a href="/management/nomenclatureIncome/{{ item.nomenclature_income_id }}">Показать поступление</a>
         </div>

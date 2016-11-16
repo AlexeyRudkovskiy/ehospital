@@ -15,7 +15,7 @@
         <tbody>
         @foreach($departments as $department)
             <tr>
-                <td>{{ $department->name }}</td>
+                <td><a href="{{ route('department.show', $department->id) }}">{{ $department->name }}</a></td>
                 <td>{{ isset($department->leader) ? $department->leader->fullName() : '' }}</td>
                 <td>{{ $department->beds_amount }}</td>
                 <td align="right">

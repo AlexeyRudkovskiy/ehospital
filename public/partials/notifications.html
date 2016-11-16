@@ -4,7 +4,7 @@
             <p>{{ n.text }}</p>
             <div v-if="n.actions.length > 0">
                 <div class="btn-group btn-group-{{ n.actions.length }}">
-                    <a href="{{ action.href }}" v-for="action in n.actions" class="btn">{{ action.text }}</a>
+                    <a href="{{ action.action }}" v-for="action in n.actions" class="btn">{{ action.text }}</a>
                 </div>
             </div>
         </div>

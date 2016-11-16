@@ -127,4 +127,9 @@ class Cure extends Model
         return null;
     }
 
+    public function granted(User $user)
+    {
+        return $this->patient->granted($user);
+    }
+
 }

@@ -14,5 +14,5 @@ require_once "contractors.php";
 require_once "patients.php";
 require_once "cures.php";
 require_once "nomenclatures.php";
-
+require_once "nomenclatureRequest.php";
 require_once "nomenclatureIncome.php";

@@ -49,9 +49,30 @@
       padding: $app-base-padding;
       text-align: left;
 
-      &.no-paddings {
+      &.no-paddings, &.has-input {
         padding: 0;
         vertical-align: top;
+
+        .input {
+          border: 0 solid transparent;
+          line-height: 14px;
+          background-color: transparent;
+          padding: $app-base-padding + 1 $app-base-padding $app-base-padding;
+          outline: none;
+          width: 100%;
+
+          @include box-sizing;
+        }
+
+        select.input {
+          padding: $app-base-padding / 2;
+          height: 45px;
+
+          option {
+            outline: none;
+            @include box-sizing;
+          }
+        }
       }
     }
   }

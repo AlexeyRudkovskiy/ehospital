@@ -20,7 +20,7 @@ $factory->define(App\User::class, function () use ($faker) {
         'firstName' => $faker->firstName,
         'middleName' => array_pop($fullName),
         'lastName' => $faker->lastName,
-        'password' => str_random(20),
+        'password' => 'password',
         'email' => $faker->safeEmail,
         'phone' => $faker->phoneNumber,
         'cryptKey' => md5(\Crypt::encrypt(str_random(32) . md5($faker->firstNameFemale))),
@@ -76,6 +76,11 @@ $factory->define(\App\Permission::class, function () use ($faker) {
                 'items' => [
                     [ 'path' => "user.index" ],
                     [ 'path' => "permission.index" ]
+                ]
+            ], [
+                'name' => 'Отделения',
+                'items' => [
+                    [ 'path' => 'department.index' ]
                 ]
             ], [
                 'name' => "Пациенты",

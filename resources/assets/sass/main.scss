@@ -46,7 +46,12 @@
 @import "pages/patient";
 @import "pages/cure";
 @import "pages/nomenclatureIncome";
+@import "pages/nomenclatureRequest";
 
 // Differences(revisions)
 
 @import "diff";
+
+// Custom UI
+
+@import "custom_ui/select";

@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Http\Controllers\Management;
+
+use App\Events\NomenclatureOutgoingEvent;
+use App\Nomenclature;
+use App\NomenclatureRequest;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class NomenclatureRequestController extends Controller
+{
+
+    public function show(NomenclatureRequest $nomenclatureRequest)
+    {
+        $requestedData = $nomenclatureRequest->requestedData();
+
+        return view('management.nomenclatureRequest.show')
+            ->with('requestedData', $requestedData)
+            ->with('isAccepted', $nomenclatureRequest->accepted != null);
+    }
+
+    public function create(NomenclatureRequest $nomenclatureRequest, Request $request)
+    {
+        $accepted = $request->get('nomenclature');
+        $nomenclatureRequest->update(['accepted' => $accepted]);
+
+        foreach ($accepted as $key => $item) {
+            $nomenclature = Nomenclature::find($key);
+            $batch = null;
+            $nomenclature->outgoing($item['amount'], $batch, [
+                'nomenclature_request_id' => $nomenclatureRequest->id
+            ]);
+
+            event(new NomenclatureOutgoingEvent($nomenclature));
+        }
+
+        return redirect()->route('nomenclature.index');
+    }
+
+}

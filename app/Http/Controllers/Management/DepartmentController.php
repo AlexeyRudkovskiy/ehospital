@@ -70,7 +70,8 @@ class DepartmentController extends PermissibleController
      */
     public function show(Department $department)
     {
-        //
+        return view('management.department.show')
+            ->with('department', $department);
     }
 
     /**

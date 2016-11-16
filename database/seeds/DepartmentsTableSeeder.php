@@ -33,16 +33,44 @@ class DepartmentsTableSeeder extends Seeder
 
         $departments = collect($departments)->shuffle();
 
-        factory(\App\Department::class, $departments->count())->make()->each(function (\App\Department $department) use ($departments) {
+        $i = 1;
+        factory(\App\Department::class, $departments->count())->make()->each(function (\App\Department $department) use ($departments, &$i) {
+            $_i = $i * 3;
             $department->name = $departments->pop();
             $department->save();
-            $department->leader()->associate(\App\User::inRandomOrder()->get()->first());
+            $department->leader()->associate(1);
+            $usersInDepartment = [ $_i, $_i - 1, $_i - 2 ];
+
+            foreach ($usersInDepartment as $item) {
+                $user = \App\User::find($item);
+                $user->department()->associate($department);
+                $user->save();
+            }
+
+            $i += 1;
         });
 
-        \App\User::all()->each(function (\App\User $user) {
-            $user->department_id = 1;
-            $user->save();
+        $i = 1;
+
+        \App\Department::all()->each(function (\App\Department $department) use (&$i) {
+            $departmentId = $department->id * 3;
+            $department->leader_id = $departmentId;
+
+            $userIds = [ $departmentId, $departmentId - 1, $departmentId - 2 ];
+
+            foreach ($userIds as $userId) {
+                \App\User::find($userId)->update([
+                    'department_id' => $department->id
+                ]);
+            }
+
+            $department->save();
         });
+
+//        \App\User::all()->each(function (\App\User $user) {
+//            $user->department_id = 1;
+//            $user->save();
+//        });
 
     }
 }
