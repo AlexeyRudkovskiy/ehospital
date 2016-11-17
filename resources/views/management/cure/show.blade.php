@@ -8,9 +8,11 @@
 ])
 
 @section('content')
-    <nav class="tabs" data-default=".tab-content-cure-card">
-        <a href="javascript:" data-target=".tab-content-cure-card">@lang('management.label.patient.card')</a>
+    <nav class="tabs" data-default=".tab-content-cure-cure-card">
         <a href="javascript:" data-target=".tab-content-cure-cure-card">@lang('management.label.cure.card.title')</a>
+        @if($cure->patient->granted(auth()->user()))
+            <a href="javascript:" data-target=".tab-content-cure-card">@lang('management.label.patient.card')</a>
+        @endif
         <a href="javascript:" data-target=".tab-content-cure-comments">@lang('management.label.cure.comments')</a>
         @if($cure->review['accepted'])
         <a href="javascript:" data-target=".tab-content-cure-flow">@lang('management.label.cure.flow')</a>
@@ -21,6 +23,14 @@
         @endif
     </nav>
     <div class="tabs-contents scrollable">
+
+        <!--  cure card-->
+        <div class="tab-content tab-content-cure-cure-card">
+            @include('management.cure.tabs.cure_card')
+        </div>
+        <!-- end cure card -->
+
+        @if($cure->patient->granted(auth()->user()))
         <!-- patient-card -->
         <div class="tab-content tab-content-cure-card">
             @if($cure->granted(auth()->user()))
@@ -30,12 +40,7 @@
             @endif
         </div>
         <!-- end patient card -->
-
-        <!--  cure card-->
-        <div class="tab-content tab-content-cure-cure-card">
-            @include('management.cure.tabs.cure_card')
-        </div>
-        <!-- end cure card -->
+        @endif
 
         <!-- patient cures -->
         <div class="tab-content tab-content-cure-comments">

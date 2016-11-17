@@ -16,7 +16,7 @@ class PermissionsTableSeeder extends Seeder
         factory(\App\Permission::class)->create();
 
         \App\Permission::create([
-            'name' => 'global',
+            'name' => 'pharmacist',
             'map' => json_encode([
                 'organization' => [
                     'index' => true,
@@ -55,6 +55,38 @@ class PermissionsTableSeeder extends Seeder
                         [ 'path' => 'atcClassification.index' ],
                         [ 'path' => 'manufacturer.index' ],
                         [ 'path' => 'nomenclatureIncome.index' ]
+                    ]
+                ]
+            ])
+        ]);
+
+        \App\Permission::create([
+            'name' => 'chief_medical_officer',
+            'map' => json_encode([
+                'organization' => [
+                    'index' => true,
+                    'store' => true,
+                    'update' => true,
+                    'show' => true,
+                    'create' => true,
+                    'edit' => true,
+                    'delete' => true
+                ],
+                'cure' => [
+                    'index' => true,
+                    'store' => true,
+                    'update' => true,
+                    'show' => true,
+                    'create' => true,
+                    'edit' => true,
+                    'delete' => true
+                ]
+            ]),
+            'sidebar' => json_encode([
+                [
+                    'name' => "Пациенты",
+                    'items' => [
+                        [ 'path' => "patient.index" ]
                     ]
                 ]
             ])

@@ -113,6 +113,11 @@ class Cure extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    public function nomenclatureRequest()
+    {
+        return $this->hasOne(NomenclatureRequest::class);
+    }
+
     /**
      * @return static
      */
@@ -144,6 +149,16 @@ class Cure extends Model
     public function isHeadNurse(User $user)
     {
         return $this->department->leader->id === $user->id;
+    }
+
+    public function isMedicamentsApprovedByPharmacists()
+    {
+        $nomenclatureRequest = $this->nomenclatureRequest;
+        if ($nomenclatureRequest == null) {
+            return false;
+        }
+
+        return $nomenclatureRequest->done;
     }
 
 }

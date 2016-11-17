@@ -40,3 +40,7 @@ Route::group([
 ], function () {
     require_once __DIR__ . '/management.php';
 });
+
+Route::get('test2', function () {
+    dispatch((new \App\Jobs\GenerateNomenclatureRequestDocument(\App\NomenclatureRequest::first()))->delay(1));
+});

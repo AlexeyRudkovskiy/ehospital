@@ -15,7 +15,7 @@ class MedicamentIncomeOutgoingTest extends TestCase
         $batch = $medicament->batches->first();
 
         $amount = rand(100, 500);
-        $medicament->income($amount, $batch);
-        $medicament->outgoing($amount, $batch);
+//        $medicament->income($amount, $batch);
+//        $medicament->outgoing($amount, $batch);
     }
 }

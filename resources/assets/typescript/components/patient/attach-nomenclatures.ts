@@ -25,9 +25,15 @@ export class AttachNomenclatures {
 
     private nomenclatures:Nomenclature[] = [];
 
+    private currentNomenclatureDay:NomenclatureDay = null;
+
+    private currentNomenclatureDayIndex:number = 0;
+
     @Prop public nomenclaturesPerDay:NomenclatureDay[] = [];
 
-    @Prop review:boolean = false;
+    @Prop public review:boolean = false;
+
+    @Prop public viewOnly:boolean = false;
 
     ready(): void {
         API.get('api/nomenclatures/?only=name_for_department,id')
@@ -36,11 +42,19 @@ export class AttachNomenclatures {
 
         if (this.review) {
             for (var i = 0; i < (window as any).review.data.length; i++) {
-                var obj:any = {} as NomenclatureDay;
-                for (var key in (window as any).review.data[i]) {
-                    obj[key] = (window as any).review.data[i][key];
-                }
-                this.nomenclaturesPerDay.push(obj);
+                var item:any = (window as any).review.data[i];
+                var nomenclatureDay:NomenclatureDay = new NomenclatureDay(
+                    item._from_day,
+                    item._until_day,
+                    item._amount,
+                    item._nomenclature_id,
+                    item._nomenclature,
+                    item._unit_id,
+                    item._unit,
+                    item._comment
+                );
+
+                this.nomenclaturesPerDay.push(nomenclatureDay);
             }
         }
     }
@@ -58,7 +72,22 @@ export class AttachNomenclatures {
     }
 
     public isDisabled(): boolean {
-        return false;
+        if (this.viewOnly)
+            return true;
+        return !this.review;
+    }
+
+    public edit(index:number): void {
+        var popup:Popup = new Popup('/test', true, {
+            classes: [ 'popup-closable' ]
+        });
+
+        this.currentNomenclatureDay = this.nomenclaturesPerDay[index];
+        this.currentNomenclatureDayIndex = index;
+
+        popup
+            .setOnPopupLoaded(this.editPopupLoaded.bind(this))
+            .show();
     }
 
     private onNomenclaturesLoaded(items): void {
@@ -95,6 +124,45 @@ export class AttachNomenclatures {
         this.nomenclatureSelect.addEventListener('change', this.updateUnits.bind(this));
     }
 
+    private editPopupLoaded(popup:Element): void {
+        var save:any = popup.querySelector('#add_day');
+        save.addEventListener('click', this.onSaveButtonClicked.bind(this));
+        this.nomenclatureSelect = popup.querySelector('#nomenclature_id') as HTMLSelectElement;
+        this.unitSelect = popup.querySelector('#unit_id') as HTMLSelectElement;
+        this.fromDayInput = popup.querySelector('#from_day') as HTMLInputElement;
+        this.untilDayInput = popup.querySelector('#until_day') as HTMLInputElement;
+        this.amountInput = popup.querySelector('#amount') as HTMLInputElement;
+        this.commentTextArea = popup.querySelector('#comment') as HTMLTextAreaElement;
+        this.popup = popup;
+
+        this.clear(this.nomenclatureSelect);
+
+        this.fromDayInput.value = this.currentNomenclatureDay.from_day;
+        this.untilDayInput.value = this.currentNomenclatureDay.until_day;
+        this.amountInput.value = this.currentNomenclatureDay.amount.toString();
+        this.commentTextArea.value = this.currentNomenclatureDay.comment;
+
+        var option = document.createElement('option');
+        option.setAttribute('value', '-1');
+        option.innerHTML = '--------';
+        this.nomenclatureSelect.appendChild(option);
+
+        for (var i = 0; i < this.nomenclatures.length; i++) {
+            option = document.createElement('option');
+            option.setAttribute('value', this.nomenclatures[i].id as any);
+            option.setAttribute('data-name', this.nomenclatures[i].name);
+            option.innerHTML = this.nomenclatures[i].name;
+
+            this.nomenclatureSelect.appendChild(option);
+
+            if (this.nomenclatures[i].id == this.currentNomenclatureDay.nomenclature_id) {
+                this.nomenclatureSelect.selectedIndex = i + 1;
+            }
+        }
+
+        this.nomenclatureSelect.addEventListener('change', this.updateUnits.bind(this));
+    }
+
     private updateUnits(): void {
         var value = parseInt(this.nomenclatureSelect.value);
         if (value === -1) return;
@@ -117,6 +185,10 @@ export class AttachNomenclatures {
             option.innerHTML = nomenclature.units[i].text;
 
             this.unitSelect.appendChild(option);
+
+            if (this.currentNomenclatureDay != null && nomenclature.units[i].id == this.currentNomenclatureDay.unit_id) {
+                this.unitSelect.selectedIndex = i;
+            }
         }
     }
 
@@ -133,6 +205,17 @@ export class AttachNomenclatures {
         );
         console.log(this.commentTextArea.value);
         this.nomenclaturesPerDay.push(nomenclatureDay);
+    }
+
+    private onSaveButtonClicked(): void {
+        this.nomenclaturesPerDay[this.currentNomenclatureDayIndex].from_day = this.fromDayInput.value;
+        this.nomenclaturesPerDay[this.currentNomenclatureDayIndex].until_day = this.untilDayInput.value;
+        this.nomenclaturesPerDay[this.currentNomenclatureDayIndex].amount = Number(this.amountInput.value);
+        this.nomenclaturesPerDay[this.currentNomenclatureDayIndex].nomenclature_id = Number(this.nomenclatureSelect.value);
+        this.nomenclaturesPerDay[this.currentNomenclatureDayIndex].nomenclature = this.nomenclatureSelect.options[this.nomenclatureSelect.selectedIndex].getAttribute('data-name');
+        this.nomenclaturesPerDay[this.currentNomenclatureDayIndex].unit_id = this.unitSelect.value;
+        this.nomenclaturesPerDay[this.currentNomenclatureDayIndex].unit = this.unitSelect.options[this.unitSelect.selectedIndex].getAttribute('data-text');
+        this.nomenclaturesPerDay[this.currentNomenclatureDayIndex].comment = this.commentTextArea.value;
     }
 
     private clear(target:Element): void {

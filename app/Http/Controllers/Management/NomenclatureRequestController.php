@@ -25,7 +25,7 @@ class NomenclatureRequestController extends Controller
     public function create(NomenclatureRequest $nomenclatureRequest, Request $request)
     {
         $accepted = $request->get('nomenclature');
-        $nomenclatureRequest->update(['accepted' => $accepted]);
+        $nomenclatureRequest->update([ 'accepted' => $accepted, 'done' => true ]);
 
         foreach ($accepted as $key => $item) {
             $nomenclature = Nomenclature::find($key);

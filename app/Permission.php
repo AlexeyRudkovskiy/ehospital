@@ -27,6 +27,10 @@ class Permission extends Model
      */
     protected $fillable = [ 'name', 'map', 'sidebar' ];
 
+    const PHARMACIST = 2;
+
+    const CHIEF_MEDICAL_OFFICER = 3;
+
     /**
      * Преобразуем нужные поля к нужным типам
      *
@@ -53,6 +57,11 @@ class Permission extends Model
         }
         $value = array_get($this->map, $what);
         return $value;
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
 
 }

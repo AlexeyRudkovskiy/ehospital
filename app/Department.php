@@ -31,6 +31,7 @@ class Department extends Model
         'female_beds_amount',
         'male_beds_amount',
         'leader_id',
+        'chief_medical_officer_id',
         'organization_id'
     ];
 
@@ -62,6 +63,14 @@ class Department extends Model
     public function leader()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function chiefMedicalOfficer()
+    {
+        return $this->belongsTo(User::class, 'chief_medical_officer_id');
     }
 
     /**

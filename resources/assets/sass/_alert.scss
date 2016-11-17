@@ -24,4 +24,8 @@
     color: $color-white;
     font-weight: bold;
   }
+
+  &.alert-space-after {
+    margin-bottom: $app-base-padding;
+  }
 }

@@ -25,5 +25,19 @@ class UsersTableSeeder extends Seeder
             $user->regenerateApiToken();
             $user->save();
         });
+
+        $u3 = \App\User::find(3);
+        $u3->email = 'test@mail.ru';
+        $u3->save();
+
+        $u4 = \App\User::find(4);
+        $u4->permission_id = 2;
+        $u4->email = 'foo@mail.ru';
+        $u4->save();
+
+        $u5 = \App\User::find(5);
+        $u5->permission_id = 3;
+        $u5->email = 'bar@mail.ru';
+        $u5->save();
     }
 }

@@ -11,6 +11,11 @@ class NomenclatureRequest extends Model
         'requested',
         'accepted',
 
+        'cure_id',
+        'done',
+
+        'ready',
+
         'doctor_id',
         'head_nurse_id',
         'chief_medical_officer_id',
@@ -19,7 +24,9 @@ class NomenclatureRequest extends Model
 
     protected $casts = [
         'requested' => 'array',
-        'accepted' => 'array'
+        'accepted' => 'array',
+        'done' => 'boolean',
+        'ready' => 'boolean'
     ];
 
     /**
@@ -52,6 +59,14 @@ class NomenclatureRequest extends Model
     public function pharmacist()
     {
         return $this->belongsTo(User::class, 'pharmacist_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cure()
+    {
+        return $this->belongsTo(Cure::class);
     }
 
     public function requestedData()

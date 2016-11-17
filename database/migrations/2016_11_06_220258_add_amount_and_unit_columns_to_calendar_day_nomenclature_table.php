@@ -17,7 +17,7 @@ class AddAmountAndUnitColumnsToCalendarDayNomenclatureTable extends Migration
             $table->float('amount');
             $table->integer('unit_id')->unsigned();
 
-            $table->foreign('unit_id')->references('id')->on('units');
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
         });
     }
 

@@ -165,6 +165,7 @@ $factory->define(\App\Department::class, function () use ($faker) {
     return [
         'name' => 'Онкология',
         'leader_id' => \App\User::inRandomOrder()->get()->first()->id,
+        'chief_medical_officer_id' => 5,
         'organization_id' => 1,
         'department_code' => $faker->randomNumber(),
         'beds_amount' => $totalBeds,
