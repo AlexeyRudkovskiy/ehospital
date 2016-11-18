@@ -14,18 +14,13 @@ class TestEvent implements ShouldBroadcast
     use InteractsWithSockets, SerializesModels;
 
     /**
-     * @var string
-     */
-    public $text;
-
-    /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(string $text)
+    public function __construct()
     {
-        $this->text = $text;
+        //
     }
 
     /**
@@ -35,6 +30,6 @@ class TestEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['eh.test'];
+        return ['channel.name'];
     }
 }

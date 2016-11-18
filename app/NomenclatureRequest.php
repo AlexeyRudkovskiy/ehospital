@@ -69,6 +69,11 @@ class NomenclatureRequest extends Model
         return $this->belongsTo(Cure::class);
     }
 
+    public function file()
+    {
+        return $this->morphOne(File::class, 'attachable');
+    }
+
     public function requestedData()
     {
         $requested = $this->requested;

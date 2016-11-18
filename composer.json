@@ -10,7 +10,8 @@
         "laravelcollective/html": "5.3.*",
         "predis/predis": "^1.1",
         "doctrine/dbal": "^2.5",
-        "bugsnag/bugsnag-laravel": "^2.0"
+        "bugsnag/bugsnag-laravel": "^2.0",
+        "setasign/fpdi-fpdf": "1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

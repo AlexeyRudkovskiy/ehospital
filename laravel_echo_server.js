@@ -8,7 +8,7 @@ var connections = [];
 io = io.listen(config.port);
 redis = new redis();
 
-redis.psubscribe('*', function () { /* empty */ });
+redis.psubscribe('*', function () { console.log('Connected to redis server'); });
 
 redis.on('pmessage', function (pattern, channel, message) {
     message = JSON.parse(message);

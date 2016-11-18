@@ -42,5 +42,5 @@ Route::group([
 });
 
 Route::get('test2', function () {
-    dispatch((new \App\Jobs\GenerateNomenclatureRequestDocument(\App\NomenclatureRequest::first()))->delay(1));
+    dispatch(new \App\Jobs\GenerateNomenclatureRequestDocument(\App\NomenclatureRequest::first()));
 });

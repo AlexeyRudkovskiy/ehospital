@@ -14,7 +14,6 @@ class GenerateNomenclatureRequestDocumentTest extends TestCase
     public function testExample()
     {
         $nomenclatureRequest = \App\NomenclatureRequest::first();
-        $test = (new \App\Jobs\GenerateNomenclatureRequestDocument($nomenclatureRequest))->delay(2);
-        dispatch($test);
+        dispatch(new \App\Jobs\GenerateNomenclatureRequestDocument($nomenclatureRequest));
     }
 }
