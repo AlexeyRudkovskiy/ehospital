@@ -19,3 +19,8 @@ Route::get('cure/{cure}', [
     'uses' => 'CureController@show',
     'as' => 'cure.show'
 ]);
+
+Route::get('cure/{cure}/form', [
+    'uses' => 'CureController@getForm',
+    'as' => 'cure.form'
+]);

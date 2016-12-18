@@ -1,8 +1,8 @@
 <div class="form-group @if($errors->has($name)) has-error @endif ">
-    <div class="col-label">
+    <div class="label">
         {!! Form::label($name, $label, ['class' => 'label']) !!}
     </div>
-    <div class="col-input">
+    <div class="input-wrapper">
         {!! Form::text($name, $value, array_merge([
             'class' => 'input'
         ], $attributes ?? [])) !!}

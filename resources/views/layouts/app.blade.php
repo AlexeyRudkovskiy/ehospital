@@ -1,22 +1,16 @@
 @inject('sidebar', 'App\Services\LayoutSidebarService')
 @inject('content', 'App\Services\LayoutContentService')
 
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App</title>
 
-    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>EHospital</title>
-
-    <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:100,100i,300,300i,400,400i,700,700i&amp;subset=cyrillic-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- styles there -->
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
 
     <!-- Scripts -->
     <script>
@@ -26,92 +20,62 @@
     </script>
 </head>
 <body>
-
-    <div class="container">
+<div class="app-container">
+    <div class="sidebar-wrapper">
         <div class="sidebar">
-            <nav>
-                <a href="javascript:" class="force-hover">EHospital</a>
+            <ul>
                 {!! $sidebar->make(auth()->user()->permission) !!}
-                {{--{!! $sidebar->link('organization.index') !!}--}}
-                {{--{!! $sidebar->link('user.index') !!}--}}
-                {{--{!! $sidebar->link('contractor.index') !!}--}}
-                {{--{!! $sidebar->link('department.index') !!}--}}
-                {{--{!! $sidebar->link('manufacturer.index') !!}--}}
-                {{--{!! $sidebar->link('nomenclature.index') !!}--}}
-                {{--{!! $sidebar->link('atcClassification.index', '999+') !!}--}}
-                {{--{!! $sidebar->link('patient.index') !!}--}}
-                {{--{!! $sidebar->link('sourceOfFinancing.index') !!}--}}
-                {{--{!! $sidebar->link('nomenclatureIncome.index') !!}--}}
-            </nav>
+            </ul>
         </div>
-        <div class="{{ $content->getContentClasses(get_defined_vars()) }}">
-
-            <header class="header">
-                <nav>
-                    <div class="pull-right">
-                        <span class="like-link">{{ auth()->user()->fullName() }}</span>
-                        <a href="/logout">logout</a>
-                    </div>
-                </nav>
-            </header>
-
-            <div class="{{ $content->getContentWrapperClasses(get_defined_vars()) }}">
-
-                {{--<div class="breadcrumbs">--}}
-                    {{--<nav>--}}
-                        {{--<div class="breadcrumbs-links">--}}
-                            {{--@foreach($breadcrumbs as $breadcrumb)--}}
-                            {{--<a href="javascript:" class="item">{{ trans($breadcrumb) }}</a>--}}
-                            {{--@endforeach--}}
-                        {{--</div>--}}
-                        {{--<div class="actions">--}}
-                            {{--@stack('breadcrumbs-right')--}}
-                        {{--</div>--}}
-                    {{--</nav>--}}
-                {{--</div>--}}
-
-                {{--<div class="clear"></div>--}}
-
-                @php($pageContentClasses = $content->getPageContentClasses(get_defined_vars()))
-
-                <div id="page-content" @if(!empty($pageContentClasses)) class="{{ $pageContentClasses }}" @endif>
-                    @yield('content')
+    </div>
+    <div class="app-content">
+        <header class="app-header">
+            <div class="grid">
+                <div class="col-main">
+                    <a href="javascript:" class="menu"><i class="material-icons">menu</i></a>
+                    <form action="#" id="global-search">
+                        <input id="global-search-input" type="text" placeholder="Введите фразу для поиска" data-input-keep-focused />
+                        @include('layouts.search.results')
+                    </form>
                 </div>
-
+                <div class="col-user-info pull-right">
+                    <a href="javascript:" class="username">{{ auth()->user()->fullName() }}</a>
+                    <a href="javascript:" class="bell" data-notification="10+"><i class="material-icons">notifications_none</i></a>
+                </div>
             </div>
+        </header>
+        <div class="content">
+
+            @yield('content')
+
+            {{--<div class="popup-notifications">--}}
+                {{--<div class="notification">--}}
+                    {{--Hello world!--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
         </div>
     </div>
+</div>
 
-    <notifications-list></notifications-list>
+<div id="offscreen-test-view-zone"></div>
 
-    {{--@if ( config('app.debug') && isset($current) ? in_array($current->email, ['test@test.test']) : false )--}}
-        {{--<script type="text/javascript">--}}
-            {{--document.write('<script src="{{ url('/') }}:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')--}}
-        {{--</script>--}}
-    {{--@endif--}}
+<!-- app js resources -->
+<script src="/vendor/systemjs/dist/system.js"></script>
+<script>
+    SystemJS.config({
+        defaultJSExtensions: true,
+        baseURL: '/js',
+        map: {
+            'react': '/vendor/react/dist/react.js',
+            'react-dom': '/vendor/react-dom/dist/react-dom.js',
+            'text': '/vendor/systemjs-plugin-text/text.js',
+            'whatwg-fetch': '/vendor/whatwg-fetch/fetch.js',
+            'json': '/vendor/systemjs-plugin-json/json.js'
+        }
+    });
 
-    <script>
-        window.page = "{{ request()->route()->getName() }}";
-        window.prefix = "{{ $prefix or 'management' }}";
-        window.token = "{{ auth()->user()->api_token }}";
-        window.uid = {{ auth()->user()->id }};
-    </script>
-
-    @stack('scripts')
-
-    @if(session()->has('message'))
-    <script>
-        window.message = JSON.parse('{!! session()->get('message') !!}');
-    </script>
-    @endif
-
-    <!-- Scripts -->
-    <script src="{{ url('/') }}:{{ config('eh.echo.port') }}/socket.io/socket.io.js"></script>
-    <script src="/vendor/system.js"></script>
-    <script src="/systemjs.config.js"></script>
-    <script>
-        System.import('js/app').catch(function(err){ console.error(err); });
-    </script>
+    SystemJS.import("app.js").then(null, console.error.bind(console));
+</script>
 </body>
 </html>

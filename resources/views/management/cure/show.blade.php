@@ -8,56 +8,57 @@
 ])
 
 @section('content')
-    <nav class="tabs" data-default=".tab-content-cure-cure-card">
-        <a href="javascript:" data-target=".tab-content-cure-cure-card">@lang('management.label.cure.card.title')</a>
-        @if($cure->patient->granted(auth()->user()))
-            <a href="javascript:" data-target=".tab-content-cure-card">@lang('management.label.patient.card')</a>
-        @endif
-        <a href="javascript:" data-target=".tab-content-cure-comments">@lang('management.label.cure.comments')</a>
-        @if($cure->review['accepted'])
-        <a href="javascript:" data-target=".tab-content-cure-flow">@lang('management.label.cure.flow')</a>
-        @else
-            @if($cure->isHeadNurse(auth()->user()))
-            <a href="javascript:" data-target=".tab-content-cure-review">@lang('management.label.cure.review.title')</a>
+    <div class="tabs">
+        <nav class="tabs-navigation">
+            <a href="javascript:" data-default data-target="cure-card">@lang('management.label.cure.card.title')</a>
+            @if($cure->patient->granted(auth()->user()))
+                <a href="javascript:" data-target="card">@lang('management.label.patient.card')</a>
             @endif
-        @endif
-    </nav>
-    <div class="tabs-contents scrollable">
-
-        <!--  cure card-->
-        <div class="tab-content tab-content-cure-cure-card">
-            @include('management.cure.tabs.cure_card')
-        </div>
-        <!-- end cure card -->
-
-        @if($cure->patient->granted(auth()->user()))
-        <!-- patient-card -->
-        <div class="tab-content tab-content-cure-card">
-            @if($cure->granted(auth()->user()))
-                @include('management.cure.tabs.card')
+            <a href="javascript:" data-target="comments">@lang('management.label.cure.comments')</a>
+            @if($cure->review['accepted'])
+                <a href="javascript:" data-target="flow">@lang('management.label.cure.flow')</a>
             @else
-                <div class="alert alert-danger">@lang('management.error.403')</div>
+                @if($cure->isHeadNurse(auth()->user()))
+                    <a href="javascript:" data-target="review">@lang('management.label.cure.review.title')</a>
+                @endif
             @endif
-        </div>
-        <!-- end patient card -->
-        @endif
-
-        <!-- patient cures -->
-        <div class="tab-content tab-content-cure-comments">
-            @include('management.cure.tabs.comments')
-        </div>
-
-        @if($cure->review['accepted'])
-        <div class="tab-content tab-content-cure-flow tab-full-size tab-horizontal-scroll">
-            @include('management.cure.tabs.flow')
-        </div>
-        @else
-            @if($cure->isHeadNurse(auth()->user()))
-            <div class="tab-content tab-content-cure-review">
-                @include('management.cure.tabs.review')
+        </nav>
+        <div class="tabs-contents">
+            <!--  cure card-->
+            <div data-tab="cure-card">
+                @include('management.cure.tabs.cure_card')
             </div>
+            <!-- end cure card -->
+
+            @if($cure->patient->granted(auth()->user()))
+            <!-- patient-card -->
+            <div data-tab="card">
+                @if($cure->granted(auth()->user()))
+                    @include('management.cure.tabs.card')
+                @else
+                    <div class="alert alert-danger">@lang('management.error.403')</div>
+                @endif
+            </div>
+            <!-- end patient card -->
             @endif
-        @endif
-        <!-- end patient cures -->
+
+            <!-- patient cures -->
+            <div data-tab="comments">
+                @include('management.cure.tabs.comments')
+            </div>
+
+            @if($cure->review['accepted'])
+            <div data-tab="flow tab-full-size tab-horizontal-scroll">
+                @include('management.cure.tabs.flow')
+            </div>
+            @else
+                @if($cure->isHeadNurse(auth()->user()))
+                <div data-tab="review">
+                    @include('management.cure.tabs.review')
+                </div>
+                @endif
+            @endif
+            <!-- end patient cures -->
+        </div>
     </div>
 @endsection

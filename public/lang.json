@@ -1,0 +1,18 @@
+{
+  "ru": {
+    "form": {
+      "send": "Отправить"
+    },
+    "popup": {
+      "registration": "Регистрация"
+    }
+  },
+  "en": {
+    "form": {
+      "send": "Send"
+    },
+    "popup": {
+      "registration": "Registration"
+    }
+  }
+}

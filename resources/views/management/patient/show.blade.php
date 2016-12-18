@@ -8,26 +8,28 @@
 ])
 
 @section('content')
-    <nav class="tabs" data-default=".tab-content-patient-card">
-        <a href="javascript:" data-target=".tab-content-patient-card">@lang('management.label.patient.card')</a>
-        <a href="javascript:" data-target=".tab-content-patient-cures">@lang('management.label.patient.cures.title')</a>
-        <a href="javascript:" data-target=".tab-content-patient-hospitalization">@lang('management.label.patient.hospitalization')</a>
-    </nav>
-    <div class="tabs-contents scrollable">
-        <!-- patient-card -->
-        <div class="tab-content tab-content-patient-card">
-            @include('management.patient.tabs.card')
-        </div>
-        <!-- end patient card -->
+    <div class="tabs">
+        <nav class="tabs-navigation">
+            <a href="javascript:" data-default data-target="card">@lang('management.label.patient.card')</a>
+            <a href="javascript:" data-target="cures">@lang('management.label.patient.cures.title')</a>
+            <a href="javascript:" data-target="hospitalization">@lang('management.label.patient.hospitalization')</a>
+        </nav>
+        <div class="tabs-contents">
+            <!-- patient-card -->
+            <div data-tab="card">
+                @include('management.patient.tabs.card')
+            </div>
+            <!-- end patient card -->
 
-        <!-- patient cures -->
-        <div class="tab-content tab-content-patient-cures">
-            @include('management.patient.tabs.cures')
-        </div>
+            <!-- patient cures -->
+            <div data-tab="cures">
+                @include('management.patient.tabs.cures')
+            </div>
 
-        <div class="tab-content tab-content-patient-hospitalization">
-            @include('management.patient.tabs.hospitalization')
+            <div data-tab="hospitalization">
+                @include('management.patient.tabs.hospitalization')
+            </div>
+            <!-- end patient cures -->
         </div>
-        <!-- end patient cures -->
     </div>
 @endsection

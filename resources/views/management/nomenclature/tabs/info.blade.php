@@ -9,7 +9,7 @@
 
     <table class="table table-striped-on-hover">
         <tr>
-            <td width="200">Название для отделения</td>
+            <td width="250">Название для отделения</td>
             <td>{{ $nomenclature->name_for_department }}</td>
         </tr>
         <tr>

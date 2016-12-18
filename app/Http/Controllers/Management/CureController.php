@@ -115,6 +115,12 @@ class CureController extends Controller
         return redirect()->route('patient.index');
     }
 
+    public function getForm(Cure $cure)
+    {
+        return view('management.cure.form')
+            ->with('cure', $cure);
+    }
+
     private function createNomenclatureRequest(Cure $cure, $calendarDays) {
 
         $days = [];

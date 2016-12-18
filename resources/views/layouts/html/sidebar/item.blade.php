@@ -1,1 +1,1 @@
-<a href="{{ route($link) }}" class="@if($active) active @endif @if($badge != null) has-badge @endif" @if($badge != null) data-badge="{{ $badge }}" @endif>{{ $title }}</a>
+<li><a href="{{ route($link) }}" @if($active) class="active" @endif>{{ $title }}</a></li>
