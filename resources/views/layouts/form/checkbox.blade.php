@@ -1,7 +1,5 @@
-<label class="input-checkbox">
-    <div class="wrapper">
-        {!! Form::checkbox($name, $value) !!}
-        <span class="wrapper"></span>
-    </div>
-    <span class="label-text">{{ $label ?? $value }}</span>
+<label>
+    {!! Form::checkbox($name, $value) !!}
+    <span class="input-wrapper"></span>
+    <span class="input-label">{{ $label ?? $value }}</span>
 </label>

@@ -8,7 +8,7 @@
 @section('content')
     <div class="tabs">
         <nav class="tabs-navigation normal-right-padding">
-            <a href="javascript:" data-default data-target="info">@lang('management.label.nomenclature.info')</a>
+            <a href="javascript:" data-default data-target="info"><nobr>@lang('management.label.nomenclature.info')</nobr></a>
             <a href="javascript:" data-target="revisions">@lang('management.label.nomenclature.revisions')</a>
             <a href="javascript:" data-target="batches" data-icon="add">@lang('management.label.nomenclature.series')</a>
             <a href="javascript:" data-target="statistic">@lang('management.label.nomenclature.statistic')</a>

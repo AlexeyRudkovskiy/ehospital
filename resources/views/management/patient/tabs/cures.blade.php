@@ -1,4 +1,4 @@
-<div class="cures">
+<div class="cards">
     @if($patient->cures->count() < 1)
         <div class="alert alert-info">@lang('management.label.patient.cures.empty')</div>
     @endif

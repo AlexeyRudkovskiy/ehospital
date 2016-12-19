@@ -27,7 +27,7 @@
         {!! Form::ehTextarea('comment') !!}
     </div>
 
-    <div class="step hidden">
+    <div class="step">
         @include('management.patient.tabs.hospitalization_nomenclatures')
     </div>
 

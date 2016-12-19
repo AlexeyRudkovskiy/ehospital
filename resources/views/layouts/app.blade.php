@@ -49,8 +49,35 @@
             @yield('content')
 
             {{--<div class="popup-notifications">--}}
-                {{--<div class="notification">--}}
-                    {{--Hello world!--}}
+                {{--<div class="notification notification-danger">--}}
+                    {{--<div class="notification-content">--}}
+                        {{--<div>--}}
+                            {{--Hello world!--}}
+                        {{--</div>--}}
+                        {{--<div class="notification-actions">--}}
+                            {{--<div class="btn-group">--}}
+                                {{--<a href="javascript:" class="btn">Show more</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="notification-close">--}}
+                        {{--<i class="material-icons">close</i>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="notification notification-success">--}}
+                    {{--<div class="notification-content">--}}
+                        {{--<div>--}}
+                            {{--Hello world!--}}
+                        {{--</div>--}}
+                        {{--<div class="notification-actions">--}}
+                            {{--<div class="btn-group">--}}
+                                {{--<a href="javascript:" class="btn">Show more</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="notification-close">--}}
+                        {{--<i class="material-icons">close</i>--}}
+                    {{--</div>--}}
                 {{--</div>--}}
             {{--</div>--}}
 

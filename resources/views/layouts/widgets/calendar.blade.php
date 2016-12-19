@@ -31,10 +31,10 @@
                 <tr>
                     <td><span class="day-wrapper">5</span></td>
                     <td><span class="day-wrapper">6</span></td>
-                    <td class="active"><span class="day-wrapper">7</span></td>
-                    <td class="active"><span class="day-wrapper">8</span></td>
-                    <td class="active"><span class="day-wrapper">9</span></td>
-                    <td class="active"><span class="day-wrapper">10</span></td>
+                    <td><span class="day-wrapper">7</span></td>
+                    <td><span class="day-wrapper">8</span></td>
+                    <td><span class="day-wrapper">9</span></td>
+                    <td><span class="day-wrapper">10</span></td>
                     <td><span class="day-wrapper">11</span></td>
                 </tr>
                 <tr>
@@ -95,3 +95,5 @@
         </ul>
     </div>
 </div>
+
+{{--<textarea name="" id="" cols="30" rows="10"></textarea>--}}

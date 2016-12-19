@@ -1,8 +1,8 @@
 <div class="form-group">
-    <div class="col-label">
-        {!! Form::label($title ?? $name, null, ['class' => 'label']) !!}
+    <div class="label">
+        {!! Form::label($title ?? $name, null, [ ]) !!}
     </div>
-    <div class="col-input">
+    <div class="input-wrapper">
         {!! Form::select($name, $elements, $current, array_merge([
             'class' => 'input'
         ], $attributes ?? [])) !!}

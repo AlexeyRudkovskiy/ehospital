@@ -1,1 +1,1 @@
-<attach-nomenclatures></attach-nomenclatures>
+@include('layouts.widgets.calendar')
