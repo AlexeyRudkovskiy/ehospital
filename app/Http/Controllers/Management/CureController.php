@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Management;
 use App\CalendarDay;
 use App\Cure;
 use App\Events\Notification;
+use App\Measure;
 use App\Permission;
 use App\User;
 use App\UserPosition;
@@ -19,21 +20,44 @@ class CureController extends Controller
 
     public function show(Cure $cure)
     {
-        if ($cure->review != null) {
-            $newCureReview = $cure->review;
-            $newCureReviewData = array_map(function ($item) {
-                foreach ($item as $key => $val) {
-                    $item['_' . $key] = $val;
-                    unset($item[$key]);
-                }
-                return $item;
-            }, $newCureReview['data']);
-            $newCureReview['data'] = $newCureReviewData;
-            $cure->review = $newCureReview;
+        // todo: remove this
+        auth()->loginUsingId(3);
+
+        $days = $cure->days;
+        $defaultData = [];
+        foreach ($days as $day) {
+            $localData = [];
+            foreach ($day->nomenclatures as $nomenclature) {
+                $measure = Measure::find($nomenclature->pivot['measure_id']);
+                array_push($localData, [
+                    'name' => $nomenclature->name_for_department,
+                    'nomenclature_id' => $nomenclature->id,
+                    'amount' => $measure->name,
+                    'measure_id' => $measure->id
+                ]);
+            }
+            $defaultData[$day->day->format('d.m.Y')] = [
+                'nomenclatures' => $localData,
+                'procedures' => [  ]
+            ];
         }
 
+//        if ($cure->review != null) {
+//            $newCureReview = $cure->review;
+//            $newCureReviewData = array_map(function ($item) {
+//                foreach ($item as $key => $val) {
+//                    $item['_' . $key] = $val;
+//                    unset($item[$key]);
+//                }
+//                return $item;
+//            }, $newCureReview['data']);
+//            $newCureReview['data'] = $newCureReviewData;
+//            $cure->review = $newCureReview;
+//        }
+
         return view('management.cure.show')
-            ->with('cure', $cure);
+            ->with('cure', $cure)
+            ->with('defaultData', $defaultData);
     }
 
     public function postReview(Cure $cure, Request $request)

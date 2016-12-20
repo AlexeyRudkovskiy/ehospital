@@ -5,6 +5,12 @@
     },
     "popup": {
       "registration": "Регистрация"
+    },
+    "hospitalization": {
+      "item": {
+        "delete": "удалить",
+        "edit": "редактировать"
+      }
     }
   },
   "en": {
@@ -13,6 +19,12 @@
     },
     "popup": {
       "registration": "Registration"
+    },
+    "hospitalization": {
+      "item": {
+        "delete": "delete",
+        "edit": "edit"
+      }
     }
   }
 }

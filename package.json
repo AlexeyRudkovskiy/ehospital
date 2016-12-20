@@ -1,13 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "start": "laravel-echo-server start",
-    "prod": "gulp --production",
-    "dev": "gulp watch",
+    "prod": "gulp --production --cwd ./frontend",
+    "dev": "gulp --cwd ./frontend",
     "clear": "rm -rf public/js && rm -rf public/css && rm -rf public/font",
     "build": "webpack",
     "postinstall": "typings install",
-    "echo": "node ./laravel_echo_server.js"
+    "echo": "node ./laravel_echo_server.js",
+    "watch": "gulp watch --cwd ./frontend"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.7",

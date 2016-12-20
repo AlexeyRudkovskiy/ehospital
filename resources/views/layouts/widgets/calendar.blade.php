@@ -1,3 +1,5 @@
+@php($isJustView = false)
+
 <div class="calendar-container">
     <div class="calendar">
         <div class="calendar-header">
@@ -75,7 +77,9 @@
         <div class="header">
             <h3>Медикаменты</h3>
             <div class="create-item">
+                @if (!$isJustView)
                 <a href="javascript:" class="btn btn-small add-medicament">добавить</a>
+                @endif
             </div>
         </div>
         <ul class="list medicaments">
@@ -95,4 +99,10 @@
     </div>
 </div>
 
-{{--<textarea name="" id="" cols="30" rows="10"></textarea>--}}
+<textarea name="calendar_value" id="calendar_value" class="hide">{{ json_encode($defaultData ?? new stdClass()) }}</textarea>
+
+<script>
+    window.calendarConfig = {
+        justView: {{ (int)$isJustView }}
+    };
+</script>

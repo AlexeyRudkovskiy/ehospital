@@ -8,7 +8,9 @@ use App\Events\Nomenclature\RequestEvent;
 use App\Events\Notification;
 use App\Inspection;
 use App\ListItem;
+use App\Measure;
 use App\Nomenclature;
+use App\NomenclatureRequest;
 use App\Patient;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -151,7 +153,69 @@ class PatientController extends Controller
 
     }
 
-    public function postHospitalization(Request $request)
+    public function postHospitalization (Request $request) {
+        $data = $request->all();
+        $data['hospitalization_date'] = Carbon::parse($data['hospitalization_date']);
+        $data['calendar_value'] = json_decode($data['calendar_value']);
+
+        $uniqueNomenclaturesCount = [];
+        $measures = [];
+
+        foreach ($data['calendar_value'] as $day => $val) {
+            $day = Carbon::parse($day);
+
+            foreach ($val->nomenclatures as $nomenclature) {
+                $nomenclatureId = $nomenclature->nomenclature_id;
+
+                if (!array_key_exists($nomenclature->measure_id, $measures)) {
+                    $measures[$nomenclature->measure_id] = Measure::find($nomenclature->measure_id);
+                }
+
+                if (!array_key_exists($nomenclatureId, $uniqueNomenclaturesCount)) {
+                    $uniqueNomenclaturesCount[$nomenclatureId] = 0;
+                }
+
+                $uniqueNomenclaturesCount[$nomenclatureId] += $measures[$nomenclature->measure_id]->amount;
+            }
+        }
+
+        $cure = new Cure();
+
+        $cure->patient_id = $request->get('patient_id');
+        $cure->department_id = $request->get('department_id');
+        $cure->user_id = 1;
+        $cure->cure_status_id = 1;
+        $cure->hospitalization_date = $data['hospitalization_date'];
+        $cure->diagnosis = $request->get('diagnosis');
+
+        $cure->save();
+
+        $nomenclatureRequest = $cure->nomenclatureRequest()->create([
+            'done' => false,
+            'requested' => $uniqueNomenclaturesCount,
+            'doctor_id' => 1
+        ]);
+
+        foreach ($data['calendar_value'] as $day => $value) {
+            $calendarDay = $cure->days()->create([
+                'day' => Carbon::parse($day)
+            ]);
+
+            foreach ($value->nomenclatures as $nomenclature) {
+                $calendarDay->nomenclatures()->attach([
+                    $nomenclature->nomenclature_id => [
+                        'amount' => $measures[$nomenclature->measure_id]->amount,
+                        'measure_id' => $nomenclature->measure_id,
+                        'comment' => ''
+                    ]
+                ]);
+            }
+        }
+
+        return $cure;
+    }
+
+    public function postHospitalization_old(Request $request)
     {
         $patient = Patient::find($request->get('patient_id'));
 
