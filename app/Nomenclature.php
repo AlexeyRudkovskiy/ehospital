@@ -55,7 +55,8 @@ class Nomenclature extends Model
     protected $with = [
         'baseUnit',
         'basicUnit',
-        'batches'
+        'batches',
+        'measures'
     ];
 
     /**
@@ -99,6 +100,16 @@ class Nomenclature extends Model
     public function atcClassification()
     {
         return $this->belongsTo(AtcClassification::class);
+    }
+
+    /**
+     * Дозировки
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function measures()
+    {
+        return $this->hasMany(Measure::class);
     }
 
     /**

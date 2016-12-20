@@ -15,8 +15,10 @@
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
+            'csrfToken' => csrf_token()
         ]); ?>
+
+        window.token = '{{ $current->api_token }}';
     </script>
 </head>
 <body>
@@ -90,6 +92,8 @@
 <!-- app js resources -->
 <script src="/vendor/systemjs/dist/system.js"></script>
 <script>
+    window.currentPage = '{{ request()->route()->getName() }}';
+
     SystemJS.config({
         defaultJSExtensions: true,
         baseURL: '/js',

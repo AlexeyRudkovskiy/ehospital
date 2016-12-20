@@ -72,23 +72,22 @@
         </div>
     </div>
     <div class="calendar-day">
-        <h3>Лекарства</h3>
-        <ul class="list">
+        <div class="header">
+            <h3>Медикаменты</h3>
+            <div class="create-item">
+                <a href="javascript:" class="btn btn-small add-medicament">добавить</a>
+            </div>
+        </div>
+        <ul class="list medicaments">
             <li>
                 <p class="name"><a href="javascript:">Амброксол</a></p>
                 <p class="amount">10 мл</p>
             </li>
-            <li>
-                <p class="name"><a href="javascript:">Берлиприл</a></p>
-                <p class="amount">2тб.</p>
-            </li>
-            <li>
-                <p class="name"><a href="javascript:">Сумамед</a></p>
-                <p class="amount">2тб.</p>
-            </li>
         </ul>
-        <h3>Процедуры</h3>
-        <ul class="list">
+        <div class="header">
+            <h3>Процедуры</h3>
+        </div>
+        <ul class="list procedures">
             <li>
                 <p class="name"><a href="javascript:">ЭКГ</a></p>
             </li>
