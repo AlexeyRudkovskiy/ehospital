@@ -190,11 +190,11 @@ class PatientController extends Controller
 
         $cure->save();
 
-        $nomenclatureRequest = $cure->nomenclatureRequest()->create([
-            'done' => false,
-            'requested' => $uniqueNomenclaturesCount,
-            'doctor_id' => 1
-        ]);
+//        $nomenclatureRequest = $cure->nomenclatureRequest()->create([
+//            'done' => false,
+//            'requested' => $uniqueNomenclaturesCount,
+//            'doctor_id' => 1
+//        ]);
 
         foreach ($data['calendar_value'] as $day => $value) {
             $calendarDay = $cure->days()->create([

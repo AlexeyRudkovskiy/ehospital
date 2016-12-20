@@ -70,7 +70,9 @@
             </table>
         </div>
         <div class="calendar-footer">
-
+            @if(isset($viewUnderCalendar))
+                @include($viewUnderCalendar)
+            @endif
         </div>
     </div>
     <div class="calendar-day">

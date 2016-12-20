@@ -62,37 +62,37 @@ class CureController extends Controller
 
     public function postReview(Cure $cure, Request $request)
     {
-        $calendarDays = $request->get('calendar_days');
-        $calendarDays = \json_decode($calendarDays, true);
-
-        $calendarDays = array_map(function ($item) {
-            foreach ($item as $key => $value) {
-                unset($item[$key]);
-                $key = substr($key, 1);
-                $item[$key] = $value;
-            }
-
-            return (object)$item;
-        }, $calendarDays);
-
-        $currentData = $cure->review['data'];
-        $updatedReview = $cure->review;
-        $updatedReview['initial'] = $currentData;
-        $updatedReview['data'] = $calendarDays;
-
-        if ($request->has('accepted') && (int)($request->get('accepted')) == 1) {
-            $updatedReview['accepted'] = true;
-
-            $notification = new Notification(trans('management.notification.nomenclature.request.title'), 'notification-default');
-            $notification->addAction(trans('management.notification.nomenclature.request.action.open'), route('cure.show', $cure->id));
-
-            $cure->department->chiefMedicalOfficer->notify($notification);
-        }
-
-        $cure->review = $updatedReview;
-        $cure->save();
-
-        return redirect()->route('cure.show', $cure->id);
+//        $calendarDays = $request->get('calendar_days');
+//        $calendarDays = \json_decode($calendarDays, true);
+//
+//        $calendarDays = array_map(function ($item) {
+//            foreach ($item as $key => $value) {
+//                unset($item[$key]);
+//                $key = substr($key, 1);
+//                $item[$key] = $value;
+//            }
+//
+//            return (object)$item;
+//        }, $calendarDays);
+//
+//        $currentData = $cure->review['data'];
+//        $updatedReview = $cure->review;
+//        $updatedReview['initial'] = $currentData;
+//        $updatedReview['data'] = $calendarDays;
+//
+//        if ($request->has('accepted') && (int)($request->get('accepted')) == 1) {
+//            $updatedReview['accepted'] = true;
+//
+//            $notification = new Notification(trans('management.notification.nomenclature.request.title'), 'notification-default');
+//            $notification->addAction(trans('management.notification.nomenclature.request.action.open'), route('cure.show', $cure->id));
+//
+//            $cure->department->chiefMedicalOfficer->notify($notification);
+//        }
+//
+//        $cure->review = $updatedReview;
+//        $cure->save();
+//
+//        return redirect()->route('cure.show', $cure->id);
     }
 
     public function getReviewAccept(Cure $cure)
