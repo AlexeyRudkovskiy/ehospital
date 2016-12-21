@@ -314,4 +314,9 @@ class PatientController extends Controller
         return redirect()->route('patient.show', $request->get('patient_id'));
     }
 
+    public function getEmergencyDepartment()
+    {
+        return [1,2,3];
+    }
+
 }

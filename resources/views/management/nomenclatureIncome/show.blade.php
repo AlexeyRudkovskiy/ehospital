@@ -7,17 +7,18 @@
 
 @section('content')
 
-    <nav class="tabs" data-default=".tab-content-info">
-        <a href="javascript:" data-target=".tab-content-info">@lang('management.label.nomenclatureIncome.info')</a>
-        <a href="javascript:" data-target=".tab-content-nomenclatures">@lang('management.label.nomenclatureIncome.nomenclatures')</a>
-    </nav>
-
-    <div class="tabs-contents">
-        <div class="tab-content tab-content-info">
-            @include('management.nomenclatureIncome.tabs.info')
-        </div>
-        <div class="tab-content tab-content-nomenclatures">
-            @include('management.nomenclatureIncome.tabs.nomenclatures')
+    <div class="tabs">
+        <nav class="tabs-navigation">
+            <a href="javascript:" data-default data-target="info">@lang('management.label.nomenclatureIncome.info')</a>
+            <a href="javascript:" data-target="nomenclatures">@lang('management.label.nomenclatureIncome.nomenclatures')</a>
+        </nav>
+        <div class="tabs-contents">
+            <div data-tab="info">
+                @include('management.nomenclatureIncome.tabs.info')
+            </div>
+            <div data-tab="nomenclatures">
+                @include('management.nomenclatureIncome.tabs.nomenclatures')
+            </div>
         </div>
     </div>
 

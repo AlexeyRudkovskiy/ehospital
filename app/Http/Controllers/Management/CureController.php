@@ -20,9 +20,6 @@ class CureController extends Controller
 
     public function show(Cure $cure)
     {
-        // todo: remove this
-        auth()->loginUsingId(5);
-
         $days = $cure->days;
         $defaultData = [];
         foreach ($days as $day) {
@@ -220,6 +217,12 @@ class CureController extends Controller
         $nomenclatureRequestObject->save();
 
         return $nomenclatureRequestObject;
+    }
+
+    public function getCard(Cure $cure)
+    {
+        return view('management.cure.card')
+            ->with('cure', $cure);
     }
 
 }

@@ -43,7 +43,7 @@ class NomenclatureIncomeController extends Controller
                 'price' => $item['total'],
                 'nomenclature_id' => $nomenclature->id
             ]);
-            $nomenclature->income($item['amount'], $batch);
+            $nomenclature->income($item['amount'], $batch, ['nomenclature_income_id' => $income->id]);
         }
 
 //        $data['nomenclatures'] = \json_decode($data['nomenclatures']);

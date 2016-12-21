@@ -24,7 +24,7 @@
         </div>
 
         <div class="step incomeTable">
-            <table class="table">
+            <table class="table table-small">
                 <thead>
                 <tr>
                     <th>Nomenclature</th>

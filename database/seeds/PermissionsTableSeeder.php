@@ -91,5 +91,18 @@ class PermissionsTableSeeder extends Seeder
                 ]
             ])
         ]);
+
+        \App\Permission::create([
+            'name' => 'emergency_department',
+            'map' => json_encode([  ]),
+            'sidebar' => json_encode([
+                [
+                    'name' => "Приёмный покой",
+                    'items' => [
+                        [ 'path' => "patient.emergency_department" ]
+                    ]
+                ]
+            ])
+        ]);
     }
 }

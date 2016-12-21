@@ -27,17 +27,26 @@ class UsersTableSeeder extends Seeder
         });
 
         $u3 = \App\User::find(3);
-        $u3->email = 'test@mail.ru';
+        $u3->email = 'stmed@mail.ru';
+        $u3->password = 'password';
         $u3->save();
 
         $u4 = \App\User::find(4);
         $u4->permission_id = 2;
-        $u4->email = 'foo@mail.ru';
+        $u4->email = 'ph@mail.ru';
+        $u4->password = 'password';
         $u4->save();
 
         $u5 = \App\User::find(5);
         $u5->permission_id = 3;
-        $u5->email = 'bar@mail.ru';
+        $u5->email = 'chief@mail.ru';
+        $u5->password = 'password';
         $u5->save();
+
+        $u6 = \App\User::find(6);
+        $u6->permission_id = 4;
+        $u6->password = 'password';
+        $u6->email = 'rd@mail.ru';
+        $u6->save();
     }
 }

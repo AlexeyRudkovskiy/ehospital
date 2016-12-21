@@ -30,4 +30,9 @@ Route::post('patient/{patient}/inspection/edit', [
     'as' => 'patient.inspection.edit.post'
 ]);
 
+Route::get('patient/emergency_department', [
+    'uses' => 'PatientController@getEmergencyDepartment',
+    'as' => 'patient.emergency_department'
+]);
+
 Route::resource('patient', 'PatientController');

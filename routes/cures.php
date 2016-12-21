@@ -15,6 +15,11 @@ Route::get('cure/{cure}/review/reject', [
     'as' => 'cure.review.reject'
 ]);
 
+Route::get('cure/{cure}/card', [
+    'uses' => 'CureController@getCard',
+    'as' => 'cure.card'
+]);
+
 Route::get('cure/{cure}', [
     'uses' => 'CureController@show',
     'as' => 'cure.show'

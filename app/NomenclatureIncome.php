@@ -79,13 +79,18 @@ class NomenclatureIncome extends Model
     private function getNomenclatures() {
         $data = [];
 
+        if (gettype($this->nomenclatures) == 'string') {
+            $this->nomenclatures = json_decode($this->nomenclatures);
+        }
+
         foreach ($this->nomenclatures as $item) {
+            $nomenclature = Nomenclature::find($item['id']);
+
             array_push($data, (object)[
-                'id' => $item['nomenclature_id'],
-                'name' => Nomenclature::where('id', $item['nomenclature_id'])->pluck('name', 'id')->first(),
-                'amount' => (int)($item['amount']),
-                'price' => (float)($item['price']),
-                'unit' => Unit::find($item['unit_id'])
+                'id' => $item['id'],
+                'name' => $nomenclature->name,
+                'amount' => (float)($item['amount']) * $nomenclature->amount_in_a_package,
+                'price' => (float)($item['price'])
             ]);
         }
 
