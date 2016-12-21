@@ -21,7 +21,7 @@ class CureController extends Controller
     public function show(Cure $cure)
     {
         // todo: remove this
-        auth()->loginUsingId(3);
+        auth()->loginUsingId(5);
 
         $days = $cure->days;
         $defaultData = [];
@@ -42,26 +42,27 @@ class CureController extends Controller
             ];
         }
 
-//        if ($cure->review != null) {
-//            $newCureReview = $cure->review;
-//            $newCureReviewData = array_map(function ($item) {
-//                foreach ($item as $key => $val) {
-//                    $item['_' . $key] = $val;
-//                    unset($item[$key]);
-//                }
-//                return $item;
-//            }, $newCureReview['data']);
-//            $newCureReview['data'] = $newCureReviewData;
-//            $cure->review = $newCureReview;
-//        }
-
+        $defaultValue = $cure->review['accepted'] != [] ? $cure->review['accepted'] : $cure->review['requested'];
         return view('management.cure.show')
             ->with('cure', $cure)
-            ->with('defaultData', $defaultData);
+            ->with('defaultData', $defaultValue);
     }
 
     public function postReview(Cure $cure, Request $request)
     {
+        $calendarValue = $request->get('calendar_value');
+        $calendarValue = json_decode($calendarValue);
+
+        $review = $cure['review'];
+        $review['accepted'] = $calendarValue;
+        $review['accepted_date'] = Carbon::today();
+        $review['headNurse'] = true;
+        $review['headNurse_id'] = auth()->id();
+
+        $cure->review = $review;
+        $cure->save();
+
+        return $cure;
 //        $calendarDays = $request->get('calendar_days');
 //        $calendarDays = \json_decode($calendarDays, true);
 //
@@ -97,27 +98,49 @@ class CureController extends Controller
 
     public function getReviewAccept(Cure $cure)
     {
-        $newReview = $cure->review;
+        $review = $cure->review;
+        $review['chief'] = true;
+        $review['chief_date'] = Carbon::today();
+        $review['chief_id'] = auth()->id();
 
-        $newReview['chief_medical_officer_id'] = auth()->id();
-        $newReview['chief_medical_officer_date'] = Carbon::now()->format('d.m.Y H:i:s');
 
-        $cure->review = $newReview;
+        $cure->review = $review;
+        $cure->save();
 
-        $calendarDays = $cure->review['data'];
-        $calendarDays = array_map(function ($item) {
-            return (object)$item;
-        }, $calendarDays);
+        $measures = [];
+        $unique = [];
 
-        $nomenclatureRequest = $this->createNomenclatureRequest($cure, $calendarDays);
+        foreach ($review['accepted'] as $day => $value) {
+            $calendarDate = $cure->days()->create(['day' => Carbon::parse($day)]);
 
-        $notification = new Notification(trans('management.notification.nomenclature.request.title'), 'notification-default');
-        $notification->addAction(trans('management.notification.nomenclature.request.action.open'), route('nomenclatureRequest.show', $nomenclatureRequest->id));
+            foreach ($value['nomenclatures'] as $nomenclature) {
+                if (!array_key_exists($nomenclature['measure_id'], $measures)) {
+                    $measures[$nomenclature['measure_id']] = Measure::find($nomenclature['measure_id']);
+                }
 
-        $users = Permission::find(Permission::PHARMACIST)->users;
-        $users->each(function (User $user) use ($notification) {
-            $user->notify($notification);
-        });
+                if (!array_key_exists($nomenclature['nomenclature_id'], $unique)) {
+                    $unique[$nomenclature['nomenclature_id']] = 0;
+                }
+
+                $unique[$nomenclature['nomenclature_id']] += $measures[$nomenclature['measure_id']]->amount;
+
+                $calendarDate->nomenclatures()->attach([
+                    $nomenclature['nomenclature_id'] => [
+                        'amount' => $measures[$nomenclature['measure_id']]->amount,
+                        'measure_id' => $nomenclature['measure_id']
+                    ]
+                ]);
+            }
+        }
+
+        $cure->nomenclatureRequest()->create([
+            'done' => false,
+            'requested' => $unique,
+            'doctor_id' => $cure->user_id,
+            'head_nurse_id' => $cure->review['headNurse_id'],
+            'chief_medical_officer_id' => $cure->review['chief_id'],
+            'ready' => true
+        ]);
 
         return $cure->review;
     }
@@ -126,7 +149,7 @@ class CureController extends Controller
     {
         $newReview = $cure->review;
 
-        $newReview['accepted'] = false;
+        $newReview['headNurse'] = false;
 
         $cure->review = $newReview;
         $cure->save();

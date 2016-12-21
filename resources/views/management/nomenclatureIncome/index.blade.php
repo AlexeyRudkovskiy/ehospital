@@ -12,10 +12,10 @@
             {!! Form::ehSelect('contractor_id', \App\Contractor::whereGroup('provider')->pluck('name', 'id'), null, null, ['id' => 'contractor_select']) !!}
 
             <div class="form-group hidden" id="agreement_group">
-                <div class="col-label">
-                    <label for="agreement" class="label">Agreement</label>
+                <div class="label">
+                    <label for="agreement">Agreement</label>
                 </div>
-                <div class="col-input">
+                <div class="input-wrapper">
                     <select name="agreement_id" id="agreement_select" class="input"></select>
                 </div>
             </div>
@@ -23,8 +23,26 @@
             {!! Form::ehSelect('storage_id', \App\Storage::pluck('name', 'id')) !!}
         </div>
 
-        <div class="step hidden">
-            <income-nomenclatures></income-nomenclatures>
+        <div class="step incomeTable">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nomenclature</th>
+                    <th>Batch</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th>Nds</th>
+                    <th>Sum</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div>
+                <a style="float:right;" href="javascript:" class="btn" id="addRow">add item</a>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
         </div>
 
         <div class="form-footer row offset-top">

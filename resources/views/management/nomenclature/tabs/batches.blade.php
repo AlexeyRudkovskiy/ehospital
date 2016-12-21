@@ -1,8 +1,7 @@
 <table class="table">
     <thead>
     <tr>
-        <th>Expiration date</th>
-        <th width="150">Number</th>
+        <th>Batch</th>
         <th width="150">Balance</th>
         <th width="150">Price</th>
         <th width="100" align="right" style="text-align: right;">
@@ -13,8 +12,7 @@
     <tbody>
     @foreach($nomenclature->batches as $batch)
         <tr>
-            <td>{{ $batch->expiration_date }}</td>
-            <td>{{ $batch->batch_number }}</td>
+            <td>{{ $batch->batch }}</td>
             <td>{{ $batch->getBalance() }}</td>
             <td>{{ $batch->price }}</td>
             <td align="right" style="text-align: right">

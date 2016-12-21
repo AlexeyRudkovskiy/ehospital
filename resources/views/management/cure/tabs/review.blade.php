@@ -1,4 +1,4 @@
-{!! Form::open(['route' => route('cure.review.post', $cure), 'method' => 'post']) !!}
+{!! Form::open(['route' => ['cure.review.post', $cure], 'method' => 'post']) !!}
     @include('layouts.widgets.calendar', [ 'defaultData' => $defaultData, 'viewUnderCalendar' => 'management.cure.tabs.partials.viewUnderCalendar' ])
 {!! Form::close() !!}
 

@@ -15,7 +15,7 @@
                 <a href="javascript:" data-target="card">@lang('management.label.patient.card')</a>
             @endif
             <a href="javascript:" data-target="comments">@lang('management.label.cure.comments')</a>
-            @if($cure->review['accepted'])
+            @if($cure->review['headNurse'] == true)
                 <a href="javascript:" data-target="flow">@lang('management.label.cure.flow')</a>
             @else
                 @if($cure->isHeadNurse(auth()->user()))
@@ -47,8 +47,8 @@
                 @include('management.cure.tabs.comments')
             </div>
 
-            @if($cure->review['accepted'])
-            <div data-tab="flow tab-full-size tab-horizontal-scroll">
+            @if($cure->review['headNurse'] == true)
+            <div data-tab="flow" class="tab-full-size tab-horizontal-scroll">
                 @include('management.cure.tabs.flow')
             </div>
             @else

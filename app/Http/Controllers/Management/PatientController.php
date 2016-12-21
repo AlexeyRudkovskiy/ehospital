@@ -187,6 +187,17 @@ class PatientController extends Controller
         $cure->cure_status_id = 1;
         $cure->hospitalization_date = $data['hospitalization_date'];
         $cure->diagnosis = $request->get('diagnosis');
+        $cure->review = [
+            'requested' => $data['calendar_value'],
+            'accepted' => new \stdClass(),
+            'headNurse' => false,
+            'chief' => false,
+            'accepted_date' => null,
+            'chief_date' => null,
+            'requested_date' => Carbon::today(),
+            'headNurse_id' => 0,
+            'chief_id' => 0
+        ];
 
         $cure->save();
 
@@ -196,21 +207,21 @@ class PatientController extends Controller
 //            'doctor_id' => 1
 //        ]);
 
-        foreach ($data['calendar_value'] as $day => $value) {
-            $calendarDay = $cure->days()->create([
-                'day' => Carbon::parse($day)
-            ]);
-
-            foreach ($value->nomenclatures as $nomenclature) {
-                $calendarDay->nomenclatures()->attach([
-                    $nomenclature->nomenclature_id => [
-                        'amount' => $measures[$nomenclature->measure_id]->amount,
-                        'measure_id' => $nomenclature->measure_id,
-                        'comment' => ''
-                    ]
-                ]);
-            }
-        }
+//        foreach ($data['calendar_value'] as $day => $value) {
+//            $calendarDay = $cure->days()->create([
+//                'day' => Carbon::parse($day)
+//            ]);
+//
+//            foreach ($value->nomenclatures as $nomenclature) {
+//                $calendarDay->nomenclatures()->attach([
+//                    $nomenclature->nomenclature_id => [
+//                        'amount' => $measures[$nomenclature->measure_id]->amount,
+//                        'measure_id' => $nomenclature->measure_id,
+//                        'comment' => ''
+//                    ]
+//                ]);
+//            }
+//        }
 
         return $cure;
     }

@@ -24,9 +24,7 @@ class NomenclatureBatchRequest extends FormRequest
     public function rules()
     {
         return [
-            'batch_number' => 'required',
-            'expiration_date' => 'required',
-            'price' => 'required'
+            'batch' => 'required'
         ];
     }
 }

@@ -1,7 +1,5 @@
-{!! Form::ehNumber('batch_number') !!}
+{!! Form::ehText('batch') !!}
 
-{!! Form::ehDate('expiration_date') !!}
-
-{!! Form::ehNumber('price', null, null, ['step' => '0.01']) !!}
+{!! Form::ehNumber('price') !!}
 
 {!! Form::ehSave() !!}

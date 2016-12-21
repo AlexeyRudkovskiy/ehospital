@@ -19,6 +19,7 @@ class NomenclatureRequestController extends Controller
 
         return view('management.nomenclatureRequest.show')
             ->with('requestedData', $requestedData)
+            ->with('accepted', $nomenclatureRequest->accepted)
             ->with('isAccepted', $nomenclatureRequest->accepted != null);
     }
 
@@ -30,7 +31,7 @@ class NomenclatureRequestController extends Controller
         foreach ($accepted as $key => $item) {
             $nomenclature = Nomenclature::find($key);
             $batch = null;
-            $nomenclature->outgoing($item['amount'], $batch, [
+            $nomenclature->outgoing($item, $batch, [
                 'nomenclature_request_id' => $nomenclatureRequest->id
             ]);
 

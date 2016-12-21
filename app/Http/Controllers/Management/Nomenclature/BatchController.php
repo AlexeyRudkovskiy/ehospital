@@ -41,8 +41,7 @@ class BatchController extends Controller
     {
         if ($nomenclature->id != null) {
             $data = $request->only([
-                'batch_number',
-                'expiration_date',
+                'batch',
                 'price'
             ]);
             $batch = $nomenclature->batches()->create($data);
@@ -78,8 +77,7 @@ class BatchController extends Controller
     public function update(NomenclatureBatchRequest $request, Nomenclature $nomenclature, NomenclatureBatch $batch)
     {
         $data = $batch->update($request->only([
-            'batch_number',
-            'expiration_date',
+            'batch',
             'price'
         ]));
         event(new BatchChangedEvent($batch));

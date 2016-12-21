@@ -26,8 +26,7 @@ class NomenclatureBatch extends Model
      * @var array
      */
     protected $fillable = [
-        'expiration_date',
-        'batch_number',
+        'batch',
         'price',
         'nomenclature_id'
     ];
