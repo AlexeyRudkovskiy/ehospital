@@ -35,7 +35,8 @@ class NomenclatureRequest extends FormRequest
             'basic_unit_id' => 'required',
             'atc_classification_id' => 'required',
             'keep_records_by_series' => 'required',
-            'manufacturer_id' => 'required'
+            'manufacturer_id' => 'required',
+            'source_of_financing_id' => 'required'
         ];
     }
 }

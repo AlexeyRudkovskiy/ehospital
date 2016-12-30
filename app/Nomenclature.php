@@ -45,7 +45,8 @@ class Nomenclature extends Model
         'base_unit_id',
         'basic_unit_id',
         'manufacturer_id',
-        'atc_classification_id'
+        'atc_classification_id',
+        'source_of_financing_id'
     ];
 
     protected $casts = [
@@ -168,6 +169,11 @@ class Nomenclature extends Model
     public function basicUnit()
     {
         return $this->belongsTo(Unit::class, 'basic_unit_id');
+    }
+
+    public function sourceOfFinancing()
+    {
+        return $this->belongsTo(SourceOfFinancing::class);
     }
 
     /**

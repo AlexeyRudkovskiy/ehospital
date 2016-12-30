@@ -49,11 +49,6 @@ class CreateCureCardsTable extends Migration
 
             $table->foreign('cure_id')->references('id')->on('cures');
         });
-
-        Schema::table('cures', function (Blueprint $table) {
-            $table->integer('cure_card_id', false, true)->nullable()->default(null);
-            $table->foreign('cure_card_id')->references('id')->on('cure_cards');
-        });
     }
 
     /**
@@ -63,11 +58,6 @@ class CreateCureCardsTable extends Migration
      */
     public function down()
     {
-        Schema::table('cures', function (Blueprint $table) {
-            $table->dropForeign(['cure_card_id']);
-            $table->dropColumn('cure_card_id');
-        });
-
         Schema::dropIfExists('cure_cards');
     }
 }

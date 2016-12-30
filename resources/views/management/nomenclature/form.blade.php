@@ -25,4 +25,6 @@
 
 {!! Form::ehSelect('manufacturer_id', \App\Manufacturer::pluck('name', 'id')) !!}
 
+{!! Form::ehSelect('source_of_financing_id', \App\SourceOfFinancing::pluck('name', 'id')) !!}
+
 {!! Form::ehSave() !!}

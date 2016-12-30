@@ -54,5 +54,9 @@
             <td>Базовая единица измерения</td>
             <td>{{ isset($nomenclature->basicUnit) ? $nomenclature->basicUnit->text : '' }}</td>
         </tr>
+        <tr>
+            <td>Источник финансирования</td>
+            <td>{{ $nomenclature->sourceOfFinancing->name }}</td>
+        </tr>
     </table>
 </div>
