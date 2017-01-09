@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Traits;
+use Carbon\Carbon;
 use League\Flysystem\Exception;
 
 /**
@@ -29,6 +30,11 @@ trait EncryptionTrait
             }
         }
 
+        $cacheKey = $this->getCacheKey($key);
+        if (cache()->has($cacheKey)) {
+            return cache()->get($cacheKey);
+        }
+
         try {
             $var = $this->attributes[$key];
             $encrypter = null;
@@ -38,6 +44,8 @@ trait EncryptionTrait
                 $encrypter = auth()->user()->getEncrypter();
             }
             $value = $encrypter->decrypt($var);
+            $expireAt = Carbon::now()->addMinutes(30);
+            cache()->put($cacheKey, $value, $expireAt);
         } catch (\Exception $e) {
             throw new \Exception("Can't decrypt data");
         }
@@ -63,6 +71,7 @@ trait EncryptionTrait
             $encrypter = auth()->user()->getEncrypter();
         }
         $this->attributes[$key] = $encrypter->encrypt($value);
+
         return $this;
     }
 
@@ -88,6 +97,15 @@ trait EncryptionTrait
                 $this->{$item} = $val;
             }
         }
+    }
+
+    /**
+     * @param $key
+     * @return string
+     */
+    public function getCacheKey($key): string
+    {
+        return 'encryption.' . $this->getTable() . '.' . $this->attributes[$this->primaryKey] . '.' . $key;
     }
 
 }
