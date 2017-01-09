@@ -15,12 +15,12 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('country');
-            $table->string('region');
-            $table->string('city');
-            $table->string('street');
-            $table->string('house_number');
-            $table->string('apartment');
+            $table->string('country');                  // город
+            $table->string('region');                   // область
+            $table->string('city');                     // город
+            $table->string('street');                   // улица
+            $table->string('house_number');             // номер дома
+            $table->string('apartment', 10)->nullable();    // квартира
 
             $table->morphs('addressable', 'addressable');
 

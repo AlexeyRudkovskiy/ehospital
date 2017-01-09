@@ -1,0 +1,13 @@
+.form-group {
+  .checkbox, .radio {
+    label {
+      padding-left: 0;
+    }
+  }
+
+  .error-block {
+    color: $brand-danger;
+    display: block;
+    padding-top: 10px;
+  }
+}

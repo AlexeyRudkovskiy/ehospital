@@ -2,9 +2,10 @@
 
 namespace App;
 
+use App\Traits\EncryptionTrait;
 use App\Traits\RevisionsTrait;
 use Illuminate\Database\Eloquent\Model;
-use Psy\Test\CodeCleaner\StaticConstructorPassTest;
+use Illuminate\Support\Collection;
 
 /**
  * Class Patient
@@ -20,7 +21,15 @@ use Psy\Test\CodeCleaner\StaticConstructorPassTest;
 class Patient extends Model
 {
 
-    use RevisionsTrait;
+    // use RevisionsTrait;
+    use EncryptionTrait;
+
+    /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * Разрешаем заполнять эти поля
@@ -36,6 +45,20 @@ class Patient extends Model
         'hospital_employee'
     ];
 
+    protected $encrypted = [
+        'name', 'birthday', 'phone', 'homeless', 'ukrainian', 'hospital_employee'
+    ];
+
+    protected $casts = [
+        'homeless' => 'bool',
+        'ukrainian' => 'bool',
+        'hospital_employee' => 'bool'
+    ];
+
+    protected $with = [
+        'inspection'
+    ];
+
     /**
      * Даём возможность комментировать пациента врачём или группой врачей
      *
@@ -47,6 +70,16 @@ class Patient extends Model
     }
 
     /**
+     * Основной лечащий врач в данный момент
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function doctor()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
      * Врачи, которые так же имеют доступ к этому пациенту
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -54,6 +87,17 @@ class Patient extends Model
     public function doctors()
     {
         return $this->belongsToMany(User::class, 'patient_users', 'patient_id');
+    }
+
+    /**
+     * Пользователь, создавший этого пациента.
+     * Используется для шифрования
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -76,6 +120,11 @@ class Patient extends Model
         return $this->hasMany(Cure::class)->orderBy('id', 'desc');
     }
 
+    public function inspection()
+    {
+        return $this->hasOne(Inspection::class, 'patient_id');
+    }
+
     /**
      * Статусы пользователя.
      * Тут хранится информация когды был госпитализирован\выписан, куда был переведён.
@@ -85,6 +134,56 @@ class Patient extends Model
     public function statuses()
     {
         return $this->hasMany(PatientStatus::class)->orderBy('id', 'desc');
+    }
+
+    /**
+     * Определяет, имеет ли текущий доктор, или доктор указанный в качестве первого аргумента, доступ к пациенту и его истории в расшифрованном виде
+     *
+     * @param User|null $user
+     * @return bool
+     */
+    public function granted (User $user = null) {
+        if ($user == null) {
+            $user = auth()->user();
+        }
+
+        $doctors = $this->getDoctors();
+        $doctorsIds = $doctors->map(function (User $user) {
+            return $user->id;
+        });
+        $hasCurrentUserAsParent = $doctors->map(function (User $doctor) use ($user) {
+            return $doctor->isParent($user);
+        });
+        $hasCurrentUserAsParent = collect($hasCurrentUserAsParent);
+        return $doctorsIds->contains($user->id) || $hasCurrentUserAsParent->contains(true);
+    }
+
+    /**
+     * Возвращает список врачей, отсносящихся к этому пациенту в данный момент
+     *
+     * @return Collection
+     */
+    public function getDoctors()
+    {
+        $doctors = collect($this->doctors->toArray());
+        $doctors->prepend($this->doctor);
+
+        return $doctors;
+    }
+
+    public function setHomelessAttribute($data)
+    {
+        $this->attributes['homeless'] = strlen($data) > 0;
+    }
+
+    public function setUkrainianAttribute($data)
+    {
+        $this->attributes['ukrainian'] = strlen($data) > 0;
+    }
+
+    public function getEncrypter()
+    {
+        return $this->createdBy->getEncrypter();
     }
 
 }

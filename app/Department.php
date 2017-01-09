@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Permissible;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,6 +14,15 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
 
+    use Permissible;
+
+    /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
     protected $fillable = [
         'name',
         'department_code',
@@ -21,6 +31,7 @@ class Department extends Model
         'female_beds_amount',
         'male_beds_amount',
         'leader_id',
+        'chief_medical_officer_id',
         'organization_id'
     ];
 
@@ -52,6 +63,14 @@ class Department extends Model
     public function leader()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function chiefMedicalOfficer()
+    {
+        return $this->belongsTo(User::class, 'chief_medical_officer_id');
     }
 
     /**

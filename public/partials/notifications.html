@@ -1,0 +1,15 @@
+<div class="notifications">
+    <div v-for="n in notifications" class="notification {{ n.type }}" track-by="$index">
+        <div class="notification-content">
+            <p>{{ n.text }}</p>
+            <div v-if="n.actions.length > 0">
+                <div class="btn-group btn-group-{{ n.actions.length }}">
+                    <a href="{{ action.action }}" v-for="action in n.actions" class="btn">{{ action.text }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="close" v-on:click="deleteNotification($index)">
+            <i class="mi-btn mi-static">close</i>
+        </div>
+    </div>
+</div>

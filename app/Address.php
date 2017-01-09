@@ -15,12 +15,28 @@ class Address extends Model
 {
 
     /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Разрешаем заполнять эти поля
      *
      * @var array
      */
     protected $fillable = [
-        'country', 'state', 'province', 'street', 'house'
+        'country_id',
+        'region',
+        'city',
+        'street',
+        'house_number',
+        'apartment'
+    ];
+
+    protected $with = [
+        'country'
     ];
 
     /**
@@ -31,6 +47,11 @@ class Address extends Model
     public function addressable()
     {
         return $this->morphTo();
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
     }
 
 }

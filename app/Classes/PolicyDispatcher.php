@@ -6,6 +6,7 @@ namespace App\Classes;
 use App\Interfaces\PolicyDispatcherInterface;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Mockery\CountValidator\Exception;
 
 /**
  * Class PolicyDispatcher
@@ -68,16 +69,21 @@ class PolicyDispatcher implements PolicyDispatcherInterface
              */
             $action = explode('.', $action);
             $action = array_pop($action);
-            /*
-             * Вызываем метод, полученный способом описанным выше у политики, которая ссовпадает с полным именем класса цели.
-             * Пример полного имёт класса: App\User, App\Organization\ App\Http\Controllers\HomeController.
-             * В качестве аргументов передаём текущего пользователя, который хранится в переменной $user и саму цель проверки.
-             * Важно помнить, что текущим пользователем не обязательно может быть текущий авторизованный пользователь.
-             * Им может так же быть любой другой, установленный с помощью функции setUser()
-             */
-            return call_user_func_array([
-                $this->policies[get_class($model)], $action
-            ], [ $this->user, $model, $access ]);
+
+            if (method_exists($this->policies[get_class($model)], $action)) {
+                /*
+                 * Вызываем метод, полученный способом описанным выше у политики, которая ссовпадает с полным именем класса цели.
+                 * Пример полного имёт класса: App\User, App\Organization\ App\Http\Controllers\HomeController.
+                 * В качестве аргументов передаём текущего пользователя, который хранится в переменной $user и саму цель проверки.
+                 * Важно помнить, что текущим пользователем не обязательно может быть текущий авторизованный пользователь.
+                 * Им может так же быть любой другой, установленный с помощью функции setUser()
+                 */
+                return call_user_func_array([
+                    $this->policies[get_class($model)], $action
+                ], [ $this->user, $model, $access ]);
+            } else {
+                return $access;
+            }
         }
         return false;
     }

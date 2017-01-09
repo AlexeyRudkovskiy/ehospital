@@ -16,8 +16,8 @@ class CreateCalendarDayMedicamentTable extends Migration
             $table->integer('calendar_day_id')->unsigned();
             $table->integer('medicament_id')->unsigned();
 
-            $table->foreign('calendar_day_id')->references('id')->on('calendar_days');
-            $table->foreign('medicament_id')->references('id')->on('medicaments');
+            $table->foreign('calendar_day_id')->references('id')->on('calendar_days')->onDelete('cascade');
+            $table->foreign('medicament_id')->references('id')->on('medicaments')->onDelete('cascade');
         });
     }
 

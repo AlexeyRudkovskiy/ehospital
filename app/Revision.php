@@ -34,7 +34,8 @@ class Revision extends Model
      */
     protected $casts = [
         'changedFrom' => 'json',
-        'changedTo' => 'json'
+        'changedTo' => 'json',
+        'keys' => 'array'
     ];
 
     protected $diff = [];
@@ -87,6 +88,12 @@ class Revision extends Model
         $from = json_decode($this->attributes['changedFrom']);
         $to = json_decode($this->attributes['changedTo']);
         $diff = [];
+
+        $targetObject = new $this->revisionable_type;
+        $traits = class_uses($targetObject);
+
+//        $diff['targetObject'] = $this->revisionable_type;
+
         foreach ($from as $key => $val) {
             $diff[$key] = [
                 'from' => $val,

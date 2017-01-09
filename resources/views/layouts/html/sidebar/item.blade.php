@@ -1,0 +1,1 @@
+<li><a href="{{ route($link) }}" @if($active) class="active" @endif>{{ $title }}</a></li>

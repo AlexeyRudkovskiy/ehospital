@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Permissible;
 use App\Traits\RevisionsTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +16,14 @@ class Contractor extends Model
 {
 
     use RevisionsTrait;
+    use Permissible;
+
+    /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * Разрешаем заполнять эти поля
@@ -25,7 +34,16 @@ class Contractor extends Model
         'name',
         'fullName',
         'type',
-        'edrpou'
+        'edrpou',
+        'description',
+        'phone',
+        'contractor_group_id',
+        'group'
+    ];
+
+    protected $with = [
+        'addresses',
+        'agreements'
     ];
 
     /**
@@ -35,7 +53,7 @@ class Contractor extends Model
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable')->orderBy('id', 'desc');
     }
 
     /**
@@ -43,9 +61,24 @@ class Contractor extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function group()
+//    public function group()
+//    {
+//        return $this->belongsTo(ContractorGroup::class, 'contractor_group_id')->orderBy('id', 'desc');
+//    }
+
+    /**
+     * @return mixed
+     */
+    public function addresses()
     {
-        return $this->belongsTo(ContractorGroup::class, 'contractor_group_id');
+        return $this->morphMany(Address::class, 'addressable')->orderBy('id', 'desc')->orderBy('id', 'desc');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function agreements () {
+        return $this->morphMany(Agreement::class, 'agreementable')->orderBy('id', 'desc');
     }
 
 }

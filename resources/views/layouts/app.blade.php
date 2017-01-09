@@ -1,85 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
+@inject('sidebar', 'App\Services\LayoutSidebarService')
+@inject('content', 'App\Services\LayoutContentService')
+
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App</title>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <title>Laravel</title>
-
-    <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:100,100i,300,300i,400,400i,700,700i&amp;subset=cyrillic-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- styles there -->
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
 
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
+            'csrfToken' => csrf_token()
         ]); ?>
+
+        window.token = '{{ $current->api_token }}';
     </script>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
-                </a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    &nbsp;
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ url('/logout') }}"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
-
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-            </div>
+<div class="app-container">
+    <div class="sidebar-wrapper">
+        <div class="sidebar">
+            <ul>
+                {!! $sidebar->make(auth()->user()->permission) !!}
+            </ul>
         </div>
-    </nav>
+    </div>
+    <div class="app-content">
+        <header class="app-header">
+            <div class="grid">
+                <div class="col-main">
+                    <a href="javascript:" class="menu"><i class="material-icons">menu</i></a>
+                    <form action="#" id="global-search">
+                        <input id="global-search-input" type="text" placeholder="Введите фразу для поиска" data-input-keep-focused />
+                        @include('layouts.search.results')
+                    </form>
+                </div>
+                <div class="col-user-info pull-right">
+                    <a href="javascript:" class="username">{{ auth()->user()->fullName() }}</a>
+                    <a href="javascript:" class="bell" data-notification="10+"><i class="material-icons">notifications_none</i></a>
+                </div>
+            </div>
+        </header>
+        <div class="content">
 
-    @yield('content')
+            @yield('content')
 
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
+            {{--<div class="popup-notifications">--}}
+                {{--<div class="notification notification-danger">--}}
+                    {{--<div class="notification-content">--}}
+                        {{--<div>--}}
+                            {{--Hello world!--}}
+                        {{--</div>--}}
+                        {{--<div class="notification-actions">--}}
+                            {{--<div class="btn-group">--}}
+                                {{--<a href="javascript:" class="btn">Show more</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="notification-close">--}}
+                        {{--<i class="material-icons">close</i>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="notification notification-success">--}}
+                    {{--<div class="notification-content">--}}
+                        {{--<div>--}}
+                            {{--Hello world!--}}
+                        {{--</div>--}}
+                        {{--<div class="notification-actions">--}}
+                            {{--<div class="btn-group">--}}
+                                {{--<a href="javascript:" class="btn">Show more</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="notification-close">--}}
+                        {{--<i class="material-icons">close</i>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+        </div>
+    </div>
+</div>
+
+<div id="offscreen-test-view-zone"></div>
+
+<!-- app js resources -->
+<script src="/vendor/systemjs/dist/system.js"></script>
+<script>
+    window.currentPage = '{{ request()->route()->getName() }}';
+
+    SystemJS.config({
+        defaultJSExtensions: true,
+        baseURL: '/js',
+        map: {
+            'react': '/vendor/react/dist/react.js',
+            'react-dom': '/vendor/react-dom/dist/react-dom.js',
+            'text': '/vendor/systemjs-plugin-text/text.js',
+            'whatwg-fetch': '/vendor/whatwg-fetch/fetch.js',
+            'json': '/vendor/systemjs-plugin-json/json.js'
+        }
+    });
+
+    SystemJS.import("app.js").then(null, console.error.bind(console));
+</script>
 </body>
 </html>

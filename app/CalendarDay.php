@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * Class CalendarDay
@@ -12,6 +14,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CalendarDay extends Model
 {
+
+    /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * Разрешаем заполнять эти поля
@@ -28,9 +37,9 @@ class CalendarDay extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function medicaments()
+    public function nomenclatures()
     {
-        return $this->belongsToMany(Medicament::class);
+        return $this->belongsToMany(Nomenclature::class)->withPivot('amount')->withPivot('measure_id');
     }
 
     /**
@@ -51,6 +60,11 @@ class CalendarDay extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function getDayAttribute ()
+    {
+        return Carbon::parse($this->attributes['day']);
     }
 
 }

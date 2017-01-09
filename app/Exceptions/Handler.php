@@ -32,6 +32,8 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        app('bugsnag')->notifyException($exception);
+
         parent::report($exception);
     }
 
@@ -62,4 +64,7 @@ class Handler extends ExceptionHandler
 
         return redirect()->guest('login');
     }
+
+
+
 }

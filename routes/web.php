@@ -12,9 +12,39 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    /*if (auth()->guest()) {
+        return redirect()->route('login');
+    }*/
+    return redirect()->route('nomenclature.index');
+});
+
+Route::get('logout', function () {
+    auth()->logout();
+    session()->flush();
+    session()->regenerate();
+    return redirect('/');
+});
+
+Route::get('test', function () {
+    return view('test_echo');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::group([
+    'prefix' => 'management',
+    'namespace' => 'Management',
+    'middleware' => [ 'web', 'auth' ]
+], function () {
+    require_once __DIR__ . '/management.php';
+});
+
+Route::get('income_template.html', function () {
+    return view('templates/income_template');
+});
+
+Route::get('test2', function () {
+    dispatch(new \App\Jobs\GenerateNomenclatureRequestDocument(\App\NomenclatureRequest::first()));
+});

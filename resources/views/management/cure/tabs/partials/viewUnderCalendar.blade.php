@@ -1,0 +1,1 @@
+<input type="submit" id="cureApproveBtn" value="approve" class="btn btn-success" />

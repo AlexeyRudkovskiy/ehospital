@@ -14,11 +14,22 @@ class Permission extends Model
 {
 
     /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Разрешаем автоматическое заполнение полей name и map
      *
      * @var array
      */
-    protected $fillable = [ 'name', 'map' ];
+    protected $fillable = [ 'name', 'map', 'sidebar' ];
+
+    const PHARMACIST = 2;
+
+    const CHIEF_MEDICAL_OFFICER = 3;
 
     /**
      * Преобразуем нужные поля к нужным типам
@@ -26,7 +37,8 @@ class Permission extends Model
      * @var array
      */
     protected $casts = [
-        'map' => 'array'
+        'map' => 'array',
+        'sidebar' => 'array'
     ];
 
     /**
@@ -45,6 +57,11 @@ class Permission extends Model
         }
         $value = array_get($this->map, $what);
         return $value;
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
 
 }

@@ -6,7 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*"
+        "laravel/framework": "5.3.*",
+        "laravelcollective/html": "5.3.*",
+        "predis/predis": "^1.1",
+        "doctrine/dbal": "^2.5",
+        "bugsnag/bugsnag-laravel": "^2.0",
+        "setasign/fpdi-fpdf": "1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -23,7 +28,8 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Helpers/PolicyHelper.php"
+            "app/Helpers/PolicyHelper.php",
+            "app/Helpers/Helpers.php"
         ]
     },
     "autoload-dev": {

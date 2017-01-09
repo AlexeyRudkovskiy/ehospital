@@ -1,0 +1,9 @@
+<div class="card address-card" v-for="agreement in agreements">
+    <p>{{ agreement.from }}</p>
+    <p>{{ agreement.until }}</p>
+    <p>{{ agreement.price }}</p>
+
+    <div class="actions">
+        <a href="/management/contractor/{{ contractorId }}/address/{{ agreement.id }}/delete" class="btn btn-danger btn-small">delete</a>
+    </div>
+</div>

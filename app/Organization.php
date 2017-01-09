@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Permissible;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -12,6 +13,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Organization extends Model
 {
+
+    use Permissible;
+
+    /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * Разрешаем автоматическое заполнение полей name и type

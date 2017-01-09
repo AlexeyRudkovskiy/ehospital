@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\RevisionsTrait;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,6 +14,15 @@ use Illuminate\Database\Eloquent\Model;
 class Manufacturer extends Model
 {
 
+    use RevisionsTrait;
+
+    /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
     /**
      * Разрешаем заполнять эти поля
      *
@@ -22,15 +32,19 @@ class Manufacturer extends Model
         'name'
     ];
 
+    protected $with = [
+        'nomenclatures'
+    ];
+
     /**
      * Медикаменты, которые производит этот производитель
      *
-     * @see \App\Medicament
+     * @see \App\Nomenclature
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function medicaments()
+    public function nomenclatures()
     {
-        return $this->hasMany(Medicament::class);
+        return $this->hasMany(Nomenclature::class);
     }
 
     /**

@@ -11,6 +11,8 @@ class UnitsTableSeeder extends Seeder
      */
     public function run()
     {
+        \App\Unit::truncate();
+
         $unit = new \App\Unit();
         $unit->text = 'Упаковка';
         $unit->scale = 1;

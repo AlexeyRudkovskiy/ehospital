@@ -14,6 +14,13 @@ class AtcClassification extends Model
 {
 
     /**
+     * Отключаем колонки created_at, updated_at
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Разрешаем заполнение этих полей
      *
      * @var array
@@ -38,12 +45,12 @@ class AtcClassification extends Model
     /**
      * Медикаменты, у которых установленна эта классификация
      *
-     * @see \App\Medicament
+     * @see \App\Nomenclature
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function medicaments()
+    public function nomenclatures()
     {
-        return $this->hasMany(Medicament::class);
+        return $this->hasMany(Nomenclature::class);
     }
 
 }

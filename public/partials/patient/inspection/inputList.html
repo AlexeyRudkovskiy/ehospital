@@ -1,0 +1,12 @@
+<div class="input-list">
+    <div class="list-item" v-for="item in editItems">
+        <a href="javascript:" class="mi-btn mi-btn-small item-remove" v-on:click="editItems.splice($index, 1)">close</a>
+        <input type="text" class="input" name="{{ getInputName('edit', item) }}" v-model="item[editableKey]" />
+    </div>
+
+    <div class="list-item" v-for="item in items">
+        <a href="javascript:" class="mi-btn mi-btn-small item-remove" v-on:click="items.splice($index, 1)">close</a>
+        <input type="text" class="input" name="{{ getInputName('new') }}" v-model="item" />
+    </div>
+    <a href="javascript:" class="btn" v-on:click="addItem">добавить</a>
+</div>

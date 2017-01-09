@@ -11,6 +11,7 @@ class ContractorsTableSeeder extends Seeder
      */
     public function run()
     {
+        \App\Contractor::truncate();
         factory(\App\Contractor::class, 30)->create();
     }
 }

@@ -26,12 +26,12 @@ class CreateMedicamentHistoriesTable extends Migration
 
             $table->foreign('medicament_id')->references('id')->on('medicaments');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('calendar_day_id')->references('id')->on('calendar_days');
+            $table->foreign('calendar_day_id')->references('id')->on('calendar_days')->onDelete('cascade');
         });
 
         Schema::table('calendar_day_medicament', function (Blueprint $table) {
             $table->integer('medicament_history_id')->unsigned()->nullable()->default(null);
-            $table->foreign('medicament_history_id')->references('id')->on('medicament_histories');
+            $table->foreign('medicament_history_id')->references('id')->on('medicament_histories')->onDelete('cascade');
         });
     }
 

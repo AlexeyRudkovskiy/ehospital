@@ -16,3 +16,26 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+Route::group([
+    'namespace' => 'API'
+], function () {
+    Route::get('patient/{patient}/comments', [
+        'uses' => 'PatientController@getComments',
+        'as' => 'api.patient.comments'
+    ]);
+
+    Route::get('test', function () {
+        return auth()->user();
+    });
+
+    require_once 'api/nomenclatures.php';
+
+    require_once 'api/contractors.php';
+
+    require_once 'api/users.php';
+
+    require_once 'api/department.php';
+
+});
+

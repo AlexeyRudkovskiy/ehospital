@@ -1,0 +1,30 @@
+.sidebar {
+  a {
+    display: inline-block;
+    width: 100%;
+
+    padding: 10px 10px 10px 13px;
+
+    position: relative;
+
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top:  12px;
+      left: 0;
+      width: 3px;
+      height: 18px;
+      background-color: white;
+    }
+
+    &.active {
+      &::after {
+        background-color: $brand-primary;
+      }
+    }
+  }
+}

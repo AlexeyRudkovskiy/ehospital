@@ -1,0 +1,18 @@
+<div>
+    <div v-if="comments.length > 0">
+        <div v-for="comment in comments">
+            <div>
+                {{ comment.text }}
+            </div>
+            <div>
+                <a href="/management/user/{{ comment.user.id }}">{{ comment.user.lastName }} {{ comment.user.firstName }} {{ comment.user.middleName }}</a>
+            </div>
+            <div>
+                {{ comment.user.department.name }}
+            </div>
+        </div>
+    </div>
+    <div v-else>
+        No comments
+    </div>
+</div>
