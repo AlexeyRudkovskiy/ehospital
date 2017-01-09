@@ -108,5 +108,6 @@
 
     SystemJS.import("app.js").then(null, console.error.bind(console));
 </script>
+<!-- {{ memory_get_usage() }} -->
 </body>
 </html>
