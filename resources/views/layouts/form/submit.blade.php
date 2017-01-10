@@ -1,9 +1,9 @@
 @if(!$empty ?? true)
 <div class="form-group">
-    <div class="col-label">
+    <div class="label">
         <label class="label">&nbsp;</label>
     </div>
-    <div class="col-input">
+    <div class="input-wrapper">
         {!! Form::submit($title ?? trans('management.label.save'), array_merge(['class' => 'btn btn-success'], $attributes ?? [])) !!}
     </div>
 </div>
