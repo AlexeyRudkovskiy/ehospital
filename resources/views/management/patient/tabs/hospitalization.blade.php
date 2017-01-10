@@ -4,7 +4,19 @@
 
     <div class="step">
         {!! Form::ehSelect('department_id', \App\Department::pluck('name', 'id'), null, null, [
-            'id' => 'hospitalization_department'
+            'id' => 'hospitalization_department',
+            'data-title' => 'Отделение',
+            'data-subtitle' => "Выберите отделение",
+            'data-search' => route('search.department'),
+            'data-search-placeholder' => 'Введите фразу для поиска отделения'
+        ]) !!}
+
+        {!! Form::ehSelect('user_id', \App\User::pluck('firstName', 'id'), null, null, [
+            'id' => 'user_id',
+            'data-title' => 'Пользователь',
+            'data-subtitle' => "Выберите пользователя",
+            'data-search' => route('search.users'),
+            'data-search-placeholder' => 'Введите фразу для поиска пользователя'
         ]) !!}
 
         <div style="display: none;" id="doctors_list">

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\Permissible;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 /**
  * Class Department
@@ -15,6 +16,7 @@ class Department extends Model
 {
 
     use Permissible;
+    use Searchable;
 
     /**
      * Отключаем колонки created_at, updated_at

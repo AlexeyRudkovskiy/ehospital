@@ -11,6 +11,12 @@
         "delete": "удалить",
         "edit": "редактировать"
       }
+    },
+    "select": {
+      "choose": "Выбрать",
+      "search": {
+        "placeholder": "Введите фразу для поиска"
+      }
     }
   },
   "en": {
@@ -24,6 +30,12 @@
       "item": {
         "delete": "delete",
         "edit": "edit"
+      }
+    },
+    "select": {
+      "choose": "Choose",
+      "search": {
+        "placeholder": "Enter text for search"
       }
     }
   }

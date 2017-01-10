@@ -37,5 +37,7 @@ Route::group([
 
     require_once 'api/department.php';
 
+    require_once 'api/search.php';
+
 });
 

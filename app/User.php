@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Scout\Searchable;
 
 /**
  * Class User
@@ -20,6 +21,7 @@ class User extends Authenticatable
 {
 
     use SoftDeletes;
+    use Searchable;
 
     /**
      * Отключаем колонки created_at, updated_at

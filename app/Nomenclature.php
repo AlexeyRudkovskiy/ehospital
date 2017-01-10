@@ -6,6 +6,7 @@ use App\Events\NomenclatureBatchBalanceUpdated;
 use App\Events\NomenclatureHistoryUpdatedEvent;
 use App\Traits\RevisionsTrait;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 /**
  * Class NomeclatureShow
@@ -17,6 +18,7 @@ class Nomenclature extends Model
 {
 
     use RevisionsTrait;
+    use Searchable;
 
     /**
      * Отключаем колонки created_at, updated_at
@@ -241,6 +243,21 @@ class Nomenclature extends Model
         }
 
         return $batches;
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+        $collection = collect($array)->only(array_merge($this->fillable, [
+            'id'
+        ]));
+
+        return $collection->toArray();
     }
 
 }
