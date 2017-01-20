@@ -110,9 +110,22 @@ class User extends Authenticatable
         return $this->belongsToMany(Patient::class, 'patient_users', 'user_id');
     }
 
+    /**
+     * @return mixed
+     */
     public function patients()
     {
         return $this->hasMany(Patient::class)->orderBy('id', 'desc');
+    }
+
+    public function cures()
+    {
+        return $this->hasManyThrough(Cure::class, Patient::class);
+    }
+
+    public function getCurrentCuresCount()
+    {
+        return $this->cures()->whereNull('discharge_date')->count();
     }
 
     /**

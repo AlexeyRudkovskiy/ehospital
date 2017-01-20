@@ -49,7 +49,8 @@ $factory->define(\App\Permission::class, function () use ($faker) {
                 'show' => true,
                 'create' => true,
                 'edit' => true,
-                'delete' => true
+                'delete' => true,
+                'current' => true
             ],
             'contractor' => [
                 'index' => true,
@@ -82,6 +83,9 @@ $factory->define(\App\Permission::class, function () use ($faker) {
                 'items' => [
                     [ 'path' => 'department.index' ]
                 ]
+            ], [
+                'path' => 'department.current',
+                'link' => true
             ], [
                 'name' => "Пациенты",
                 'items' => [

@@ -78,6 +78,12 @@ class LayoutSidebarService {
 
         $currentController = $this->currentController;
         foreach ($schema as $item) {
+            if (property_exists($item, 'link') && $item->link) {
+                $sidebar .= $this->link($item->path, null, null, []);
+
+                continue;
+            }
+
             $urls = array_map(function ($item) {
                 return $item->path;
             }, $item->items);

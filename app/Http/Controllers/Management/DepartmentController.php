@@ -121,4 +121,17 @@ class DepartmentController extends PermissibleController
     {
         //
     }
+
+    public function current()
+    {
+        $department = auth()->user()->department;
+        $users = $department->users()->paginate(config('eh.pagination.limit'), ['*'], 'department_users_page');
+        $storage = $department->storage()->paginate(config('eh.pagination.limit'), ['*'], 'department_storage_page');
+
+        return view('management.department.current')
+            ->with('department', $department)
+            ->with('users', $users)
+            ->with('storage', $storage);
+    }
+    
 }

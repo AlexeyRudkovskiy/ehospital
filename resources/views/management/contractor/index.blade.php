@@ -38,6 +38,6 @@
             </tbody>
         </table>
 
-        {!! $contractors->links('layouts.pagination') !!}
+        {!! $contractors->appends([ 'type' => $type ])->links('layouts.pagination') !!}
     </div>
 @stop

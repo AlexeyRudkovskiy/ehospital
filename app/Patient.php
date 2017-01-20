@@ -60,6 +60,11 @@ class Patient extends Model
     ];
 
     /**
+     * @var Collection
+     */
+    protected $loadedCures;
+
+    /**
      * Даём возможность комментировать пациента врачём или группой врачей
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
@@ -148,14 +153,21 @@ class Patient extends Model
         }
 
         $doctors = $this->getDoctors();
+
         $doctorsIds = $doctors->map(function (User $user) {
             return $user->id;
         });
+
         $hasCurrentUserAsParent = $doctors->map(function (User $doctor) use ($user) {
             return $doctor->isParent($user);
         });
         $hasCurrentUserAsParent = collect($hasCurrentUserAsParent);
-        return $doctorsIds->contains($user->id) || $hasCurrentUserAsParent->contains(true);
+
+        $isDepartmentHeadNurse = $this->cures()->select('department_id', 'id')->distinct('department_id')->get()->map(function(Cure $cure) {
+            return $cure->department_id;
+        })->contains($user->id);
+
+        return $doctorsIds->contains($user->id) || $hasCurrentUserAsParent->contains(true) || $isDepartmentHeadNurse;
     }
 
     /**
@@ -184,6 +196,15 @@ class Patient extends Model
     public function getEncrypter()
     {
         return $this->createdBy->getEncrypter();
+    }
+
+    public function getCurrentCures()
+    {
+        if ($this->loadedCures) {
+            return $this->loadedCures;
+        }
+        $this->loadedCures = $this->cures()->orderBy('id', 'desc')->whereNull('discharge_date')->get();
+        return $this->loadedCures;
     }
 
 }

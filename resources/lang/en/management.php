@@ -21,9 +21,45 @@ return [
         'saved' => 'Организация успешно сохранена',
         'create' => 'Организация успешно создана'
     ],
+
     'atcClassification' => [
         'created' => 'АТС классификация создана',
         'saved' => 'АТС классификация сохранена'
+    ],
+
+    'department' => [
+        'statistic' => 'Статистика отделения',
+        'patients' => 'Пациенты',
+        'workers' => 'Работники',
+        'storage' => 'Склад',
+
+        'tabs' => [
+            'statistic' => [
+                'code' => 'Код отделения',
+                'beds_amount' => 'Количество коек',
+                'beds_amount_in_repair' => 'Количество коек в ремонте',
+                'female_beds_amount' => 'Количество женских коек',
+                'male_beds_amount' => 'Количество мужских коек'
+            ],
+
+            'patients' => [
+                'name' => 'ФИО пациента',
+                'diagnosis' => 'Диагноз',
+                'hospitalization_date' => 'Дата госпитализации',
+            ],
+
+            'workers' => [
+                'name' => 'ФИО работника',
+                'position_name' => 'Должность',
+                'current_cures_count' => 'Количество пациентов'
+            ],
+
+            'storage' => [
+                'nomenclature' => 'Номенклатура',
+                'in_stock' => 'В наличии',
+                'armored' => 'Заброинровано'
+            ]
+        ]
     ],
 
     'breadcrumbs' => [
@@ -40,7 +76,8 @@ return [
             'show' => 'Просмотр контрагента'
         ],
         'department' => [
-            'title' => 'Отделения'
+            'title' => 'Отделения',
+            'current' => 'Отделение'
         ],
         'manufacturer' => [
             'title' => 'Производители'

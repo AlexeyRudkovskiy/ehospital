@@ -44,7 +44,7 @@ class Department extends Model
      */
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class)->orderBy('lastName')->orderBy('firstName')->orderBy('middleName');
     }
 
     /**
@@ -55,6 +55,24 @@ class Department extends Model
     public function cures()
     {
         return $this->hasMany(Cure::class);
+    }
+
+    public function storage()
+    {
+        return $this->hasMany(DepartmentStorage::class, 'department_id');
+    }
+
+    public function patients()
+    {
+        $patientsIds = $this->cures()
+                            ->select('patient_id')
+                            ->whereNull('discharge_date')
+                            ->distinct('patient_id')
+                            ->get()
+                            ->map(function (Cure $cure) {
+                                return $cure->patient_id;
+                            });
+        return Patient::whereIn('id', $patientsIds)->orderBy('name', 'asc')->paginate(config('eh.pagination.limit'), ['*'], 'department_patients_page');
     }
 
     /**
@@ -83,6 +101,62 @@ class Department extends Model
     public function organization()
     {
         return $this->belongsTo(Organization::class);
+    }
+
+    public function calculateAmountToRequest(Nomenclature $nomenclature = null, $need = 0)
+    {
+        if ($nomenclature == null) {
+            throw new \InvalidArgumentException('$nomenclature can\'t be equals null');
+        }
+
+        $storageRecord = $this->storage()->whereNomenclatureId($nomenclature->id);
+
+        if ($storageRecord->count() < 1) {
+            return [
+                'storage' => $need,
+                'in_stock' => 0
+            ];
+        } else {
+            $storageRecord = $storageRecord->first();
+            if ($storageRecord->data['in_stock'] > $need) {
+                return [
+                    'storage' => 0,
+                    'in_stock' => $need
+                ];
+            } else {
+                return [
+                    'storage' => $need - $storageRecord->data['in_stock'],
+                    'in_stock' => $storageRecord->data['in_stock']
+                ];
+            }
+        }
+    }
+
+    public function nomenclatureIncome(Nomenclature $nomenclature, $amount)
+    {
+        if ($this->storage()->whereNomenclatureId($nomenclature->id)->count() > 0) {
+            $storage = $this->storage()->whereNomenclatureId($nomenclature->id)->first();
+            $data = $storage->data;
+
+            $data['in_stock'] += $amount;
+
+            $storage->update([
+                'data' => $data
+            ]);
+
+            return $data;
+        } else {
+            $data = [
+                'in_stock' => $amount,
+                'armored' => 0
+            ];
+            $this->storage()->create([
+                'nomenclature_id' => $nomenclature->id,
+                'data' => $data
+            ]);
+
+            return  $data;
+        }
     }
 
 }

@@ -126,6 +126,11 @@ class Nomenclature extends Model
         return $this->hasMany(NomenclatureHistory::class)->orderBy('id', 'desc');
     }
 
+    public function departmentStorages()
+    {
+        return $this->hasMany(DepartmentStorage::class);
+    }
+
     /**
      * История вместе с забронированными медикаментами
      *
