@@ -11,24 +11,17 @@
             'data-search-placeholder' => 'Введите фразу для поиска отделения'
         ]) !!}
 
-        {!! Form::ehSelect('user_id', \App\User::pluck('firstName', 'id'), null, null, [
-            'id' => 'user_id',
-            'data-title' => 'Пользователь',
-            'data-subtitle' => "Выберите пользователя",
-            'data-search' => route('search.users'),
-            'data-search-placeholder' => 'Введите фразу для поиска пользователя'
-        ]) !!}
+        <div id="doctors_list">
 
-        <div style="display: none;" id="doctors_list">
-
-            <div class="form-group">
-                <div class="col-label">
-                    <label for="department_id" class="label">User</label>
-                </div>
-                <div class="col-input">
-                    <select class="input" id="doctor_select" name="doctor_select"></select>
-                </div>
-            </div>
+            {!! Form::ehSelect('user_id', collect([]), null, null, [
+                'id' => 'user_id_select',
+                'data-title' => 'Лечащий врач',
+                'data-subtitle' => "Выберите лечащего врача",
+                'data-search' => route('search.users'),
+                'data-search-alias' => route('search.users'),
+                'data-search-placeholder' => 'Введите фразу для поиска врача',
+                'data-empty' => trans('management.global.select.empty')
+            ]) !!}
 
         </div>
 

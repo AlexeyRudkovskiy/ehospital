@@ -57,9 +57,20 @@ class Department extends Model
         return $this->hasMany(Cure::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function storage()
     {
         return $this->hasMany(DepartmentStorage::class, 'department_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function nomenclatureSets()
+    {
+        return $this->hasMany(NomenclatureSet::class);
     }
 
     public function patients()

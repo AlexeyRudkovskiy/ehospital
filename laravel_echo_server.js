@@ -8,7 +8,7 @@ var connections = [];
 io = io.listen(config.port);
 redis = new redis();
 
-redis.psubscribe('*', function () { console.log('Connected to redis server'); });
+redis.psubscribe('*', function () { console.log('[SERVER] Connected to redis server'); });
 
 redis.on('pmessage', function (pattern, channel, message) {
     message = JSON.parse(message);
@@ -20,7 +20,7 @@ redis.on('pmessage', function (pattern, channel, message) {
         }
     };
 
-    console.log('New event: ', data);
+    console.log('[SERVER] New event: ', data);
 
     for (var i = 0, length = connections.length; i < length; i++) {
         connections[i].emit('message', data);
@@ -29,5 +29,7 @@ redis.on('pmessage', function (pattern, channel, message) {
 
 io.sockets.on('connection', function (socket) {
     connections.push(socket);
-    console.log('New client connected');
+    console.log('[SERVER] New client connected');
 });
+
+console.log('[SERVER] Echo server started on 0.0.0.0:' + config.port);

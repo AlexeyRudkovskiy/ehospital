@@ -90,6 +90,7 @@
 <div id="offscreen-test-view-zone"></div>
 
 <!-- app js resources -->
+<script src="//ehospital.dev:5888/socket.io/socket.io.js"></script>
 <script src="/vendor/systemjs/dist/system.js"></script>
 <script>
     window.currentPage = '{{ request()->route()->getName() }}';
@@ -102,7 +103,8 @@
             'react-dom': '/vendor/react-dom/dist/react-dom.js',
             'text': '/vendor/systemjs-plugin-text/text.js',
             'whatwg-fetch': '/vendor/whatwg-fetch/fetch.js',
-            'json': '/vendor/systemjs-plugin-json/json.js'
+            'json': '/vendor/systemjs-plugin-json/json.js',
+            'socket.io-client': ['@', 'empty'].join('')
         }
     });
 

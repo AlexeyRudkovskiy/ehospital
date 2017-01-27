@@ -6,7 +6,11 @@ return [
         'yes' => 'Да',
         'create' => 'Создать',
         'delete' => 'Удалить',
-        'edit' => 'Редактировать'
+        'edit' => 'Редактировать',
+
+        'select' => [
+            'empty' => 'Не выбрано'
+        ]
     ],
 
     'property' => [
@@ -32,6 +36,7 @@ return [
         'patients' => 'Пациенты',
         'workers' => 'Работники',
         'storage' => 'Склад',
+        'sets' => 'Наборы',
 
         'tabs' => [
             'statistic' => [
@@ -107,6 +112,8 @@ return [
 
     'label' => [
         'save' => 'Сохранить',
+        'create' => 'Создать',
+
         'pagination' => [
             'next' => 'следующая страница',
             'previous' => 'предыдущая страница'
@@ -265,6 +272,26 @@ return [
 
             'action' => [
                 'open' => 'Открыть курс лечения'
+            ]
+        ]
+    ],
+
+    'ui' => [
+        'select' => [
+            "choose" => "Выбрать",
+            "search" => [
+                "placeholder" => "Введите фразу для поиска"
+            ],
+        ],
+
+        'form' => [
+            'send' => 'Отправить'
+        ],
+
+        'hospitalization' => [
+            'item' => [
+                'delete' => 'удалить',
+                'edit' => 'редактировать'
             ]
         ]
     ]

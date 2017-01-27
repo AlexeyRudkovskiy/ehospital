@@ -7,6 +7,7 @@
             <a href="javascript:" data-target="patients">@lang('management.department.patients')</a>
             <a href="javascript:" data-target="workers">@lang('management.department.workers')</a>
             <a href="javascript:" data-target="storage">@lang('management.department.storage')</a>
+            <a href="javascript:" data-target="sets">@lang('management.department.sets')</a>
         </nav>
         <div class="tabs-contents">
 
@@ -33,6 +34,12 @@
                 @include('management.department.tabs.current_storage')
             </div>
             <!-- End storage -->
+
+            <!-- Sets -->
+            <div data-tab="sets">
+                @include('management.department.tabs.current_sets')
+            </div>
+            <!-- End sets -->
 
         </div>
     </div>

@@ -6,6 +6,8 @@ use App\Cure;
 use App\CureStatus;
 use App\Events\Nomenclature\RequestEvent;
 use App\Events\Notification;
+use App\Events\Patient\CureHeadNurseReview;
+use App\Events\Patient\HospitalizationEvent;
 use App\Inspection;
 use App\ListItem;
 use App\Measure;
@@ -158,27 +160,6 @@ class PatientController extends Controller
         $data['hospitalization_date'] = Carbon::parse($data['hospitalization_date']);
         $data['calendar_value'] = json_decode($data['calendar_value']);
 
-        $uniqueNomenclaturesCount = [];
-        $measures = [];
-
-        foreach ($data['calendar_value'] as $day => $val) {
-            $day = Carbon::parse($day);
-
-            foreach ($val->nomenclatures as $nomenclature) {
-                $nomenclatureId = $nomenclature->nomenclature_id;
-
-                if (!array_key_exists($nomenclature->measure_id, $measures)) {
-                    $measures[$nomenclature->measure_id] = Measure::find($nomenclature->measure_id);
-                }
-
-                if (!array_key_exists($nomenclatureId, $uniqueNomenclaturesCount)) {
-                    $uniqueNomenclaturesCount[$nomenclatureId] = 0;
-                }
-
-                $uniqueNomenclaturesCount[$nomenclatureId] += $measures[$nomenclature->measure_id]->amount;
-            }
-        }
-
         $cure = new Cure();
 
         $cure->patient_id = $request->get('patient_id');
@@ -188,6 +169,7 @@ class PatientController extends Controller
         $cure->hospitalization_date = $data['hospitalization_date'];
         $cure->diagnosis = $request->get('diagnosis');
         $cure->review = [
+            'destination_list' => $data['calendar_value'],
             'requested' => $data['calendar_value'],
             'accepted' => new \stdClass(),
             'headNurse' => false,
@@ -200,6 +182,7 @@ class PatientController extends Controller
         ];
 
         $cure->save();
+        event(new CureHeadNurseReview($cure));
 
 //        $nomenclatureRequest = $cure->nomenclatureRequest()->create([
 //            'done' => false,

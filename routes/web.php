@@ -48,3 +48,7 @@ Route::get('income_template.html', function () {
 Route::get('test2', function () {
     dispatch(new \App\Jobs\GenerateNomenclatureRequestDocument(\App\NomenclatureRequest::first()));
 });
+
+Route::get('lang.json', function () {
+    return trans('management');
+});

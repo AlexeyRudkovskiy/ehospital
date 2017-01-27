@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@types/es6-promise": "0.0.32",
+    "@types/socket.io-client": "^1.4.29",
     "@types/whatwg-fetch": "0.0.33",
     "elixir-typescript": "^2.0.0",
     "gulp-clean": "^0.3.2",

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Patient;
 
-use App\User;
+use App\Cure;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -10,23 +10,23 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class TestEvent implements ShouldBroadcast
+class CureHeadNurseReview implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
 
     /**
-     * @var User
+     * @var Cure
      */
-    public $user;
+    public $cure;
 
     /**
      * Create a new event instance.
      *
-     * @param User $user
+     * @param Cure $cure
      */
-    public function __construct(User $user)
+    public function __construct(Cure $cure)
     {
-        $this->user = $user;
+        $this->cure = $cure;
     }
 
     /**
@@ -36,6 +36,6 @@ class TestEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['channel'];
+        return [ CureHeadNurseReview::class ];
     }
 }
