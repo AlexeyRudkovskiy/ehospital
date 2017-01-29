@@ -9,9 +9,30 @@ Route::group([
     'prefix' => '/department/current/',
     'namespace' => 'Department'
 ], function () {
+
+    Route::get('set/create', [
+        'uses' => 'NomenclatureSetController@create',
+        'as' => 'department.nomenclature_set.create'
+    ]);
+
     Route::get('set/{nomenclatureSet}', [
         'uses' => 'NomenclatureSetController@show',
         'as' => 'department.nomenclature_set.show'
+    ]);
+
+    Route::post('set', [
+        'uses' => 'NomenclatureSetController@store',
+        'as' => 'department.nomenclature_set.store'
+    ]);
+
+    Route::get('set/{nomenclatureSet}/edit', [
+        'uses' => 'NomenclatureSetController@edit',
+        'as' => 'department.nomenclature_set.edit'
+    ]);
+
+    Route::post('set/{nomenclatureSet}', [
+        'uses' => 'NomenclatureSetController@update',
+        'as' => 'department.nomenclature_set.update'
     ]);
 
     Route::get('set/{nomenclatureSet}/item/create', [

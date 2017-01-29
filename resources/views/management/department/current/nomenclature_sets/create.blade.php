@@ -2,7 +2,7 @@
 
 @section('content')
 
-    {!! Form::model('item', [ 'route' => ['department.nomenclature_set.item.store', $nomenclatureSet->id], 'class' => 'form' ]) !!}
+    {!! Form::model('item', [ 'route' => [ 'department.nomenclature_set.store' ], 'class' => 'form' ]) !!}
 
     @include('management.department.current.nomenclature_sets.form')
 

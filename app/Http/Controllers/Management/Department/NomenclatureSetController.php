@@ -22,13 +22,42 @@ class NomenclatureSetController extends Controller
             ->with('nomenclatureSet', $nomenclatureSet);
     }
 
+    public function create()
+    {
+        return view('management.department.current.nomenclature_sets.create')
+            ->with('item', new NomenclatureSet());
+    }
+
+    public function store(Request $request)
+    {
+        $department = auth()->user()->department;
+        $department->nomenclatureSets()->create($request->only([
+            'name'
+        ]));
+
+        return redirect()->route('department.current');
+    }
+
+    public function edit(NomenclatureSet $nomenclatureSet)
+    {
+        return view('management.department.current.nomenclature_sets.edit')
+            ->with('item', $nomenclatureSet);
+    }
+
+    public function update(NomenclatureSet $nomenclatureSet, Request $request)
+    {
+        $nomenclatureSet->update($request->only(['name']));
+
+        return redirect()->route('department.current');
+    }
+
     /**
      * @param NomenclatureSet $nomenclatureSet
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function createItem(NomenclatureSet $nomenclatureSet)
     {
-        return view('management.department.current.nomenclature_sets.create')
+        return view('management.department.current.nomenclature_sets.item.create')
             ->with('item', new NomenclatureSetItem())
             ->with('nomenclatureSet', $nomenclatureSet);
     }
@@ -52,7 +81,7 @@ class NomenclatureSetController extends Controller
      */
     public function editItem(NomenclatureSet $nomenclatureSet, NomenclatureSetItem $nomenclatureSetItem)
     {
-        return view('management.department.current.nomenclature_sets.edit')
+        return view('management.department.current.nomenclature_sets.item.edit')
             ->with('item', $nomenclatureSetItem)
             ->with('nomenclatureSet', $nomenclatureSet);
     }

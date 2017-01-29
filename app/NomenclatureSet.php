@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class NomenclatureSet extends Model
 {
 
+    public $timestamps = false;
+
     protected $fillable = [
         'name', 'department_id'
     ];
