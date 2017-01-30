@@ -50,6 +50,8 @@
 
             @yield('content')
 
+            <div id="notifications-container"></div>
+
             {{--<div class="popup-notifications">--}}
                 {{--<div class="notification notification-danger">--}}
                     {{--<div class="notification-content">--}}

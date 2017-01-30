@@ -29,4 +29,14 @@ Route::group([
         'as' => 'search.nomenclatures'
     ]);
 
+    Route::get('nomenclatures/{nomenclature}', [
+        'uses' => 'SearchController@nomenclature',
+        'as' => 'search.nomenclature'
+    ]);
+
+    Route::post('units', [
+        'uses' => 'SearchController@units',
+        'as' => 'search.units'
+    ]);
+
 });

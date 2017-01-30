@@ -53,12 +53,40 @@ class SearchController extends Controller
     public function nomenclatures(Request $request)
     {
         return Nomenclature::search($request->get('text'))->get()->map(function (Nomenclature $nomenclature) {
+            $units = collect([
+                $nomenclature->baseUnit,
+                $nomenclature->basicUnit
+            ]);
             return [
                 'id' => $nomenclature->id,
                 'name' => $nomenclature->name,
-                'name_for_department' => $nomenclature->name_for_department
+                'name_for_department' => $nomenclature->name_for_department,
+                'units' => $units
             ];
         });
+    }
+
+    public function nomenclature(Nomenclature $nomenclature, Request $request)
+    {
+        $currentUnitId = $request->get('unit_id', 0);
+        $units = collect([
+            $nomenclature->baseUnit,
+            $nomenclature->basicUnit
+        ])->map(function ($unit) use ($currentUnitId) {
+            $unit = $unit->toArray();
+            $unit['selected'] = $unit['id'] == $currentUnitId;
+            return $unit;
+        });
+        return [
+            [
+                'id' => $nomenclature->id,
+                'name' => $nomenclature->name,
+                'name_for_department' => $nomenclature->name_for_department,
+                'units' => $units,
+                'selected' => true
+            ]
+        ];
+
     }
 
 }

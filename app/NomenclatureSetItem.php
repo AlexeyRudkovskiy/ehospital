@@ -8,7 +8,7 @@ class NomenclatureSetItem extends Model
 {
 
     protected $fillable = [
-        'amount', 'nomenclature_id', 'nomenclature_set_id'
+        'amount', 'nomenclature_id', 'nomenclature_set_id', 'unit_id'
     ];
 
     public $timestamps = false;
@@ -27,6 +27,11 @@ class NomenclatureSetItem extends Model
     public function nomenclature()
     {
         return $this->belongsTo(Nomenclature::class);
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
     }
 
 }

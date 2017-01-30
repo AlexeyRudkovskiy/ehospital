@@ -5,6 +5,7 @@
         <thead>
         <tr>
             <th>Nomenclature</th>
+            <th width="100">unit</th>
             <th width="100" class="pull-right">amount</th>
             <th width="75" class="vertical-aligned pull-right small-right-padding no-vertical-paddings">
                 <a href="{{ route('department.nomenclature_set.item.create', $nomenclatureSet->id) }}" class="mi-icon use-shadow">add</a>
@@ -15,6 +16,7 @@
         @foreach($items as $item)
         <tr>
             <td>{{ $item->nomenclature->name_for_department }}</td>
+            <td>{{ $item->unit->text }}</td>
             <td class="pull-right">{{ $item->amount }}</td>
             <td class="pull-right no-vertical-paddings small-right-padding vertical-aligned">
                 <div class="inline-list pull-right">

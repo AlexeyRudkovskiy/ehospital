@@ -18,10 +18,12 @@ class CreateNomenclatureSetItemsTable extends Migration
 
             $table->integer('nomenclature_id', false, true);
             $table->integer('nomenclature_set_id', false, true);
+            $table->integer('unit_id', false, true);
             $table->float('amount');
 
             $table->foreign('nomenclature_id')->references('id')->on('nomenclatures')->onDelete('cascade');
             $table->foreign('nomenclature_set_id')->references('id')->on('nomenclature_sets')->onDelete('cascade');
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
         });
     }
 

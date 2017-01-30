@@ -170,4 +170,24 @@ class Department extends Model
         }
     }
 
+    public function armorNomenclature(Nomenclature $nomenclature, float $amount)
+    {
+        if ($this->storage()->whereNomenclatureId($nomenclature->id)->count() > 0) {
+            $storage = $this->storage()->whereNomenclatureId($nomenclature->id)->first();
+            $data = $storage->data;
+            if ($data['in_stock'] > $amount) {
+                $data['in_stock'] -= $amount;
+                $data['armored'] += $amount;
+
+                $storage->update([
+                    'data' => $data
+                ]);
+                return $data;
+            }
+            return null;
+        } else {
+            return null;
+        }
+    }
+
 }

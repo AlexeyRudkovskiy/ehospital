@@ -36,6 +36,6 @@ class TestEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['channel'];
+        return self::class;
     }
 }

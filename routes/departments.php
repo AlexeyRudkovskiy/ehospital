@@ -35,6 +35,11 @@ Route::group([
         'as' => 'department.nomenclature_set.update'
     ]);
 
+    Route::get('set/{nomenclatureSet}/delete', [
+        'uses' => 'NomenclatureSetController@delete',
+        'as' => 'department.nomenclature_set.delete'
+    ]);
+
     Route::get('set/{nomenclatureSet}/item/create', [
         'uses' => 'NomenclatureSetController@createItem',
         'as' => 'department.nomenclature_set.item.create'

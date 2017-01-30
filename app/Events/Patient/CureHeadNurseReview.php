@@ -36,6 +36,6 @@ class CureHeadNurseReview implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return [ CureHeadNurseReview::class ];
+        return [ self::class ];
     }
 }

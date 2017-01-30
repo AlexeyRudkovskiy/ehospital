@@ -168,6 +168,7 @@ return [
          */
         Laravel\Scout\ScoutServiceProvider::class,
         ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
+        Lord\Laroute\LarouteServiceProvider::class,
 
         //
 
