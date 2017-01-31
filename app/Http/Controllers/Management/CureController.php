@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Management;
 use App\CalendarDay;
 use App\Cure;
 use App\Events\Notification;
+use App\Events\Patient\CureChiefReview;
 use App\Measure;
+use App\Nomenclature;
 use App\Permission;
 use App\User;
 use App\UserPosition;
@@ -20,26 +22,7 @@ class CureController extends Controller
 
     public function show(Cure $cure)
     {
-        $days = $cure->days;
-        $defaultData = [];
-        foreach ($days as $day) {
-            $localData = [];
-            foreach ($day->nomenclatures as $nomenclature) {
-                $measure = Measure::find($nomenclature->pivot['measure_id']);
-                array_push($localData, [
-                    'name' => $nomenclature->name_for_department,
-                    'nomenclature_id' => $nomenclature->id,
-                    'amount' => $measure->name,
-                    'measure_id' => $measure->id
-                ]);
-            }
-            $defaultData[$day->day->format('d.m.Y')] = [
-                'nomenclatures' => $localData,
-                'procedures' => [  ]
-            ];
-        }
-
-        $defaultValue = $cure->review['accepted'] != [] ? $cure->review['accepted'] : $cure->review['requested'];
+        $defaultValue = count($cure->review['accepted']) > 0 ? $cure->review['accepted'] : $cure->review['requested'];
         return view('management.cure.show')
             ->with('cure', $cure)
             ->with('defaultData', $defaultValue);
@@ -59,38 +42,9 @@ class CureController extends Controller
         $cure->review = $review;
         $cure->save();
 
+        event(new CureChiefReview($cure));
+
         return $cure;
-//        $calendarDays = $request->get('calendar_days');
-//        $calendarDays = \json_decode($calendarDays, true);
-//
-//        $calendarDays = array_map(function ($item) {
-//            foreach ($item as $key => $value) {
-//                unset($item[$key]);
-//                $key = substr($key, 1);
-//                $item[$key] = $value;
-//            }
-//
-//            return (object)$item;
-//        }, $calendarDays);
-//
-//        $currentData = $cure->review['data'];
-//        $updatedReview = $cure->review;
-//        $updatedReview['initial'] = $currentData;
-//        $updatedReview['data'] = $calendarDays;
-//
-//        if ($request->has('accepted') && (int)($request->get('accepted')) == 1) {
-//            $updatedReview['accepted'] = true;
-//
-//            $notification = new Notification(trans('management.notification.nomenclature.request.title'), 'notification-default');
-//            $notification->addAction(trans('management.notification.nomenclature.request.action.open'), route('cure.show', $cure->id));
-//
-//            $cure->department->chiefMedicalOfficer->notify($notification);
-//        }
-//
-//        $cure->review = $updatedReview;
-//        $cure->save();
-//
-//        return redirect()->route('cure.show', $cure->id);
     }
 
     public function getReviewAccept(Cure $cure)
@@ -107,32 +61,74 @@ class CureController extends Controller
         $measures = [];
         $unique = [];
 
-        foreach ($review['accepted'] as $day => $value) {
-            $calendarDate = $cure->days()->create(['day' => Carbon::parse($day)]);
+        $nomenclatures = [];
+        $totalNomenclaturesAmount = [];
+        $accepted = $review['accepted'];
 
-            foreach ($value['nomenclatures'] as $nomenclature) {
-                if (!array_key_exists($nomenclature['measure_id'], $measures)) {
-                    $measures[$nomenclature['measure_id']] = Measure::find($nomenclature['measure_id']);
+        $cure->days()->delete();
+
+        foreach ($accepted as $_day => $value) {
+            $nomenclaturesAtThisDay = $value['nomenclatures'];
+            $day = $cure->days()->create([
+                'day' => Carbon::parse($_day)
+            ]);
+            foreach ($nomenclaturesAtThisDay as $item) {
+                if (!array_key_exists($item['nomenclature_id'], $nomenclatures)) {
+                    $nomenclatures[$item['nomenclature_id']] = Nomenclature::find($item['nomenclature_id']);
+                    $totalNomenclaturesAmount[$item['nomenclature_id']] = 0;
                 }
 
-                if (!array_key_exists($nomenclature['nomenclature_id'], $unique)) {
-                    $unique[$nomenclature['nomenclature_id']] = 0;
+                if ($item['unit_id'] == $nomenclatures[$item['nomenclature_id']]->base_unit_id) {
+                    $item['amount'] *= $nomenclatures[$item['nomenclature_id']]->amount_in_a_package;
                 }
 
-                $unique[$nomenclature['nomenclature_id']] += $measures[$nomenclature['measure_id']]->amount;
-
-                $calendarDate->nomenclatures()->attach([
-                    $nomenclature['nomenclature_id'] => [
-                        'amount' => $measures[$nomenclature['measure_id']]->amount,
-                        'measure_id' => $nomenclature['measure_id']
+                $day->nomenclatures()->attach([
+                    $item['nomenclature_id'] => [
+                        'amount' => $item['amount'],
+                        'unit_id' => $item['unit_id']
                     ]
                 ]);
+
+                $totalNomenclaturesAmount[$item['nomenclature_id']] += $item['amount'];
             }
         }
 
+        $department = $cure->department;
+
+        foreach ($totalNomenclaturesAmount as $nomenclature => $item) {
+            $response = $department->calculateAmountToRequest($nomenclatures[$nomenclature], $item);
+            $totalNomenclaturesAmount[$nomenclature] = $response['storage'];
+            if ($totalNomenclaturesAmount[$nomenclature] <= 0) {
+                unset($totalNomenclaturesAmount[$nomenclature]);
+            }
+        }
+
+//        foreach ($review['accepted'] as $day => $value) {
+//            $calendarDate = $cure->days()->create(['day' => Carbon::parse($day)]);
+//
+//            foreach ($value['nomenclatures'] as $nomenclature) {
+//                if (!array_key_exists($nomenclature['measure_id'], $measures)) {
+//                    $measures[$nomenclature['measure_id']] = Measure::find($nomenclature['measure_id']);
+//                }
+//
+//                if (!array_key_exists($nomenclature['nomenclature_id'], $unique)) {
+//                    $unique[$nomenclature['nomenclature_id']] = 0;
+//                }
+//
+//                $unique[$nomenclature['nomenclature_id']] += $measures[$nomenclature['measure_id']]->amount;
+//
+//                $calendarDate->nomenclatures()->attach([
+//                    $nomenclature['nomenclature_id'] => [
+//                        'amount' => $measures[$nomenclature['measure_id']]->amount,
+//                        'measure_id' => $nomenclature['measure_id']
+//                    ]
+//                ]);
+//            }
+//        }
+
         $cure->nomenclatureRequest()->create([
             'done' => false,
-            'requested' => $unique,
+            'requested' => $totalNomenclaturesAmount,
             'doctor_id' => $cure->user_id,
             'head_nurse_id' => $cure->review['headNurse_id'],
             'chief_medical_officer_id' => $cure->review['chief_id'],
@@ -151,7 +147,7 @@ class CureController extends Controller
         $cure->review = $newReview;
         $cure->save();
 
-        $notification = new Notification(trans('management.notification.cure.rejected'), 'notification-danger');
+        $notification = new Notification(trans('management.notification.cure.rejected'), 'danger');
         $notification->addAction(trans('management.notification.cure.action.open'), route('cure.show', $cure->id));
 
         $cure->department->leader->notify($notification);

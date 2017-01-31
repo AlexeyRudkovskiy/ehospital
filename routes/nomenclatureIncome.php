@@ -1,16 +1,16 @@
 <?php
 
-Route::get('nomenclatureIncome', [
+Route::get('nomenclature/income', [
     'uses' => 'NomenclatureIncomeController@index',
     'as' => 'nomenclatureIncome.index'
 ]);
 
-Route::get('nomenclatureIncome/{nomenclature_income_id}', [
+Route::get('nomenclature/income/{nomenclature_income_id}', [
     'uses' => 'NomenclatureIncomeController@show',
     'as' => 'nomenclatureIncome.show'
 ]);
 
-Route::post('nomenclatureIncome/nomenclatures', [
+Route::post('nomenclature/income/nomenclatures', [
     'uses' => 'NomenclatureIncomeController@postNomenclatures',
     'as' => 'nomenclatureIncome.nomenclatures'
 ]);

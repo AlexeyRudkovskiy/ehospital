@@ -309,49 +309,23 @@ class User extends Authenticatable
     public function notify()
     {
         $arguments = func_get_args();
+        $notification = null;
         if ($arguments[0] instanceof Notification) {
-            $arguments[0]->setUserId($this->id);
-            event($arguments[0]);
+            $arguments[0]->setUser($this);
+            $notification = $arguments[0];
         } else if (count($arguments) == 2) {
-            $type = $arguments[1];
-            switch ($type) {
-                case 'danger':
-                    $type = 'notification-danger';
-                    break;
-                case 'default':
-                    $type = 'notification-default';
-                    break;
-                default:
-                    $type = '';
-                    break;
-            }
-            $event = new Notification($arguments[0], $type);
-            $event->setUserId($this->id);
-            event($event);
+            $notification = new Notification($arguments[0], $arguments[1], $this);
         } else if (count($arguments) == 3) {
-            $type = $arguments[1];
-            switch ($type) {
-                case 'danger':
-                    $type = 'notification-danger';
-                    break;
-                case 'default':
-                    $type = 'notification-default';
-                    break;
-                default:
-                    $type = '';
-                    break;
-            }
-            $notification = new Notification($arguments[0], $type);
-            $notification->setUserId($this->id);
+            $notification = new Notification($arguments[0], $arguments[1], $this);
 
             foreach ($arguments[3] as $argument) {
                 call_user_func_array([
                     $notification, 'addAction'
                 ], $argument);
             }
-
-            event($notification);
         }
+
+        event($notification);
     }
 
     public function getEncrypter()

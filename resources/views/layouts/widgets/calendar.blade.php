@@ -85,19 +85,11 @@
             </div>
         </div>
         <ul class="list medicaments">
-            <li>
-                <p class="name"><a href="javascript:">Амброксол</a></p>
-                <p class="amount">10 мл</p>
-            </li>
         </ul>
         <div class="header">
             <h3>Процедуры</h3>
         </div>
-        <ul class="list procedures">
-            <li>
-                <p class="name"><a href="javascript:">ЭКГ</a></p>
-            </li>
-        </ul>
+        <ul class="list procedures"></ul>
     </div>
 </div>
 

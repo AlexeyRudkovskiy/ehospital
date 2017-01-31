@@ -48,7 +48,7 @@
             </div>
 
             @if($cure->review['headNurse'] == true)
-            <div data-tab="flow" class="tab-full-size tab-horizontal-scroll">
+            <div data-tab="flow">
                 @include('management.cure.tabs.flow')
             </div>
             @else

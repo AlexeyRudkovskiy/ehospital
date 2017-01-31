@@ -54,7 +54,8 @@ class PermissionsTableSeeder extends Seeder
                         [ 'path' => "contractor.index" ],
                         [ 'path' => 'atcClassification.index' ],
                         [ 'path' => 'manufacturer.index' ],
-                        [ 'path' => 'nomenclatureIncome.index' ]
+                        [ 'path' => 'nomenclatureIncome.index' ],
+                        [ 'path' => 'nomenclature.requests' ]
                     ]
                 ]
             ])

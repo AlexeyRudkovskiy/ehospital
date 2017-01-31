@@ -19,7 +19,8 @@ class NomenclatureRequest extends Model
         'doctor_id',
         'head_nurse_id',
         'chief_medical_officer_id',
-        'pharmacist_id'
+        'pharmacist_id',
+        'nomenclature_request_merged'
     ];
 
     protected $casts = [
@@ -72,6 +73,14 @@ class NomenclatureRequest extends Model
     public function file()
     {
         return $this->morphOne(File::class, 'attachable');
+    }
+
+    /**
+     * @return Department
+     */
+    public function department()
+    {
+        return $this->cure->department;
     }
 
     public function requestedData()

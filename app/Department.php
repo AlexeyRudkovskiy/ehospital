@@ -73,6 +73,11 @@ class Department extends Model
         return $this->hasMany(NomenclatureSet::class);
     }
 
+    public function nomenclatureRequests()
+    {
+        return $this->hasManyThrough(NomenclatureRequest::class, Cure::class);
+    }
+
     public function patients()
     {
         $patientsIds = $this->cures()

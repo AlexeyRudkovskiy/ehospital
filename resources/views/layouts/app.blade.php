@@ -110,8 +110,11 @@
         }
     });
 
+    window.user = {
+        id: {{ auth()->id() }}
+    };
+
     SystemJS.import("app.js").then(null, console.error.bind(console));
 </script>
-<!-- {{ memory_get_usage() }} -->
 </body>
 </html>
