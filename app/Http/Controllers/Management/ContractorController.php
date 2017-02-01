@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Management;
 
 use App\Address;
+use App\Agreement;
 use App\Contractor;
 use Illuminate\Http\Request;
 
@@ -127,6 +128,12 @@ class ContractorController extends Controller
             ->with('contractor', $contractor);
     }
 
+    public function postAddAddress(Contractor $contractor, Request $request)
+    {
+        $contractor->addresses()->create($request->all());
+        return redirect(route('contractor.show', $contractor->id) . '#addresses');
+    }
+
     public function deleteAddress(Contractor $contractor, Address $address)
     {
         $address->delete();
@@ -136,13 +143,26 @@ class ContractorController extends Controller
             'type' => 'notification-default'
         ]));
 
-        return back();
+        return route(route('contractor.show', $contractor->id) . '#addresses');
     }
 
     public function getAddAgreement(Contractor $contractor)
     {
         return view('management.contractor.agreement.create')
             ->with('contractor', $contractor);
+    }
+
+    public function deleteAgreement(Contractor $contractor, Agreement $agreement)
+    {
+        $agreement->delete();
+
+        return redirect(route('contractor.show', $contractor->id) . '#documents');
+    }
+
+    public function storeAgreement (Contractor $contractor, Request $request) {
+        $contractor->agreements()->create($request->all());
+
+        return redirect(route('contractor.show', $contractor->id) . '#documents');
     }
 
 }

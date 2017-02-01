@@ -31,42 +31,29 @@ class NomenclatureIncomeController extends Controller
         $data = $request->except(['_token', 'nomenclature']);
 
         $income = new NomenclatureIncome($data);
-        $income->nomenclatures = json_encode($request->get('nomenclature'));
+        $nomenclatures = $request->get('nomenclature');
+        $income->nomenclatures = json_encode($nomenclatures);
         $income->created_by = auth()->id();
 
         $income->save();
 
-        foreach ($request->get('nomenclature') as $item) {
+        foreach ($nomenclatures as $item) {
             $nomenclature = Nomenclature::find($item['id']);
-            $batch = NomenclatureBatch::create([
-                'batch' => $item['batch'],
-                'price' => $item['total'],
-                'nomenclature_id' => $nomenclature->id
-            ]);
-            $nomenclature->income($item['amount'], $batch, ['nomenclature_income_id' => $income->id]);
+            $batches = $item['batches'];
+            foreach ($batches as $batch) {
+                $createdBatch = $nomenclature->batches()->create([
+                    'batch' => implode(' ', [$batch['batch_date'], $batch['batch_number']]),
+                    'price' => $batch['total']
+                ]);
+
+                $nomenclature->income($batch['amount'], $createdBatch, [
+                    'user_id' => auth()->id(),
+                    'nomenclature_income_id' => $income->id
+                ]);
+            }
         }
 
-//        $data['nomenclatures'] = \json_decode($data['nomenclatures']);
-//
-//        $data = array_merge($data, [
-//            'created_by' => auth()->id()
-//        ]);
-//        $nomenclatureIncome = NomenclatureIncome::create($data);
-//
-//        foreach ($data['nomenclatures'] as $nomenclatureData) {
-//            $nomenclature = Nomenclature::find($nomenclatureData->nomenclature_id);
-//            $batch = null;
-//
-//            if (isset($nomenclatureData->keep_records_by_series) && $nomenclatureData->keep_records_by_series && isset($nomenclatureData->batch_id)) {
-//                $batch = NomenclatureBatch::find($nomenclatureData->batch_id);
-//            }
-//
-//            $nomenclature->income($nomenclatureData->amount, $batch, [
-//                'nomenclature_income_id' => $nomenclatureIncome->id
-//            ]);
-//        }
-
-//        return $nomenclatureIncome;
+        return redirect()->route('nomenclature.index');
     }
 
 }

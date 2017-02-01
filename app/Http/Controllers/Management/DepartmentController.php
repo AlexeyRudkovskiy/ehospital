@@ -66,12 +66,17 @@ class DepartmentController extends PermissibleController
      * Display the specified resource.
      *
      * @param  \App\Department  $department
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(Department $department)
     {
-        return view('management.department.show')
-            ->with('department', $department);
+        $users = $department->users()->paginate(config('eh.pagination.limit'), ['*'], 'department_users_page');
+        $storage = $department->storage()->paginate(config('eh.pagination.limit'), ['*'], 'department_storage_page');
+
+        return view('management.department.current')
+            ->with('department', $department)
+            ->with('users', $users)
+            ->with('storage', $storage);
     }
 
     /**

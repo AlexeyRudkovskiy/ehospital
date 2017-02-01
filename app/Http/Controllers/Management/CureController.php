@@ -8,6 +8,7 @@ use App\Events\Notification;
 use App\Events\Patient\CureChiefReview;
 use App\Measure;
 use App\Nomenclature;
+use App\NomenclatureSet;
 use App\Permission;
 use App\User;
 use App\UserPosition;
@@ -69,27 +70,60 @@ class CureController extends Controller
 
         foreach ($accepted as $_day => $value) {
             $nomenclaturesAtThisDay = $value['nomenclatures'];
+            $procedures = $value['procedures'];
+
             $day = $cure->days()->create([
                 'day' => Carbon::parse($_day)
             ]);
+
             foreach ($nomenclaturesAtThisDay as $item) {
-                if (!array_key_exists($item['nomenclature_id'], $nomenclatures)) {
-                    $nomenclatures[$item['nomenclature_id']] = Nomenclature::find($item['nomenclature_id']);
-                    $totalNomenclaturesAmount[$item['nomenclature_id']] = 0;
-                }
+                // check is nomenclature
+                if (array_key_exists('is_set', $item) && $item['is_set'] == false) {
+                    if (!array_key_exists($item['nomenclature_id'], $nomenclatures)) {
+                        $nomenclatures[$item['nomenclature_id']] = Nomenclature::find($item['nomenclature_id']);
+                        $totalNomenclaturesAmount[$item['nomenclature_id']] = 0;
+                    }
 
-                if ($item['unit_id'] == $nomenclatures[$item['nomenclature_id']]->base_unit_id) {
-                    $item['amount'] *= $nomenclatures[$item['nomenclature_id']]->amount_in_a_package;
-                }
+                    if ($item['unit_id'] == $nomenclatures[$item['nomenclature_id']]->base_unit_id) {
+                        $item['amount'] *= $nomenclatures[$item['nomenclature_id']]->amount_in_a_package;
+                    }
 
-                $day->nomenclatures()->attach([
-                    $item['nomenclature_id'] => [
-                        'amount' => $item['amount'],
-                        'unit_id' => $item['unit_id']
-                    ]
+                    $day->nomenclatures()->attach([
+                        $item['nomenclature_id'] => [
+                            'amount' => $item['amount'],
+                            'unit_id' => $item['unit_id']
+                        ]
+                    ]);
+
+                    $totalNomenclaturesAmount[$item['nomenclature_id']] += $item['amount'];
+                } else if (array_key_exists('is_set', $item) && $item['is_set'] == true) {
+                    $set = NomenclatureSet::find($item['set_id']);
+
+                    foreach ($set->items as $setItem) {
+                        if (!array_key_exists($setItem->nomenclature_id, $nomenclatures)) {
+                            $nomenclatures[$setItem->nomenclature_id] = $setItem->nomenclature;
+                            $totalNomenclaturesAmount[$setItem->nomenclature_id] = 0;
+                        }
+
+//                        if ($item['unit_id'] == $nomenclatures[$setItem->nomenclature_id]->base_unit_id) {
+                            $setItem->amount *= $item['amount'];
+//                        }
+
+                        $totalNomenclaturesAmount[$setItem->nomenclature_id] += $setItem->amount;
+                    }
+
+                    $day->nomenclatureSets()->attach([
+                        $set->id => [
+                            'amount' => $item['amount']
+                        ]
+                    ]);
+                }
+            }
+
+            foreach ($procedures as $procedure) {
+                $day->procedures()->attach([
+                    $procedure['id'] => [  ]
                 ]);
-
-                $totalNomenclaturesAmount[$item['nomenclature_id']] += $item['amount'];
             }
         }
 
@@ -150,7 +184,7 @@ class CureController extends Controller
         $notification = new Notification(trans('management.notification.cure.rejected'), 'danger');
         $notification->addAction(trans('management.notification.cure.action.open'), route('cure.show', $cure->id));
 
-        $cure->department->leader->notify($notification);
+        $cure->department->headNurse->notify($notification);
 
         return redirect()->route('patient.index');
     }

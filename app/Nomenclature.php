@@ -5,6 +5,7 @@ namespace App;
 use App\Events\NomenclatureBatchBalanceUpdated;
 use App\Events\NomenclatureHistoryUpdatedEvent;
 use App\Traits\RevisionsTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
@@ -91,7 +92,7 @@ class Nomenclature extends Model
      */
     public function batches()
     {
-        return $this->hasMany(NomenclatureBatch::class);
+        return $this->hasMany(NomenclatureBatch::class)->orderBy('id', 'desc');
     }
 
     /**
@@ -140,6 +141,19 @@ class Nomenclature extends Model
     public function historyWithoutArmored()
     {
         return $this->history()->where('status', '!=', 'armored');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function incomeHistory()
+    {
+        return $this->history()->where('status', 'income')->get();
+    }
+
+    public function expenseHistory()
+    {
+        return $this->history()->where('status', 'outgoing')->get();
     }
 
     /**
@@ -221,12 +235,13 @@ class Nomenclature extends Model
             'amount' => $amount,
             'status' => $status,
             'user_id' => auth()->id(),
-            'nomenclature_batch_id' => $batch->id ?? null
+            'nomenclature_batch_id' => $batch->id ?? null,
+            'created_at' => Carbon::now()
         ];
         $createAttributes = array_merge($createAttributes, $attributes);
         $nomenclatureHistory = $this->history()->create($createAttributes);
-        event(new NomenclatureBatchBalanceUpdated($this, $this->balance(), $status == 'income' ? $amount : -$amount, $status, $batch));
-        event(new NomenclatureHistoryUpdatedEvent($this->history()->take(1)->get()->first()));
+//        event(new NomenclatureBatchBalanceUpdated($this, $this->balance(), $status == 'income' ? $amount : -$amount, $status, $batch));
+//        event(new NomenclatureHistoryUpdatedEvent($this->history()->take(1)->get()->first()));
         return $nomenclatureHistory;
     }
 

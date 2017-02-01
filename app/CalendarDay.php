@@ -39,7 +39,23 @@ class CalendarDay extends Model
      */
     public function nomenclatures()
     {
-        return $this->belongsToMany(Nomenclature::class)->withPivot('amount')->withPivot('measure_id');
+        return $this->belongsToMany(Nomenclature::class)->withPivot('amount')->withPivot('unit_id')->withPivot('took');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function procedures()
+    {
+        return $this->belongsToMany(Procedure::class)->withPivot('result');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function nomenclatureSets()
+    {
+        return $this->belongsToMany(NomenclatureSet::class)->withPivot('amount')->withPivot('took')->withPivot('user_id');
     }
 
     /**

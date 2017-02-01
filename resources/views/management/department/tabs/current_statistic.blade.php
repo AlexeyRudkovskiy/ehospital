@@ -1,10 +1,12 @@
 <div class="info-compact">
     <div class="header underline">
         <h3>{{ $department->name }}</h3>
+        @if($department->leader_id == auth()->id() || $department->leader->isParent(auth()->user()))
         <nav class="links">
             <a href="{{ route('department.edit', $department->id) }}">@lang('management.global.edit')</a><!--
                 --><a href="javascript:" class="danger">@lang('management.global.delete')</a>
         </nav>
+        @endif
     </div>
 
     <table class="table table-striped-on-hover">

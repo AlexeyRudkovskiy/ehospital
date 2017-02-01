@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class NomenclatureSet extends Model
 {
+
+    use Searchable;
 
     public $timestamps = false;
 

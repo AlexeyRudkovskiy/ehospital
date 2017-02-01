@@ -35,7 +35,8 @@ class NomenclatureHistory extends Model
         'user_id',
         'nomenclature_batch_id',
         'nomenclature_income_id',
-        'nomenclature_request_id'
+        'nomenclature_request_id',
+        'created_at'
     ];
 
     protected $with = [

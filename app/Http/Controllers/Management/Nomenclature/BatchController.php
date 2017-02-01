@@ -47,7 +47,7 @@ class BatchController extends Controller
             $batch = $nomenclature->batches()->create($data);
             session()->flash('message', 'management.nomenclature.batch.created');
             event(new BatchCreatedEvent($batch));
-            return redirect()->route('nomenclature.show', [$nomenclature->id, '#activetab=.tab-content-batches']);
+            return redirect()->route('nomenclature.show', [$nomenclature->id, '#batches']);
         }
         abort(403);
     }
@@ -82,7 +82,7 @@ class BatchController extends Controller
         ]));
         event(new BatchChangedEvent($batch));
 
-        return redirect()->route('nomenclature.show', [$nomenclature->id, '#activetab=.tab-content-batches']);
+        return redirect(route('nomenclature.show', [$nomenclature->id]) . '#batches');
     }
 
     /**
@@ -98,7 +98,7 @@ class BatchController extends Controller
             'text' => 'management.nomenclature.batch.deleted',
             'type' => ''
         ]));
-        return redirect()->route('nomenclature.show', [$nomenclature->id, '#activetab=.tab-content-batches']);
+        return redirect(route('nomenclature.show', [$nomenclature->id]) . '#batches');
     }
 
 }

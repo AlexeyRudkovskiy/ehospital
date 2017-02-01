@@ -45,10 +45,6 @@ Route::get('income_template.html', function () {
     return view('templates/income_template');
 });
 
-Route::get('test2', function () {
-    dispatch(new \App\Jobs\GenerateNomenclatureRequestDocument(\App\NomenclatureRequest::first()));
-});
-
 Route::get('lang.json', function () {
     return trans('management');
 });

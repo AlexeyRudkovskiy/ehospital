@@ -56,10 +56,56 @@
                 </div>
             </div>
             <div data-tab="addresses">
-                <addresses-list></addresses-list>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Адрес</th>
+                        <th width="130" class="pull-right">
+                            <a href="{{ route('contractor.address.create', $contractor->id) }}" class="btn">создать</a>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($contractor->addresses as $addresses)
+                        <tr>
+                            <td>
+                                {{ $addresses->country->name }}
+                                {{ $addresses->city }}
+                                {{ $addresses->street }}
+                                {{ $addresses->house_number }}
+                                {{ $addresses->apartment }}
+                            </td>
+                            <td class="pull-right">
+                                <a href="{{ route('contractor.address.delete', [$contractor->id, $addresses->id]) }}">Удалить</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
             <div data-tab="documents">
-                <agreements-list></agreements-list>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Срок</th>
+                        <th width="100" class="pull-right">Цена</th>
+                        <th width="130" class="pull-right">
+                            <a href="{{ route('contractor.agreement.create', $contractor->id) }}" class="btn">создать</a>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($contractor->agreements as $agreement)
+                        <tr>
+                            <td>{{ $agreement->from }} - {{ $agreement->until }}</td>
+                            <td class="pull-right">{{ $agreement->price }}</td>
+                            <td class="pull-right">
+                                <a href="{{ route('contractor.agreement.delete', [$contractor->id, $agreement->id]) }}">Удалить</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

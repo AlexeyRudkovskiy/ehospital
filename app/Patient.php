@@ -167,7 +167,14 @@ class Patient extends Model
             return $cure->department_id;
         })->contains($user->id);
 
-        return $doctorsIds->contains($user->id) || $hasCurrentUserAsParent->contains(true) || $isDepartmentHeadNurse;
+        $isDepartmentLeader = false;
+        $isDepartmentHeadNurse = $this->getCurrentCures()->map(function (Cure $cure) {
+            return $cure->department;
+        })->unique()->map(function (Department $department) {
+            return $department->head_nurse_id;
+        })->unique()->contains(auth()->id());
+
+        return $doctorsIds->contains($user->id) || $hasCurrentUserAsParent->contains(true) || $isDepartmentHeadNurse || $isDepartmentLeader;
     }
 
     /**

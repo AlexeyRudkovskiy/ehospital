@@ -101,6 +101,11 @@ class Department extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function headNurse()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

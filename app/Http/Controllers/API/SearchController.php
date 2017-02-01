@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Contractor;
 use App\Department;
 use App\Nomenclature;
+use App\NomenclatureSet;
+use App\Procedure;
+use App\SourceOfFinancing;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -52,7 +56,7 @@ class SearchController extends Controller
 
     public function nomenclatures(Request $request)
     {
-        return Nomenclature::search($request->get('text'))->get()->map(function (Nomenclature $nomenclature) {
+        $nomenclatures = Nomenclature::search($request->get('text'))->get()->map(function (Nomenclature $nomenclature) {
             $units = collect([
                 $nomenclature->baseUnit,
                 $nomenclature->basicUnit
@@ -64,6 +68,18 @@ class SearchController extends Controller
                 'units' => $units
             ];
         });
+
+        if ($request->has('sets_link') && $request->get('sets_link', -1) == 1) {
+            $nomenclatures->push([
+                'id' => -1,
+                'name' => 'Загрузить наборы',
+                'name_for_department' => '',
+                'units' => [],
+                'is_set' => true
+            ]);
+        }
+
+        return $nomenclatures;
     }
 
     public function nomenclature(Nomenclature $nomenclature, Request $request)
@@ -86,7 +102,56 @@ class SearchController extends Controller
                 'selected' => true
             ]
         ];
+    }
 
+    public function procedures(Request $request)
+    {
+        return Procedure::search($request->get('text'))->get();
+    }
+
+    public function procedure(Procedure $procedure)
+    {
+        $procedure->selected = true;
+        return [ $procedure ];
+    }
+
+    public function source_of_financing(Request $request)
+    {
+        return SourceOfFinancing::search($request->get('text'))->get();
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function contractors(Request $request)
+    {
+        return Contractor::search($request->get('text'))->where('group', 'provider')->get()->map(function (Contractor $contractor) {
+            $contractor->agreements;
+            return $contractor;
+        });
+    }
+
+    public function sets(Department $department, Request $request)
+    {
+        $default = null;
+        if ($request->has('set_id')) {
+            $default = NomenclatureSet::whereId($request->get('set_id', 0))
+                ->get()
+                ->map(function (NomenclatureSet $set) {
+                    $set->selected = true;
+                    return $set;
+                });
+        } else {
+            $default = NomenclatureSet::search($request->get('text'))
+                ->where('department_id', $department->id)
+                ->get();
+        }
+        return $default
+            ->map(function (NomenclatureSet $nomenclatureSet) {
+                $nomenclatureSet->count = $nomenclatureSet->items()->count();
+                return $nomenclatureSet;
+            });
     }
 
 }

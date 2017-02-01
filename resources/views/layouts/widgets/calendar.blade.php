@@ -88,6 +88,11 @@
         </ul>
         <div class="header">
             <h3>Процедуры</h3>
+            <div class="create-item">
+                @if (!$isJustView)
+                    <a href="javascript:" class="btn btn-small add-procedure">добавить</a>
+                @endif
+            </div>
         </div>
         <ul class="list procedures"></ul>
     </div>
@@ -100,3 +105,11 @@
         justView: {{ (int)$isJustView }}
     };
 </script>
+
+@if($cure->id !== null)
+<script>
+    window.department = {
+        id: {{ $cure->department->id }}
+    };
+</script>
+@endif

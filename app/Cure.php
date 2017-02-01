@@ -148,7 +148,7 @@ class Cure extends Model
 
     public function isHeadNurse(User $user)
     {
-        return $this->department->leader->id === $user->id;
+        return $this->department->headNurse->id === $user->id;
     }
 
     public function isMedicamentsApprovedByPharmacists()

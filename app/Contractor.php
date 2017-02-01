@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\Permissible;
 use App\Traits\RevisionsTrait;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 /**
  * Class Contractor
@@ -17,6 +18,7 @@ class Contractor extends Model
 
     use RevisionsTrait;
     use Permissible;
+    use Searchable;
 
     /**
      * Отключаем колонки created_at, updated_at

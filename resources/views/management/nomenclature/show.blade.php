@@ -11,7 +11,8 @@
             <a href="javascript:" data-default data-target="info"><nobr>@lang('management.label.nomenclature.info')</nobr></a>
             <a href="javascript:" data-target="revisions">@lang('management.label.nomenclature.revisions')</a>
             <a href="javascript:" data-target="batches" data-icon="add">@lang('management.label.nomenclature.series')</a>
-            <a href="javascript:" data-target="statistic">@lang('management.label.nomenclature.statistic')</a>
+            <a href="javascript:" data-target="receipts">@lang('management.label.nomenclature.receipts')</a>
+            <a href="javascript:" data-target="expense">@lang('management.label.nomenclature.expense')</a>
         </nav>
         <div class="tabs-contents">
             <div data-tab="info">
@@ -23,8 +24,11 @@
             <div data-tab="batches" class="no-left-padding no-right-padding">
                 @include('management.nomenclature.tabs.batches')
             </div>
-            <div data-tab="statistic">
-                @include('management.nomenclature.tabs.statistic')
+            <div data-tab="receipts">
+                @include('management.nomenclature.tabs.receipts')
+            </div>
+            <div data-tab="expense">
+                @include('management.nomenclature.tabs.expense')
             </div>
         </div>
     </div>

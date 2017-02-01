@@ -65,7 +65,12 @@ class NomenclatureRequestController extends Controller
 
             array_push($acceptedData, $data);
 
-            $nomenclatureRequestMerged->department->nomenclatureIncome(Nomenclature::find($key), $item);
+            $nomenclature = Nomenclature::find($key);
+            $nomenclature->outgoing($item, $nomenclature->batches()->first(), [
+                'user_id' => auth()->id()
+            ]);
+
+            $nomenclatureRequestMerged->department->nomenclatureIncome($nomenclature, $item);
         }
 
         $nomenclatureRequestMerged->update([

@@ -134,7 +134,9 @@ return [
             'series' => 'Серии',
             'statistic' => 'Статистика',
             'income' => 'Поступление',
-            'outgoing' => 'Отпуск в отделение'
+            'outgoing' => 'Отпуск в отделение',
+            'expense' => 'Расходы',
+            'receipts' => 'Поступления'
         ],
 
         'user' => [
@@ -299,13 +301,17 @@ return [
         ],
 
         'form' => [
-            'send' => 'Отправить'
+            'send' => 'Отправить',
         ],
 
         'hospitalization' => [
             'item' => [
                 'delete' => 'удалить',
                 'edit' => 'редактировать'
+            ],
+
+            'popup' => [
+                'use_set_instead_of_nomenclature' => 'Использовать набор вместо номенлктуры'
             ]
         ]
     ]

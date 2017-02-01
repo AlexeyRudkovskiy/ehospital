@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Nomenclature;
 use App\NomenclatureRequest;
 use App\NomenclatureRequestMerged;
 use Illuminate\Console\Command;

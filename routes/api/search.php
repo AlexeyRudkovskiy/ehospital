@@ -39,4 +39,34 @@ Route::group([
         'as' => 'search.units'
     ]);
 
+    Route::post('procedures', [
+        'uses' => 'SearchController@procedures',
+        'as' => 'search.procedures'
+    ]);
+
+    Route::get('procedure/{procedure}', [
+        'uses' => 'SearchController@procedure',
+        'as' => 'search.procedure'
+    ]);
+
+    Route::post('source_of_financings', [
+        'uses' => 'SearchController@source_of_financing',
+        'as' => 'search.source_of_financing'
+    ]);
+
+    Route::post('contractors', [
+        'uses' => 'SearchController@contractors',
+        'as' => 'search.contractors'
+    ]);
+
+    Route::post('sets/{department}', [
+        'uses' => 'SearchController@sets',
+        'as' => 'search.sets'
+    ]);
+
+    Route::get('sets/{department}', [
+        'uses' => 'SearchController@sets',
+        'as' => 'search.sets_default'
+    ]);
+
 });

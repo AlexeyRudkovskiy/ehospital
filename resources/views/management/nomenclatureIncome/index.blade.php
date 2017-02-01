@@ -7,37 +7,30 @@
     {!! Form::model($model, ['class' => 'form form-compact steps', 'route' => ['nomenclatureIncome.nomenclatures'], 'id' => 'nomenclature_income_form', 'data-form' => '']) !!}
 
         <div class="step">
+
             {!! Form::ehSelect('source_of_financing_id', \App\SourceOfFinancing::pluck('name', 'id')) !!}
 
-            {!! Form::ehSelect('contractor_id', \App\Contractor::whereGroup('provider')->pluck('name', 'id'), null, null, ['id' => 'contractor_select']) !!}
+            {!! Form::ehSelect('contractor_id', collect([]), null, null, [
+                'id' => 'contractor_select',
+                'data-title' => 'Контрагент',
+                'data-subtitle' => "Выберите контрагента",
+                'data-search' => route('search.contractors'),
+                'data-search-placeholder' => 'Введите фразу для поиска контрагента'
+            ]) !!}
 
-            <div class="form-group hidden" id="agreement_group">
-                <div class="label">
-                    <label for="agreement">Agreement</label>
-                </div>
-                <div class="input-wrapper">
-                    <select name="agreement_id" id="agreement_select" class="input"></select>
-                </div>
-            </div>
+            {!! Form::ehSelect('agreement_id', collect([]), null, null, [
+                'id' => 'agreements_select',
+                'data-title' => 'Договор',
+                'data-subtitle' => "Выберите договор"
+            ]) !!}
 
             {!! Form::ehSelect('storage_id', \App\Storage::pluck('name', 'id')) !!}
         </div>
 
         <div class="step incomeTable">
-            <table class="table table-small">
-                <thead>
-                <tr>
-                    <th>Nomenclature</th>
-                    <th>Batch</th>
-                    <th>Price</th>
-                    <th>Amount</th>
-                    <th>Nds</th>
-                    <th>Sum</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+
+            <div class="income-container"></div>
+
             <div>
                 <a style="float:right;" href="javascript:" class="btn" id="addRow">add item</a>
                 <div class="clear"></div>
