@@ -11,7 +11,8 @@ class UserChannel extends Channel
     /**
      * UserChannel constructor.
      * @param string $name
-     * @param User $tag
+     * @param User $user
+     * @internal param User $tag
      * @internal param int $id
      */
     public function __construct(string $name, User $user)

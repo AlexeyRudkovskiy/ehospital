@@ -4,7 +4,9 @@
     <div class="tabs">
         <nav class="tabs-navigation">
             <a href="javascript:" data-default data-target="statistic">@lang('management.department.statistic')</a>
+            @if(policy()->dispatch($department, 'patients'))
             <a href="javascript:" data-target="patients">@lang('management.department.patients')</a>
+            @endif
             <a href="javascript:" data-target="workers">@lang('management.department.workers')</a>
             <a href="javascript:" data-target="storage">@lang('management.department.storage')</a>
             <a href="javascript:" data-target="sets">@lang('management.department.sets')</a>
@@ -17,11 +19,13 @@
             </div>
             <!-- End statistic -->
 
+            @if(policy()->dispatch($department, 'patients'))
             <!-- Patients -->
             <div data-tab="patients">
                 @include('management.department.tabs.current_patients')
             </div>
             <!-- End patients -->
+            @endif
 
             <!-- Workers -->
             <div data-tab="workers">

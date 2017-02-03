@@ -13,8 +13,6 @@ use App\Department;
 class DepartmentTest extends TestCase
 {
 
-
-
     public function testIncomeNomenclature()
     {
         $department = Department::first();
@@ -31,6 +29,12 @@ class DepartmentTest extends TestCase
 
         $response = $department->armorNomenclature($nomenclature, 5);
         $this->assertNotNull($response);
+    }
+
+    public function testUsers()
+    {
+        $department = Department::first();
+        $this->assertTrue($department->users()->count() == \App\User::where('department_id', $department->id)->count());
     }
 
 }

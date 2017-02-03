@@ -2,12 +2,12 @@
 
 Route::get('nomenclature/income', [
     'uses' => 'NomenclatureIncomeController@index',
-    'as' => 'nomenclatureIncome.index'
+    'as' => 'nomenclature.income.index'
 ]);
 
-Route::get('nomenclature/income/{nomenclature_income_id}', [
+Route::get('nomenclature/income/{nomenclatureIncome}', [
     'uses' => 'NomenclatureIncomeController@show',
-    'as' => 'nomenclatureIncome.show'
+    'as' => 'nomenclature.income.show'
 ]);
 
 Route::post('nomenclature/income/nomenclatures', [

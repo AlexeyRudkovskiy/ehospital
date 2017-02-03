@@ -11,6 +11,8 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
+        \DB::statement("SET foreign_key_checks=0");
+
         \App\Permission::truncate();
 
         factory(\App\Permission::class)->create();
@@ -54,7 +56,7 @@ class PermissionsTableSeeder extends Seeder
                         [ 'path' => "contractor.index" ],
                         [ 'path' => 'atcClassification.index' ],
                         [ 'path' => 'manufacturer.index' ],
-                        [ 'path' => 'nomenclatureIncome.index' ],
+                        [ 'path' => 'nomenclature.income.index' ],
                         [ 'path' => 'nomenclature.requests' ]
                     ]
                 ]
@@ -105,5 +107,10 @@ class PermissionsTableSeeder extends Seeder
                 ]
             ])
         ]);
+
+        factory(\App\Permission::class)->create();
+
+        \DB::statement("SET foreign_key_checks=1");
+
     }
 }

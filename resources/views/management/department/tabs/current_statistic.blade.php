@@ -11,6 +11,14 @@
 
     <table class="table table-striped-on-hover">
         <tr>
+            <td width="250">@lang('management.department.tabs.statistic.leader')</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td width="250">@lang('management.department.tabs.statistic.head_nurse')</td>
+            <td></td>
+        </tr>
+        <tr>
             <td width="250">@lang('management.department.tabs.statistic.code')</td>
             <td>{{ $department->department_code }}</td>
         </tr>

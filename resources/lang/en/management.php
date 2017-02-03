@@ -41,6 +41,8 @@ return [
 
         'tabs' => [
             'statistic' => [
+                'leader' => 'Руководитель',
+                'head_nurse' => 'Старшая мед. сестра',
                 'code' => 'Код отделения',
                 'beds_amount' => 'Количество коек',
                 'beds_amount_in_repair' => 'Количество коек в ремонте',
@@ -91,7 +93,10 @@ return [
         'nomenclature' => [
             'title' => 'Номенклатуры',
             'show' => 'Просмотр номенклатуры',
-            'requests' => 'Запросы номенклатур'
+            'requests' => 'Запросы номенклатур',
+            'income' => [
+                'index' => 'Поступление номенклатур'
+            ]
         ],
         'atcClassification' => [
             'title' => 'АТС классификации'

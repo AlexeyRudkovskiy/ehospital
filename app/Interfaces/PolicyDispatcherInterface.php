@@ -51,6 +51,13 @@ interface PolicyDispatcherInterface
     public function setUser(User $user) : PolicyDispatcherInterface;
 
     /**
+     * Получаем пользователя, от имени которого проверяем права доступа
+     *
+     * @return User
+     */
+    public function getUser() : User;
+
+    /**
      * Восстаналивает значения текущего пользователя авторизованным пользователем
      *
      * @return PolicyDispatcherInterface

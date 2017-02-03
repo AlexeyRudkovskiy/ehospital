@@ -246,6 +246,7 @@ class User extends Authenticatable
             throw new \InvalidArgumentException("$modelFullClassName does not contains getActionScope method");
         }
         $permissionScope = $model->getActionScope($action);
+
         return $this->permission->granted($permissionScope);
     }
 

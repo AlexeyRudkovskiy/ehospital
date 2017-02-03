@@ -52,6 +52,7 @@ class Permission extends Model
         if (gettype($this->map) === 'string') {
             $this->map = json_decode($this->map, true);
         }
+
         if (!array_has($this->map, $what)) {
             return false;
         }

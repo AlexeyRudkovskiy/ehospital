@@ -42,7 +42,13 @@ class LayoutSidebarService {
         if ($lastItem != 'index') {
             $page = $lastItem;
         }
-        $title = trans('management.breadcrumbs.' . $controller . '.' . $page);
+
+        $title = '';
+        if (trans()->has('management.breadcrumbs.' . $link)) {
+            $title = trans('management.breadcrumbs.' . $link);
+        } else {
+            $title = trans('management.breadcrumbs.' . $controller . '.' . $page);
+        }
 
         $active = false;
         if ($checkByFullPath) {

@@ -19,21 +19,35 @@ class NomenclatureIncomeController extends Controller
             ->with('model', new \stdClass());
     }
 
-    public function show(int $income)
+    public function show(NomenclatureIncome $nomenclatureIncome)
     {
-        $income = NomenclatureIncome::find($income);
-        return view('management.nomenclatureIncome.show')
-            ->with('income', $income->data());
+        return $nomenclatureIncome;
+//        $income = NomenclatureIncome::find($income);
+//        dd($income);
+//        return view('management.nomenclatureIncome.show')
+//            ->with('income', $income->data());
     }
 
     public function postNomenclatures(Request $request)
     {
         $data = $request->except(['_token', 'nomenclature']);
 
+        $loadedNomenclatures = [];
+
         $income = new NomenclatureIncome($data);
         $nomenclatures = $request->get('nomenclature');
         $income->nomenclatures = json_encode($nomenclatures);
         $income->created_by = auth()->id();
+
+        foreach ($nomenclatures as $item) {
+            if (!array_key_exists($item['id'], $loadedNomenclatures)) {
+                $nomenclature = Nomenclature::find($item['id']);
+                if ($nomenclature === null) {
+                    return response('Nomenclature is empty', 400);
+                }
+                $loadedNomenclatures[$item['id']] = $nomenclature;
+            }
+        }
 
         $income->save();
 

@@ -70,7 +70,7 @@ $factory->define(\App\Permission::class, function () use ($faker) {
                     [ 'path' => "contractor.index" ],
                     [ 'path' => 'atcClassification.index' ],
                     [ 'path' => 'manufacturer.index' ],
-                    [ 'path' => 'nomenclatureIncome.index' ]
+                    [ 'path' => 'nomenclature.income.index' ]
                 ]
             ], [
                 'name' => "Пользователи",

@@ -18,6 +18,9 @@ use Mockery\CountValidator\Exception;
 class PolicyDispatcher implements PolicyDispatcherInterface
 {
 
+    /**
+     * @var array
+     */
     protected $policies = [];
 
     /**
@@ -114,6 +117,16 @@ class PolicyDispatcher implements PolicyDispatcherInterface
     }
 
     /**
+     * Получаем пользователя, от имени которого проверяем права доступа
+     *
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
      * Восстаналивает значения текущего пользователя авторизованным пользователем
      *
      * @return PolicyDispatcherInterface
@@ -121,6 +134,7 @@ class PolicyDispatcher implements PolicyDispatcherInterface
     public function restoreUser() : PolicyDispatcherInterface
     {
         $this->user = auth()->user();
+        return $this;
     }
 
 }
