@@ -11,7 +11,7 @@ class PositionsTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\UserPosition::truncate();
+        // \App\UserPosition::truncate();
 
         $doctor = new \App\UserPosition;
         $doctor->name = 'Врач';

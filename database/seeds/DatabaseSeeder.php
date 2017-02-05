@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \DB::statement("SET foreign_key_checks=0");
+        \DB::statement("SET FOREIGN_KEY_CHECKS = 0;");
 
         $this->call(ManufacturersTableSeeder::class);
         $this->call(AtcClassificationsTableSeeder::class);
@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProceduresTableSeeder::class);
 
 //        $this->call(MedicamentsTableSeeder::class);
-        \DB::statement("SET foreign_key_checks=1");
+        \DB::statement("SET FOREIGN_KEY_CHECKS = 1;");
 
         Artisan::call('patient:encrypt');
     }

@@ -8,6 +8,7 @@
 ])
 
 @section('content')
+
     <div class="tabs">
         <nav class="tabs-navigation">
             <a href="javascript:" data-default data-target="cure-card">@lang('management.label.cure.card.title')</a>

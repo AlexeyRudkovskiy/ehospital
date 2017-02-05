@@ -11,8 +11,6 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::statement("SET foreign_key_checks=0");
-
         \App\Permission::truncate();
 
         factory(\App\Permission::class)->create();
@@ -109,8 +107,5 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
         factory(\App\Permission::class)->create();
-
-        \DB::statement("SET foreign_key_checks=1");
-
     }
 }

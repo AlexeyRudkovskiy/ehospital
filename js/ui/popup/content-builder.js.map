@@ -1,0 +1,1 @@
+{"version":3,"sources":["ui/popup/content-builder.ts"],"names":[],"mappings":";;;;;;QAIC,CAAC","file":"content-builder.js","sourcesContent":["export interface ContentBuilder {\n\n    build(data:any):any;\n\n}"]}

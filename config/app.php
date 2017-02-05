@@ -185,7 +185,6 @@ return [
         App\Providers\PolicyProvider::class,
 
         App\Providers\FormComponentsProvider::class,
-        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
     ],
 
     /*

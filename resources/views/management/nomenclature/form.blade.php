@@ -27,4 +27,6 @@
 
 {!! Form::ehSelect('source_of_financing_id', \App\SourceOfFinancing::pluck('name', 'id')) !!}
 
+{!! Form::ehSelect('nomenclature_category_id', \App\NomenclatureCategory::pluck('name', 'id')) !!}
+
 {!! Form::ehSave() !!}

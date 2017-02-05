@@ -106,7 +106,7 @@
     };
 </script>
 
-@if($cure->id !== null)
+@if(isset($cure) && $cure->id !== null)
 <script>
     window.department = {
         id: {{ $cure->department->id }}
